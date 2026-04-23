@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { ChevronLeft, Calendar, MessageSquare, MapPin, Users, ShieldCheck, Gamepad2, ScrollText, Send, User } from 'lucide-react';
+import { ChevronLeft, Calendar, MessageSquare, MapPin, Users, ShieldCheck, Gamepad2, ScrollText, Send, User, CheckCircle2 } from 'lucide-react';
 import { clsx } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 import { supabase } from '../lib/supabase';
@@ -9,14 +9,14 @@ function cn(...inputs) {
 }
 
 const ChatMessage = ({ user, text, created_at, self }) => (
-  <div className={cn("flex flex-col mb-4", self ? "items-end" : "items-start")}>
+  <div className={cn("flex flex-col mb-4 animate-fade-in", self ? "items-end" : "items-start")}>
     <div className="flex items-center gap-2 mb-1">
       {!self && <div className="w-6 h-6 rounded-full bg-brand-primary/20 flex items-center justify-center text-[10px] font-bold"><User className="w-3 h-3" /></div>}
       <span className="text-[10px] font-bold text-white/40 uppercase tracking-wider">{user}</span>
       <span className="text-[10px] text-white/20">{new Date(created_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
     </div>
     <div className={cn(
-      "px-4 py-2 rounded-2xl text-sm max-w-[80%]",
+      "px-4 py-2 rounded-2xl text-sm max-w-[80%] shadow-sm",
       self ? "bg-brand-primary text-white rounded-tr-none" : "bg-white/5 border border-white/10 rounded-tl-none"
     )}>
       {text}
@@ -24,18 +24,33 @@ const ChatMessage = ({ user, text, created_at, self }) => (
   </div>
 );
 
-const GroupDetail = ({ group, onBack }) => {
+const GroupDetail = ({ group, onBack, user }) => {
   const [activeTab, setActiveTab] = useState('chat');
-  const [isRSVPd, setIsRSVPd] = useState(false);
+  const [isJoined, setIsJoined] = useState(false);
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState('');
   const chatEndRef = useRef(null);
 
-  // 1. Initial Load & Realtime Subscription
   useEffect(() => {
-    // Fetch existing messages
+    if (!user) return;
+
+    // 1. Check if user is already a member
+    const checkMembership = async () => {
+      const { data } = await supabase
+        .from('memberships')
+        .select('*')
+        .eq('user_id', user.id)
+        .eq('group_id', group.id)
+        .single();
+      
+      if (data) setIsJoined(true);
+    };
+
+    checkMembership();
+
+    // 2. Initial Messages Load
     const fetchMessages = async () => {
-      const { data, error } = await supabase
+      const { data } = await supabase
         .from('messages')
         .select('*')
         .eq('group_id', group.id)
@@ -46,7 +61,7 @@ const GroupDetail = ({ group, onBack }) => {
 
     fetchMessages();
 
-    // Subscribe to new messages
+    // 3. Subscribe to Realtime
     const channel = supabase
       .channel(`group-${group.id}`)
       .on('postgres_changes', { 
@@ -62,93 +77,113 @@ const GroupDetail = ({ group, onBack }) => {
     return () => {
       supabase.removeChannel(channel);
     };
-  }, [group.id]);
+  }, [group.id, user]);
 
-  // Scroll to bottom when messages update
   useEffect(() => {
     chatEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
 
+  const handleJoin = async () => {
+    if (!user) return; // Should be handled by UI showing Login
+
+    if (isJoined) {
+      // Logic for leaving group could go here
+      return;
+    }
+
+    const { error } = await supabase
+      .from('memberships')
+      .insert([{ user_id: user.id, group_id: group.id }]);
+
+    if (!error) setIsJoined(true);
+  };
+
   const handleSendMessage = async (e) => {
     e.preventDefault();
-    if (!newMessage.trim()) return;
-
-    const tempMessage = {
-      group_id: group.id,
-      user: 'Me', // We will replace this with real auth user later
-      text: newMessage,
-      created_at: new Date().toISOString(),
-    };
+    if (!newMessage.trim() || !user) return;
 
     const { error } = await supabase
       .from('messages')
-      .insert([tempMessage]);
+      .insert([{
+        group_id: group.id,
+        user: user.email.split('@')[0], // Use email prefix as temp username
+        text: newMessage,
+      }]);
 
-    if (!error) {
-      setNewMessage('');
-    } else {
-      console.error('Error sending message:', error);
-    }
+    if (!error) setNewMessage('');
   };
 
   return (
     <div className="pt-20 min-h-screen flex flex-col bg-surface-950">
-      {/* Header (Same as before but with real data) */}
-      <div className="relative h-[300px] overflow-hidden">
+      {/* Header */}
+      <div className="relative h-[350px] overflow-hidden">
         <img src={group.image} alt={group.name} className="w-full h-full object-cover" />
-        <div className="absolute inset-0 bg-gradient-to-t from-surface-950 via-surface-950/40 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-surface-950 via-surface-950/20 to-transparent" />
         
-        <div className="absolute bottom-0 w-full px-6 md:px-12 pb-8">
+        <div className="absolute bottom-0 w-full px-6 md:px-12 pb-12">
           <div className="max-w-7xl mx-auto">
-            <button onClick={onBack} className="flex items-center gap-2 text-white/60 hover:text-white mb-6 transition-colors text-sm font-bold uppercase tracking-wider">
+            <button onClick={onBack} className="flex items-center gap-2 text-white/60 hover:text-white mb-8 transition-colors text-[10px] font-black uppercase tracking-[0.2em]">
               <ChevronLeft className="w-4 h-4" />
-              Back to Discover
+              Back to PBC Discover
             </button>
-            <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
-              <div>
-                <div className="flex items-center gap-3 mb-2">
-                  <span className="px-2 py-1 bg-brand-primary rounded-lg text-[10px] font-bold tracking-wider uppercase">{group.category}</span>
-                  <div className="flex items-center gap-1 text-brand-secondary text-xs font-bold">
+            <div className="flex flex-col md:flex-row md:items-end justify-between gap-8">
+              <div className="space-y-4">
+                <div className="flex items-center gap-3">
+                  <span className="px-3 py-1 bg-brand-primary/20 text-brand-primary border border-brand-primary/30 rounded-full text-[10px] font-black tracking-widest uppercase">{group.category}</span>
+                  <div className="flex items-center gap-1.5 text-brand-secondary text-[10px] font-black tracking-widest uppercase">
                     <ShieldCheck className="w-4 h-4" />
-                    VERIFIED GROUP
+                    Verified PBC Group
                   </div>
                 </div>
-                <h1 className="text-4xl md:text-5xl font-black mb-4">{group.name}</h1>
-                <div className="flex flex-wrap items-center gap-6 text-white/60 text-sm">
+                <h1 className="text-5xl md:text-6xl font-black tracking-tighter">{group.name}</h1>
+                <div className="flex flex-wrap items-center gap-8 text-white/40 text-xs font-medium">
                   <div className="flex items-center gap-2">
                     <MapPin className="w-4 h-4 text-brand-secondary" />
                     {group.city}, FL
                   </div>
                   <div className="flex items-center gap-2">
                     <Users className="w-4 h-4 text-brand-secondary" />
-                    {group.members} / {group.capacity} Members
+                    {group.members} / {group.capacity} Residents
                   </div>
                 </div>
               </div>
+              
               <button 
-                onClick={() => setIsRSVPd(!isRSVPd)}
+                onClick={handleJoin}
                 className={cn(
-                  "px-8 py-4 rounded-2xl font-bold transition-all shadow-xl active:scale-95",
-                  isRSVPd ? "bg-emerald-500 text-white" : "bg-white text-black hover:bg-white/90"
+                  "px-10 py-5 rounded-2xl font-black text-sm transition-all shadow-2xl active:scale-95 group relative overflow-hidden",
+                  isJoined ? "bg-emerald-500 text-white" : "bg-white text-black hover:bg-white/90"
                 )}
               >
-                {isRSVPd ? '✓ RSVP Done' : 'RSVP for Next Session'}
+                <div className="flex items-center gap-3 relative z-10">
+                  {isJoined ? (
+                    <>
+                      <CheckCircle2 className="w-5 h-5" />
+                      MEMBERSHIP ACTIVE
+                    </>
+                  ) : (
+                    <>
+                      JOIN COMMUNITY
+                      <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                    </>
+                  )}
+                </div>
               </button>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Tabs */}
-      <div className="border-b border-white/5 bg-surface-950/80 backdrop-blur-md sticky top-16 z-30 px-6 md:px-12">
-        <div className="max-w-7xl mx-auto flex gap-8">
+      {/* Navigation Tabs */}
+      <div className="border-b border-white/5 bg-surface-950/80 backdrop-blur-xl sticky top-16 z-30 px-6 md:px-12">
+        <div className="max-w-7xl mx-auto flex gap-10">
           {['Chat', 'Session Info', 'Members'].map(tab => (
             <button 
               key={tab}
               onClick={() => setActiveTab(tab.toLowerCase())}
               className={cn(
-                "py-6 text-sm font-bold uppercase tracking-widest border-b-2 transition-all",
-                activeTab === tab.toLowerCase() ? "border-brand-primary text-white" : "border-transparent text-white/40 hover:text-white"
+                "py-6 text-[10px] font-black uppercase tracking-[0.2em] border-b-2 transition-all",
+                activeTab === tab.toLowerCase() ? "border-brand-primary text-white" : "border-transparent text-white/20 hover:text-white"
               )}
             >
               {tab}
@@ -157,45 +192,79 @@ const GroupDetail = ({ group, onBack }) => {
         </div>
       </div>
 
-      {/* Tab Content */}
+      {/* Main Content */}
       <div className="flex-1 max-w-7xl mx-auto w-full p-6 md:p-12 grid grid-cols-1 lg:grid-cols-3 gap-12">
         <div className="lg:col-span-2">
           {activeTab === 'chat' && (
-            <div className="glass rounded-[2rem] flex flex-col h-[600px] overflow-hidden border border-white/5">
-              <div className="p-6 border-b border-white/5 flex items-center justify-between">
+            <div className="glass rounded-[2.5rem] flex flex-col h-[650px] overflow-hidden border border-white/5 shadow-2xl">
+              <div className="p-8 border-b border-white/5 flex items-center justify-between">
                 <div className="flex items-center gap-3">
-                  <MessageSquare className="w-5 h-5 text-brand-primary" />
-                  <span className="font-bold">Live Production Chat</span>
+                  <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                  <span className="font-bold tracking-tight">Community Social Hub</span>
                 </div>
+                {!user && <span className="text-[10px] font-black text-brand-primary uppercase tracking-widest">Login to participate</span>}
               </div>
               
-              <div className="flex-1 overflow-y-auto p-6 scrollbar-hide">
+              <div className="flex-1 overflow-y-auto p-8 scrollbar-hide space-y-4">
                 {messages.length === 0 && (
-                  <div className="flex items-center justify-center h-full text-white/20 text-sm italic">
-                    Start the conversation...
+                  <div className="flex flex-col items-center justify-center h-full opacity-20 text-center">
+                    <MessageSquare className="w-12 h-12 mb-4" />
+                    <p className="text-sm font-medium">Be the first to say hello!</p>
                   </div>
                 )}
-                {messages.map((msg, i) => (
-                  <ChatMessage key={msg.id || i} {...msg} self={msg.user === 'Me'} />
+                {messages.map((msg) => (
+                  <ChatMessage 
+                    key={msg.id} 
+                    {...msg} 
+                    self={user && msg.user === user.email.split('@')[0]} 
+                  />
                 ))}
                 <div ref={chatEndRef} />
               </div>
 
-              <form onSubmit={handleSendMessage} className="p-4 bg-white/5 border-t border-white/5 flex gap-3">
-                <input 
-                  type="text" 
-                  value={newMessage}
-                  onChange={(e) => setNewMessage(e.target.value)}
-                  placeholder="Type a message..."
-                  className="flex-1 bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-brand-primary transition-all"
-                />
-                <button type="submit" className="bg-brand-primary p-3 rounded-xl hover:bg-brand-primary/80 transition-all">
-                  <Send className="w-5 h-5" />
-                </button>
-              </form>
+              {user && (
+                <form onSubmit={handleSendMessage} className="p-6 bg-white/5 border-t border-white/5 flex gap-4">
+                  <input 
+                    type="text" 
+                    value={newMessage}
+                    onChange={(e) => setNewMessage(e.target.value)}
+                    placeholder="Message the community..."
+                    className="flex-1 bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-sm focus:outline-none focus:border-brand-primary transition-all placeholder:text-white/20"
+                  />
+                  <button type="submit" className="bg-brand-primary p-4 rounded-2xl hover:bg-brand-primary/80 transition-all shadow-lg shadow-brand-primary/20 active:scale-95">
+                    <Send className="w-5 h-5 text-white" />
+                  </button>
+                </form>
+              )}
             </div>
           )}
-          {/* ... Other tabs remain same ... */}
+        </div>
+
+        {/* Sidebar */}
+        <div className="space-y-6">
+          <div className="glass p-8 rounded-[2rem] border border-brand-primary/20 bg-brand-primary/5">
+            <h3 className="font-black text-xs uppercase tracking-[0.2em] mb-6 flex items-center gap-2">
+              <Gamepad2 className="w-5 h-5 text-brand-primary" />
+              Guidelines
+            </h3>
+            <ul className="space-y-4">
+              {['Level 20+', 'Mic Required', 'Non-toxic', 'Discord Joined'].map(req => (
+                <li key={req} className="flex items-center gap-3 text-xs font-medium text-white/60">
+                  <div className="h-1 w-1 rounded-full bg-brand-primary" />
+                  {req}
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className="glass p-8 rounded-[2rem]">
+            <h3 className="font-black text-xs uppercase tracking-[0.2em] mb-6 flex items-center gap-2 text-brand-secondary">
+              <ScrollText className="w-5 h-5" />
+              PBC Standards
+            </h3>
+            <p className="text-xs text-white/30 leading-relaxed italic">
+              "By joining this group, you agree to the RollCall Community Standards for Palm Beach County."
+            </p>
+          </div>
         </div>
       </div>
     </div>
