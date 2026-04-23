@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Users, MapPin, Calendar, MessageSquare, ChevronRight, Gamepad2, Beer, ScrollText, UsersRound, LogOut, User as UserIcon, Plus, LayoutDashboard, Search, Map as MapIcon, Globe, AlertTriangle, Sun, Moon } from 'lucide-react';
+import { Users, MapPin, Calendar, MessageSquare, ChevronRight, Gamepad2, Beer, ScrollText, UsersRound, LogOut, User as UserIcon, Plus, LayoutDashboard, Search, Map as MapIcon, Globe, AlertTriangle, Sun, Moon, Dices, Trophy, Sparkles } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Discover from './components/Discover';
 import GroupDetail from './components/GroupDetail';
@@ -8,18 +8,50 @@ import Dashboard from './components/Dashboard';
 import Auth from './components/Auth';
 import { supabase } from './lib/supabase';
 
-const Logo = () => (
-  <motion.div 
-    whileHover={{ scale: 1.05 }}
-    className="relative w-8 h-8 md:w-10 md:h-10 flex items-center justify-center cursor-pointer"
+// High-Fidelity PRD Logo: 6-Node Hexagonal Network with Center Hub
+const Logo = ({ size = "md" }) => {
+  const s = size === "lg" ? "w-24 h-24" : "w-10 h-10";
+  return (
+    <motion.div 
+      whileHover={{ scale: 1.05, rotate: 5 }}
+      className={`relative ${s} flex items-center justify-center cursor-pointer`}
+    >
+      <div className="absolute inset-0 bg-brand-primary/10 blur-xl rounded-full" />
+      <svg viewBox="0 0 100 100" className="w-full h-full relative z-10 filter drop-shadow-lg">
+        {/* Connection Lines */}
+        <circle cx="50" cy="50" r="30" fill="none" stroke="currentColor" strokeWidth="0.5" className="opacity-20" />
+        
+        {/* Nodes */}
+        <circle cx="50" cy="20" r="6" className="fill-rose-500" />
+        <circle cx="76" cy="35" r="6" className="fill-orange-500" />
+        <circle cx="76" cy="65" r="6" className="fill-emerald-500" />
+        <circle cx="50" cy="80" r="6" className="fill-cyan-500" />
+        <circle cx="24" cy="65" r="6" className="fill-blue-500" />
+        <circle cx="24" cy="35" r="6" className="fill-purple-500" />
+        
+        {/* Central Hub */}
+        <defs>
+          <linearGradient id="hubGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style={{ stopColor: '#a855f7' }} />
+            <stop offset="100%" style={{ stopColor: '#3b82f6' }} />
+          </linearGradient>
+        </defs>
+        <circle cx="50" cy="50" r="12" fill="url(#hubGrad)" />
+        <path d="M50 42 L52 48 L58 50 L52 52 L50 58 L48 52 L42 50 L48 48 Z" fill="white" className="animate-pulse" />
+      </svg>
+    </motion.div>
+  );
+};
+
+const CategoryChip = ({ label, icon: Icon, colorClass }) => (
+  <motion.button
+    whileHover={{ y: -2, scale: 1.02 }}
+    whileTap={{ scale: 0.98 }}
+    className={`flex items-center gap-2 px-4 py-1.5 rounded-full border-2 bg-white/5 backdrop-blur-md transition-all ${colorClass}`}
   >
-    <div className="absolute inset-0 bg-brand-primary/20 blur-lg rounded-full animate-pulse" />
-    <svg viewBox="0 0 24 24" className="w-6 h-6 md:w-8 md:h-8 text-brand-primary relative z-10" fill="none" stroke="currentColor" strokeWidth="2">
-      <path d="M12 2l8.66 5v10L12 22l-8.66-5V7L12 2z" />
-      <circle cx="12" cy="12" r="3" className="fill-brand-secondary/40" />
-      <path d="M12 2v7M12 22v-7M3.34 7l6.5 3.75M20.66 17l-6.5-3.75M3.34 17l6.5-3.75M20.66 7l-6.5 3.75" />
-    </svg>
-  </motion.div>
+    <Icon className="w-4 h-4" />
+    <span className="text-[11px] font-black uppercase tracking-widest">{label}</span>
+  </motion.button>
 );
 
 function App() {
@@ -48,7 +80,6 @@ function App() {
         setUser(session?.user ?? null);
         if (session?.user && (step === 'hero')) setStep('dashboard');
       } catch (err) {
-        console.error('Initialization error:', err);
         setConnError('Offline Mode');
       } finally {
         setIsInitializing(false);
@@ -68,76 +99,45 @@ function App() {
   if (isInitializing) {
     return (
       <div className="min-h-screen bg-surface-950 flex flex-col items-center justify-center p-6 text-center text-white">
-        <Logo />
+        <Logo size="lg" />
         <div className="mt-8 space-y-4">
           <div className="w-16 h-1 bg-white/5 rounded-full overflow-hidden mx-auto">
             <motion.div initial={{ width: 0 }} animate={{ width: "100%" }} transition={{ duration: 1.5, repeat: Infinity }} className="h-full bg-brand-primary" />
           </div>
-          <p className="text-[10px] font-black uppercase tracking-widest opacity-20">Initializing...</p>
+          <p className="text-[10px] font-black uppercase tracking-widest opacity-20">Initializing Community...</p>
         </div>
       </div>
     );
   }
 
-  const handleGroupSelect = (group) => {
-    setSelectedGroup(group);
-    setStep('groupDetail');
-  };
-
-  const handleLogout = async () => {
-    await supabase.auth.signOut();
-    setStep('hero');
-  };
-
   const toggleTheme = () => setTheme(prev => prev === 'dark' ? 'light' : 'dark');
 
   return (
-    <div className="min-h-screen bg-surface-950 text-white selection:bg-brand-secondary/30 flex flex-col font-sans transition-colors duration-500">
+    <div className="min-h-screen bg-surface-950 text-white selection:bg-brand-secondary/30 flex flex-col font-sans transition-all duration-500">
       
       {/* Navigation */}
       <nav className="fixed top-0 w-full z-50 glass border-b border-white/5 py-4 px-6 md:px-12 flex justify-between items-center">
-        <div className="flex items-center gap-3 cursor-pointer" onClick={() => setStep(user ? 'dashboard' : 'hero')}>
-          <Logo />
-          <div className="flex flex-col">
-            <span className="text-xl font-black tracking-tighter leading-none">RollCall</span>
-            {connError && <span className="text-[8px] text-brand-secondary font-black uppercase tracking-widest mt-1">{connError}</span>}
-          </div>
-        </div>
-        
-        <div className="hidden xl:flex gap-8 items-center">
-          <button onClick={() => setStep('discover')} className={`hover:text-brand-primary transition-all text-[10px] font-black uppercase tracking-widest ${step === 'discover' ? 'text-brand-primary' : 'opacity-40'}`}>Explore</button>
-          {user && <button onClick={() => setStep('dashboard')} className={`hover:text-brand-primary transition-all text-[10px] font-black uppercase tracking-widest ${step === 'dashboard' ? 'text-brand-primary' : 'opacity-40'}`}>Hub</button>}
+        <div className="flex items-center gap-4 cursor-pointer" onClick={() => setStep(user ? 'dashboard' : 'hero')}>
+          <Logo size="md" />
+          <span className="text-2xl font-black tracking-tighter leading-none bg-gradient-to-r from-rose-500 to-blue-500 bg-clip-text text-transparent">RollCall</span>
         </div>
 
-        <div className="flex items-center gap-3 md:gap-4">
-          
-          {/* PERMANENT THEME TOGGLE - NO BREAKPOINTS */}
-          <button 
-            onClick={toggleTheme}
-            className="flex items-center gap-2 px-3 py-2 rounded-xl bg-white/10 hover:bg-white/20 border border-white/10 transition-all active:scale-95 group shadow-lg"
-          >
-            {theme === 'dark' ? <Sun className="w-5 h-5 text-amber-400" /> : <Moon className="w-5 h-5 text-indigo-400" />}
-            <span className="hidden sm:inline text-[10px] font-black uppercase tracking-widest opacity-60 group-hover:opacity-100">{theme === 'dark' ? 'Light' : 'Dark'}</span>
+        <div className="flex items-center gap-4">
+          <button onClick={toggleTheme} className="flex items-center gap-2 px-3 py-2 rounded-xl bg-white/10 border border-white/10 hover:bg-white/20 transition-all group">
+            {theme === 'dark' ? <Sun className="w-4 h-4 text-amber-400" /> : <Moon className="w-4 h-4 text-indigo-400" />}
+            <span className="hidden sm:inline text-[10px] font-black uppercase">{theme === 'dark' ? 'Light' : 'Dark'}</span>
           </button>
 
-          <div className="h-6 w-px bg-white/10 mx-1 hidden sm:block" />
-
           {user ? (
-            <div className="flex items-center gap-2 md:gap-4">
-              <button onClick={() => setStep('createGroup')} className="hidden md:flex items-center gap-2 px-4 py-2.5 bg-brand-primary text-white rounded-xl hover:bg-brand-primary/80 transition-all text-[10px] font-black uppercase tracking-widest shadow-xl shadow-brand-primary/20">
-                <Plus className="w-4 h-4" /> Host
-              </button>
-              <div className="h-10 w-10 rounded-full bg-brand-primary/20 flex items-center justify-center border border-brand-primary/30 group relative cursor-pointer">
-                <UserIcon className="w-5 h-5 text-brand-primary" />
-                <div className="absolute top-12 right-0 w-60 glass p-3 rounded-2xl border border-white/10 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all shadow-2xl z-[100]">
-                  <p className="text-[10px] text-white/40 uppercase font-black tracking-widest mb-3 px-2 border-b border-white/5 pb-2 truncate">{user.email}</p>
-                  <button onClick={() => setStep('dashboard')} className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-white/5 transition-all text-xs font-bold text-white"><LayoutDashboard className="w-4 h-4" /> My Hub</button>
-                  <button onClick={handleLogout} className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-rose-500/10 text-rose-400 transition-all text-xs font-bold mt-1"><LogOut className="w-4 h-4" /> Sign Out</button>
-                </div>
+            <div className="h-10 w-10 rounded-full bg-brand-primary/20 flex items-center justify-center border border-brand-primary/30 group relative cursor-pointer">
+              <UserIcon className="w-5 h-5 text-brand-primary" />
+              <div className="absolute top-12 right-0 w-60 glass p-3 rounded-2xl border border-white/10 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all shadow-2xl z-[100]">
+                <button onClick={() => setStep('dashboard')} className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-white/5 transition-all text-xs font-bold text-white"><LayoutDashboard className="w-4 h-4" /> My Hub</button>
+                <button onClick={async () => { await supabase.auth.signOut(); setStep('hero'); }} className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-rose-500/10 text-rose-400 font-bold mt-1"><LogOut className="w-4 h-4" /> Sign Out</button>
               </div>
             </div>
           ) : (
-            <button onClick={() => setShowAuth(true)} className="bg-brand-primary text-white px-6 md:px-8 py-2.5 md:py-3 rounded-full text-[10px] font-black uppercase tracking-widest hover:bg-brand-primary/80 transition-all active:scale-95 shadow-xl shadow-brand-primary/20">Start</button>
+            <button onClick={() => setShowAuth(true)} className="bg-brand-primary text-white px-8 py-2.5 rounded-full text-[10px] font-black uppercase tracking-widest hover:bg-brand-primary/80 shadow-xl shadow-brand-primary/20">Sign In</button>
           )}
         </div>
       </nav>
@@ -146,25 +146,35 @@ function App() {
 
       <AnimatePresence mode="wait">
         {step === 'hero' && (
-          <motion.main key="hero" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="pt-32 pb-20 relative flex-1">
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-6xl aspect-square bg-gradient-to-b from-brand-primary/10 via-transparent to-transparent blur-3xl -z-10 opacity-50" />
-            <div className="max-w-4xl mx-auto text-center px-6">
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-brand-secondary text-[10px] font-black tracking-[0.2em] mb-10">
-                <span className="flex h-2 w-2 rounded-full bg-brand-secondary animate-ping" /> PBC PILOT LIVE
+          <motion.main key="hero" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="pt-40 pb-20 relative flex-1 flex flex-col items-center">
+            {/* Background Aesthetics */}
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-5xl aspect-square bg-gradient-to-b from-brand-primary/10 via-transparent to-transparent blur-3xl -z-10 opacity-30" />
+            
+            <div className="flex flex-col md:flex-row items-center gap-8 mb-12">
+              <Logo size="lg" />
+              <div className="text-center md:text-left flex flex-col">
+                <h1 className="text-7xl md:text-9xl font-black tracking-tighter leading-[0.8] mb-4 bg-gradient-to-r from-rose-500 to-blue-500 bg-clip-text text-transparent">RollCall</h1>
+                <p className="text-xl md:text-2xl font-medium tracking-tight opacity-60">Find your community, explore, learn and have fun!</p>
               </div>
-              <h1 className="text-6xl md:text-9xl font-black tracking-tighter mb-8 leading-[0.85] text-white">
-                Stop coordinating.<br /><span className="gradient-text">Start playing.</span>
-              </h1>
-              <p className="text-lg md:text-xl text-white/40 mb-12 max-w-2xl mx-auto leading-relaxed font-medium">The community software for finding groups in Palm Beach County. Build your squad, today.</p>
-              <div className="flex flex-col md:flex-row gap-4 justify-center">
-                <button onClick={() => user ? setStep('dashboard') : setShowAuth(true)} className="bg-white text-black px-12 py-5 rounded-3xl font-black text-sm flex items-center justify-center gap-2 hover:opacity-90 transition-all active:scale-95">Find My Group <ChevronRight className="w-5 h-5" /></button>
-                <button onClick={() => setStep('discover')} className="bg-white/5 border border-white/10 px-12 py-5 rounded-3xl font-black text-sm hover:bg-white/10 transition-all text-white">Explore Map</button>
-              </div>
+            </div>
+
+            {/* Category Chips - Directly matching the image */}
+            <div className="flex flex-wrap justify-center gap-4 mb-20">
+              <CategoryChip label="Gaming" icon={Gamepad2} colorClass="border-rose-500/30 text-rose-500" />
+              <CategoryChip label="Tabletop" icon={Dices} colorClass="border-purple-500/30 text-purple-500" />
+              <CategoryChip label="Sports" icon={Trophy} colorClass="border-blue-500/30 text-blue-500" />
+              <CategoryChip label="& More" icon={Sparkles} colorClass="border-orange-500/30 text-orange-500" />
+            </div>
+
+            <div className="flex flex-col md:flex-row gap-4">
+              <button onClick={() => user ? setStep('dashboard') : setShowAuth(true)} className="bg-white text-black px-12 py-5 rounded-3xl font-black text-sm flex items-center justify-center gap-2 hover:scale-105 transition-all shadow-2xl">Start Discovering <ChevronRight className="w-5 h-5 flex-shrink-0" /></button>
+              <button onClick={() => setStep('discover')} className="bg-white/5 border border-white/10 backdrop-blur-xl px-12 py-5 rounded-3xl font-black text-sm hover:bg-white/10 transition-all text-white">View Local Map</button>
             </div>
           </motion.main>
         )}
-        {step === 'dashboard' && <motion.main key="dashboard" className="flex-1"><Dashboard user={user} onSelectGroup={handleGroupSelect} /></motion.main>}
-        {step === 'discover' && <motion.main key="discover" className="flex-1"><Discover onSelectGroup={handleGroupSelect} /></motion.main>}
+        
+        {step === 'dashboard' && <motion.main key="dashboard" className="flex-1 min-h-[50vh]"><Dashboard user={user} onSelectGroup={(g) => { setSelectedGroup(g); setStep('groupDetail'); }} /></motion.main>}
+        {step === 'discover' && <motion.main key="discover" className="flex-1"><Discover onSelectGroup={(g) => { setSelectedGroup(g); setStep('groupDetail'); }} /></motion.main>}
         {step === 'groupDetail' && selectedGroup && <motion.main key="detail" className="flex-1"><GroupDetail group={selectedGroup} user={user} onBack={() => setStep('discover')} /></motion.main>}
         {step === 'createGroup' && <motion.main key="create" className="flex-1"><CreateGroup userId={user?.id} onBack={() => setStep('dashboard')} onSuccess={(g) => { setSelectedGroup(g); setStep('groupDetail'); }} /></motion.main>}
       </AnimatePresence>
@@ -172,9 +182,9 @@ function App() {
       {/* Mobile Bottom Navigation */}
       {step !== 'hero' && (
         <nav className="fixed bottom-0 w-full z-50 md:hidden glass border-t border-white/10 px-6 py-4 pb-12 flex justify-around items-center">
-          <button onClick={() => setStep('discover')} className={`flex flex-col items-center gap-1 ${step === 'discover' ? 'text-brand-primary' : 'opacity-40 text-white'}`}><Search className="w-6 h-6" /><span className="text-[10px] font-black uppercase tracking-widest">Map</span></button>
+          <button onClick={() => setStep('discover')} className={`flex flex-col items-center gap-1 ${step === 'discover' ? 'text-brand-primary' : 'opacity-40 text-white'}`}><Search className="w-6 h-6" /><span className="text-[10px] font-black uppercase">Map</span></button>
           <button onClick={() => user ? setStep('createGroup') : setShowAuth(true)} className="relative -top-8 w-16 h-16 bg-brand-primary rounded-[2rem] flex items-center justify-center shadow-2xl border-8 border-surface-950"><Plus className="w-10 h-10 text-white" /></button>
-          <button onClick={() => user ? setStep('dashboard') : setShowAuth(true)} className={`flex flex-col items-center gap-1 ${step === 'dashboard' ? 'text-brand-primary' : 'opacity-40 text-white'}`}><LayoutDashboard className="w-6 h-6" /><span className="text-[10px] font-black uppercase tracking-widest">Hub</span></button>
+          <button onClick={() => user ? setStep('dashboard') : setShowAuth(true)} className={`flex flex-col items-center gap-1 ${step === 'dashboard' ? 'text-brand-primary' : 'opacity-40 text-white'}`}><LayoutDashboard className="w-6 h-6" /><span className="text-[10px] font-black uppercase">Hub</span></button>
         </nav>
       )}
     </div>
