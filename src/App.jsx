@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Users, MapPin, Calendar, MessageSquare, ChevronRight, Gamepad2, Beer, ScrollText, UsersRound, LogOut, User as UserIcon, Plus, LayoutDashboard, Search, Map as MapIcon, Globe, AlertTriangle } from 'lucide-react';
+import { Users, MapPin, Calendar, MessageSquare, ChevronRight, Gamepad2, Beer, ScrollText, UsersRound, LogOut, User as UserIcon, Plus, LayoutDashboard, Search, Map as MapIcon, Globe, AlertTriangle, Sun, Moon } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Discover from './components/Discover';
 import GroupDetail from './components/GroupDetail';
@@ -29,6 +29,17 @@ function App() {
   const [showAuth, setShowAuth] = useState(false);
   const [isInitializing, setIsInitializing] = useState(true);
   const [connError, setConnError] = useState(null);
+  const [theme, setTheme] = useState(localStorage.getItem('rollcall-theme') || 'dark');
+
+  useEffect(() => {
+    // Apply theme to body
+    if (theme === 'light') {
+      document.body.classList.add('theme-light');
+    } else {
+      document.body.classList.remove('theme-light');
+    }
+    localStorage.setItem('rollcall-theme', theme);
+  }, [theme]);
 
   useEffect(() => {
     async function init() {
@@ -74,7 +85,7 @@ function App() {
               className="h-full bg-brand-primary"
             />
           </div>
-          <p className="text-[10px] font-black uppercase tracking-widest text-white/20">Booting Analytics Engine...</p>
+          <p className="text-[10px] font-black uppercase tracking-widest text-[#ffffff]/20">Booting Analytics Engine...</p>
         </div>
       </div>
     );
@@ -90,8 +101,12 @@ function App() {
     setStep('hero');
   };
 
+  const toggleTheme = () => {
+    setTheme(prev => prev === 'dark' ? 'light' : 'dark');
+  };
+
   return (
-    <div className="min-h-screen bg-surface-950 text-white overflow-x-hidden selection:bg-brand-secondary/30 flex flex-col font-sans">
+    <div className="min-h-screen bg-surface-950 text-[#ffffff] overflow-x-hidden selection:bg-brand-secondary/30 flex flex-col font-sans">
       {/* Navigation */}
       <nav className="fixed top-0 w-full z-50 glass border-b border-white/5 py-4 px-6 md:px-12 flex justify-between items-center text-sm font-medium">
         <div className="flex items-center gap-3 cursor-pointer" onClick={() => setStep(user ? 'dashboard' : 'hero')}>
@@ -108,6 +123,15 @@ function App() {
         </div>
 
         <div className="flex items-center gap-4">
+          {/* Theme Toggle Button */}
+          <button 
+            onClick={toggleTheme}
+            className="w-10 h-10 rounded-xl flex items-center justify-center bg-white/5 border border-white/10 hover:bg-white/10 transition-all text-brand-primary"
+            title={`Switch to ${theme === 'dark' ? 'Light' : 'Dark'} Mode`}
+          >
+            {theme === 'dark' ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+          </button>
+
           {user ? (
             <div className="flex items-center gap-4">
               <button 
@@ -154,7 +178,7 @@ function App() {
                 <span className="flex h-2 w-2 rounded-full bg-brand-secondary animate-ping" />
                 PBC PILOT LIVE
               </div>
-              <h1 className="text-5xl md:text-9xl font-black tracking-tighter mb-8 leading-[0.85] text-white">
+              <h1 className="text-6xl md:text-9xl font-black tracking-tighter mb-8 leading-[0.85] text-white">
                 Stop coordinating.<br />
                 <span className="gradient-text">Start playing.</span>
               </h1>
@@ -168,7 +192,7 @@ function App() {
                 >
                   Find My Group <ChevronRight className="w-5 h-5" />
                 </button>
-                <button onClick={() => setStep('discover')} className="w-full md:w-auto bg-white/5 border border-white/10 px-12 py-5 rounded-3xl font-black text-sm hover:bg-white/10 transition-all backdrop-blur-md text-white">Explore Map</button>
+                <button onClick={() => setStep('discover')} className="w-full md:w-auto bg-white/5 border border-white/10 px-12 py-5 rounded-3xl font-black text-sm hover:bg-white/10 transition-all backdrop-blur-md text-white">Explore Mapping</button>
               </div>
             </div>
           </motion.main>
@@ -187,7 +211,7 @@ function App() {
             <Search className="w-6 h-6 shadow-sm" />
             <span className="text-[10px] font-black uppercase tracking-widest font-bold">Explore</span>
           </button>
-          <button onClick={() => user ? setStep('createGroup') : setShowAuth(true)} className="relative -top-8 w-16 h-16 bg-brand-primary rounded-[2rem] flex items-center justify-center shadow-2xl shadow-brand-primary/40 border-8 border-surface-950 active:scale-95 transition-transform">
+          <button onClick={() => user ? setStep('createGroup') : setShowAuth(true)} className="relative -top-8 w-16 h-16 bg-brand-primary rounded-[2.2rem] flex items-center justify-center shadow-2xl shadow-brand-primary/40 border-8 border-surface-950 active:scale-95 transition-transform">
             <Plus className="w-10 h-10 text-white" />
           </button>
           <button onClick={() => user ? setStep('dashboard') : setShowAuth(true)} className={`flex flex-col items-center gap-1 transition-all ${step === 'dashboard' ? 'text-brand-primary' : 'text-white/40'}`}>

@@ -1,49 +1,47 @@
 @import "tailwindcss";
 
-@theme {
-  --color-brand-primary: #a855f7;
-  --color-brand-secondary: #06b6d4;
-  --color-surface-950: #020617;
-  --color-surface-900: #0f172a;
-  --color-surface-800: #1e293b;
-  --color-surface-700: #334155;
-  
-  --font-inter: "Inter", system-ui, -apple-system, sans-serif;
+:root {
+  --surface-950: #020617;
+  --surface-900: #0f172a;
+  --surface-800: #1e293b;
+  --text-primary: #ffffff;
+  --text-secondary: rgba(255, 255, 255, 0.4);
+  --brand-primary: #3b82f6;
+  --brand-secondary: #60a5fa;
+  --border-subtle: rgba(255, 255, 255, 0.05);
+  --glass-bg: rgba(15, 23, 42, 0.7);
 }
 
-:root {
-  font-family: var(--font-inter);
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: dark;
-  color: rgba(255, 255, 255, 0.9);
-  background-color: var(--color-surface-950);
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+.theme-light {
+  --surface-950: #f8fafc;
+  --surface-900: #f1f5f9;
+  --surface-800: #e2e8f0;
+  --text-primary: #0f172a;
+  --text-secondary: rgba(15, 23, 42, 0.6);
+  --brand-primary: #2563eb;
+  --brand-secondary: #3b82f6;
+  --border-subtle: rgba(15, 23, 42, 0.05);
+  --glass-bg: rgba(255, 255, 255, 0.7);
 }
 
 body {
-  margin: 0;
+  background-color: var(--surface-950);
+  color: var(--text-primary);
+  transition: background-color 0.4s cubic-bezier(0.4, 0, 0.2, 1), color 0.4s ease;
   min-height: 100vh;
-  display: flex;
-  flex-direction: column;
+  @apply selection:bg-brand-primary/30 font-sans m-0 p-0;
 }
 
-/* Premium Aesthetics */
 .glass {
-  background: rgba(255, 255, 255, 0.03);
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background-color: var(--glass-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-color: var(--border-subtle);
+  transition: background-color 0.4s ease, border-color 0.4s ease;
 }
 
 .gradient-text {
-  @apply bg-clip-text text-transparent bg-gradient-to-r from-brand-primary to-brand-secondary;
-}
-
-.section-padding {
-  @apply px-6 py-12 md:px-12 md:py-24;
+  background: linear-gradient(135deg, var(--brand-primary), var(--brand-secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
