@@ -19,30 +19,13 @@ const Auth = ({ onClose, onSuccess }) => {
       if (isSignUp) {
         const { error } = await supabase.auth.signUp({ email, password });
         if (error) throw error;
-        setMessage({ type: 'success', content: 'Check your email for a confirmation link!' });
+        setMessage({ type: 'success', content: 'Account created! Check your email.' });
       } else {
-        // PRODUCTION LOGIN ONLY
+        // PRODUCTION AUTH ONLY
         const { error } = await supabase.auth.signInWithPassword({ email, password });
         if (error) throw error;
         onSuccess();
       }
-    } catch (error) {
-      setMessage({ type: 'error', content: error.message || 'Invalid login credentials.' });
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const handleMagicLink = async () => {
-    if (!email) {
-      setMessage({ type: 'error', content: 'Please enter your email first.' });
-      return;
-    }
-    setLoading(true);
-    try {
-      const { error } = await supabase.auth.signInWithOtp({ email });
-      if (error) throw error;
-      setMessage({ type: 'success', content: 'Magic link sent! Check your inbox.' });
     } catch (error) {
       setMessage({ type: 'error', content: error.message });
     } finally {
@@ -67,8 +50,8 @@ const Auth = ({ onClose, onSuccess }) => {
         </button>
 
         <div className="text-center mb-8">
-          <h2 className="text-3xl font-black mb-2">{isSignUp ? 'Join RollCall' : 'Sign In'}</h2>
-          <p className="text-white/40 text-sm">Welcome back to the PBC community.</p>
+          <h2 className="text-3xl font-black mb-2">{isSignUp ? 'Create Account' : 'Sign In'}</h2>
+          <p className="text-white/40 text-sm">Join the Palm Beach gaming community.</p>
         </div>
 
         {message.content && (
@@ -106,25 +89,12 @@ const Auth = ({ onClose, onSuccess }) => {
             disabled={loading}
             className="w-full bg-brand-primary py-4 rounded-2xl font-bold flex items-center justify-center gap-2 hover:bg-brand-primary/80 transition-all shadow-xl shadow-brand-primary/20 disabled:opacity-50 text-white"
           >
-            {loading ? <Loader2 className="w-5 h-5 animate-spin" /> : (isSignUp ? 'Create Account' : 'Sign In')}
+            {loading ? <Loader2 className="w-5 h-5 animate-spin" /> : (isSignUp ? 'Sign Up' : 'Sign In')}
             {!loading && <ChevronRight className="w-5 h-5" />}
           </button>
         </form>
 
-        <div className="relative my-8">
-          <div className="absolute inset-0 flex items-center"><div className="w-full border-t border-white/10"></div></div>
-          <div className="relative flex justify-center text-xs uppercase font-bold tracking-widest"><span className="bg-surface-950 px-4 text-white/20">OR</span></div>
-        </div>
-
-        <button 
-          onClick={handleMagicLink}
-          disabled={loading}
-          className="w-full bg-white/5 border border-white/10 py-4 rounded-2xl font-bold text-sm hover:bg-white/10 transition-all mb-8 flex items-center justify-center gap-2 text-white"
-        >
-          Send Magic Link
-        </button>
-
-        <p className="text-center text-sm text-white/40">
+        <p className="mt-8 text-center text-sm text-white/40">
           {isSignUp ? 'Already have an account?' : "Don't have an account?"}
           <button 
             onClick={() => setIsSignUp(!isSignUp)}
