@@ -67,18 +67,10 @@ function App() {
     localStorage.setItem('rollcall-theme', theme);
   }, [theme]);
 
+  // PRODUCTION INITIALIZATION
   useEffect(() => {
     async function init() {
       try {
-        // CHECK FOR DEMO SESSION FIRST
-        const demoSession = localStorage.getItem('rollcall-demo-session');
-        if (demoSession) {
-          setUser(JSON.parse(demoSession));
-          setStep('dashboard');
-          setIsInitializing(false);
-          return;
-        }
-
         const { data: { session }, error } = await supabase.auth.getSession();
         if (error) throw error;
         setUser(session?.user ?? null);
@@ -92,15 +84,17 @@ function App() {
     init();
 
     const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+      setUser(session?.user ?? null);
       if (session?.user) {
-        setUser(session.user);
         setShowAuth(false);
         if (step === 'hero') setStep('dashboard');
+      } else {
+        setStep('hero');
       }
     });
 
     return () => subscription.unsubscribe();
-  }, [step]);
+  }, []);
 
   if (isInitializing) {
     return (
@@ -110,7 +104,7 @@ function App() {
           <div className="w-16 h-1 bg-white/5 rounded-full overflow-hidden mx-auto">
             <motion.div initial={{ width: 0 }} animate={{ width: "100%" }} transition={{ duration: 1.5, repeat: Infinity }} className="h-full bg-brand-primary" />
           </div>
-          <p className="text-[10px] font-black uppercase tracking-widest opacity-20">Initializing Community...</p>
+          <p className="text-[10px] font-black uppercase tracking-widest opacity-20">Initializing Engine...</p>
         </div>
       </div>
     );
@@ -119,14 +113,13 @@ function App() {
   const toggleTheme = () => setTheme(prev => prev === 'dark' ? 'light' : 'dark');
 
   const handleLogout = async () => {
-    localStorage.removeItem('rollcall-demo-session');
     await supabase.auth.signOut();
-    setStep('hero');
-    setUser(null);
   };
 
   return (
     <div className="min-h-screen bg-surface-950 text-white selection:bg-brand-secondary/30 flex flex-col font-sans transition-all duration-500">
+      
+      {/* Navigation */}
       <nav className="fixed top-0 w-full z-50 glass border-b border-white/5 py-4 px-6 md:px-12 flex justify-between items-center">
         <div className="flex items-center gap-4 cursor-pointer" onClick={() => setStep(user ? 'dashboard' : 'hero')}>
           <Logo size="md" />
@@ -137,6 +130,7 @@ function App() {
             {theme === 'dark' ? <Sun className="w-5 h-5 text-amber-400" /> : <Moon className="w-5 h-5 text-indigo-400" />}
             <span className="hidden sm:inline text-[10px] font-black uppercase tracking-widest opacity-60 group-hover:opacity-100">{theme === 'dark' ? 'Light' : 'Dark'}</span>
           </button>
+
           {user ? (
             <div className="h-10 w-10 rounded-full bg-brand-primary/20 flex items-center justify-center border border-brand-primary/30 group relative cursor-pointer">
               <UserIcon className="w-5 h-5 text-brand-primary" />
@@ -151,7 +145,9 @@ function App() {
           )}
         </div>
       </nav>
+
       <AnimatePresence>{showAuth && <Auth onClose={() => setShowAuth(false)} onSuccess={() => setShowAuth(false)} />}</AnimatePresence>
+
       <AnimatePresence mode="wait">
         {step === 'hero' && (
           <motion.main key="hero" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="pt-40 pb-20 relative flex-1 flex flex-col items-center">

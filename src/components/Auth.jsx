@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { supabase } from '../lib/supabase';
-import { Mail, Lock, Loader2, ChevronRight, X, Sparkles } from 'lucide-react';
+import { Mail, Lock, Loader2, ChevronRight, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const Auth = ({ onClose, onSuccess }) => {
@@ -21,37 +21,30 @@ const Auth = ({ onClose, onSuccess }) => {
         if (error) throw error;
         setMessage({ type: 'success', content: 'Check your email for a confirmation link!' });
       } else {
-        // 1. TRY REAL AUTH
-        const { data, error } = await supabase.auth.signInWithPassword({ email, password });
-        
-        // 2. DEMO BYPASS: If real auth fails or keys are missing, check the Profiles table directly
-        if (error) {
-          console.log('Switching to Demo Logic...');
-          const { data: profile, error: pError } = await supabase
-            .from('profiles')
-            .select('*')
-            .eq('username', email.split('@')[0])
-            .single();
-
-          // If we find a profile matching the handle or email, let them in for the presentation
-          if (profile || email.includes('demo') || email.includes('admin')) {
-            const mockUser = {
-              id: profile?.id || 'demo-uid',
-              email: email,
-              user_metadata: { full_name: profile?.full_name || 'Demo User' }
-            };
-            
-            // This event will be caught by App.jsx to set the session
-            localStorage.setItem('rollcall-demo-session', JSON.stringify(mockUser));
-            window.location.reload(); // Force refresh to trigger session load
-            return;
-          }
-          throw error;
-        }
+        // PRODUCTION LOGIN ONLY
+        const { error } = await supabase.auth.signInWithPassword({ email, password });
+        if (error) throw error;
         onSuccess();
       }
     } catch (error) {
-      setMessage({ type: 'error', content: error.message || 'Check spreadsheet for correct credentials' });
+      setMessage({ type: 'error', content: error.message || 'Invalid login credentials.' });
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleMagicLink = async () => {
+    if (!email) {
+      setMessage({ type: 'error', content: 'Please enter your email first.' });
+      return;
+    }
+    setLoading(true);
+    try {
+      const { error } = await supabase.auth.signInWithOtp({ email });
+      if (error) throw error;
+      setMessage({ type: 'success', content: 'Magic link sent! Check your inbox.' });
+    } catch (error) {
+      setMessage({ type: 'error', content: error.message });
     } finally {
       setLoading(false);
     }
@@ -74,11 +67,8 @@ const Auth = ({ onClose, onSuccess }) => {
         </button>
 
         <div className="text-center mb-8">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-primary/10 border border-brand-primary/20 text-brand-primary text-[10px] font-black tracking-widest mb-4">
-            <Sparkles className="w-3 h-3" /> DEMO MODE ENABLED
-          </div>
-          <h2 className="text-3xl font-black mb-2">{isSignUp ? 'Join RollCall' : 'Presentation Sign-In'}</h2>
-          <p className="text-white/40 text-sm">Log in with any account from your Excel file.</p>
+          <h2 className="text-3xl font-black mb-2">{isSignUp ? 'Join RollCall' : 'Sign In'}</h2>
+          <p className="text-white/40 text-sm">Welcome back to the PBC community.</p>
         </div>
 
         {message.content && (
@@ -92,7 +82,7 @@ const Auth = ({ onClose, onSuccess }) => {
             <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-white/20" />
             <input 
               type="email" 
-              placeholder="Excel Email Address"
+              placeholder="Email address"
               required
               value={email}
               onChange={(e) => setEmail(e.target.value)}
@@ -103,7 +93,7 @@ const Auth = ({ onClose, onSuccess }) => {
             <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-white/20" />
             <input 
               type="password" 
-              placeholder="Excel Password"
+              placeholder="Password"
               required
               value={password}
               onChange={(e) => setPassword(e.target.value)}
@@ -116,16 +106,33 @@ const Auth = ({ onClose, onSuccess }) => {
             disabled={loading}
             className="w-full bg-brand-primary py-4 rounded-2xl font-bold flex items-center justify-center gap-2 hover:bg-brand-primary/80 transition-all shadow-xl shadow-brand-primary/20 disabled:opacity-50 text-white"
           >
-            {loading ? <Loader2 className="w-5 h-5 animate-spin" /> : 'Enter Platform'}
+            {loading ? <Loader2 className="w-5 h-5 animate-spin" /> : (isSignUp ? 'Create Account' : 'Sign In')}
             {!loading && <ChevronRight className="w-5 h-5" />}
           </button>
         </form>
 
-        <div className="mt-8 text-center">
-          <p className="text-[10px] text-white/20 uppercase font-black tracking-widest leading-relaxed">
-            Note: Passwords like 'PeakEB21*' from row 3 <br/> of your xlsx file are now active.
-          </p>
+        <div className="relative my-8">
+          <div className="absolute inset-0 flex items-center"><div className="w-full border-t border-white/10"></div></div>
+          <div className="relative flex justify-center text-xs uppercase font-bold tracking-widest"><span className="bg-surface-950 px-4 text-white/20">OR</span></div>
         </div>
+
+        <button 
+          onClick={handleMagicLink}
+          disabled={loading}
+          className="w-full bg-white/5 border border-white/10 py-4 rounded-2xl font-bold text-sm hover:bg-white/10 transition-all mb-8 flex items-center justify-center gap-2 text-white"
+        >
+          Send Magic Link
+        </button>
+
+        <p className="text-center text-sm text-white/40">
+          {isSignUp ? 'Already have an account?' : "Don't have an account?"}
+          <button 
+            onClick={() => setIsSignUp(!isSignUp)}
+            className="ml-2 text-brand-primary font-bold hover:underline"
+          >
+            {isSignUp ? 'Sign In' : 'Sign Up'}
+          </button>
+        </p>
       </motion.div>
     </motion.div>
   );
