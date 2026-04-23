@@ -104,44 +104,40 @@ function App() {
           </div>
         </div>
         
-        <div className="hidden lg:flex gap-8 items-center">
-          <button onClick={() => setStep('discover')} className={`hover:text-brand-primary transition-all text-[10px] font-black uppercase tracking-widest ${step === 'discover' ? 'text-brand-primary' : 'opacity-40'}`}>Explore Events</button>
-          {user && <button onClick={() => setStep('dashboard')} className={`hover:text-brand-primary transition-all text-[10px] font-black uppercase tracking-widest ${step === 'dashboard' ? 'text-brand-primary' : 'opacity-40'}`}>My Hub</button>}
-          
-          <div className="h-4 w-px bg-white/10 mx-2" />
-
-          {/* New High-Visibility Theme Toggle */}
-          <button 
-            onClick={toggleTheme}
-            className="flex items-center gap-2 px-3 py-2 rounded-xl bg-white/10 hover:bg-white/20 border border-white/10 transition-all active:scale-95 group"
-          >
-            {theme === 'dark' ? <Sun className="w-4 h-4 text-amber-400" /> : <Moon className="w-4 h-4 text-indigo-400" />}
-            <span className="text-[10px] font-black uppercase tracking-widest opacity-60 group-hover:opacity-100">{theme === 'dark' ? 'Light' : 'Dark'} Mode</span>
-          </button>
+        <div className="hidden xl:flex gap-8 items-center">
+          <button onClick={() => setStep('discover')} className={`hover:text-brand-primary transition-all text-[10px] font-black uppercase tracking-widest ${step === 'discover' ? 'text-brand-primary' : 'opacity-40'}`}>Explore</button>
+          {user && <button onClick={() => setStep('dashboard')} className={`hover:text-brand-primary transition-all text-[10px] font-black uppercase tracking-widest ${step === 'dashboard' ? 'text-brand-primary' : 'opacity-40'}`}>Hub</button>}
         </div>
 
-        <div className="flex items-center gap-4">
-          {/* Mobile Theme Toggle (Visible only on small screens) */}
-          <button onClick={toggleTheme} className="lg:hidden p-2 rounded-lg bg-white/5 border border-white/10">
+        <div className="flex items-center gap-3 md:gap-4">
+          
+          {/* PERMANENT THEME TOGGLE - NO BREAKPOINTS */}
+          <button 
+            onClick={toggleTheme}
+            className="flex items-center gap-2 px-3 py-2 rounded-xl bg-white/10 hover:bg-white/20 border border-white/10 transition-all active:scale-95 group shadow-lg"
+          >
             {theme === 'dark' ? <Sun className="w-5 h-5 text-amber-400" /> : <Moon className="w-5 h-5 text-indigo-400" />}
+            <span className="hidden sm:inline text-[10px] font-black uppercase tracking-widest opacity-60 group-hover:opacity-100">{theme === 'dark' ? 'Light' : 'Dark'}</span>
           </button>
 
+          <div className="h-6 w-px bg-white/10 mx-1 hidden sm:block" />
+
           {user ? (
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-2 md:gap-4">
               <button onClick={() => setStep('createGroup')} className="hidden md:flex items-center gap-2 px-4 py-2.5 bg-brand-primary text-white rounded-xl hover:bg-brand-primary/80 transition-all text-[10px] font-black uppercase tracking-widest shadow-xl shadow-brand-primary/20">
-                <Plus className="w-4 h-4" /> Host Group
+                <Plus className="w-4 h-4" /> Host
               </button>
               <div className="h-10 w-10 rounded-full bg-brand-primary/20 flex items-center justify-center border border-brand-primary/30 group relative cursor-pointer">
                 <UserIcon className="w-5 h-5 text-brand-primary" />
                 <div className="absolute top-12 right-0 w-60 glass p-3 rounded-2xl border border-white/10 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all shadow-2xl z-[100]">
                   <p className="text-[10px] text-white/40 uppercase font-black tracking-widest mb-3 px-2 border-b border-white/5 pb-2 truncate">{user.email}</p>
-                  <button onClick={() => setStep('dashboard')} className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-white/5 transition-all text-xs font-bold"><LayoutDashboard className="w-4 h-4" /> My Hub</button>
+                  <button onClick={() => setStep('dashboard')} className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-white/5 transition-all text-xs font-bold text-white"><LayoutDashboard className="w-4 h-4" /> My Hub</button>
                   <button onClick={handleLogout} className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-rose-500/10 text-rose-400 transition-all text-xs font-bold mt-1"><LogOut className="w-4 h-4" /> Sign Out</button>
                 </div>
               </div>
             </div>
           ) : (
-            <button onClick={() => setShowAuth(true)} className="bg-brand-primary text-white px-8 py-3 rounded-full text-[10px] font-black uppercase tracking-widest hover:bg-brand-primary/80 transition-all active:scale-95 shadow-xl shadow-brand-primary/20">Get Started</button>
+            <button onClick={() => setShowAuth(true)} className="bg-brand-primary text-white px-6 md:px-8 py-2.5 md:py-3 rounded-full text-[10px] font-black uppercase tracking-widest hover:bg-brand-primary/80 transition-all active:scale-95 shadow-xl shadow-brand-primary/20">Start</button>
           )}
         </div>
       </nav>
@@ -156,18 +152,18 @@ function App() {
               <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-brand-secondary text-[10px] font-black tracking-[0.2em] mb-10">
                 <span className="flex h-2 w-2 rounded-full bg-brand-secondary animate-ping" /> PBC PILOT LIVE
               </div>
-              <h1 className="text-6xl md:text-9xl font-black tracking-tighter mb-8 leading-[0.85]">
+              <h1 className="text-6xl md:text-9xl font-black tracking-tighter mb-8 leading-[0.85] text-white">
                 Stop coordinating.<br /><span className="gradient-text">Start playing.</span>
               </h1>
-              <p className="text-lg md:text-xl opacity-40 mb-12 max-w-2xl mx-auto leading-relaxed font-medium">The community software for finding groups in Palm Beach County. Build your squad, today.</p>
+              <p className="text-lg md:text-xl text-white/40 mb-12 max-w-2xl mx-auto leading-relaxed font-medium">The community software for finding groups in Palm Beach County. Build your squad, today.</p>
               <div className="flex flex-col md:flex-row gap-4 justify-center">
                 <button onClick={() => user ? setStep('dashboard') : setShowAuth(true)} className="bg-white text-black px-12 py-5 rounded-3xl font-black text-sm flex items-center justify-center gap-2 hover:opacity-90 transition-all active:scale-95">Find My Group <ChevronRight className="w-5 h-5" /></button>
-                <button onClick={() => setStep('discover')} className="bg-white/5 border border-white/10 px-12 py-5 rounded-3xl font-black text-sm hover:bg-white/10 transition-all">Explore Map</button>
+                <button onClick={() => setStep('discover')} className="bg-white/5 border border-white/10 px-12 py-5 rounded-3xl font-black text-sm hover:bg-white/10 transition-all text-white">Explore Map</button>
               </div>
             </div>
           </motion.main>
         )}
-        {step === 'dashboard' && <motion.main key="dashboard" className="flex-1 min-h-[50vh]"><Dashboard user={user} onSelectGroup={handleGroupSelect} /></motion.main>}
+        {step === 'dashboard' && <motion.main key="dashboard" className="flex-1"><Dashboard user={user} onSelectGroup={handleGroupSelect} /></motion.main>}
         {step === 'discover' && <motion.main key="discover" className="flex-1"><Discover onSelectGroup={handleGroupSelect} /></motion.main>}
         {step === 'groupDetail' && selectedGroup && <motion.main key="detail" className="flex-1"><GroupDetail group={selectedGroup} user={user} onBack={() => setStep('discover')} /></motion.main>}
         {step === 'createGroup' && <motion.main key="create" className="flex-1"><CreateGroup userId={user?.id} onBack={() => setStep('dashboard')} onSuccess={(g) => { setSelectedGroup(g); setStep('groupDetail'); }} /></motion.main>}
@@ -176,9 +172,9 @@ function App() {
       {/* Mobile Bottom Navigation */}
       {step !== 'hero' && (
         <nav className="fixed bottom-0 w-full z-50 md:hidden glass border-t border-white/10 px-6 py-4 pb-12 flex justify-around items-center">
-          <button onClick={() => setStep('discover')} className={`flex flex-col items-center gap-1 ${step === 'discover' ? 'text-brand-primary' : 'opacity-40'}`}><Search className="w-6 h-6" /><span className="text-[10px] font-black uppercase tracking-widest">Map</span></button>
+          <button onClick={() => setStep('discover')} className={`flex flex-col items-center gap-1 ${step === 'discover' ? 'text-brand-primary' : 'opacity-40 text-white'}`}><Search className="w-6 h-6" /><span className="text-[10px] font-black uppercase tracking-widest">Map</span></button>
           <button onClick={() => user ? setStep('createGroup') : setShowAuth(true)} className="relative -top-8 w-16 h-16 bg-brand-primary rounded-[2rem] flex items-center justify-center shadow-2xl border-8 border-surface-950"><Plus className="w-10 h-10 text-white" /></button>
-          <button onClick={() => user ? setStep('dashboard') : setShowAuth(true)} className={`flex flex-col items-center gap-1 ${step === 'dashboard' ? 'text-brand-primary' : 'opacity-40'}`}><LayoutDashboard className="w-6 h-6" /><span className="text-[10px] font-black uppercase tracking-widest">Hub</span></button>
+          <button onClick={() => user ? setStep('dashboard') : setShowAuth(true)} className={`flex flex-col items-center gap-1 ${step === 'dashboard' ? 'text-brand-primary' : 'opacity-40 text-white'}`}><LayoutDashboard className="w-6 h-6" /><span className="text-[10px] font-black uppercase tracking-widest">Hub</span></button>
         </nav>
       )}
     </div>
