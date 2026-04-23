@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+// Build Version: 1.0.4-PRD-BRANDING
 import { Users, MapPin, Calendar, MessageSquare, ChevronRight, Gamepad2, Beer, ScrollText, UsersRound, LogOut, User as UserIcon, Plus, LayoutDashboard, Search, Map as MapIcon, Globe, AlertTriangle, Sun, Moon, Dices, Trophy, Sparkles } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Discover from './components/Discover';
