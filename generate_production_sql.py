@@ -163,7 +163,7 @@ $$ LANGUAGE plpgsql SECURITY DEFINER;
             lat = round(random.uniform(26.3, 26.9), 4)
             lng = round(random.uniform(-80.2, -80.0), 4)
             desc = f"Join the {name} community in {city}. Open for all residents."
-            f.write(f"INSERT INTO public.groups (name, category, city, description, capacity, members, skill, coords, image) VALUES ($pbc${name}$pbc$, $pbc${category}$pbc$, $pbc${city}$pbc$, $pbc${desc}$pbc$, {cap}, 1, $pbc${skill}$pbc$, ARRAY[{lat}, {lng}], $pbc${img}$pbc$);\n")
+            f.write(f"INSERT INTO public.groups (name, category, city, description, capacity, members, skill, coords, image) VALUES ($pbc${name}$pbc$, $pbc${category}$pbc$, $pbc${city}$pbc$, $pbc${desc}$pbc$, {cap}, 1, $pbc${skill}$pbc$, jsonb_build_array({lat}, {lng}), $pbc${img}$pbc$);\n")
 
     f.write("\n-- RANDOMIZING 500 USERS INTO MEMBERSHIPS\n")
     f.write("""
