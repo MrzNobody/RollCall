@@ -56,3 +56,9 @@ CREATE POLICY "Users can create their own tickets" ON public.support_tickets
 COMMENT ON TABLE public.support_tickets IS 'Official resident support requests.';
 COMMENT ON TABLE public.admin_audit_log IS 'Immutable record of all administrative actions.';
 COMMENT ON TABLE public.data_requests IS 'Tracking GDPR/CCPA compliance requests.';
+
+-- SECURITY UTILITY: SOLE ADMIN ACTIVATION
+-- Run this to reset all admins and make yourself the only master:
+-- UPDATE public.profiles SET is_admin = false;
+-- UPDATE public.profiles SET is_admin = true WHERE email = 'YOUR_EMAIL_HERE';
+
