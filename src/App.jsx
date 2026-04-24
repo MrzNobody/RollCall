@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Users, MapPin, Calendar, MessageSquare, ChevronRight, Gamepad2, Beer, ScrollText, UsersRound, LogOut, User as UserIcon, Plus, LayoutDashboard, Search, Map as MapIcon, Globe, AlertTriangle, Sun, Moon, Dices, Trophy, Sparkles, X } from 'lucide-react';
+import { Users, MapPin, Calendar, MessageSquare, ChevronRight, Gamepad2, Beer, ScrollText, UsersRound, LogOut, User as UserIcon, Plus, LayoutDashboard, Search, Map as MapIcon, Globe, AlertTriangle, Sun, Moon, Dices, Trophy, Sparkles, X, Activity } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Discover from './components/Discover';
 import GroupDetail from './components/GroupDetail';
@@ -7,6 +7,7 @@ import CreateGroup from './components/CreateGroup';
 import Dashboard from './components/Dashboard';
 import Auth from './components/Auth';
 import AdminDashboard from './components/AdminDashboard';
+import Status from './components/Status';
 import { supabase } from './lib/supabase';
 
 // High-Fidelity PRD Logo: 6-Node Hexagonal Network with Center Hub
@@ -365,11 +366,18 @@ function App() {
               <div className="absolute top-12 right-0 w-60 glass p-3 rounded-2xl border border-white/10 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all shadow-2xl z-[100]">
                 <p className="text-[10px] text-text-secondary uppercase font-black tracking-widest mb-3 px-2 border-b border-white/5 pb-2 truncate">{user.email}</p>
                 <button onClick={() => setStep('dashboard')} className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-white/5 transition-all text-xs font-bold text-text-primary"><LayoutDashboard className="w-4 h-4" /> My Hub</button>
+                <button onClick={() => setStep('status')} className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-white/5 transition-all text-xs font-bold text-text-primary"><Activity className="w-4 h-4" /> System Status</button>
                 <button onClick={handleLogout} className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-rose-500/10 text-rose-400 font-bold mt-1"><LogOut className="w-4 h-4" /> Sign Out</button>
               </div>
             </div>
           ) : (
-            <button onClick={() => setShowAuth(true)} className="bg-brand-primary text-white px-8 py-2.5 rounded-full text-[10px] font-black uppercase tracking-widest hover:bg-brand-primary/80 shadow-xl shadow-brand-primary/20">Sign In</button>
+            <div className="flex items-center gap-4">
+              <button onClick={() => setStep('status')} className="hidden sm:flex items-center gap-2 px-4 py-2 text-[9px] font-black uppercase tracking-widest text-text-muted hover:text-text-primary transition-all">
+                <Activity className="w-4 h-4 text-emerald-500" />
+                Status
+              </button>
+              <button onClick={() => setShowAuth(true)} className="bg-brand-primary text-white px-8 py-2.5 rounded-full text-[10px] font-black uppercase tracking-widest hover:bg-brand-primary/80 shadow-xl shadow-brand-primary/20">Sign In</button>
+            </div>
           )}
         </div>
       </nav>
@@ -406,8 +414,26 @@ function App() {
           {step === 'create-group' && <CreateGroup onCreated={() => setStep('dashboard')} onCancel={() => setStep('dashboard')} />}
           {step === 'group-detail' && <GroupDetail group={selectedGroup} onBack={() => setStep('dashboard')} />}
           {step === 'admin' && <AdminDashboard onBack={() => setStep('dashboard')} />}
+          {step === 'status' && <Status onBack={() => setStep(user ? 'dashboard' : 'hero')} />}
         {step === 'createGroup' && <motion.main key="create" className="flex-1"><CreateGroup userId={user?.id} onBack={() => setStep('dashboard')} onSuccess={(g) => { setSelectedGroup(g); setStep('groupDetail'); }} /></motion.main>}
       </AnimatePresence>
+
+      {/* Global Footer */}
+      <footer className="w-full py-12 px-6 md:px-12 border-t border-white/5 mt-auto">
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
+          <div className="flex items-center gap-3 opacity-50">
+            <Logo size="sm" />
+            <span className="text-sm font-black tracking-tighter uppercase">RollCall PBC</span>
+          </div>
+          <div className="flex items-center gap-8">
+            <button onClick={() => setStep('status')} className="flex items-center gap-2 group">
+              <div className="w-2 h-2 rounded-full bg-emerald-500 shadow-[0_0_10px_rgba(16,185,129,0.5)]" />
+              <span className="text-[10px] font-black uppercase tracking-widest text-text-muted group-hover:text-text-primary transition-all">Systems Operational</span>
+            </button>
+            <span className="text-[10px] font-black uppercase tracking-widest text-text-muted">© 2026 ROLLCALL PBC PILOT</span>
+          </div>
+        </div>
+      </footer>
       {step !== 'hero' && (
         <nav className="fixed bottom-0 w-full z-50 md:hidden glass border-t border-white/10 px-6 py-4 pb-12 flex justify-around items-center">
           <button onClick={() => setStep('discover')} className={`flex flex-col items-center gap-1 ${step === 'discover' ? 'text-brand-primary' : 'opacity-40 text-white'}`}><Search className="w-6 h-6" /><span className="text-[10px] font-black uppercase">Map</span></button>
