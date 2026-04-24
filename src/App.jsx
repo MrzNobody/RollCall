@@ -399,10 +399,10 @@ function App() {
               </div>
             </div>
             <div className="flex flex-wrap justify-center gap-4 mb-20">
-              <CategoryChip label="Gaming" icon={Gamepad2} count={categoryCounts['Gaming']} colorClass="border-rose-500/30 text-rose-500" onClick={() => setSelectedCategory('Gaming')} />
-              <CategoryChip label="Tabletop" icon={Dices} count={categoryCounts['Tabletop']} colorClass="border-purple-500/30 text-purple-500" onClick={() => setSelectedCategory('Tabletop')} />
-              <CategoryChip label="Sports" icon={Trophy} count={categoryCounts['Sports']} colorClass="border-blue-500/30 text-blue-500" onClick={() => setSelectedCategory('Sports')} />
-              <CategoryChip label="& More" icon={Sparkles} count={categoryCounts['Other']} colorClass="border-orange-500/30 text-orange-500" onClick={() => setSelectedCategory('& More')} />
+              <CategoryChip label="Gaming" icon={Gamepad2} count={categoryCounts['Gaming']} colorClass="border-rose-500/30 text-rose-500" onClick={() => { setActiveCategoryFilter('Gaming'); setStep('discover'); }} />
+              <CategoryChip label="Tabletop" icon={Dices} count={categoryCounts['Tabletop']} colorClass="border-purple-500/30 text-purple-500" onClick={() => { setActiveCategoryFilter('Tabletop'); setStep('discover'); }} />
+              <CategoryChip label="Sports" icon={Trophy} count={categoryCounts['Sports']} colorClass="border-blue-500/30 text-blue-500" onClick={() => { setActiveCategoryFilter('Sports'); setStep('discover'); }} />
+              <CategoryChip label="& More" icon={Sparkles} count={categoryCounts['Other']} colorClass="border-orange-500/30 text-orange-500" onClick={() => { setActiveCategoryFilter('Other'); setStep('discover'); }} />
             </div>
 
             <LatestFeed user={user} onAuthRequired={() => setShowAuth(true)} />

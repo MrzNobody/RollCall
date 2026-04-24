@@ -187,7 +187,7 @@ const Discover = ({ onSelectGroup, initialCategory = 'All' }) => {
 
           {/* Category Chips */}
           <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-hide no-scrollbar">
-            {['All', 'FPS Gaming', 'Dungeons & Dragons', 'Board Games', 'Soccer', 'Other'].map(cat => (
+            {['All', 'Gaming', 'Tabletop', 'Sports', 'Other'].map(cat => (
               <button
                 key={cat}
                 onClick={() => setActiveCategory(cat)}
