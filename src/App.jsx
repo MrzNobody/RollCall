@@ -387,9 +387,10 @@ function App() {
       </nav>
       <AnimatePresence>{showAuth && <Auth onClose={() => setShowAuth(false)} onSuccess={() => setShowAuth(false)} />}</AnimatePresence>
       <AnimatePresence>{selectedCategory && <CategoryModal category={selectedCategory} onClose={() => setSelectedCategory(null)} onNavigate={(target, cat) => { setActiveCategoryFilter(cat); setStep(target); }} />}</AnimatePresence>
-      <AnimatePresence mode="wait">
+      {/* Main Content Router */}
+      <main className="flex-1 flex flex-col relative overflow-hidden">
         {step === 'hero' && (
-          <motion.main key="hero" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="pt-40 pb-20 relative flex-1 flex flex-col items-center">
+          <div className="pt-40 pb-20 relative flex-1 flex flex-col items-center">
             <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-5xl aspect-square bg-gradient-to-b from-brand-primary/10 via-transparent to-transparent blur-3xl -z-10 opacity-30" />
             <div className="flex flex-col md:flex-row items-center gap-8 mb-12">
               <Logo size="lg" />
@@ -398,29 +399,45 @@ function App() {
                 <p className="text-xl md:text-2xl font-medium tracking-tight text-text-secondary">Find your community, explore, learn and have fun!</p>
               </div>
             </div>
-            <div className="flex flex-wrap justify-center gap-4 mb-20">
-              <CategoryChip label="Gaming" icon={Gamepad2} count={categoryCounts['Gaming']} colorClass="border-rose-500/30 text-rose-500" onClick={() => { setActiveCategoryFilter('Gaming'); setStep('discover'); }} />
-              <CategoryChip label="Tabletop" icon={Dices} count={categoryCounts['Tabletop']} colorClass="border-purple-500/30 text-purple-500" onClick={() => { setActiveCategoryFilter('Tabletop'); setStep('discover'); }} />
-              <CategoryChip label="Sports" icon={Trophy} count={categoryCounts['Sports']} colorClass="border-blue-500/30 text-blue-500" onClick={() => { setActiveCategoryFilter('Sports'); setStep('discover'); }} />
-              <CategoryChip label="& More" icon={Sparkles} count={categoryCounts['Other']} colorClass="border-orange-500/30 text-orange-500" onClick={() => { setActiveCategoryFilter('Other'); setStep('discover'); }} />
+            
+            {/* Category Discovery Grid */}
+            <div className="flex flex-wrap justify-center gap-4 mb-20 px-6">
+              {[
+                { label: 'Gaming', icon: Gamepad2, color: 'border-rose-500/30 text-rose-500' },
+                { label: 'Tabletop', icon: Dices, color: 'border-purple-500/30 text-purple-500' },
+                { label: 'Sports', icon: Trophy, color: 'border-blue-500/30 text-blue-500' },
+                { label: 'Other', icon: Sparkles, color: 'border-orange-500/30 text-orange-500' }
+              ].map(cat => (
+                <button
+                  key={cat.label}
+                  onClick={() => {
+                    setActiveCategoryFilter(cat.label);
+                    setStep('discover');
+                  }}
+                  className={`flex items-center gap-2 px-6 py-3 rounded-full border-2 bg-white/5 hover:bg-white/10 transition-all ${cat.color}`}
+                >
+                  <cat.icon className="w-4 h-4" />
+                  <span className="text-xs font-black uppercase tracking-widest">{cat.label}</span>
+                </button>
+              ))}
             </div>
 
             <LatestFeed user={user} onAuthRequired={() => setShowAuth(true)} />
 
             <div className="flex flex-col md:flex-row gap-4 mt-20">
               <button onClick={() => user ? setStep('dashboard') : setShowAuth(true)} className="bg-text-primary text-surface-950 px-12 py-5 rounded-3xl font-black text-sm flex items-center justify-center gap-2 hover:scale-105 transition-all shadow-2xl">Start Discovering <ChevronRight className="w-5 h-5 flex-shrink-0" /></button>
-              <button onClick={() => user ? setStep('discover') : setShowAuth(true)} className="glass px-12 py-5 rounded-3xl font-black text-sm hover:bg-white/10 transition-all text-text-primary">View Local Map</button>
+              <button onClick={() => setStep('discover')} className="glass px-12 py-5 rounded-3xl font-black text-sm hover:bg-white/10 transition-all text-text-primary">View Local Map</button>
             </div>
-          </motion.main>
+          </div>
         )}
+
         {step === 'dashboard' && <Dashboard user={user} onSelectGroup={(g) => { setSelectedGroup(g); setStep('group-detail'); }} onCreateGroup={() => setStep('create-group')} onEnterDiscover={(cat) => { setActiveCategoryFilter(cat || 'All'); setStep('discover'); }} onEnterAdmin={() => setStep('admin')} />}
-          {step === 'discover' && <Discover initialCategory={activeCategoryFilter} onSelectGroup={(g) => { setSelectedGroup(g); setStep('group-detail'); }} />}
-          {step === 'create-group' && <CreateGroup onCreated={() => setStep('dashboard')} onCancel={() => setStep('dashboard')} />}
-          {step === 'group-detail' && <GroupDetail group={selectedGroup} onBack={() => setStep('dashboard')} />}
-          {step === 'admin' && <AdminDashboard onBack={() => setStep('dashboard')} />}
-          {step === 'status' && <Status onBack={() => setStep(user ? 'dashboard' : 'hero')} />}
-        {step === 'createGroup' && <motion.main key="create" className="flex-1"><CreateGroup userId={user?.id} onBack={() => setStep('dashboard')} onSuccess={(g) => { setSelectedGroup(g); setStep('groupDetail'); }} /></motion.main>}
-      </AnimatePresence>
+        {step === 'discover' && <Discover initialCategory={activeCategoryFilter} onSelectGroup={(g) => { setSelectedGroup(g); setStep('group-detail'); }} />}
+        {step === 'create-group' && <CreateGroup onCreated={() => setStep('dashboard')} onCancel={() => setStep('dashboard')} />}
+        {step === 'group-detail' && <GroupDetail group={selectedGroup} onBack={() => setStep('dashboard')} />}
+        {step === 'admin' && <AdminDashboard onBack={() => setStep('dashboard')} />}
+        {step === 'status' && <Status onBack={() => setStep(user ? 'dashboard' : 'hero')} />}
+      </main>
 
       {/* Global Footer */}
       <footer className="w-full py-12 px-6 md:px-12 border-t border-white/5 mt-auto">
