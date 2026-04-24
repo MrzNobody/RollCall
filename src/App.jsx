@@ -42,7 +42,7 @@ const CategoryChip = ({ label, icon: Icon, colorClass }) => (
   <motion.button
     whileHover={{ y: -2, scale: 1.02 }}
     whileTap={{ scale: 0.98 }}
-    className={`flex items-center gap-2 px-4 py-1.5 rounded-full border-2 bg-white/5 backdrop-blur-md transition-all ${colorClass}`}
+    className={`flex items-center gap-2 px-4 py-1.5 rounded-full border-2 bg-surface-950/5 backdrop-blur-md transition-all ${colorClass}`}
   >
     <Icon className="w-4 h-4" />
     <span className="text-[11px] font-black uppercase tracking-widest">{label}</span>

@@ -11,9 +11,9 @@ function cn(...inputs) {
 const ChatMessage = ({ user, text, created_at, self }) => (
   <div className={cn("flex flex-col mb-4 animate-fade-in", self ? "items-end" : "items-start")}>
     <div className="flex items-center gap-2 mb-1">
-      {!self && <div className="w-6 h-6 rounded-full bg-brand-primary/20 flex items-center justify-center text-[10px] font-bold"><User className="w-3 h-3" /></div>}
-      <span className="text-[10px] font-bold text-white/40 uppercase tracking-wider">{user}</span>
-      <span className="text-[10px] text-white/20">{new Date(created_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
+      {!self && <div className="w-6 h-6 rounded-full bg-brand-primary/20 flex items-center justify-center text-[10px] font-bold"><User className="w-3 h-3 text-brand-primary" /></div>}
+      <span className="text-[10px] font-bold text-text-secondary uppercase tracking-wider">{user}</span>
+      <span className="text-[10px] text-text-muted">{new Date(created_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
     </div>
     <div className={cn(
       "px-4 py-2 rounded-2xl text-sm max-w-[80%] shadow-sm",
@@ -122,7 +122,7 @@ const GroupDetail = ({ group, onBack, user }) => {
         
         <div className="absolute bottom-0 w-full px-6 md:px-12 pb-12">
           <div className="max-w-7xl mx-auto">
-            <button onClick={onBack} className="flex items-center gap-2 text-white/60 hover:text-white mb-8 transition-colors text-[10px] font-black uppercase tracking-[0.2em]">
+            <button onClick={onBack} className="flex items-center gap-2 text-text-secondary hover:text-text-primary mb-8 transition-colors text-[10px] font-black uppercase tracking-[0.2em]">
               <ChevronLeft className="w-4 h-4" />
               Back to PBC Discover
             </button>
@@ -135,8 +135,8 @@ const GroupDetail = ({ group, onBack, user }) => {
                     Verified PBC Group
                   </div>
                 </div>
-                <h1 className="text-5xl md:text-6xl font-black tracking-tighter">{group.name}</h1>
-                <div className="flex flex-wrap items-center gap-8 text-white/40 text-xs font-medium">
+                <h1 className="text-5xl md:text-6xl font-black tracking-tighter text-text-primary">{group.name}</h1>
+                <div className="flex flex-wrap items-center gap-8 text-text-secondary text-xs font-medium">
                   <div className="flex items-center gap-2">
                     <MapPin className="w-4 h-4 text-brand-secondary" />
                     {group.city}, FL
@@ -183,7 +183,7 @@ const GroupDetail = ({ group, onBack, user }) => {
               onClick={() => setActiveTab(tab.toLowerCase())}
               className={cn(
                 "py-6 text-[10px] font-black uppercase tracking-[0.2em] border-b-2 transition-all",
-                activeTab === tab.toLowerCase() ? "border-brand-primary text-white" : "border-transparent text-white/20 hover:text-white"
+                activeTab === tab.toLowerCase() ? "border-brand-primary text-text-primary" : "border-transparent text-text-muted hover:text-text-primary"
               )}
             >
               {tab}
@@ -229,7 +229,7 @@ const GroupDetail = ({ group, onBack, user }) => {
                     value={newMessage}
                     onChange={(e) => setNewMessage(e.target.value)}
                     placeholder="Message the community..."
-                    className="flex-1 bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-sm focus:outline-none focus:border-brand-primary transition-all placeholder:text-white/20"
+                    className="flex-1 bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-sm focus:outline-none focus:border-brand-primary transition-all text-text-primary placeholder:text-text-muted"
                   />
                   <button type="submit" className="bg-brand-primary p-4 rounded-2xl hover:bg-brand-primary/80 transition-all shadow-lg shadow-brand-primary/20 active:scale-95">
                     <Send className="w-5 h-5 text-white" />
@@ -249,7 +249,7 @@ const GroupDetail = ({ group, onBack, user }) => {
             </h3>
             <ul className="space-y-4">
               {['Level 20+', 'Mic Required', 'Non-toxic', 'Discord Joined'].map(req => (
-                <li key={req} className="flex items-center gap-3 text-xs font-medium text-white/60">
+                <li key={req} className="flex items-center gap-3 text-xs font-medium text-text-secondary">
                   <div className="h-1 w-1 rounded-full bg-brand-primary" />
                   {req}
                 </li>
@@ -261,7 +261,7 @@ const GroupDetail = ({ group, onBack, user }) => {
               <ScrollText className="w-5 h-5" />
               PBC Standards
             </h3>
-            <p className="text-xs text-white/30 leading-relaxed italic">
+            <p className="text-xs text-text-muted leading-relaxed italic">
               "By joining this group, you agree to the RollCall Community Standards for Palm Beach County."
             </p>
           </div>

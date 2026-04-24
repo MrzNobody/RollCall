@@ -33,10 +33,10 @@ const GroupCard = ({ group, onClick }) => {
     >
       <div className="relative h-32 md:h-40 overflow-hidden">
         <img src={group.image} alt={group.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-        <div className="absolute top-2 left-2 px-2 py-1 bg-black/60 backdrop-blur-md rounded-lg text-[9px] font-black tracking-widest uppercase border border-white/10">
+        <div className="absolute top-2 left-2 px-2 py-1 bg-surface-950/60 backdrop-blur-md rounded-lg text-[9px] font-black tracking-widest uppercase border border-white/10 text-text-primary">
           {group.category}
         </div>
-        <div className="absolute bottom-2 right-2 px-2 py-1 bg-brand-primary rounded-lg text-[9px] font-black tracking-widest uppercase shadow-lg shadow-brand-primary/40">
+        <div className="absolute bottom-2 right-2 px-2 py-1 bg-brand-primary rounded-lg text-[9px] font-black tracking-widest uppercase shadow-lg shadow-brand-primary/40 text-white">
           {group.skill}
         </div>
       </div>

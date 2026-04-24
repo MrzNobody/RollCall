@@ -59,7 +59,7 @@ const CreateGroup = ({ onBack, onSuccess, userId }) => {
           />
         </div>
 
-        <button onClick={onBack} className="flex items-center gap-2 text-white/40 hover:text-white mb-8 transition-colors text-xs font-bold uppercase tracking-widest">
+        <button onClick={onBack} className="flex items-center gap-2 text-text-secondary hover:text-text-primary mb-8 transition-colors text-xs font-bold uppercase tracking-widest">
           <ChevronLeft className="w-4 h-4" />
           Cancel
         </button>
@@ -68,29 +68,29 @@ const CreateGroup = ({ onBack, onSuccess, userId }) => {
           {step === 1 && (
             <motion.div key="step1" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} className="space-y-8">
               <div>
-                <h2 className="text-4xl font-black mb-2">The Basics</h2>
-                <p className="text-white/40">What's the soul of your group?</p>
+                <h2 className="text-4xl font-black mb-2 text-text-primary">The Basics</h2>
+                <p className="text-text-secondary">What's the soul of your group?</p>
               </div>
               <div className="space-y-6">
                 <div>
-                  <label className="block text-[10px] font-black text-white/20 uppercase tracking-[0.2em] mb-3">Group Name</label>
+                  <label className="block text-[10px] font-black text-text-muted uppercase tracking-[0.2em] mb-3">Group Name</label>
                   <input 
                     type="text" 
                     placeholder="e.g. WPB Casual Chess Club"
                     value={formData.name}
                     onChange={e => setFormData({...formData, name: e.target.value})}
-                    className="w-full bg-white/5 border border-white/10 rounded-2xl py-5 px-6 focus:outline-none focus:border-brand-primary transition-all text-lg font-bold"
+                    className="w-full bg-white/5 border border-white/10 rounded-2xl py-5 px-6 focus:outline-none focus:border-brand-primary transition-all text-lg font-bold text-text-primary placeholder:text-text-muted"
                   />
                 </div>
                 <div>
-                  <label className="block text-[10px] font-black text-white/20 uppercase tracking-[0.2em] mb-3">Category</label>
+                  <label className="block text-[10px] font-black text-text-muted uppercase tracking-[0.2em] mb-3">Category</label>
                   <select 
                     value={formData.category}
                     onChange={e => setFormData({...formData, category: e.target.value})}
-                    className="w-full bg-white/5 border border-white/10 rounded-2xl py-5 px-6 focus:outline-none focus:border-brand-primary transition-all appearance-none text-white/80"
+                    className="w-full bg-white/5 border border-white/10 rounded-2xl py-5 px-6 focus:outline-none focus:border-brand-primary transition-all appearance-none text-text-primary"
                   >
                     {["FPS Gaming", "Dungeons & Dragons", "Board Games", "Hiking", "Soccer", "Pickleball", "Other"].map(cat => (
-                      <option key={cat} value={cat} className="bg-surface-900">{cat}</option>
+                      <option key={cat} value={cat} className="bg-surface-900 text-white">{cat}</option>
                     ))}
                   </select>
                 </div>
@@ -106,21 +106,21 @@ const CreateGroup = ({ onBack, onSuccess, userId }) => {
               </div>
               <div className="h-80 w-full rounded-3xl overflow-hidden border border-white/10 relative">
                 <MapContainer center={formData.coords} zoom={13} className="h-full w-full z-0">
-                  <TileLayer url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png" />
+                  <TileLayer url={document.documentElement.classList.contains('theme-light') ? "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png" : "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"} />
                   <LocationPicker coords={formData.coords} setCoords={c => setFormData({...formData, coords: c})} />
                 </MapContainer>
-                <div className="absolute bottom-4 left-4 z-10 glass px-4 py-2 rounded-xl text-[10px] font-bold">
+                <div className="absolute bottom-4 left-4 z-10 glass px-4 py-2 rounded-xl text-[10px] font-bold text-text-primary">
                   CLICK MAP TO SET PIN
                 </div>
               </div>
               <div>
-                <label className="block text-[10px] font-black text-white/20 uppercase tracking-[0.2em] mb-3">City Name</label>
+                <label className="block text-[10px] font-black text-text-muted uppercase tracking-[0.2em] mb-3">City Name</label>
                 <input 
                   type="text" 
                   placeholder="e.g. West Palm Beach"
                   value={formData.city}
                   onChange={e => setFormData({...formData, city: e.target.value})}
-                  className="w-full bg-white/5 border border-white/10 rounded-2xl py-4 px-6 focus:outline-none focus:border-brand-primary transition-all"
+                  className="w-full bg-white/5 border border-white/10 rounded-2xl py-4 px-6 focus:outline-none focus:border-brand-primary transition-all text-text-primary placeholder:text-text-muted"
                 />
               </div>
             </motion.div>
@@ -134,36 +134,36 @@ const CreateGroup = ({ onBack, onSuccess, userId }) => {
               </div>
               <div className="grid grid-cols-2 gap-6">
                 <div>
-                  <label className="block text-[10px] font-black text-white/20 uppercase tracking-[0.2em] mb-3">Max Capacity</label>
+                  <label className="block text-[10px] font-black text-text-muted uppercase tracking-[0.2em] mb-3">Max Capacity</label>
                   <input 
                     type="number" 
                     value={formData.capacity}
                     onChange={e => setFormData({...formData, capacity: parseInt(e.target.value)})}
-                    className="w-full bg-white/5 border border-white/10 rounded-2xl py-4 px-6"
+                    className="w-full bg-white/5 border border-white/10 rounded-2xl py-4 px-6 text-text-primary"
                   />
                 </div>
                 <div>
-                  <label className="block text-[10px] font-black text-white/20 uppercase tracking-[0.2em] mb-3">Skill Level</label>
+                  <label className="block text-[10px] font-black text-text-muted uppercase tracking-[0.2em] mb-3">Skill Level</label>
                   <select 
                     value={formData.skill}
                     onChange={e => setFormData({...formData, skill: e.target.value})}
-                    className="w-full bg-white/5 border border-white/10 rounded-2xl py-4 px-6"
+                    className="w-full bg-white/5 border border-white/10 rounded-2xl py-4 px-6 text-text-primary"
                   >
-                    <option value="Casual">Casual</option>
-                    <option value="Intermediate">Intermediate</option>
-                    <option value="Competitive">Competitive</option>
-                    <option value="Pro">Pro</option>
+                    <option value="Casual" className="bg-surface-900 text-white">Casual</option>
+                    <option value="Intermediate" className="bg-surface-900 text-white">Intermediate</option>
+                    <option value="Competitive" className="bg-surface-900 text-white">Competitive</option>
+                    <option value="Pro" className="bg-surface-900 text-white">Pro</option>
                   </select>
                 </div>
               </div>
               <div>
-                <label className="block text-[10px] font-black text-white/20 uppercase tracking-[0.2em] mb-3">Description</label>
+                <label className="block text-[10px] font-black text-text-muted uppercase tracking-[0.2em] mb-3">Description</label>
                 <textarea 
                   rows={4}
                   placeholder="Tell everyone what makes this group awesome..."
                   value={formData.description}
                   onChange={e => setFormData({...formData, description: e.target.value})}
-                  className="w-full bg-white/5 border border-white/10 rounded-2xl py-4 px-6 focus:outline-none focus:border-brand-primary transition-all"
+                  className="w-full bg-white/5 border border-white/10 rounded-2xl py-4 px-6 focus:outline-none focus:border-brand-primary transition-all text-text-primary placeholder:text-text-muted"
                 />
               </div>
             </motion.div>
@@ -174,7 +174,7 @@ const CreateGroup = ({ onBack, onSuccess, userId }) => {
           {step > 1 ? (
             <button 
               onClick={() => setStep(step - 1)}
-              className="px-6 py-4 rounded-2xl font-bold text-white/40 hover:text-white transition-all flex items-center gap-2"
+              className="px-6 py-4 rounded-2xl font-bold text-text-secondary hover:text-text-primary transition-all flex items-center gap-2"
             >
               <ChevronLeft className="w-5 h-5" />
               Back
