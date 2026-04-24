@@ -1,5 +1,6 @@
 import { ChevronLeft, Calendar, MessageSquare, MapPin, Users, ShieldCheck, Gamepad2, ScrollText, Send, User, CheckCircle2, Flag } from 'lucide-react';
 import ReportModal from './ReportModal';
+import Forum from './Forum';
 import { clsx } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 import { supabase } from '../lib/supabase';
@@ -178,7 +179,7 @@ const GroupDetail = ({ group, onBack, user }) => {
       {/* Navigation Tabs */}
       <div className="border-b border-white/5 bg-surface-950/80 backdrop-blur-xl sticky top-16 z-30 px-6 md:px-12">
         <div className="max-w-7xl mx-auto flex gap-10">
-          {['Chat', 'Session Info', 'Members'].map(tab => (
+          {['Chat', 'Forum', 'Session Info', 'Members'].map(tab => (
             <button 
               key={tab}
               onClick={() => setActiveTab(tab.toLowerCase())}
@@ -238,6 +239,10 @@ const GroupDetail = ({ group, onBack, user }) => {
                 </form>
               )}
             </div>
+          )}
+
+          {activeTab === 'forum' && (
+            <Forum groupId={group.id} user={user} />
           )}
         </div>
 
