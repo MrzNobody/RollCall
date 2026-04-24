@@ -71,6 +71,7 @@ const Discover = ({ onSelectGroup }) => {
   const [searchQuery, setSearchQuery] = useState('');
   const [groups, setGroups] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [activeCategory, setActiveCategory] = useState('All');
   const [isLive, setIsLive] = useState(false);
 
   useEffect(() => {
@@ -101,51 +102,72 @@ const Discover = ({ onSelectGroup }) => {
   }, []);
 
   const filteredGroups = useMemo(() => {
-    return groups.filter(g => 
-      g.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      g.city.toLowerCase().includes(searchQuery.toLowerCase())
-    );
-  }, [groups, searchQuery]);
+    return groups.filter(g => {
+      const matchesSearch = g.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                           g.city.toLowerCase().includes(searchQuery.toLowerCase());
+      const matchesCategory = activeCategory === 'All' || g.category === activeCategory;
+      return matchesSearch && matchesCategory;
+    });
+  }, [groups, searchQuery, activeCategory]);
 
   return (
     <div className="pt-20 md:pt-24 min-h-screen flex flex-col bg-surface-950">
       {/* Search & Mobile Filter Bar */}
-      <div className="sticky top-16 z-40 bg-surface-950/80 backdrop-blur-xl border-b border-white/5 px-4 md:px-12 py-4 md:py-6">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row gap-3 md:gap-4 items-center justify-between">
-          <div className="relative w-full md:w-96">
-            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 md:w-5 md:h-5 text-text-muted" />
-            <input 
-              type="text" 
-              placeholder="Search PBC groups..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full bg-white/5 border border-white/10 rounded-2xl py-3 md:py-4 pl-10 md:pl-12 pr-6 focus:outline-none focus:border-brand-primary/50 transition-all text-xs md:text-sm text-text-primary placeholder:text-text-muted"
-            />
+      <div className="sticky top-16 z-40 bg-surface-950/80 backdrop-blur-xl border-b border-white/5 px-4 md:px-12 pt-4 md:pt-6">
+        <div className="max-w-7xl mx-auto space-y-4 md:space-y-6 pb-4">
+          <div className="flex flex-col md:flex-row gap-3 md:gap-4 items-center justify-between">
+            <div className="relative w-full md:w-96">
+              <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 md:w-5 md:h-5 text-text-muted" />
+              <input 
+                type="text" 
+                placeholder="Search PBC groups..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="w-full bg-white/5 border border-white/10 rounded-2xl py-3 md:py-4 pl-10 md:pl-12 pr-6 focus:outline-none focus:border-brand-primary/50 transition-all text-xs md:text-sm text-text-primary placeholder:text-text-muted"
+              />
+            </div>
+
+            <div className="flex items-center gap-3 w-full md:w-auto">
+              <div className="flex bg-white/5 rounded-2xl p-1 border border-white/10 flex-1 md:flex-none">
+                <button 
+                  onClick={() => setView('list')}
+                  className={`flex-1 md:flex-none flex items-center justify-center gap-2 px-4 py-2 rounded-xl text-[10px] md:text-sm font-black uppercase tracking-widest transition-all ${view === 'list' ? 'bg-brand-primary text-white shadow-lg shadow-brand-primary/20' : 'text-text-secondary hover:text-text-primary'}`}
+                >
+                  <LayoutGrid className="w-4 h-4" />
+                  <span className="hidden sm:inline">List</span>
+                </button>
+                <button 
+                  onClick={() => setView('map')}
+                  className={`flex-1 md:flex-none flex items-center justify-center gap-2 px-4 py-2 rounded-xl text-[10px] md:text-sm font-black uppercase tracking-widest transition-all ${view === 'map' ? 'bg-brand-primary text-white shadow-lg shadow-brand-primary/20' : 'text-text-secondary hover:text-text-primary'}`}
+                >
+                  <MapIcon className="w-4 h-4" />
+                  <span className="hidden sm:inline">Map</span>
+                </button>
+              </div>
+              {isLive && (
+                <div className="hidden lg:flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-[9px] font-black tracking-widest uppercase">
+                  <Zap className="w-3 h-3 fill-emerald-400 animate-pulse" />
+                  LIVE
+                </div>
+              )}
+            </div>
           </div>
 
-          <div className="flex items-center gap-3 w-full md:w-auto">
-            <div className="flex bg-white/5 rounded-2xl p-1 border border-white/10 flex-1 md:flex-none">
-              <button 
-                onClick={() => setView('list')}
-                className={`flex-1 md:flex-none flex items-center justify-center gap-2 px-4 py-2 rounded-xl text-[10px] md:text-sm font-black uppercase tracking-widest transition-all ${view === 'list' ? 'bg-brand-primary text-white shadow-lg shadow-brand-primary/20' : 'text-text-secondary hover:text-text-primary'}`}
+          {/* Category Chips */}
+          <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-hide no-scrollbar">
+            {['All', 'FPS Gaming', 'Dungeons & Dragons', 'Board Games', 'Soccer', 'Other'].map(cat => (
+              <button
+                key={cat}
+                onClick={() => setActiveCategory(cat)}
+                className={`whitespace-nowrap px-4 py-2 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all border ${
+                  activeCategory === cat 
+                    ? 'bg-brand-primary/10 border-brand-primary text-brand-primary' 
+                    : 'bg-white/5 border-white/10 text-text-muted hover:text-text-primary hover:border-white/20'
+                }`}
               >
-                <LayoutGrid className="w-4 h-4" />
-                <span className="hidden sm:inline">List</span>
+                {cat}
               </button>
-              <button 
-                onClick={() => setView('map')}
-                className={`flex-1 md:flex-none flex items-center justify-center gap-2 px-4 py-2 rounded-xl text-[10px] md:text-sm font-black uppercase tracking-widest transition-all ${view === 'map' ? 'bg-brand-primary text-white shadow-lg shadow-brand-primary/20' : 'text-text-secondary hover:text-text-primary'}`}
-              >
-                <MapIcon className="w-4 h-4" />
-                <span className="hidden sm:inline">Map</span>
-              </button>
-            </div>
-            {isLive && (
-              <div className="hidden lg:flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-[9px] font-black tracking-widest uppercase">
-                <Zap className="w-3 h-3 fill-emerald-400 animate-pulse" />
-                LIVE
-              </div>
-            )}
+            ))}
           </div>
         </div>
       </div>

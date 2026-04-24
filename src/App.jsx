@@ -75,6 +75,30 @@ const CATEGORY_INSIGHTS = {
 
 const CategoryModal = ({ category, onClose }) => {
   const insight = CATEGORY_INSIGHTS[category];
+  const [previews, setPreviews] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchPreviews = async () => {
+      try {
+        const { data, error } = await supabase
+          .from('groups')
+          .select('name, members, city')
+          .eq('category', category)
+          .order('members', { ascending: false })
+          .limit(3);
+        
+        if (error) throw error;
+        setPreviews(data || []);
+      } catch (err) {
+        console.error('Error fetching previews:', err);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchPreviews();
+  }, [category]);
+
   if (!insight) return null;
   const Icon = insight.icon;
 
@@ -102,7 +126,7 @@ const CategoryModal = ({ category, onClose }) => {
           </div>
           <div>
             <h2 className="text-2xl font-black text-text-primary">{insight.title}</h2>
-            <p className="text-[10px] font-black uppercase tracking-widest text-text-muted">Palm Beach County</p>
+            <p className="text-[10px] font-black uppercase tracking-widest text-text-muted">Live from PBC</p>
           </div>
         </div>
 
@@ -111,13 +135,25 @@ const CategoryModal = ({ category, onClose }) => {
         </p>
 
         <div className="space-y-4 mb-10">
-          <h4 className="text-[10px] font-black uppercase tracking-[0.2em] text-text-muted">Typical Events</h4>
-          <div className="flex flex-wrap gap-2">
-            {insight.events.map(event => (
-              <span key={event} className="px-3 py-1.5 rounded-xl bg-white/5 border border-white/10 text-[10px] font-bold text-text-primary italic">
-                #{event}
-              </span>
-            ))}
+          <h4 className="text-[10px] font-black uppercase tracking-[0.2em] text-text-muted">Active Communities</h4>
+          <div className="space-y-3">
+            {loading ? (
+              <div className="flex items-center gap-2 text-text-muted animate-pulse">
+                <div className="w-4 h-4 border-2 border-current border-t-transparent rounded-full animate-spin" />
+                <span className="text-[10px] font-bold uppercase tracking-widest">Scanning PBC...</span>
+              </div>
+            ) : previews.length > 0 ? (
+              previews.map(group => (
+                <div key={group.name} className="flex items-center justify-between p-4 bg-white/5 rounded-2xl border border-white/10">
+                  <span className="text-sm font-bold text-text-primary">{group.name}</span>
+                  <div className="text-[9px] font-black text-text-muted uppercase tracking-tighter">
+                    {group.members} RESIDENTS • {group.city}
+                  </div>
+                </div>
+              ))
+            ) : (
+              <div className="text-[10px] text-text-muted font-bold italic">No groups in this category yet. Be the first to start one!</div>
+            )}
           </div>
         </div>
 
@@ -125,14 +161,14 @@ const CategoryModal = ({ category, onClose }) => {
           onClick={onClose}
           className="w-full py-4 bg-brand-primary text-white rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-brand-primary/80 shadow-xl shadow-brand-primary/20 transition-all"
         >
-          Join to View All
+          Join to Access Full Map
         </button>
       </motion.div>
     </motion.div>
   );
 };
 
-const CategoryChip = ({ label, icon: Icon, colorClass, onClick }) => (
+const CategoryChip = ({ label, icon: Icon, colorClass, onClick, count }) => (
   <motion.button
     whileHover={{ y: -2, scale: 1.02 }}
     whileTap={{ scale: 0.98 }}
@@ -140,7 +176,9 @@ const CategoryChip = ({ label, icon: Icon, colorClass, onClick }) => (
     className={`flex items-center gap-2 px-4 py-1.5 rounded-full border-2 bg-surface-950/5 backdrop-blur-md transition-all ${colorClass}`}
   >
     <Icon className="w-4 h-4" />
-    <span className="text-[11px] font-black uppercase tracking-widest">{label}</span>
+    <span className="text-[11px] font-black uppercase tracking-widest">
+      {label} {count !== undefined && <span className="opacity-40 ml-1">• {count}</span>}
+    </span>
   </motion.button>
 );
 
@@ -150,7 +188,30 @@ function App() {
   const [user, setUser] = useState(null);
   const [showAuth, setShowAuth] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState(null);
+  const [categoryCounts, setCategoryCounts] = useState({});
   const [isInitializing, setIsInitializing] = useState(true);
+
+  useEffect(() => {
+    const fetchCounts = async () => {
+      try {
+        const { data, error } = await supabase
+          .from('groups')
+          .select('category');
+        
+        if (error) throw error;
+        
+        const counts = data.reduce((acc, curr) => {
+          acc[curr.category] = (acc[curr.category] || 0) + 1;
+          return acc;
+        }, {});
+        
+        setCategoryCounts(counts);
+      } catch (err) {
+        console.error('Error fetching counts:', err);
+      }
+    };
+    fetchCounts();
+  }, []);
   const [theme, setTheme] = useState(localStorage.getItem('rollcall-theme') || 'dark');
 
   useEffect(() => {
@@ -250,10 +311,10 @@ function App() {
               </div>
             </div>
             <div className="flex flex-wrap justify-center gap-4 mb-20">
-              <CategoryChip label="Gaming" icon={Gamepad2} colorClass="border-rose-500/30 text-rose-500" onClick={() => setSelectedCategory('Gaming')} />
-              <CategoryChip label="Tabletop" icon={Dices} colorClass="border-purple-500/30 text-purple-500" onClick={() => setSelectedCategory('Tabletop')} />
-              <CategoryChip label="Sports" icon={Trophy} colorClass="border-blue-500/30 text-blue-500" onClick={() => setSelectedCategory('Sports')} />
-              <CategoryChip label="& More" icon={Sparkles} colorClass="border-orange-500/30 text-orange-500" onClick={() => setSelectedCategory('& More')} />
+              <CategoryChip label="Gaming" icon={Gamepad2} count={categoryCounts['FPS Gaming']} colorClass="border-rose-500/30 text-rose-500" onClick={() => setSelectedCategory('FPS Gaming')} />
+              <CategoryChip label="Tabletop" icon={Dices} count={categoryCounts['Dungeons & Dragons']} colorClass="border-purple-500/30 text-purple-500" onClick={() => setSelectedCategory('Dungeons & Dragons')} />
+              <CategoryChip label="Sports" icon={categoryCounts['Soccer'] ? Trophy : MapPin} count={categoryCounts['Soccer']} colorClass="border-blue-500/30 text-blue-500" onClick={() => setSelectedCategory('Soccer')} />
+              <CategoryChip label="& More" icon={Sparkles} count={categoryCounts['Other']} colorClass="border-orange-500/30 text-orange-500" onClick={() => setSelectedCategory('Other')} />
             </div>
             <div className="flex flex-col md:flex-row gap-4">
               <button onClick={() => user ? setStep('dashboard') : setShowAuth(true)} className="bg-text-primary text-surface-950 px-12 py-5 rounded-3xl font-black text-sm flex items-center justify-center gap-2 hover:scale-105 transition-all shadow-2xl">Start Discovering <ChevronRight className="w-5 h-5 flex-shrink-0" /></button>
