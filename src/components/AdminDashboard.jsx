@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { 
   Shield, Users, AlertTriangle, CheckCircle, XCircle, 
   Search, Filter, ChevronRight, MessageSquare, Flag,
-  Search, Filter, ChevronRight, MessageSquare, Flag,
   ArrowUpRight, ArrowDownRight, Clock, ShieldAlert, LifeBuoy, Globe
 } from 'lucide-react';
 import { supabase } from '../lib/supabase';

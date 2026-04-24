@@ -107,7 +107,6 @@ const Dashboard = ({ user, onSelectGroup, onEnterAdmin, onEnterDiscover }) => {
               <Shield className="w-4 h-4" />
               Admin Command
             </button>
-            </button>
           </div>
         </div>
 
@@ -136,7 +135,6 @@ const Dashboard = ({ user, onSelectGroup, onEnterAdmin, onEnterDiscover }) => {
               </motion.button>
             ))}
           </div>
-        </div>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -184,6 +182,7 @@ const Dashboard = ({ user, onSelectGroup, onEnterAdmin, onEnterDiscover }) => {
       {showSupport && (
         <SupportCenter user={user} onClose={() => setShowSupport(false)} />
       )}
+      </div>
     </div>
   );
 };
