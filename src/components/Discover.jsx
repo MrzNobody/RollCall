@@ -68,16 +68,22 @@ const GroupCard = ({ group, onClick }) => {
   );
 };
 
-const Discover = ({ onSelectGroup }) => {
+const Discover = ({ onSelectGroup, initialCategory = 'All' }) => {
   const [view, setView] = useState('list');
   const [searchQuery, setSearchQuery] = useState('');
   const [groups, setGroups] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [activeCategory, setActiveCategory] = useState('All');
+  const [activeCategory, setActiveCategory] = useState(initialCategory);
   const [showWaitlist, setShowWaitlist] = useState(false);
   const [isLive, setIsLive] = useState(false);
   const [counties, setCounties] = useState([]);
   const [selectedCounty, setSelectedCounty] = useState(null);
+
+  useEffect(() => {
+    if (initialCategory) {
+      setActiveCategory(initialCategory);
+    }
+  }, [initialCategory]);
 
   useEffect(() => {
     let isMounted = true;

@@ -75,7 +75,7 @@ const CATEGORY_INSIGHTS = {
   }
 };
 
-const CategoryModal = ({ category, onClose }) => {
+const CategoryModal = ({ category, onClose, onNavigate }) => {
   const insight = CATEGORY_INSIGHTS[category];
   const [previews, setPreviews] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -160,10 +160,13 @@ const CategoryModal = ({ category, onClose }) => {
         </div>
 
         <button 
-          onClick={onClose}
+          onClick={() => {
+            onClose();
+            onNavigate('discover', category);
+          }}
           className="w-full py-4 bg-brand-primary text-white rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-brand-primary/80 shadow-xl shadow-brand-primary/20 transition-all"
         >
-          Join to Access Full Map
+          View Full Map
         </button>
       </motion.div>
     </motion.div>
@@ -262,6 +265,7 @@ const LatestFeed = ({ user, onAuthRequired }) => {
 function App() {
   const [step, setStep] = useState('hero');
   const [selectedGroup, setSelectedGroup] = useState(null);
+  const [activeCategoryFilter, setActiveCategoryFilter] = useState('All');
   const [user, setUser] = useState(null);
   const [showAuth, setShowAuth] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState(null);
@@ -382,7 +386,7 @@ function App() {
         </div>
       </nav>
       <AnimatePresence>{showAuth && <Auth onClose={() => setShowAuth(false)} onSuccess={() => setShowAuth(false)} />}</AnimatePresence>
-      <AnimatePresence>{selectedCategory && <CategoryModal category={selectedCategory} onClose={() => setSelectedCategory(null)} />}</AnimatePresence>
+      <AnimatePresence>{selectedCategory && <CategoryModal category={selectedCategory} onClose={() => setSelectedCategory(null)} onNavigate={(target, cat) => { setActiveCategoryFilter(cat); setStep(target); }} />}</AnimatePresence>
       <AnimatePresence mode="wait">
         {step === 'hero' && (
           <motion.main key="hero" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="pt-40 pb-20 relative flex-1 flex flex-col items-center">
@@ -395,10 +399,10 @@ function App() {
               </div>
             </div>
             <div className="flex flex-wrap justify-center gap-4 mb-20">
-              <CategoryChip label="Gaming" icon={Gamepad2} count={categoryCounts['FPS Gaming']} colorClass="border-rose-500/30 text-rose-500" onClick={() => setSelectedCategory('FPS Gaming')} />
-              <CategoryChip label="Tabletop" icon={Dices} count={categoryCounts['Dungeons & Dragons']} colorClass="border-purple-500/30 text-purple-500" onClick={() => setSelectedCategory('Dungeons & Dragons')} />
-              <CategoryChip label="Sports" icon={categoryCounts['Soccer'] ? Trophy : MapPin} count={categoryCounts['Soccer']} colorClass="border-blue-500/30 text-blue-500" onClick={() => setSelectedCategory('Soccer')} />
-              <CategoryChip label="& More" icon={Sparkles} count={categoryCounts['Other']} colorClass="border-orange-500/30 text-orange-500" onClick={() => setSelectedCategory('Other')} />
+              <CategoryChip label="Gaming" icon={Gamepad2} count={categoryCounts['Gaming']} colorClass="border-rose-500/30 text-rose-500" onClick={() => setSelectedCategory('Gaming')} />
+              <CategoryChip label="Tabletop" icon={Dices} count={categoryCounts['Tabletop']} colorClass="border-purple-500/30 text-purple-500" onClick={() => setSelectedCategory('Tabletop')} />
+              <CategoryChip label="Sports" icon={Trophy} count={categoryCounts['Sports']} colorClass="border-blue-500/30 text-blue-500" onClick={() => setSelectedCategory('Sports')} />
+              <CategoryChip label="& More" icon={Sparkles} count={categoryCounts['Other']} colorClass="border-orange-500/30 text-orange-500" onClick={() => setSelectedCategory('& More')} />
             </div>
 
             <LatestFeed user={user} onAuthRequired={() => setShowAuth(true)} />
@@ -410,7 +414,7 @@ function App() {
           </motion.main>
         )}
         {step === 'dashboard' && <Dashboard onSelectGroup={(g) => { setSelectedGroup(g); setStep('group-detail'); }} onCreateGroup={() => setStep('create-group')} onEnterDiscover={() => setStep('discover')} onEnterAdmin={() => setStep('admin')} />}
-          {step === 'discover' && <Discover onSelectGroup={(g) => { setSelectedGroup(g); setStep('group-detail'); }} />}
+          {step === 'discover' && <Discover initialCategory={activeCategoryFilter} onSelectGroup={(g) => { setSelectedGroup(g); setStep('group-detail'); }} />}
           {step === 'create-group' && <CreateGroup onCreated={() => setStep('dashboard')} onCancel={() => setStep('dashboard')} />}
           {step === 'group-detail' && <GroupDetail group={selectedGroup} onBack={() => setStep('dashboard')} />}
           {step === 'admin' && <AdminDashboard onBack={() => setStep('dashboard')} />}
