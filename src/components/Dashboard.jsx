@@ -37,7 +37,7 @@ const JoinedGroupCard = ({ group, onClick }) => (
   </div>
 );
 
-const Dashboard = ({ user, onSelectGroup, onEnterAdmin }) => {
+const Dashboard = ({ user, onSelectGroup, onEnterAdmin, onEnterDiscover }) => {
   const [joinedGroups, setJoinedGroups] = useState([]);
   const [loading, setLoading] = useState(true);
   const [showMessages, setShowMessages] = useState(false);
@@ -107,7 +107,36 @@ const Dashboard = ({ user, onSelectGroup, onEnterAdmin }) => {
               <Shield className="w-4 h-4" />
               Admin Command
             </button>
+            </button>
           </div>
+        </div>
+
+        {/* Dynamic Category Discovery Hub */}
+        <div className="space-y-6 pt-4">
+          <div className="flex items-center justify-between">
+            <h3 className="text-[10px] font-black uppercase tracking-[0.2em] text-text-muted">Explore Palm Beach Categories</h3>
+            <div className="h-px flex-1 bg-white/5 ml-6" />
+          </div>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            {[
+              { label: 'Gaming', icon: LayoutGrid, color: 'border-rose-500/30 text-rose-500', bg: 'bg-rose-500/5' },
+              { label: 'Tabletop', icon: Award, color: 'border-purple-500/30 text-purple-500', bg: 'bg-purple-500/5' },
+              { label: 'Sports', icon: Zap, color: 'border-blue-500/30 text-blue-500', bg: 'bg-blue-500/5' },
+              { label: 'Other', icon: Shield, color: 'border-orange-500/30 text-orange-500', bg: 'bg-orange-500/5' }
+            ].map(cat => (
+              <motion.button
+                key={cat.label}
+                whileHover={{ y: -5, scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                onClick={() => onEnterDiscover(cat.label)}
+                className={`flex flex-col items-center gap-3 p-6 rounded-[2rem] glass border-2 transition-all ${cat.color} ${cat.bg}`}
+              >
+                <cat.icon className="w-6 h-6" />
+                <span className="text-xs font-black uppercase tracking-widest">{cat.label}</span>
+              </motion.button>
+            ))}
+          </div>
+        </div>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">

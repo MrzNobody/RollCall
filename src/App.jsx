@@ -413,7 +413,7 @@ function App() {
             </div>
           </motion.main>
         )}
-        {step === 'dashboard' && <Dashboard onSelectGroup={(g) => { setSelectedGroup(g); setStep('group-detail'); }} onCreateGroup={() => setStep('create-group')} onEnterDiscover={() => setStep('discover')} onEnterAdmin={() => setStep('admin')} />}
+        {step === 'dashboard' && <Dashboard user={user} onSelectGroup={(g) => { setSelectedGroup(g); setStep('group-detail'); }} onCreateGroup={() => setStep('create-group')} onEnterDiscover={(cat) => { setActiveCategoryFilter(cat || 'All'); setStep('discover'); }} onEnterAdmin={() => setStep('admin')} />}
           {step === 'discover' && <Discover initialCategory={activeCategoryFilter} onSelectGroup={(g) => { setSelectedGroup(g); setStep('group-detail'); }} />}
           {step === 'create-group' && <CreateGroup onCreated={() => setStep('dashboard')} onCancel={() => setStep('dashboard')} />}
           {step === 'group-detail' && <GroupDetail group={selectedGroup} onBack={() => setStep('dashboard')} />}
