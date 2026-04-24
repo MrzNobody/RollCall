@@ -8,27 +8,27 @@ const StatCard = ({ title, value, icon, color }) => (
     <div className={`p-3 rounded-2xl ${color} w-fit`}>
       {icon}
     </div>
-    <div className="text-2xl font-black">{value}</div>
-    <div className="text-[10px] font-black uppercase tracking-widest text-white/20">{title}</div>
+    <div className="text-2xl font-black text-text-primary">{value}</div>
+    <div className="text-[10px] font-black uppercase tracking-widest text-text-secondary">{title}</div>
   </div>
 );
 
 const JoinedGroupCard = ({ group, onClick }) => (
   <div 
     onClick={onClick}
-    className="glass p-5 rounded-3xl border border-white/5 hover:border-white/20 transition-all cursor-pointer group flex items-center gap-6"
+    className="glass p-5 rounded-3xl border border-white/5 hover:border-brand-primary/20 transition-all cursor-pointer group flex items-center gap-6"
   >
     <div className="h-16 w-16 rounded-2xl overflow-hidden shrink-0">
       <img src={group.image} className="h-full w-full object-cover group-hover:scale-110 transition-transform duration-500" />
     </div>
     <div className="flex-1 min-w-0">
-      <h4 className="font-bold truncate">{group.name}</h4>
-      <div className="flex items-center gap-3 text-white/40 text-[10px] font-bold uppercase tracking-wider mt-1">
+      <h4 className="font-bold truncate text-text-primary">{group.name}</h4>
+      <div className="flex items-center gap-3 text-text-secondary text-[10px] font-bold uppercase tracking-wider mt-1">
         <span className="flex items-center gap-1"><MapPin className="w-3 h-3" /> {group.city}</span>
         <span className="flex items-center gap-1"><Users className="w-3 h-3" /> {group.members} Members</span>
       </div>
     </div>
-    <ChevronRight className="w-5 h-5 text-white/20 group-hover:text-brand-primary group-hover:translate-x-1 transition-all" />
+    <ChevronRight className="w-5 h-5 text-text-muted group-hover:text-brand-primary group-hover:translate-x-1 transition-all" />
   </div>
 );
 
@@ -104,9 +104,9 @@ const Dashboard = ({ user, onSelectGroup }) => {
             ) : (
               <div className="glass p-12 rounded-[2.5rem] border border-dashed border-white/10 text-center space-y-6">
                 <div className="w-16 h-16 bg-white/5 rounded-full flex items-center justify-center mx-auto">
-                  <LayoutGrid className="w-8 h-8 text-white/20" />
+                  <LayoutGrid className="w-8 h-8 text-text-muted" />
                 </div>
-                <p className="text-white/40 text-sm max-w-xs mx-auto">You haven't joined any groups yet. Start exploring the map!</p>
+                <p className="text-text-secondary text-sm max-w-xs mx-auto">You haven't joined any groups yet. Start exploring the map!</p>
               </div>
             )}
           </div>

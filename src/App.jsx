@@ -96,13 +96,13 @@ function App() {
 
   if (isInitializing) {
     return (
-      <div className="min-h-screen bg-surface-950 flex flex-col items-center justify-center p-6 text-center text-white">
+      <div className="min-h-screen bg-surface-950 flex flex-col items-center justify-center p-6 text-center text-text-primary">
         <Logo size="lg" />
         <div className="mt-8 space-y-4">
-          <div className="w-16 h-1 bg-white/5 rounded-full overflow-hidden mx-auto">
+          <div className="w-16 h-1 bg-text-muted rounded-full overflow-hidden mx-auto">
             <motion.div initial={{ width: 0 }} animate={{ width: "100%" }} transition={{ duration: 1.5, repeat: Infinity }} className="h-full bg-brand-primary" />
           </div>
-          <p className="text-[10px] font-black uppercase tracking-widest opacity-20">Production Engine Initializing...</p>
+          <p className="text-[10px] font-black uppercase tracking-widest text-text-muted">Production Engine Initializing...</p>
         </div>
       </div>
     );
@@ -115,7 +115,7 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-surface-950 text-white selection:bg-brand-secondary/30 flex flex-col font-sans transition-all duration-500">
+    <div className="min-h-screen bg-surface-950 text-text-primary selection:bg-brand-secondary/30 flex flex-col font-sans transition-all duration-500">
       <nav className="fixed top-0 w-full z-50 glass border-b border-white/5 py-4 px-6 md:px-12 flex justify-between items-center">
         <div className="flex items-center gap-4 cursor-pointer" onClick={() => setStep(user ? 'dashboard' : 'hero')}>
           <Logo size="md" />
@@ -130,8 +130,8 @@ function App() {
             <div className="h-10 w-10 rounded-full bg-brand-primary/20 flex items-center justify-center border border-brand-primary/30 group relative cursor-pointer">
               <UserIcon className="w-5 h-5 text-brand-primary" />
               <div className="absolute top-12 right-0 w-60 glass p-3 rounded-2xl border border-white/10 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all shadow-2xl z-[100]">
-                <p className="text-[10px] text-white/40 uppercase font-black tracking-widest mb-3 px-2 border-b border-white/5 pb-2 truncate">{user.email}</p>
-                <button onClick={() => setStep('dashboard')} className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-white/5 transition-all text-xs font-bold text-white"><LayoutDashboard className="w-4 h-4" /> My Hub</button>
+                <p className="text-[10px] text-text-secondary uppercase font-black tracking-widest mb-3 px-2 border-b border-white/5 pb-2 truncate">{user.email}</p>
+                <button onClick={() => setStep('dashboard')} className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-white/5 transition-all text-xs font-bold text-text-primary"><LayoutDashboard className="w-4 h-4" /> My Hub</button>
                 <button onClick={handleLogout} className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-rose-500/10 text-rose-400 font-bold mt-1"><LogOut className="w-4 h-4" /> Sign Out</button>
               </div>
             </div>
@@ -149,7 +149,7 @@ function App() {
               <Logo size="lg" />
               <div className="text-center md:text-left flex flex-col">
                 <h1 className="text-7xl md:text-9xl font-black tracking-tighter leading-[0.8] mb-4 bg-gradient-to-r from-rose-500 to-blue-500 bg-clip-text text-transparent">RollCall</h1>
-                <p className="text-xl md:text-2xl font-medium tracking-tight opacity-60">Find your community, explore, learn and have fun!</p>
+                <p className="text-xl md:text-2xl font-medium tracking-tight text-text-secondary">Find your community, explore, learn and have fun!</p>
               </div>
             </div>
             <div className="flex flex-wrap justify-center gap-4 mb-20">
@@ -159,8 +159,8 @@ function App() {
               <CategoryChip label="& More" icon={Sparkles} colorClass="border-orange-500/30 text-orange-500" />
             </div>
             <div className="flex flex-col md:flex-row gap-4">
-              <button onClick={() => user ? setStep('dashboard') : setShowAuth(true)} className="bg-white text-black px-12 py-5 rounded-3xl font-black text-sm flex items-center justify-center gap-2 hover:scale-105 transition-all shadow-2xl">Start Discovering <ChevronRight className="w-5 h-5 flex-shrink-0" /></button>
-              <button onClick={() => setStep('discover')} className="bg-white/5 border border-white/10 backdrop-blur-xl px-12 py-5 rounded-3xl font-black text-sm hover:bg-white/10 transition-all text-white">View Local Map</button>
+              <button onClick={() => user ? setStep('dashboard') : setShowAuth(true)} className="bg-text-primary text-surface-950 px-12 py-5 rounded-3xl font-black text-sm flex items-center justify-center gap-2 hover:scale-105 transition-all shadow-2xl">Start Discovering <ChevronRight className="w-5 h-5 flex-shrink-0" /></button>
+              <button onClick={() => setStep('discover')} className="glass px-12 py-5 rounded-3xl font-black text-sm hover:bg-white/10 transition-all text-text-primary">View Local Map</button>
             </div>
           </motion.main>
         )}

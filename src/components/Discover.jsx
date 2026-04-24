@@ -28,8 +28,8 @@ const GroupCard = ({ group, onClick }) => (
       </div>
     </div>
     <div className="p-4 md:p-5 flex-1 flex flex-col">
-      <h3 className="font-bold text-base md:text-lg mb-1 group-hover:text-brand-primary transition-colors truncate">{group.name}</h3>
-      <div className="flex items-center gap-2 text-white/40 text-[10px] md:text-xs mb-3">
+      <h3 className="font-bold text-base md:text-lg mb-1 group-hover:text-brand-primary transition-colors truncate text-text-primary">{group.name}</h3>
+      <div className="flex items-center gap-2 text-text-secondary text-[10px] md:text-xs mb-3">
         <span>{group.city}</span>
         <span>•</span>
         <div className="flex items-center gap-1">
@@ -37,7 +37,7 @@ const GroupCard = ({ group, onClick }) => (
           {group.members}/{group.capacity}
         </div>
       </div>
-      <button className="mt-auto w-full py-2.5 md:py-3 bg-white/5 border border-white/10 rounded-xl font-bold text-xs hover:bg-brand-primary group-hover:border-brand-primary transition-all flex items-center justify-center gap-2">
+      <button className="mt-auto w-full py-2.5 md:py-3 bg-white/5 border border-white/10 rounded-xl font-bold text-xs hover:bg-brand-primary group-hover:border-brand-primary transition-all flex items-center justify-center gap-2 text-text-primary">
         View Group
         <ChevronRight className="w-4 h-4" />
       </button>
@@ -92,13 +92,13 @@ const Discover = ({ onSelectGroup }) => {
       <div className="sticky top-16 z-40 bg-surface-950/80 backdrop-blur-xl border-b border-white/5 px-4 md:px-12 py-4 md:py-6">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row gap-3 md:gap-4 items-center justify-between">
           <div className="relative w-full md:w-96">
-            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 md:w-5 md:h-5 text-white/30" />
+            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 md:w-5 md:h-5 text-text-muted" />
             <input 
               type="text" 
               placeholder="Search PBC groups..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full bg-white/5 border border-white/10 rounded-2xl py-3 md:py-4 pl-10 md:pl-12 pr-6 focus:outline-none focus:border-brand-primary/50 transition-all text-xs md:text-sm placeholder:text-white/20"
+              className="w-full bg-white/5 border border-white/10 rounded-2xl py-3 md:py-4 pl-10 md:pl-12 pr-6 focus:outline-none focus:border-brand-primary/50 transition-all text-xs md:text-sm text-text-primary placeholder:text-text-muted"
             />
           </div>
 
@@ -106,14 +106,14 @@ const Discover = ({ onSelectGroup }) => {
             <div className="flex bg-white/5 rounded-2xl p-1 border border-white/10 flex-1 md:flex-none">
               <button 
                 onClick={() => setView('list')}
-                className={`flex-1 md:flex-none flex items-center justify-center gap-2 px-4 py-2 rounded-xl text-[10px] md:text-sm font-black uppercase tracking-widest transition-all ${view === 'list' ? 'bg-brand-primary text-white shadow-lg shadow-brand-primary/20' : 'text-white/40 hover:text-white'}`}
+                className={`flex-1 md:flex-none flex items-center justify-center gap-2 px-4 py-2 rounded-xl text-[10px] md:text-sm font-black uppercase tracking-widest transition-all ${view === 'list' ? 'bg-brand-primary text-white shadow-lg shadow-brand-primary/20' : 'text-text-secondary hover:text-text-primary'}`}
               >
                 <LayoutGrid className="w-4 h-4" />
                 <span className="hidden sm:inline">List</span>
               </button>
               <button 
                 onClick={() => setView('map')}
-                className={`flex-1 md:flex-none flex items-center justify-center gap-2 px-4 py-2 rounded-xl text-[10px] md:text-sm font-black uppercase tracking-widest transition-all ${view === 'map' ? 'bg-brand-primary text-white shadow-lg shadow-brand-primary/20' : 'text-white/40 hover:text-white'}`}
+                className={`flex-1 md:flex-none flex items-center justify-center gap-2 px-4 py-2 rounded-xl text-[10px] md:text-sm font-black uppercase tracking-widest transition-all ${view === 'map' ? 'bg-brand-primary text-white shadow-lg shadow-brand-primary/20' : 'text-text-secondary hover:text-text-primary'}`}
               >
                 <MapIcon className="w-4 h-4" />
                 <span className="hidden sm:inline">Map</span>
@@ -151,7 +151,9 @@ const Discover = ({ onSelectGroup }) => {
               zoomControl={false}
             >
               <TileLayer
-                url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
+                url={document.documentElement.classList.contains('theme-light') 
+                  ? "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
+                  : "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"}
                 attribution='&copy; CARTO'
               />
               {filteredGroups.map(group => (
