@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { LayoutGrid, Map as MapIcon, Search, Filter, ChevronRight, Users, Zap, X } from 'lucide-react';
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker, Popup, LayersControl } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import { supabase } from '../lib/supabase';
@@ -150,12 +150,29 @@ const Discover = ({ onSelectGroup }) => {
               className="bg-surface-950 z-0"
               zoomControl={false}
             >
-              <TileLayer
-                url={document.documentElement.classList.contains('theme-light') 
-                  ? "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
-                  : "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"}
-                attribution='&copy; CARTO'
-              />
+              <LayersControl position="topright">
+                <LayersControl.BaseLayer name="Clean Dark" checked={!document.documentElement.classList.contains('theme-light')}>
+                  <TileLayer
+                    url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
+                    attribution='&copy; CARTO'
+                  />
+                </LayersControl.BaseLayer>
+                
+                <LayersControl.BaseLayer name="Clean Light" checked={document.documentElement.classList.contains('theme-light')}>
+                  <TileLayer
+                    url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
+                    attribution='&copy; CARTO'
+                  />
+                </LayersControl.BaseLayer>
+
+                <LayersControl.BaseLayer name="Satellite View">
+                  <TileLayer
+                    url="https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}"
+                    attribution='&copy; Esri'
+                  />
+                </LayersControl.BaseLayer>
+              </LayersControl>
+
               {filteredGroups.map(group => (
                 <Marker 
                   key={group.id} 
@@ -165,8 +182,8 @@ const Discover = ({ onSelectGroup }) => {
                 >
                   <Popup className="custom-popup">
                     <div className="p-2 min-w-[150px]">
-                      <h4 className="font-bold text-black text-xs mb-1">{group.name}</h4>
-                      <p className="text-[9px] text-gray-500 mb-2 uppercase font-black tracking-tighter">{group.city} • {group.category}</p>
+                      <h4 className="font-bold text-slate-900 text-xs mb-1">{group.name}</h4>
+                      <p className="text-[9px] text-slate-500 mb-2 uppercase font-black tracking-tighter">{group.city} • {group.category}</p>
                       <button 
                         onClick={() => onSelectGroup(group)}
                         className="w-full py-2 bg-brand-primary text-white rounded-lg text-[10px] font-black uppercase tracking-widest shadow-md active:scale-95 transition-transform"
