@@ -43,15 +43,31 @@ ALTER TABLE public.admin_audit_log ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.data_requests ENABLE ROW LEVEL SECURITY;
 
 -- 5. Policies
--- Residents can only see their own tickets
+-- Support Tickets: Users can only see their own tickets
+DROP POLICY IF EXISTS "Users can view their own tickets" ON public.support_tickets;
 CREATE POLICY "Users can view their own tickets" ON public.support_tickets
     FOR SELECT USING (auth.uid() = user_id);
 
+DROP POLICY IF EXISTS "Users can create their own tickets" ON public.support_tickets;
 CREATE POLICY "Users can create their own tickets" ON public.support_tickets
     FOR INSERT WITH CHECK (auth.uid() = user_id);
 
--- Only admins can see audit logs (Handled via service role in real app, simplified for pilot)
--- In production, we'd use a specific 'is_admin' check function
+-- Data Requests: Users can only see their own requests
+DROP POLICY IF EXISTS "Users can view their own data requests" ON public.data_requests;
+CREATE POLICY "Users can view their own data requests" ON public.data_requests
+    FOR SELECT USING (auth.uid() = user_id);
+
+DROP POLICY IF EXISTS "Users can create their own data requests" ON public.data_requests;
+CREATE POLICY "Users can create their own data requests" ON public.data_requests
+    FOR INSERT WITH CHECK (auth.uid() = user_id);
+
+-- Only admins can see audit logs
+DROP POLICY IF EXISTS "Admins can view audit log" ON public.admin_audit_log;
+CREATE POLICY "Admins can view audit log" ON public.admin_audit_log
+    FOR SELECT USING (EXISTS (
+        SELECT 1 FROM public.profiles 
+        WHERE id = auth.uid() AND is_admin = true
+    ));
 
 COMMENT ON TABLE public.support_tickets IS 'Official resident support requests.';
 COMMENT ON TABLE public.admin_audit_log IS 'Immutable record of all administrative actions.';
