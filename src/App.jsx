@@ -38,10 +38,105 @@ const Logo = ({ size = "md" }) => {
   );
 };
 
-const CategoryChip = ({ label, icon: Icon, colorClass }) => (
+const CATEGORY_INSIGHTS = {
+  'Gaming': {
+    title: 'Gaming Community',
+    icon: Gamepad2,
+    color: 'text-rose-500',
+    bg: 'bg-rose-500/10',
+    description: 'Join competitive FPS lobbies, casual RPG adventures, and local LAN parties. From West Palm to Jupiter, our gamers meet at local hubs to compete and connect.',
+    events: ['Co-op Campaigns', 'Competitive Lobbies', 'Retro Gaming Nights']
+  },
+  'Tabletop': {
+    title: 'Tabletop & RPGs',
+    icon: Dices,
+    color: 'text-purple-500',
+    bg: 'bg-purple-500/10',
+    description: 'Find your next D&D campaign, Magic: The Gathering tournament, or casual board game night. PBC has a thriving scene of strategy and storytelling enthusiasts.',
+    events: ['D&D One-Shots', 'Strategy Tournaments', 'Board Game Socials']
+  },
+  'Sports': {
+    title: 'Local Sports',
+    icon: Trophy,
+    color: 'text-blue-500',
+    bg: 'bg-blue-500/10',
+    description: 'Pickleball doubles, adult soccer leagues, and beach volleyball meetups. Whether you are pro-level or just looking for cardio, there is a court waiting for you.',
+    events: ['Beach Volleyball', 'Soccer Leagues', 'Pickleball Socials']
+  },
+  '& More': {
+    title: 'Community & Culture',
+    icon: Sparkles,
+    color: 'text-orange-500',
+    bg: 'bg-orange-500/10',
+    description: 'Book clubs, coding jams, art workshops, and coffee meetups. PBC is full of diverse interests beyond gaming—find your specific niche here.',
+    events: ['Art Workshops', 'Coding Jams', 'Book Clubs']
+  }
+};
+
+const CategoryModal = ({ category, onClose }) => {
+  const insight = CATEGORY_INSIGHTS[category];
+  if (!insight) return null;
+  const Icon = insight.icon;
+
+  return (
+    <motion.div 
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className="fixed inset-0 z-[110] flex items-center justify-center p-6 bg-black/60 backdrop-blur-md"
+    >
+      <motion.div 
+        initial={{ scale: 0.9, y: 20 }}
+        animate={{ scale: 1, y: 0 }}
+        className="glass w-full max-w-lg p-8 rounded-[2.5rem] border border-white/10 relative overflow-hidden"
+      >
+        <div className={`absolute top-0 right-0 w-32 h-32 ${insight.bg} blur-3xl -z-10`} />
+        
+        <button onClick={onClose} className="absolute top-6 right-6 text-text-muted hover:text-text-primary transition-colors">
+          <X className="w-6 h-6" />
+        </button>
+
+        <div className="flex items-center gap-4 mb-8">
+          <div className={`p-4 rounded-2xl ${insight.bg} ${insight.color}`}>
+            <Icon className="w-8 h-8" />
+          </div>
+          <div>
+            <h2 className="text-2xl font-black text-text-primary">{insight.title}</h2>
+            <p className="text-[10px] font-black uppercase tracking-widest text-text-muted">Palm Beach County</p>
+          </div>
+        </div>
+
+        <p className="text-text-secondary leading-relaxed mb-8">
+          {insight.description}
+        </p>
+
+        <div className="space-y-4 mb-10">
+          <h4 className="text-[10px] font-black uppercase tracking-[0.2em] text-text-muted">Typical Events</h4>
+          <div className="flex flex-wrap gap-2">
+            {insight.events.map(event => (
+              <span key={event} className="px-3 py-1.5 rounded-xl bg-white/5 border border-white/10 text-[10px] font-bold text-text-primary italic">
+                #{event}
+              </span>
+            ))}
+          </div>
+        </div>
+
+        <button 
+          onClick={onClose}
+          className="w-full py-4 bg-brand-primary text-white rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-brand-primary/80 shadow-xl shadow-brand-primary/20 transition-all"
+        >
+          Join to View All
+        </button>
+      </motion.div>
+    </motion.div>
+  );
+};
+
+const CategoryChip = ({ label, icon: Icon, colorClass, onClick }) => (
   <motion.button
     whileHover={{ y: -2, scale: 1.02 }}
     whileTap={{ scale: 0.98 }}
+    onClick={onClick}
     className={`flex items-center gap-2 px-4 py-1.5 rounded-full border-2 bg-surface-950/5 backdrop-blur-md transition-all ${colorClass}`}
   >
     <Icon className="w-4 h-4" />
@@ -54,6 +149,7 @@ function App() {
   const [selectedGroup, setSelectedGroup] = useState(null);
   const [user, setUser] = useState(null);
   const [showAuth, setShowAuth] = useState(false);
+  const [selectedCategory, setSelectedCategory] = useState(null);
   const [isInitializing, setIsInitializing] = useState(true);
   const [theme, setTheme] = useState(localStorage.getItem('rollcall-theme') || 'dark');
 
@@ -141,6 +237,7 @@ function App() {
         </div>
       </nav>
       <AnimatePresence>{showAuth && <Auth onClose={() => setShowAuth(false)} onSuccess={() => setShowAuth(false)} />}</AnimatePresence>
+      <AnimatePresence>{selectedCategory && <CategoryModal category={selectedCategory} onClose={() => setSelectedCategory(null)} />}</AnimatePresence>
       <AnimatePresence mode="wait">
         {step === 'hero' && (
           <motion.main key="hero" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="pt-40 pb-20 relative flex-1 flex flex-col items-center">
@@ -153,10 +250,10 @@ function App() {
               </div>
             </div>
             <div className="flex flex-wrap justify-center gap-4 mb-20">
-              <CategoryChip label="Gaming" icon={Gamepad2} colorClass="border-rose-500/30 text-rose-500" />
-              <CategoryChip label="Tabletop" icon={Dices} colorClass="border-purple-500/30 text-purple-500" />
-              <CategoryChip label="Sports" icon={Trophy} colorClass="border-blue-500/30 text-blue-500" />
-              <CategoryChip label="& More" icon={Sparkles} colorClass="border-orange-500/30 text-orange-500" />
+              <CategoryChip label="Gaming" icon={Gamepad2} colorClass="border-rose-500/30 text-rose-500" onClick={() => setSelectedCategory('Gaming')} />
+              <CategoryChip label="Tabletop" icon={Dices} colorClass="border-purple-500/30 text-purple-500" onClick={() => setSelectedCategory('Tabletop')} />
+              <CategoryChip label="Sports" icon={Trophy} colorClass="border-blue-500/30 text-blue-500" onClick={() => setSelectedCategory('Sports')} />
+              <CategoryChip label="& More" icon={Sparkles} colorClass="border-orange-500/30 text-orange-500" onClick={() => setSelectedCategory('& More')} />
             </div>
             <div className="flex flex-col md:flex-row gap-4">
               <button onClick={() => user ? setStep('dashboard') : setShowAuth(true)} className="bg-text-primary text-surface-950 px-12 py-5 rounded-3xl font-black text-sm flex items-center justify-center gap-2 hover:scale-105 transition-all shadow-2xl">Start Discovering <ChevronRight className="w-5 h-5 flex-shrink-0" /></button>
