@@ -1,4 +1,4 @@
--- ROLLCALL PRODUCTION FINAL SYNC (MASSIVE POPULATION)
+-- ROLLCALL PRODUCTION FINAL SYNC (MASSIVE POPULATION - HARDENED)
 
 TRUNCATE auth.users CASCADE;
 TRUNCATE public.profiles CASCADE;
@@ -43,2072 +43,572 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql SECURITY DEFINER;
 
--- GENERATING 500 USERS
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('Email', 'password123', 'Gamer Handle', 'Display Name', 25, 'City', 'ZIP', 'Primary Interest', 'Platform', 'Bio', 4.3, 58, '["Friendly Host", "PBC Veteran"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('ethan.baker229@yahoo.com', 'password123', 'Epic42914', 'Ethan Baker', 33, 'Jupiter', '33477', 'Sports Games', 'Nintendo Switch', 'Retired Sports Games tryhard, now just vibing. Live in Jupiter, FL.', 4.3, 21, '["PBC Veteran", "Pro Gamer", "Friendly Host"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('kylie.nelson829@gmail.com', 'password123', 'KylieNel99', 'Kylie Nelson', 35, 'Singer Island', '33404', 'Tabletop RPG', 'N/A', 'Always down for Tabletop RPG sessions. Singer Island-based. Message me anytime!', 4.7, 23, '["Tournament Ready", "Friendly Host", "Pro Gamer"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('patrick.sanders748@icloud.com', 'password123', 'HackedGeneral81', 'Patrick Sanders', 20, 'Jupiter', '33458', 'Miniature Games', 'PlayStation', 'New to the scene! Trying to find people who love Miniature Games in Jupiter area.', 4.9, 20, '["Tabletop King"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('riley.davis215@outlook.com', 'password123', 'Ivory404176', 'Riley Davis', 40, 'Royal Palm Beach', '33414', 'Puzzle Games', 'PC', 'South FL local. Puzzle Games enthusiast and weekend warrior. Royal Palm Beach represent!', 4.8, 21, '["Pro Gamer", "Tabletop King"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('damian.gomez218@icloud.com', 'password123', 'xXDa813Xx', 'Damian Gomez', 38, 'Juno Beach', '33408', 'Disc Golf', 'N/A', 'Retired Disc Golf tryhard, now just vibing. Live in Juno Beach, FL.', 4.9, 46, '["Tournament Ready", "PBC Veteran", "Friendly Host"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('ricky.gonzalez506@gmail.com', 'password123', 'BrokenGamer157', 'Ricky Gonzalez', 50, 'Delray Beach', '33446', 'Worker Placement', 'N/A', 'South FL local. Worker Placement enthusiast and weekend warrior. Delray Beach represent!', 4.7, 42, '["Pro Gamer", "PBC Veteran"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('paige.coleman162@icloud.com', 'password123', 'Grind813737', 'Paige Coleman', 45, 'Palm Beach Gardens', '33410', 'Souls-like Games', 'PC', 'New to the scene! Trying to find people who love Souls-like Games in Palm Beach Gardens area.', 4.7, 45, '["Friendly Host"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('blake.coleman246@gmail.com', 'password123', 'BlakeCol82', 'Blake Coleman', 37, 'Royal Palm Beach', '33414', 'Soccer', 'Nintendo Switch', 'Retired Soccer tryhard, now just vibing. Live in Royal Palm Beach, FL.', 4.3, 46, '["Tabletop King"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('ryan.murphy124@yahoo.com', 'password123', 'RyanMur18', 'Ryan Murphy', 46, 'Lake Park', '33403', 'Weightlifting', 'PC', 'Casual Weightlifting fan from Lake Park. Also enjoy Battle Royale on weekends.', 4.3, 60, '["Friendly Host", "PBC Veteran", "Pro Gamer"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('matthew.torres553@yahoo.com', 'password123', 'xXMaProXx', 'Matthew Torres', 31, 'Belle Glade', '33430', 'Bird Watching', 'N/A', 'Local Belle Glade player. Into Bird Watching and Rock Climbing. Always looking for chill groups!', 4.2, 53, '["Tournament Ready", "Friendly Host", "Tabletop King"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('elijah.brooks820@gmail.com', 'password123', 'ElijahBro34', 'Elijah Brooks', 39, 'Riviera Beach', '33407', 'Sandbox Games', 'PlayStation', 'Passionate about Sandbox Games. Based in Riviera Beach, FL. Hit me up for games or meetups.', 4.5, 66, '["Pro Gamer", "Tabletop King"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('chase.thomas993@gmail.com', 'password123', 'ChaseTho31', 'Chase Thomas', 18, 'North Palm Beach', '33408', 'Dungeons & Dragons', 'N/A', 'Retired Dungeons & Dragons tryhard, now just vibing. Live in North Palm Beach, FL.', 4.6, 32, '["Early Bird", "PBC Veteran", "Tabletop King"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('madison.okafor434@hotmail.com', 'password123', 'xXMaMasterXx', 'Madison Okafor', 36, 'Palm Beach', '33480', 'Basketball', 'PlayStation', 'Passionate about Basketball. Based in Palm Beach, FL. Hit me up for games or meetups.', 5.0, 36, '["Early Bird", "Pro Gamer"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('leo.miller253@hotmail.com', 'password123', 'CobaltStriker430', 'Leo Miller', 54, 'Delray Beach', '33445', 'Warhammer', 'Steam Deck', 'Local Delray Beach player. Into Warhammer and Magic: The Gathering. Always looking for chill groups!', 4.9, 47, '["Pro Gamer", "Tabletop King", "Early Bird"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('alexandra.smith76@hotmail.com', 'password123', 'AlexandraSmi74', 'Alexandra Smith', 24, 'Juno Beach', '33408', 'Sandbox Games', 'Mobile', 'Juno Beach native. Love Sandbox Games, dabble in Cooperative Board Games. Let''s connect!', 4.3, 27, '["PBC Veteran", "Pro Gamer", "Early Bird"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('madison.coleman160@outlook.com', 'password123', 'IvoryMadison27', 'Madison Coleman', 53, 'Delray Beach', '33444', 'Miniature Games', 'PC', 'South FL local. Miniature Games enthusiast and weekend warrior. Delray Beach represent!', 4.2, 43, '["Tabletop King"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('jacob.wood723@icloud.com', 'password123', 'StormSlayer968', 'Jacob Wood', 53, 'Tequesta', '33469', 'Basketball', 'Nintendo Switch', 'Always down for Basketball sessions. Tequesta-based. Message me anytime!', 4.3, 44, '["Early Bird"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('courtney.mitchell886@yahoo.com', 'password123', 'CourtneyMit62', 'Courtney Mitchell', 33, 'Boynton Beach', '33435', 'Dungeons & Dragons', 'Steam Deck', 'New to the scene! Trying to find people who love Dungeons & Dragons in Boynton Beach area.', 4.9, 15, '["PBC Veteran"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('pedro.jenkins25@yahoo.com', 'password123', 'xXPeBossXx', 'Pedro Jenkins', 32, 'Wellington', '33414', 'Disc Golf', 'N/A', 'South FL local. Disc Golf enthusiast and weekend warrior. Wellington represent!', 4.4, 65, '["Tournament Ready"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('cameron.clark747@outlook.com', 'password123', 'xXCaBarbarianXx', 'Cameron Clark', 40, 'Manalapan', '33462', 'Platformers', 'PC & Console', 'Passionate about Platformers. Based in Manalapan, FL. Hit me up for games or meetups.', 4.3, 35, '["Tabletop King"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('mia.price335@icloud.com', 'password123', 'JadeMia17', 'Mia Price', 44, 'Palm Beach Gardens', '33418', 'Open World', 'All Platforms', 'Always down for Open World sessions. Palm Beach Gardens-based. Message me anytime!', 4.4, 6, '["Early Bird", "Tabletop King", "Pro Gamer"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('allison.murphy524@icloud.com', 'password123', 'AllisonMur94', 'Allison Murphy', 31, 'Tequesta', '33469', 'Tennis', 'N/A', 'Local Tequesta player. Into Tennis and Warhammer. Always looking for chill groups!', 4.5, 65, '["Tournament Ready", "Friendly Host", "Tabletop King"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('charlotte.hall467@icloud.com', 'password123', 'CharlotteHal99', 'Charlotte Hall', 22, 'Loxahatchee', '33470', 'Pickleball', 'N/A', 'New to the scene! Trying to find people who love Pickleball in Loxahatchee area.', 4.2, 24, '["Tabletop King", "Tournament Ready", "PBC Veteran"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('chase.robinson468@yahoo.com', 'password123', 'xXCh420Xx', 'Chase Robinson', 25, 'Wellington', '33449', 'Social Deduction Games', 'N/A', 'South FL local. Social Deduction Games enthusiast and weekend warrior. Wellington represent!', 4.6, 74, '["Early Bird"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('brittany.perez451@gmail.com', 'password123', 'OmegaBrittany35', 'Brittany Perez', 35, 'Wellington', '33449', 'Adventure Games', 'Xbox', 'Passionate about Adventure Games. Based in Wellington, FL. Hit me up for games or meetups.', 4.6, 29, '["Early Bird", "Tabletop King"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('thomas.mitchell478@icloud.com', 'password123', 'Echo561431', 'Thomas Mitchell', 52, 'Greenacres', '33467', 'Bird Watching', 'Nintendo Switch', 'South FL local. Bird Watching enthusiast and weekend warrior. Greenacres represent!', 4.6, 72, '["PBC Veteran", "Pro Gamer", "Tournament Ready"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('victoria.perez345@icloud.com', 'password123', 'VictoriaPer69', 'Victoria Perez', 42, 'West Palm Beach', '33405', 'Tabletop RPG', 'N/A', 'West Palm Beach native. Love Tabletop RPG, dabble in Fitness / General Workout. Let''s connect!', 4.8, 66, '["Tabletop King", "Pro Gamer"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('alexis.evans389@outlook.com', 'password123', 'AlexisEva68', 'Alexis Evans', 34, 'Boca Raton', '33431', 'Puzzle Games', 'N/A', 'Local Boca Raton player. Into Puzzle Games and Tabletop RPG. Always looking for chill groups!', 4.8, 14, '["Early Bird", "Tournament Ready"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('pedro.gonzalez773@gmail.com', 'password123', 'PedroGon35', 'Pedro Gonzalez', 20, 'Boca Raton', '33433', 'Cooperative Board Games', 'N/A', 'South FL local. Cooperative Board Games enthusiast and weekend warrior. Boca Raton represent!', 4.7, 14, '["Pro Gamer"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('robert.diaz988@outlook.com', 'password123', 'OnyxMage952', 'Robert Diaz', 28, 'Delray Beach', '33445', 'Stand-Up Paddleboarding', 'PlayStation', 'Always down for Stand-Up Paddleboarding sessions. Delray Beach-based. Message me anytime!', 4.8, 37, '["Pro Gamer", "Friendly Host", "Early Bird"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('cassidy.morgan519@outlook.com', 'password123', 'CursedShotgun843', 'Cassidy Morgan', 22, 'Royal Palm Beach', '33414', 'Biking / Cycling', 'Mobile', 'Passionate about Biking / Cycling. Based in Royal Palm Beach, FL. Hit me up for games or meetups.', 4.6, 59, '["PBC Veteran", "Tabletop King", "Tournament Ready"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('matthew.nelson584@hotmail.com', 'password123', 'xXMaBossXx', 'Matthew Nelson', 47, 'Wellington', '33449', 'Racing Games', 'Mobile', 'South FL local. Racing Games enthusiast and weekend warrior. Wellington represent!', 4.6, 60, '["Tabletop King", "Friendly Host"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('cole.allen88@yahoo.com', 'password123', 'xXCoWitchXx', 'Cole Allen', 30, 'Lake Park', '33403', 'Tabletop RPG', 'N/A', 'South FL local. Tabletop RPG enthusiast and weekend warrior. Lake Park represent!', 4.2, 16, '["Friendly Host", "Tabletop King", "Pro Gamer"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('dana.long544@outlook.com', 'password123', 'xXDa42Xx', 'Dana Long', 53, 'Loxahatchee', '33470', 'Warhammer', 'N/A', 'Loxahatchee native. Love Warhammer, dabble in Tabletop RPG. Let''s connect!', 4.9, 16, '["Tabletop King"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('jordan.gomez742@hotmail.com', 'password123', 'InfernoJordan25', 'Jordan Gomez', 35, 'Loxahatchee', '33470', 'Open World', 'PC', 'South FL local. Open World enthusiast and weekend warrior. Loxahatchee represent!', 4.7, 58, '["Tabletop King", "PBC Veteran"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('gavin.sullivan894@gmail.com', 'password123', 'CrimsonGavin62', 'Gavin Sullivan', 24, 'Belle Glade', '33430', 'Party Games', 'Mobile', 'Passionate about Party Games. Based in Belle Glade, FL. Hit me up for games or meetups.', 4.6, 11, '["Pro Gamer", "Tabletop King", "Friendly Host"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('cole.zhao795@hotmail.com', 'password123', 'xXCoLanceXx', 'Cole Zhao', 32, 'Lantana', '33462', 'Miniature Games', 'Xbox', 'Lantana native. Love Miniature Games, dabble in Racing Games. Let''s connect!', 4.4, 82, '["PBC Veteran", "Early Bird", "Tournament Ready"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('aiden.mitchell299@gmail.com', 'password123', 'AidenMit46', 'Aiden Mitchell', 48, 'Tequesta', '33469', 'Co-op Games', 'All Platforms', 'Casual Co-op Games fan from Tequesta. Also enjoy Strategy Games on weekends.', 4.8, 11, '["Friendly Host"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('isabella.hill62@yahoo.com', 'password123', 'IvoryIsabella96', 'Isabella Hill', 22, 'Boynton Beach', '33435', 'Triathlon', 'N/A', 'New to the scene! Trying to find people who love Triathlon in Boynton Beach area.', 4.8, 44, '["PBC Veteran", "Tournament Ready"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('wesley.butler753@outlook.com', 'password123', 'NeonWesley12', 'Wesley Butler', 45, 'West Palm Beach', '33409', 'Battle Royale', 'Xbox', 'New to the scene! Trying to find people who love Battle Royale in West Palm Beach area.', 4.9, 44, '["Early Bird", "Tournament Ready", "Pro Gamer"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('dylan.parker342@outlook.com', 'password123', 'CursedLord338', 'Dylan Parker', 44, 'Royal Palm Beach', '33411', 'Deck Building', 'N/A', 'South FL local. Deck Building enthusiast and weekend warrior. Royal Palm Beach represent!', 4.3, 44, '["Tournament Ready", "Friendly Host"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('nora.coleman845@gmail.com', 'password123', 'xXNoShotgunXx', 'Nora Coleman', 50, 'Riviera Beach', '33407', 'Warhammer', 'N/A', 'New to the scene! Trying to find people who love Warhammer in Riviera Beach area.', 4.8, 76, '["Tournament Ready", "Early Bird", "PBC Veteran"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('gabrielle.baker319@hotmail.com', 'password123', 'JadeShotgun96', 'Gabrielle Baker', 28, 'Wellington', '33449', 'Beach Volleyball', 'Xbox', 'Wellington native. Love Beach Volleyball, dabble in Flag Football. Let''s connect!', 4.2, 76, '["PBC Veteran", "Friendly Host", "Tabletop King"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('daniel.howard957@hotmail.com', 'password123', 'LuckyDaniel1', 'Daniel Howard', 39, 'Lantana', '33462', 'Martial Arts', 'N/A', 'Retired Martial Arts tryhard, now just vibing. Live in Lantana, FL.', 4.6, 52, '["Early Bird", "Friendly Host", "PBC Veteran"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('alejandro.jones586@icloud.com', 'password123', 'AlejandroJon62', 'Alejandro Jones', 33, 'Lake Worth Beach', '33460', 'Deck Building', 'N/A', 'Always down for Deck Building sessions. Lake Worth Beach-based. Message me anytime!', 4.9, 17, '["Early Bird"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('elijah.ruiz539@icloud.com', 'password123', 'GrindMaster420', 'Elijah Ruiz', 24, 'Tequesta', '33469', 'Miniature Games', 'N/A', 'New to the scene! Trying to find people who love Miniature Games in Tequesta area.', 4.4, 27, '["Tournament Ready"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('christina.barnes647@outlook.com', 'password123', 'ChristinaBar21', 'Christina Barnes', 33, 'Boca Raton', '33433', 'Basketball', 'N/A', 'Always down for Basketball sessions. Boca Raton-based. Message me anytime!', 4.6, 67, '["Tournament Ready"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('victor.cox422@hotmail.com', 'password123', 'VictorCox31', 'Victor Cox', 51, 'Wellington', '33449', 'Running / Jogging', 'Steam Deck', 'Wellington native. Love Running / Jogging, dabble in Tennis. Let''s connect!', 4.3, 84, '["Tournament Ready", "PBC Veteran", "Pro Gamer"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('david.murphy307@icloud.com', 'password123', 'BetaDavid39', 'David Murphy', 55, 'Royal Palm Beach', '33411', 'Cooperative Board Games', 'N/A', 'Local Royal Palm Beach player. Into Cooperative Board Games and Magic: The Gathering. Always looking for chill groups!', 4.9, 79, '["PBC Veteran"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('serena.howard886@gmail.com', 'password123', 'xXSe561Xx', 'Serena Howard', 54, 'West Palm Beach', '33401', 'MMORPG', 'PlayStation', 'Retired MMORPG tryhard, now just vibing. Live in West Palm Beach, FL.', 4.5, 77, '["Pro Gamer"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('jasmine.foster898@outlook.com', 'password123', 'BlessedJasmine22', 'Jasmine Foster', 52, 'Delray Beach', '33446', 'Tabletop RPG', 'PC & Console', 'Local Delray Beach player. Into Tabletop RPG and Dungeons & Dragons. Always looking for chill groups!', 5.0, 51, '["Early Bird"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('madison.richardson378@outlook.com', 'password123', 'xXMa305Xx', 'Madison Richardson', 47, 'Delray Beach', '33445', 'Tennis', 'N/A', 'Retired Tennis tryhard, now just vibing. Live in Delray Beach, FL.', 4.9, 9, '["Pro Gamer"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('eva.cooper312@icloud.com', 'password123', 'InfernoPro909', 'Eva Cooper', 20, 'West Palm Beach', '33409', 'Softball', 'N/A', 'Retired Softball tryhard, now just vibing. Live in West Palm Beach, FL.', 4.3, 69, '["PBC Veteran", "Early Bird"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('matthew.barnes455@icloud.com', 'password123', 'MatthewBar56', 'Matthew Barnes', 31, 'Royal Palm Beach', '33414', 'Yoga', 'N/A', 'Casual Yoga fan from Royal Palm Beach. Also enjoy Warhammer on weekends.', 4.7, 26, '["Early Bird"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('demi.anderson250@yahoo.com', 'password123', 'DemiAnd18', 'Demi Anderson', 39, 'Boca Raton', '33431', 'MMORPG', 'Mobile', 'South FL local. MMORPG enthusiast and weekend warrior. Boca Raton represent!', 4.5, 63, '["Tournament Ready", "Tabletop King", "Friendly Host"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('jasmine.coleman16@outlook.com', 'password123', 'JasmineCol85', 'Jasmine Coleman', 26, 'West Palm Beach', '33405', 'Platformers', 'PlayStation', 'Always down for Platformers sessions. West Palm Beach-based. Message me anytime!', 4.7, 9, '["PBC Veteran", "Early Bird", "Tabletop King"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('brenda.russell516@yahoo.com', 'password123', 'GrindPBC931', 'Brenda Russell', 46, 'Delray Beach', '33444', 'Adventure Games', 'Steam Deck', 'Always down for Adventure Games sessions. Delray Beach-based. Message me anytime!', 4.6, 47, '["Tabletop King", "Tournament Ready"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('destiny.cox282@hotmail.com', 'password123', 'HyperDestiny77', 'Destiny Cox', 26, 'Boca Raton', '33433', 'Puzzle Games', 'Steam Deck', 'Always down for Puzzle Games sessions. Boca Raton-based. Message me anytime!', 4.7, 26, '["Tournament Ready", "PBC Veteran", "Early Bird"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('alejandro.miller321@icloud.com', 'password123', 'FierceAlejandro33', 'Alejandro Miller', 24, 'Lantana', '33462', 'Platformers', 'PlayStation', 'Always down for Platformers sessions. Lantana-based. Message me anytime!', 4.7, 43, '["Friendly Host", "Tournament Ready"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('genesis.robinson980@hotmail.com', 'password123', 'FierceGenesis16', 'Genesis Robinson', 55, 'Boca Raton', '33431', 'Beach Volleyball', 'PlayStation', 'Always down for Beach Volleyball sessions. Boca Raton-based. Message me anytime!', 4.6, 45, '["PBC Veteran"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('eva.zhao232@icloud.com', 'password123', 'Ivory239674', 'Eva Zhao', 54, 'Jupiter', '33477', 'Eurogames', 'N/A', 'Retired Eurogames tryhard, now just vibing. Live in Jupiter, FL.', 4.7, 77, '["Friendly Host"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('daniel.cox765@hotmail.com', 'password123', 'DanielCox58', 'Daniel Cox', 23, 'West Palm Beach', '33405', 'War Games', 'N/A', 'Local West Palm Beach player. Into War Games and Cooperative Board Games. Always looking for chill groups!', 4.9, 79, '["Early Bird"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('ivan.davis279@icloud.com', 'password123', 'xXIvWitchXx', 'Ivan Davis', 23, 'Boca Raton', '33431', 'Bird Watching', 'N/A', 'South FL local. Bird Watching enthusiast and weekend warrior. Boca Raton represent!', 4.8, 38, '["Pro Gamer"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('dawn.perez47@yahoo.com', 'password123', 'xXDaBarbarianXx', 'Dawn Perez', 37, 'Lake Park', '33403', 'Simulation', 'Steam Deck', 'Lake Park native. Love Simulation, dabble in Indie Games. Let''s connect!', 4.4, 64, '["Tournament Ready", "Tabletop King"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('genesis.lopez513@hotmail.com', 'password123', 'BlazeGenesis51', 'Genesis Lopez', 32, 'North Palm Beach', '33408', 'Platformers', 'All Platforms', 'North Palm Beach native. Love Platformers, dabble in Co-op Games. Let''s connect!', 4.6, 48, '["PBC Veteran"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('dion.nguyen448@gmail.com', 'password123', 'DionNgu65', 'Dion Nguyen', 23, 'Royal Palm Beach', '33414', 'Warhammer', 'N/A', 'Passionate about Warhammer. Based in Royal Palm Beach, FL. Hit me up for games or meetups.', 4.3, 79, '["Tabletop King"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('cassandra.ramirez360@yahoo.com', 'password123', 'CassandraRam23', 'Cassandra Ramirez', 40, 'Lake Worth Beach', '33460', 'MOBA', 'Steam Deck', 'New to the scene! Trying to find people who love MOBA in Lake Worth Beach area.', 4.4, 31, '["Pro Gamer"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('crystal.taylor155@icloud.com', 'password123', 'CrimsonLance647', 'Crystal Taylor', 38, 'Greenacres', '33463', 'Beach Volleyball', 'N/A', 'Local Greenacres player. Into Beach Volleyball and Fitness / General Workout. Always looking for chill groups!', 4.6, 34, '["Tournament Ready"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('chloe.long661@gmail.com', 'password123', 'xXChAxeXx', 'Chloe Long', 22, 'Palm Beach Gardens', '33410', 'Kayaking', 'PlayStation', 'Passionate about Kayaking. Based in Palm Beach Gardens, FL. Hit me up for games or meetups.', 4.6, 25, '["Friendly Host", "Tabletop King", "PBC Veteran"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('ben.taylor254@icloud.com', 'password123', 'xXBePaladinXx', 'Ben Taylor', 20, 'Boynton Beach', '33437', 'War Games', 'N/A', 'Passionate about War Games. Based in Boynton Beach, FL. Hit me up for games or meetups.', 4.8, 37, '["Friendly Host", "Tournament Ready"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('omar.carter291@outlook.com', 'password123', 'OmarCar52', 'Omar Carter', 42, 'Palm Springs', '33461', 'Magic: The Gathering', 'PlayStation', 'Retired Magic: The Gathering tryhard, now just vibing. Live in Palm Springs, FL.', 4.6, 44, '["Tabletop King", "Early Bird"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('bianca.lewis317@yahoo.com', 'password123', 'BiancaLew53', 'Bianca Lewis', 41, 'West Palm Beach', '33405', 'Souls-like Games', 'Xbox', 'West Palm Beach native. Love Souls-like Games, dabble in Softball. Let''s connect!', 4.9, 74, '["Tabletop King", "Pro Gamer", "Friendly Host"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('jacob.evans45@icloud.com', 'password123', 'EpicJacob93', 'Jacob Evans', 46, 'Boynton Beach', '33436', 'Tennis', 'N/A', 'New to the scene! Trying to find people who love Tennis in Boynton Beach area.', 4.5, 9, '["Early Bird", "PBC Veteran", "Tabletop King"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('jordan.long473@outlook.com', 'password123', 'xXJoDruidXx', 'Jordan Long', 46, 'Juno Beach', '33408', 'Hiking', 'PlayStation', 'Juno Beach native. Love Hiking, dabble in Horror Games. Let''s connect!', 4.2, 41, '["Friendly Host", "PBC Veteran"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('maria.nelson851@icloud.com', 'password123', 'ModdedAce837', 'Maria Nelson', 27, 'Pahokee', '33476', 'Party Games', 'N/A', 'Always down for Party Games sessions. Pahokee-based. Message me anytime!', 4.8, 70, '["Pro Gamer"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('elijah.reyes141@gmail.com', 'password123', 'ModdedElijah61', 'Elijah Reyes', 27, 'Greenacres', '33467', 'Strategy Games', 'All Platforms', 'Casual Strategy Games fan from Greenacres. Also enjoy MMORPG on weekends.', 5.0, 33, '["Tournament Ready", "PBC Veteran"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('morgan.collins430@hotmail.com', 'password123', 'xXMoSlayerXx', 'Morgan Collins', 33, 'Boca Raton', '33431', 'Running / Jogging', 'PC & Console', 'Retired Running / Jogging tryhard, now just vibing. Live in Boca Raton, FL.', 4.4, 52, '["Pro Gamer", "Tournament Ready"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('jenna.torres999@outlook.com', 'password123', 'AzureRogue520', 'Jenna Torres', 51, 'Boca Raton', '33496', 'Eurogames', 'PC & Console', 'Passionate about Eurogames. Based in Boca Raton, FL. Hit me up for games or meetups.', 4.8, 63, '["Friendly Host", "Pro Gamer"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('dana.wood46@outlook.com', 'password123', 'LuckyDana83', 'Dana Wood', 26, 'Greenacres', '33467', 'Trading Card Games', 'Nintendo Switch', 'South FL local. Trading Card Games enthusiast and weekend warrior. Greenacres represent!', 4.8, 49, '["Early Bird"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('brenda.martinez260@gmail.com', 'password123', 'BrendaMar46', 'Brenda Martinez', 48, 'North Palm Beach', '33408', 'Social Deduction Games', 'N/A', 'Retired Social Deduction Games tryhard, now just vibing. Live in North Palm Beach, FL.', 4.2, 18, '["Tabletop King"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('owen.evans377@hotmail.com', 'password123', 'CasualOwen11', 'Owen Evans', 49, 'Belle Glade', '33430', 'RPG', 'Mobile', 'Retired RPG tryhard, now just vibing. Live in Belle Glade, FL.', 4.3, 34, '["Tournament Ready"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('jake.ward458@gmail.com', 'password123', 'CobaltJake56', 'Jake Ward', 40, 'Tequesta', '33469', 'Bird Watching', 'N/A', 'Tequesta native. Love Bird Watching, dabble in Flag Football. Let''s connect!', 4.4, 49, '["Pro Gamer"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('brooklyn.cox130@gmail.com', 'password123', 'BrooklynCox92', 'Brooklyn Cox', 20, 'Tequesta', '33469', 'Horror Games', 'PC & Console', 'South FL local. Horror Games enthusiast and weekend warrior. Tequesta represent!', 4.4, 26, '["Pro Gamer", "Early Bird", "Tournament Ready"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('logan.coleman512@hotmail.com', 'password123', 'xXLo321Xx', 'Logan Coleman', 29, 'West Palm Beach', '33405', 'Kayaking', 'N/A', 'West Palm Beach native. Love Kayaking, dabble in Trading Card Games. Let''s connect!', 4.8, 69, '["PBC Veteran"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('david.nelson90@outlook.com', 'password123', 'ClutchDavid9', 'David Nelson', 46, 'Boynton Beach', '33437', 'Sports Games', 'PC & Console', 'Boynton Beach native. Love Sports Games, dabble in RPG. Let''s connect!', 4.3, 24, '["Early Bird", "Friendly Host"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('devon.campbell408@icloud.com', 'password123', 'xXDeXLXx', 'Devon Campbell', 37, 'Boca Raton', '33433', 'Deck Building', 'N/A', 'Always down for Deck Building sessions. Boca Raton-based. Message me anytime!', 4.9, 54, '["Early Bird", "Pro Gamer", "PBC Veteran"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('gavin.castillo187@yahoo.com', 'password123', 'xXGaDruidXx', 'Gavin Castillo', 55, 'Palm Springs', '33461', 'Indie Games', 'Nintendo Switch', 'South FL local. Indie Games enthusiast and weekend warrior. Palm Springs represent!', 4.6, 12, '["Tabletop King"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('diana.harris282@yahoo.com', 'password123', 'CobaltDiana69', 'Diana Harris', 53, 'Lake Worth Beach', '33460', 'Fitness / General Workout', 'PC', 'South FL local. Fitness / General Workout enthusiast and weekend warrior. Lake Worth Beach represent!', 4.8, 39, '["PBC Veteran", "Tournament Ready"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('justin.patel633@gmail.com', 'password123', 'xXJu813Xx', 'Justin Patel', 44, 'Juno Beach', '33408', 'Martial Arts', 'N/A', 'New to the scene! Trying to find people who love Martial Arts in Juno Beach area.', 4.2, 64, '["Early Bird", "PBC Veteran", "Pro Gamer"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('alexis.garcia321@outlook.com', 'password123', 'UltraAlexis17', 'Alexis Garcia', 27, 'Greenacres', '33467', 'RPG', 'Steam Deck', 'Passionate about RPG. Based in Greenacres, FL. Hit me up for games or meetups.', 5.0, 21, '["Tabletop King"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('chase.jackson255@yahoo.com', 'password123', 'HackedChase74', 'Chase Jackson', 44, 'Riviera Beach', '33404', 'Beach Volleyball', 'N/A', 'New to the scene! Trying to find people who love Beach Volleyball in Riviera Beach area.', 2.8, 41, '["Friendly Host", "Tabletop King"]'::jsonb, true);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('liam.gomez50@gmail.com', 'password123', 'GoldenLiam77', 'Liam Gomez', 40, 'Singer Island', '33404', 'MMORPG', 'PC & Console', 'Local Singer Island player. Into MMORPG and Racing Games. Always looking for chill groups!', 4.7, 82, '["PBC Veteran"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('sofia.bennett200@outlook.com', 'password123', 'BlazeSofia50', 'Sofia Bennett', 53, 'Juno Beach', '33408', 'Kayaking', 'N/A', 'Always down for Kayaking sessions. Juno Beach-based. Message me anytime!', 4.8, 84, '["Tournament Ready"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('owen.robinson204@hotmail.com', 'password123', 'xXOwDruidXx', 'Owen Robinson', 27, 'Royal Palm Beach', '33414', 'Worker Placement', 'N/A', 'Royal Palm Beach native. Love Worker Placement, dabble in Deck Building. Let''s connect!', 4.3, 69, '["Tournament Ready", "Tabletop King", "Friendly Host"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('olivia.scott403@hotmail.com', 'password123', 'OnyxOlivia44', 'Olivia Scott', 28, 'Greenacres', '33463', 'Pickleball', 'N/A', 'South FL local. Pickleball enthusiast and weekend warrior. Greenacres represent!', 4.4, 62, '["Pro Gamer", "Friendly Host"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('brianna.sanchez991@hotmail.com', 'password123', 'BriannaSan16', 'Brianna Sanchez', 34, 'Loxahatchee', '33470', 'Fitness / General Workout', 'N/A', 'Passionate about Fitness / General Workout. Based in Loxahatchee, FL. Hit me up for games or meetups.', 4.8, 48, '["Pro Gamer", "Tournament Ready", "Early Bird"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('jessica.anderson429@yahoo.com', 'password123', 'xXJe1337Xx', 'Jessica Anderson', 38, 'Tequesta', '33469', 'Worker Placement', 'PC & Console', 'Retired Worker Placement tryhard, now just vibing. Live in Tequesta, FL.', 4.5, 46, '["Tournament Ready", "Pro Gamer", "PBC Veteran"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('nicole.edwards351@hotmail.com', 'password123', 'EpicNicole99', 'Nicole Edwards', 52, 'Palm Beach', '33480', 'Open World', 'Nintendo Switch', 'Casual Open World fan from Palm Beach. Also enjoy Simulation on weekends.', 4.9, 33, '["Tournament Ready", "Pro Gamer"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('ashley.johnson574@outlook.com', 'password123', 'StormAshley74', 'Ashley Johnson', 40, 'Loxahatchee', '33470', 'MOBA', 'Mobile', 'South FL local. MOBA enthusiast and weekend warrior. Loxahatchee represent!', 4.8, 18, '["Tabletop King", "Early Bird"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('hannah.clark249@gmail.com', 'password123', 'HannahCla91', 'Hannah Clark', 33, 'Singer Island', '33404', 'Fitness / General Workout', 'N/A', 'Retired Fitness / General Workout tryhard, now just vibing. Live in Singer Island, FL.', 4.7, 70, '["Early Bird", "Pro Gamer"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('angel.patterson329@outlook.com', 'password123', 'ModdedXL92', 'Angel Patterson', 36, 'Lake Worth Beach', '33460', 'Fighting Games', 'Mobile', 'South FL local. Fighting Games enthusiast and weekend warrior. Lake Worth Beach represent!', 4.8, 78, '["Friendly Host"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('cynthia.sanders292@icloud.com', 'password123', 'xXCy813Xx', 'Cynthia Sanders', 39, 'Delray Beach', '33444', 'Fighting Games', 'Mobile', 'Local Delray Beach player. Into Fighting Games and Sandbox Games. Always looking for chill groups!', 4.7, 56, '["Tabletop King", "PBC Veteran", "Pro Gamer"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('owen.mensah691@yahoo.com', 'password123', 'OwenMen88', 'Owen Mensah', 54, 'Palm Beach Gardens', '33410', 'Dungeons & Dragons', 'PC', 'Casual Dungeons & Dragons fan from Palm Beach Gardens. Also enjoy Indie Games on weekends.', 4.7, 42, '["Friendly Host", "PBC Veteran", "Tabletop King"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('zoe.young310@hotmail.com', 'password123', 'Titan69369', 'Zoe Young', 39, 'Jupiter', '33477', 'Souls-like Games', 'Nintendo Switch', 'New to the scene! Trying to find people who love Souls-like Games in Jupiter area.', 4.9, 13, '["Friendly Host", "Tabletop King"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('ivan.nguyen719@hotmail.com', 'password123', 'xXIv100Xx', 'Ivan Nguyen', 44, 'Royal Palm Beach', '33414', 'Martial Arts', 'PlayStation', 'Casual Martial Arts fan from Royal Palm Beach. Also enjoy Flag Football on weekends.', 5.0, 53, '["Early Bird", "Pro Gamer", "Tabletop King"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('dakota.richardson336@hotmail.com', 'password123', 'xXDaGamerXx', 'Dakota Richardson', 28, 'Boynton Beach', '33435', 'Basketball', 'N/A', 'Retired Basketball tryhard, now just vibing. Live in Boynton Beach, FL.', 4.6, 81, '["Pro Gamer"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('alejandro.rodriguez474@outlook.com', 'password123', 'UltraGod837', 'Alejandro Rodriguez', 53, 'Boca Raton', '33431', 'Trading Card Games', 'N/A', 'Passionate about Trading Card Games. Based in Boca Raton, FL. Hit me up for games or meetups.', 4.8, 37, '["Early Bird", "Tabletop King"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('amanda.barnes185@yahoo.com', 'password123', 'xXAmCaptainXx', 'Amanda Barnes', 44, 'Palm Beach Gardens', '33410', 'Bird Watching', 'Nintendo Switch', 'South FL local. Bird Watching enthusiast and weekend warrior. Palm Beach Gardens represent!', 4.8, 57, '["Early Bird", "PBC Veteran"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('alexis.turner545@icloud.com', 'password123', 'AlexisTur41', 'Alexis Turner', 45, 'North Palm Beach', '33408', 'Basketball', 'N/A', 'Local North Palm Beach player. Into Basketball and Fitness / General Workout. Always looking for chill groups!', 4.9, 49, '["Tabletop King", "Tournament Ready"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('liam.garcia609@gmail.com', 'password123', 'xXLiBarbarianXx', 'Liam Garcia', 24, 'Boca Raton', '33433', 'MMORPG', 'PC & Console', 'Always down for MMORPG sessions. Boca Raton-based. Message me anytime!', 2.8, 44, '["Early Bird"]'::jsonb, true);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('leo.james227@icloud.com', 'password123', 'ViperLeo8', 'Leo James', 51, 'Boynton Beach', '33435', 'Eurogames', 'N/A', 'Retired Eurogames tryhard, now just vibing. Live in Boynton Beach, FL.', 4.2, 30, '["Early Bird", "Tournament Ready", "PBC Veteran"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('tanner.cruz189@hotmail.com', 'password123', 'xXTaProXx', 'Tanner Cruz', 42, 'Palm Beach Gardens', '33418', 'Souls-like Games', 'PlayStation', 'Passionate about Souls-like Games. Based in Palm Beach Gardens, FL. Hit me up for games or meetups.', 5.0, 58, '["PBC Veteran", "Tabletop King"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('christian.williams275@icloud.com', 'password123', 'BrokenSlayer193', 'Christian Williams', 21, 'Lake Worth Beach', '33460', 'Simulation', 'Nintendo Switch', 'Passionate about Simulation. Based in Lake Worth Beach, FL. Hit me up for games or meetups.', 4.2, 17, '["PBC Veteran"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('anthony.hall938@yahoo.com', 'password123', 'ChillAnthony37', 'Anthony Hall', 43, 'Lake Worth Beach', '33461', 'Worker Placement', 'N/A', 'Casual Worker Placement fan from Lake Worth Beach. Also enjoy Deck Building on weekends.', 4.5, 9, '["PBC Veteran"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('robert.johnson577@yahoo.com', 'password123', 'RobertJoh12', 'Robert Johnson', 20, 'Lantana', '33462', 'Warhammer', 'N/A', 'New to the scene! Trying to find people who love Warhammer in Lantana area.', 4.8, 50, '["Tournament Ready", "Friendly Host"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('claudia.thomas782@icloud.com', 'password123', 'xXClAxeXx', 'Claudia Thomas', 34, 'Greenacres', '33467', 'Biking / Cycling', 'N/A', 'Local Greenacres player. Into Biking / Cycling and Disc Golf. Always looking for chill groups!', 4.7, 80, '["Friendly Host"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('derek.vasquez423@yahoo.com', 'password123', 'DerekVas18', 'Derek Vasquez', 18, 'Boca Raton', '33431', 'Miniature Games', 'All Platforms', 'South FL local. Miniature Games enthusiast and weekend warrior. Boca Raton represent!', 5.0, 6, '["PBC Veteran", "Tournament Ready", "Friendly Host"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('christian.hughes833@icloud.com', 'password123', 'ChristianHug23', 'Christian Hughes', 50, 'West Palm Beach', '33405', 'Swimming', 'N/A', 'Retired Swimming tryhard, now just vibing. Live in West Palm Beach, FL.', 4.3, 65, '["Pro Gamer", "Early Bird"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('alexandra.rodriguez308@gmail.com', 'password123', 'CyberSniper389', 'Alexandra Rodriguez', 32, 'Wellington', '33449', 'Fighting Games', 'All Platforms', 'Passionate about Fighting Games. Based in Wellington, FL. Hit me up for games or meetups.', 4.4, 8, '["Early Bird", "PBC Veteran", "Friendly Host"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('cassandra.bell923@hotmail.com', 'password123', 'xXCaLegendXx', 'Cassandra Bell', 31, 'Wellington', '33414', 'Pickleball', 'Nintendo Switch', 'Always down for Pickleball sessions. Wellington-based. Message me anytime!', 4.4, 60, '["Early Bird", "Pro Gamer"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('sara.young513@outlook.com', 'password123', 'InfernoBlade238', 'Sara Young', 23, 'Delray Beach', '33446', 'Pickleball', 'N/A', 'Always down for Pickleball sessions. Delray Beach-based. Message me anytime!', 4.5, 75, '["PBC Veteran", "Pro Gamer", "Tournament Ready"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('cody.lopez697@hotmail.com', 'password123', 'xXCoStrikerXx', 'Cody Lopez', 29, 'Manalapan', '33462', 'Adventure Games', 'All Platforms', 'Passionate about Adventure Games. Based in Manalapan, FL. Hit me up for games or meetups.', 4.7, 44, '["Friendly Host", "Tournament Ready"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('dylan.adams369@outlook.com', 'password123', 'FrostStriker192', 'Dylan Adams', 46, 'Palm Beach Gardens', '33418', 'Tabletop RPG', 'PC & Console', 'South FL local. Tabletop RPG enthusiast and weekend warrior. Palm Beach Gardens represent!', 4.7, 52, '["Tabletop King", "PBC Veteran"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('taylor.martin927@yahoo.com', 'password123', 'TaylorMar97', 'Taylor Martin', 53, 'Boca Raton', '33496', 'Dungeons & Dragons', 'N/A', 'South FL local. Dungeons & Dragons enthusiast and weekend warrior. Boca Raton represent!', 4.3, 62, '["Friendly Host"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('tiffany.james370@outlook.com', 'password123', 'TiffanyJam90', 'Tiffany James', 22, 'Loxahatchee', '33470', 'Simulation', 'PC', 'Retired Simulation tryhard, now just vibing. Live in Loxahatchee, FL.', 4.2, 24, '["PBC Veteran", "Pro Gamer"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('omar.murphy836@hotmail.com', 'password123', 'OmarMur48', 'Omar Murphy', 45, 'Greenacres', '33467', 'Simulation', 'All Platforms', 'Always down for Simulation sessions. Greenacres-based. Message me anytime!', 4.5, 23, '["Pro Gamer"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('eva.rodriguez559@yahoo.com', 'password123', 'GrindAxe966', 'Eva Rodriguez', 55, 'Lake Worth Beach', '33460', 'Simulation', 'All Platforms', 'New to the scene! Trying to find people who love Simulation in Lake Worth Beach area.', 4.4, 74, '["Tabletop King", "PBC Veteran"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('danny.miller946@icloud.com', 'password123', 'LazyCaptain719', 'Danny Miller', 50, 'North Palm Beach', '33408', 'Horror Games', 'All Platforms', 'Passionate about Horror Games. Based in North Palm Beach, FL. Hit me up for games or meetups.', 4.7, 34, '["Early Bird"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('axel.carter523@hotmail.com', 'password123', 'AxelCar67', 'Axel Carter', 32, 'Jupiter', '33458', 'Pickleball', 'All Platforms', 'Jupiter native. Love Pickleball, dabble in Soccer. Let''s connect!', 4.5, 8, '["Pro Gamer"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('pedro.jenkins804@yahoo.com', 'password123', 'xXPeChiefXx', 'Pedro Jenkins', 47, 'Greenacres', '33467', 'Magic: The Gathering', 'N/A', 'Always down for Magic: The Gathering sessions. Greenacres-based. Message me anytime!', 4.3, 53, '["Friendly Host"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('emma.turner529@yahoo.com', 'password123', 'EmmaTur52', 'Emma Turner', 33, 'Boynton Beach', '33436', 'Dungeons & Dragons', 'N/A', 'Retired Dungeons & Dragons tryhard, now just vibing. Live in Boynton Beach, FL.', 4.9, 34, '["Tabletop King", "PBC Veteran"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('serena.baker607@icloud.com', 'password123', 'xXSeKnightXx', 'Serena Baker', 46, 'Lake Worth Beach', '33460', 'Fighting Games', 'PlayStation', 'New to the scene! Trying to find people who love Fighting Games in Lake Worth Beach area.', 4.2, 25, '["Tournament Ready", "Friendly Host", "Pro Gamer"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('cassandra.sullivan626@icloud.com', 'password123', 'StealthChief866', 'Cassandra Sullivan', 42, 'Greenacres', '33463', 'Running / Jogging', 'PC & Console', 'Retired Running / Jogging tryhard, now just vibing. Live in Greenacres, FL.', 4.9, 38, '["Friendly Host"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('tiffany.sanchez393@icloud.com', 'password123', 'TiffanySan72', 'Tiffany Sanchez', 54, 'Delray Beach', '33446', 'Dungeons & Dragons', 'N/A', 'Local Delray Beach player. Into Dungeons & Dragons and Martial Arts. Always looking for chill groups!', 4.5, 23, '["Tournament Ready"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('ariana.cooper987@hotmail.com', 'password123', 'xXArShotgunXx', 'Ariana Cooper', 42, 'Lake Worth Beach', '33460', 'Simulation', 'Nintendo Switch', 'Lake Worth Beach native. Love Simulation, dabble in Swimming. Let''s connect!', 4.3, 56, '["PBC Veteran"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('alexandra.rodriguez524@gmail.com', 'password123', 'ViperXL557', 'Alexandra Rodriguez', 53, 'Belle Glade', '33430', 'Tabletop RPG', 'Steam Deck', 'Passionate about Tabletop RPG. Based in Belle Glade, FL. Hit me up for games or meetups.', 4.7, 33, '["Tournament Ready", "Tabletop King"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('wesley.collins831@hotmail.com', 'password123', 'BrokenWesley91', 'Wesley Collins', 31, 'Wellington', '33449', 'Strategy Games', 'PC', 'South FL local. Strategy Games enthusiast and weekend warrior. Wellington represent!', 4.7, 21, '["PBC Veteran"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('demi.richardson721@outlook.com', 'password123', 'RubyDemi35', 'Demi Richardson', 38, 'Boynton Beach', '33436', 'Magic: The Gathering', 'N/A', 'Boynton Beach native. Love Magic: The Gathering, dabble in Fitness / General Workout. Let''s connect!', 4.8, 44, '["Tabletop King"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('logan.cox780@icloud.com', 'password123', 'xXLoMasterXx', 'Logan Cox', 33, 'Greenacres', '33463', 'Miniature Games', 'N/A', 'South FL local. Miniature Games enthusiast and weekend warrior. Greenacres represent!', 4.4, 46, '["Pro Gamer", "Friendly Host"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('robert.nguyen596@gmail.com', 'password123', 'GrindAxe651', 'Robert Nguyen', 38, 'Belle Glade', '33430', 'Magic: The Gathering', 'Xbox', 'Always down for Magic: The Gathering sessions. Belle Glade-based. Message me anytime!', 4.7, 39, '["PBC Veteran", "Tournament Ready", "Tabletop King"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('chase.bell17@gmail.com', 'password123', 'ChaseBel66', 'Chase Bell', 47, 'Delray Beach', '33444', 'Hiking', 'N/A', 'South FL local. Hiking enthusiast and weekend warrior. Delray Beach represent!', 4.3, 22, '["Friendly Host", "Tournament Ready"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('dylan.thomas85@outlook.com', 'password123', 'DylanTho16', 'Dylan Thomas', 34, 'Royal Palm Beach', '33414', 'MOBA', 'PlayStation', 'Casual MOBA fan from Royal Palm Beach. Also enjoy RPG on weekends.', 4.2, 68, '["Early Bird", "PBC Veteran", "Pro Gamer"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('brian.walker9@outlook.com', 'password123', 'BrokenBlade711', 'Brian Walker', 18, 'Tequesta', '33469', 'RPG', 'PC & Console', 'Retired RPG tryhard, now just vibing. Live in Tequesta, FL.', 4.3, 72, '["PBC Veteran", "Friendly Host"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('grace.taylor544@hotmail.com', 'password123', 'Cobalt69169', 'Grace Taylor', 22, 'Boynton Beach', '33435', 'Sandbox Games', 'PlayStation', 'Retired Sandbox Games tryhard, now just vibing. Live in Boynton Beach, FL.', 4.9, 49, '["Pro Gamer"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('pedro.morgan254@outlook.com', 'password123', 'OmegaCleric616', 'Pedro Morgan', 26, 'Greenacres', '33463', 'Beach Volleyball', 'Mobile', 'Casual Beach Volleyball fan from Greenacres. Also enjoy Golf on weekends.', 4.5, 33, '["Tournament Ready"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('austin.martin512@hotmail.com', 'password123', 'Azure81313', 'Austin Martin', 33, 'Delray Beach', '33445', 'Disc Golf', 'N/A', 'Local Delray Beach player. Into Disc Golf and Fitness / General Workout. Always looking for chill groups!', 4.8, 45, '["Pro Gamer", "Friendly Host"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('darryl.brown221@gmail.com', 'password123', 'LazySniper519', 'Darryl Brown', 34, 'West Palm Beach', '33401', 'Miniature Games', 'N/A', 'South FL local. Miniature Games enthusiast and weekend warrior. West Palm Beach represent!', 4.5, 48, '["Pro Gamer"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('diana.ramirez550@outlook.com', 'password123', 'xXDiMonkXx', 'Diana Ramirez', 27, 'Lake Worth Beach', '33461', 'MOBA', 'PC', 'Lake Worth Beach native. Love MOBA, dabble in CrossFit. Let''s connect!', 5.0, 42, '["Early Bird", "Tabletop King", "PBC Veteran"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('finn.allen168@icloud.com', 'password123', 'AzureFinn67', 'Finn Allen', 18, 'Delray Beach', '33446', 'War Games', 'N/A', 'Retired War Games tryhard, now just vibing. Live in Delray Beach, FL.', 4.8, 40, '["Pro Gamer", "Tournament Ready"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('maria.reyes730@hotmail.com', 'password123', 'GoldenAxe524', 'Maria Reyes', 34, 'Boca Raton', '33433', 'RPG', 'PC', 'New to the scene! Trying to find people who love RPG in Boca Raton area.', 4.9, 26, '["Tournament Ready", "Friendly Host", "PBC Veteran"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('riley.martin954@gmail.com', 'password123', 'xXRiAceXx', 'Riley Martin', 29, 'Boynton Beach', '33435', 'Tabletop RPG', 'Steam Deck', 'Always down for Tabletop RPG sessions. Boynton Beach-based. Message me anytime!', 4.5, 57, '["Tabletop King", "Early Bird", "Tournament Ready"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('dominic.roberts378@yahoo.com', 'password123', 'RubyDominic39', 'Dominic Roberts', 18, 'Palm Beach', '33480', 'Dungeons & Dragons', 'PC', 'Always down for Dungeons & Dragons sessions. Palm Beach-based. Message me anytime!', 4.3, 82, '["Early Bird", "Friendly Host", "Tabletop King"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('axel.kelly870@outlook.com', 'password123', 'EchoPaladin244', 'Axel Kelly', 42, 'West Palm Beach', '33401', 'Sports Games', 'PlayStation', 'Retired Sports Games tryhard, now just vibing. Live in West Palm Beach, FL.', 5.0, 64, '["Early Bird", "Tabletop King", "Friendly Host"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('derek.russell446@yahoo.com', 'password123', 'DerekRus47', 'Derek Russell', 21, 'Juno Beach', '33408', 'Martial Arts', 'N/A', 'Passionate about Martial Arts. Based in Juno Beach, FL. Hit me up for games or meetups.', 4.3, 17, '["Friendly Host", "Early Bird", "Tabletop King"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('ivan.clark478@outlook.com', 'password123', 'xXIvGamerXx', 'Ivan Clark', 46, 'Boynton Beach', '33436', 'Tabletop RPG', 'N/A', 'Local Boynton Beach player. Into Tabletop RPG and Fitness / General Workout. Always looking for chill groups!', 4.2, 21, '["PBC Veteran", "Tabletop King"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('kevin.castillo94@yahoo.com', 'password123', 'UltraKevin66', 'Kevin Castillo', 27, 'Greenacres', '33463', 'Adventure Games', 'Steam Deck', 'Casual Adventure Games fan from Greenacres. Also enjoy Fitness / General Workout on weekends.', 4.8, 58, '["Tournament Ready", "Pro Gamer"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('elena.ortiz125@gmail.com', 'password123', 'BlessedXL228', 'Elena Ortiz', 26, 'Delray Beach', '33444', 'Stand-Up Paddleboarding', 'Nintendo Switch', 'Delray Beach native. Love Stand-Up Paddleboarding, dabble in Swimming. Let''s connect!', 4.9, 42, '["Early Bird", "Tournament Ready"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('dylan.ruiz44@icloud.com', 'password123', 'Ghost239588', 'Dylan Ruiz', 25, 'Greenacres', '33467', 'Biking / Cycling', 'N/A', 'South FL local. Biking / Cycling enthusiast and weekend warrior. Greenacres represent!', 4.4, 36, '["Early Bird", "Tournament Ready"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('matthew.nelson629@hotmail.com', 'password123', 'MatthewNel92', 'Matthew Nelson', 20, 'Boynton Beach', '33435', 'Party Games', 'PC', 'Always down for Party Games sessions. Boynton Beach-based. Message me anytime!', 4.4, 27, '["PBC Veteran"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('anthony.rivera935@hotmail.com', 'password123', 'HyperAnthony35', 'Anthony Rivera', 40, 'Belle Glade', '33430', 'Card Games / TCG', 'Nintendo Switch', 'Casual Card Games / TCG fan from Belle Glade. Also enjoy War Games on weekends.', 4.7, 52, '["PBC Veteran", "Tabletop King", "Friendly Host"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('liam.hill783@yahoo.com', 'password123', 'xXLiChiefXx', 'Liam Hill', 21, 'North Palm Beach', '33408', 'Pickleball', 'N/A', 'South FL local. Pickleball enthusiast and weekend warrior. North Palm Beach represent!', 4.2, 8, '["Friendly Host"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('jasmine.perez58@yahoo.com', 'password123', 'JasminePer12', 'Jasmine Perez', 23, 'West Palm Beach', '33409', 'Beach Activities', 'PC', 'West Palm Beach native. Love Beach Activities, dabble in Fighting Games. Let''s connect!', 4.6, 53, '["Tabletop King", "Pro Gamer"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('ethan.ruiz984@gmail.com', 'password123', 'ClutchEthan85', 'Ethan Ruiz', 41, 'Lake Park', '33403', 'Trading Card Games', 'Xbox', 'Always down for Trading Card Games sessions. Lake Park-based. Message me anytime!', 4.9, 32, '["Early Bird", "Tabletop King"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('lara.torres388@outlook.com', 'password123', 'FrostLara23', 'Lara Torres', 29, 'Singer Island', '33404', 'Kayaking', 'PlayStation', 'Always down for Kayaking sessions. Singer Island-based. Message me anytime!', 4.9, 19, '["Tournament Ready", "Pro Gamer"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('derek.griffin172@gmail.com', 'password123', 'AlphaDerek2', 'Derek Griffin', 38, 'Royal Palm Beach', '33411', 'Trading Card Games', 'N/A', 'Retired Trading Card Games tryhard, now just vibing. Live in Royal Palm Beach, FL.', 5.0, 83, '["Early Bird", "Pro Gamer", "Tabletop King"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('jake.mitchell360@hotmail.com', 'password123', 'xXJaRunnerXx', 'Jake Mitchell', 42, 'Belle Glade', '33430', 'Simulation', 'PC', 'Passionate about Simulation. Based in Belle Glade, FL. Hit me up for games or meetups.', 4.4, 25, '["Tournament Ready", "Friendly Host", "Tabletop King"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('david.kim165@gmail.com', 'password123', 'PhantomBarbarian629', 'David Kim', 42, 'Boynton Beach', '33436', 'RPG', 'Mobile', 'South FL local. RPG enthusiast and weekend warrior. Boynton Beach represent!', 4.2, 64, '["Pro Gamer", "Early Bird"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('leo.carter586@hotmail.com', 'password123', 'xXLeMasterXx', 'Leo Carter', 43, 'Boca Raton', '33431', 'Tabletop RPG', 'N/A', 'South FL local. Tabletop RPG enthusiast and weekend warrior. Boca Raton represent!', 4.6, 83, '["Friendly Host"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('diana.parker804@icloud.com', 'password123', 'xXDiWitchXx', 'Diana Parker', 37, 'Delray Beach', '33445', 'Dungeons & Dragons', 'N/A', 'South FL local. Dungeons & Dragons enthusiast and weekend warrior. Delray Beach represent!', 4.9, 85, '["Tabletop King", "Early Bird"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('lara.reyes64@yahoo.com', 'password123', 'Cyber420353', 'Lara Reyes', 54, 'Jupiter', '33477', 'Souls-like Games', 'Steam Deck', 'New to the scene! Trying to find people who love Souls-like Games in Jupiter area.', 4.9, 40, '["Friendly Host", "Tournament Ready"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('mia.butler515@hotmail.com', 'password123', 'MiaBut25', 'Mia Butler', 20, 'Riviera Beach', '33407', 'MOBA', 'Mobile', 'Passionate about MOBA. Based in Riviera Beach, FL. Hit me up for games or meetups.', 4.4, 19, '["Friendly Host"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('dominic.martin566@outlook.com', 'password123', 'AzureDominic59', 'Dominic Martin', 43, 'Palm Springs', '33461', 'Dungeons & Dragons', 'PlayStation', 'South FL local. Dungeons & Dragons enthusiast and weekend warrior. Palm Springs represent!', 5.0, 8, '["PBC Veteran", "Early Bird"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('christian.king393@icloud.com', 'password123', 'xXChRangerXx', 'Christian King', 34, 'Lantana', '33462', 'Triathlon', 'N/A', 'Casual Triathlon fan from Lantana. Also enjoy Yoga on weekends.', 5.0, 10, '["Friendly Host", "Tabletop King", "Pro Gamer"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('chase.wright919@outlook.com', 'password123', 'Phantom305813', 'Chase Wright', 35, 'Loxahatchee', '33470', 'Beach Volleyball', 'PlayStation', 'Casual Beach Volleyball fan from Loxahatchee. Also enjoy Sandbox Games on weekends.', 4.3, 33, '["Tournament Ready", "Early Bird"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('tanner.wood889@outlook.com', 'password123', 'SilverPBC163', 'Tanner Wood', 51, 'Belle Glade', '33430', 'Golf', 'Nintendo Switch', 'Local Belle Glade player. Into Golf and Battle Royale. Always looking for chill groups!', 4.4, 33, '["PBC Veteran", "Pro Gamer", "Tournament Ready"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('ricky.watson378@icloud.com', 'password123', 'xXRi404Xx', 'Ricky Watson', 35, 'Lake Worth Beach', '33460', 'Dungeons & Dragons', 'N/A', 'Always down for Dungeons & Dragons sessions. Lake Worth Beach-based. Message me anytime!', 4.9, 27, '["PBC Veteran", "Pro Gamer"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('patrick.davis292@gmail.com', 'password123', 'xXPaHunterXx', 'Patrick Davis', 23, 'Jupiter', '33458', 'Hiking', 'Xbox', 'Casual Hiking fan from Jupiter. Also enjoy Rock Climbing on weekends.', 4.6, 84, '["Tournament Ready", "Friendly Host"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('lucas.sanders434@icloud.com', 'password123', 'BetaLucas33', 'Lucas Sanders', 35, 'Palm Beach Gardens', '33418', 'CrossFit', 'N/A', 'South FL local. CrossFit enthusiast and weekend warrior. Palm Beach Gardens represent!', 4.8, 61, '["Pro Gamer", "PBC Veteran"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('mia.walker66@outlook.com', 'password123', 'RapidMia42', 'Mia Walker', 48, 'Delray Beach', '33444', 'Basketball', 'N/A', 'Always down for Basketball sessions. Delray Beach-based. Message me anytime!', 4.5, 29, '["PBC Veteran"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('hannah.williams303@outlook.com', 'password123', 'xXHaSniperXx', 'Hannah Williams', 49, 'West Palm Beach', '33405', 'Softball', 'Steam Deck', 'South FL local. Softball enthusiast and weekend warrior. West Palm Beach represent!', 4.7, 13, '["Friendly Host", "PBC Veteran"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('james.reyes301@gmail.com', 'password123', 'xXJaPlayerXx', 'James Reyes', 29, 'Palm Springs', '33461', 'Warhammer', 'Mobile', 'New to the scene! Trying to find people who love Warhammer in Palm Springs area.', 4.4, 36, '["Friendly Host"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('chris.sullivan967@hotmail.com', 'password123', 'Crimson813200', 'Chris Sullivan', 55, 'Singer Island', '33404', 'Dungeons & Dragons', 'All Platforms', 'Singer Island native. Love Dungeons & Dragons, dabble in Indie Games. Let''s connect!', 4.7, 26, '["Early Bird"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('nicole.white500@outlook.com', 'password123', 'NicoleWhi50', 'Nicole White', 23, 'Boynton Beach', '33437', 'Fighting Games', 'Xbox', 'Retired Fighting Games tryhard, now just vibing. Live in Boynton Beach, FL.', 4.4, 46, '["Early Bird", "Tournament Ready"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('sophia.morgan5@gmail.com', 'password123', 'SophiaMor57', 'Sophia Morgan', 42, 'Loxahatchee', '33470', 'Hiking', 'N/A', 'Casual Hiking fan from Loxahatchee. Also enjoy Fitness / General Workout on weekends.', 4.7, 24, '["Tabletop King", "Pro Gamer"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('patrick.jenkins393@hotmail.com', 'password123', 'GhostPatrick9', 'Patrick Jenkins', 24, 'Delray Beach', '33446', 'Fitness / General Workout', 'N/A', 'Delray Beach native. Love Fitness / General Workout, dabble in Running / Jogging. Let''s connect!', 3.0, 82, '["Pro Gamer"]'::jsonb, true);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('sophia.anderson745@yahoo.com', 'password123', 'SophiaAnd12', 'Sophia Anderson', 32, 'Wellington', '33414', 'Basketball', 'N/A', 'Local Wellington player. Into Basketball and Yoga. Always looking for chill groups!', 4.4, 32, '["PBC Veteran"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('demi.bennett50@gmail.com', 'password123', 'xXDeLanceXx', 'Demi Bennett', 19, 'Delray Beach', '33444', 'Golf', 'N/A', 'Local Delray Beach player. Into Golf and Fitness / General Workout. Always looking for chill groups!', 4.9, 66, '["Tabletop King"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('morgan.moore277@hotmail.com', 'password123', 'MorganMoo63', 'Morgan Moore', 51, 'Delray Beach', '33444', 'Card Games / TCG', 'Nintendo Switch', 'South FL local. Card Games / TCG enthusiast and weekend warrior. Delray Beach represent!', 4.4, 56, '["PBC Veteran", "Tabletop King", "Tournament Ready"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('brittany.foster303@yahoo.com', 'password123', 'JadeWitch933', 'Brittany Foster', 44, 'Royal Palm Beach', '33411', 'MOBA', 'PlayStation', 'Passionate about MOBA. Based in Royal Palm Beach, FL. Hit me up for games or meetups.', 4.9, 29, '["PBC Veteran", "Friendly Host"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('luis.taylor304@outlook.com', 'password123', 'xXLuHunterXx', 'Luis Taylor', 47, 'Wellington', '33414', 'Tabletop RPG', 'PC & Console', 'South FL local. Tabletop RPG enthusiast and weekend warrior. Wellington represent!', 4.3, 85, '["Tournament Ready", "Pro Gamer"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('dylan.long117@icloud.com', 'password123', 'xXDyAxeXx', 'Dylan Long', 29, 'Greenacres', '33467', 'Running / Jogging', 'All Platforms', 'New to the scene! Trying to find people who love Running / Jogging in Greenacres area.', 4.9, 78, '["Tabletop King", "Friendly Host", "Tournament Ready"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('jayden.scott627@gmail.com', 'password123', 'JaydenSco71', 'Jayden Scott', 40, 'Riviera Beach', '33404', 'Indie Games', 'PC & Console', 'Passionate about Indie Games. Based in Riviera Beach, FL. Hit me up for games or meetups.', 4.8, 6, '["Early Bird", "Tournament Ready", "Friendly Host"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('victor.thompson355@icloud.com', 'password123', 'VictorTho81', 'Victor Thompson', 48, 'Wellington', '33449', 'Fighting Games', 'PC & Console', 'Casual Fighting Games fan from Wellington. Also enjoy MOBA on weekends.', 4.3, 57, '["PBC Veteran", "Friendly Host"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('claudia.taylor837@yahoo.com', 'password123', 'BetaLance821', 'Claudia Taylor', 43, 'Riviera Beach', '33404', 'Trading Card Games', 'PC', 'South FL local. Trading Card Games enthusiast and weekend warrior. Riviera Beach represent!', 4.4, 31, '["PBC Veteran", "Pro Gamer"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('bianca.robinson974@outlook.com', 'password123', 'LuckyBianca7', 'Bianca Robinson', 47, 'Lake Worth Beach', '33461', 'Fitness / General Workout', 'N/A', 'Local Lake Worth Beach player. Into Fitness / General Workout and Bird Watching. Always looking for chill groups!', 5.0, 76, '["Friendly Host", "PBC Veteran"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('paige.lee535@outlook.com', 'password123', 'Pixel407169', 'Paige Lee', 53, 'Palm Beach Gardens', '33410', 'Golf', 'N/A', 'Casual Golf fan from Palm Beach Gardens. Also enjoy Fitness / General Workout on weekends.', 4.9, 63, '["Tabletop King", "Tournament Ready", "Pro Gamer"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('alexandra.morales111@icloud.com', 'password123', 'Hacked404858', 'Alexandra Morales', 39, 'Lake Worth Beach', '33460', 'Pickleball', 'Steam Deck', 'Lake Worth Beach native. Love Pickleball, dabble in Flag Football. Let''s connect!', 4.7, 61, '["Friendly Host"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('gavin.clark517@icloud.com', 'password123', 'xXGaBarbarianXx', 'Gavin Clark', 38, 'Riviera Beach', '33404', 'Party Games', 'Nintendo Switch', 'South FL local. Party Games enthusiast and weekend warrior. Riviera Beach represent!', 4.4, 83, '["Tabletop King", "Pro Gamer", "PBC Veteran"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('patrick.turner516@hotmail.com', 'password123', 'ClutchPatrick15', 'Patrick Turner', 29, 'Delray Beach', '33446', 'Softball', 'N/A', 'Local Delray Beach player. Into Softball and Disc Golf. Always looking for chill groups!', 5.0, 44, '["Tabletop King"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('santiago.cox205@outlook.com', 'password123', 'SantiagoCox46', 'Santiago Cox', 21, 'Boca Raton', '33431', 'Eurogames', 'Nintendo Switch', 'Retired Eurogames tryhard, now just vibing. Live in Boca Raton, FL.', 4.5, 14, '["PBC Veteran", "Early Bird", "Pro Gamer"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('leo.ramirez949@icloud.com', 'password123', 'xXLeShotgunXx', 'Leo Ramirez', 21, 'Palm Beach Gardens', '33410', 'Cooperative Board Games', 'N/A', 'Always down for Cooperative Board Games sessions. Palm Beach Gardens-based. Message me anytime!', 4.6, 75, '["Friendly Host", "Tournament Ready"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('darryl.rivera302@icloud.com', 'password123', 'DarrylRiv97', 'Darryl Rivera', 30, 'Lake Worth Beach', '33460', 'Platformers', 'Xbox', 'South FL local. Platformers enthusiast and weekend warrior. Lake Worth Beach represent!', 4.5, 24, '["Early Bird", "Tabletop King", "Tournament Ready"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('amara.kelly41@yahoo.com', 'password123', 'IvoryAmara7', 'Amara Kelly', 27, 'Palm Beach', '33480', 'Triathlon', 'N/A', 'Passionate about Triathlon. Based in Palm Beach, FL. Hit me up for games or meetups.', 4.3, 82, '["Early Bird"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('ben.davis550@icloud.com', 'password123', 'StealthAce905', 'Ben Davis', 52, 'Lantana', '33462', 'Worker Placement', 'Steam Deck', 'Casual Worker Placement fan from Lantana. Also enjoy Puzzle Games on weekends.', 4.2, 85, '["Friendly Host"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('carlos.walker938@gmail.com', 'password123', 'xXCaGodXx', 'Carlos Walker', 42, 'Greenacres', '33463', 'Magic: The Gathering', 'Xbox', 'Local Greenacres player. Into Magic: The Gathering and Golf. Always looking for chill groups!', 4.6, 79, '["Early Bird"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('damian.garcia856@gmail.com', 'password123', 'DamianGar78', 'Damian Garcia', 45, 'Lake Worth Beach', '33461', 'Indie Games', 'PC', 'Passionate about Indie Games. Based in Lake Worth Beach, FL. Hit me up for games or meetups.', 5.0, 76, '["Tabletop King"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('dallas.morales418@icloud.com', 'password123', 'xXDa404Xx', 'Dallas Morales', 34, 'Wellington', '33414', 'Disc Golf', 'N/A', 'Passionate about Disc Golf. Based in Wellington, FL. Hit me up for games or meetups.', 2.9, 44, '["Tabletop King"]'::jsonb, true);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('danny.bell951@hotmail.com', 'password123', 'WolfPBC703', 'Danny Bell', 40, 'Boca Raton', '33433', 'Party Games', 'N/A', 'New to the scene! Trying to find people who love Party Games in Boca Raton area.', 4.6, 25, '["Early Bird", "Tabletop King", "PBC Veteran"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('jack.richardson765@icloud.com', 'password123', 'RapidJack19', 'Jack Richardson', 26, 'Wellington', '33414', 'First-Person Shooters', 'Nintendo Switch', 'Always down for First-Person Shooters sessions. Wellington-based. Message me anytime!', 4.4, 85, '["Early Bird", "Tournament Ready", "PBC Veteran"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('kayla.mitchell165@yahoo.com', 'password123', 'KaylaMit88', 'Kayla Mitchell', 27, 'Pahokee', '33476', 'Disc Golf', 'N/A', 'Passionate about Disc Golf. Based in Pahokee, FL. Hit me up for games or meetups.', 4.6, 38, '["Pro Gamer", "PBC Veteran", "Friendly Host"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('michael.torres101@yahoo.com', 'password123', 'xXMiBossXx', 'Michael Torres', 34, 'Boca Raton', '33433', 'Golf', 'N/A', 'New to the scene! Trying to find people who love Golf in Boca Raton area.', 4.9, 11, '["Tournament Ready", "Early Bird"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('omar.scott157@hotmail.com', 'password123', 'CasualOmar41', 'Omar Scott', 55, 'Palm Beach Gardens', '33418', 'Horror Games', 'Steam Deck', 'South FL local. Horror Games enthusiast and weekend warrior. Palm Beach Gardens represent!', 4.9, 32, '["Tabletop King", "Friendly Host", "Early Bird"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('ariana.roberts662@hotmail.com', 'password123', 'BlessedLegend880', 'Ariana Roberts', 29, 'Delray Beach', '33444', 'Softball', 'N/A', 'Local Delray Beach player. Into Softball and Fitness / General Workout. Always looking for chill groups!', 4.8, 57, '["Friendly Host", "PBC Veteran", "Pro Gamer"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('dana.ross218@gmail.com', 'password123', 'EmeraldDana70', 'Dana Ross', 55, 'Riviera Beach', '33407', 'Sandbox Games', 'PC & Console', 'Casual Sandbox Games fan from Riviera Beach. Also enjoy Party Games on weekends.', 4.6, 62, '["Tournament Ready", "Friendly Host", "Tabletop King"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('diamond.walker144@icloud.com', 'password123', 'DiamondWal32', 'Diamond Walker', 50, 'Boynton Beach', '33436', 'Warhammer', 'N/A', 'Casual Warhammer fan from Boynton Beach. Also enjoy Tennis on weekends.', 4.7, 74, '["Pro Gamer"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('carlos.torres930@outlook.com', 'password123', 'xXCaWizardXx', 'Carlos Torres', 51, 'Lake Worth Beach', '33461', 'Cooperative Board Games', 'PlayStation', 'Retired Cooperative Board Games tryhard, now just vibing. Live in Lake Worth Beach, FL.', 4.4, 29, '["Early Bird"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('lara.reed837@outlook.com', 'password123', 'xXLaPBCXx', 'Lara Reed', 40, 'Riviera Beach', '33407', 'Sports Games', 'Mobile', 'Riviera Beach native. Love Sports Games, dabble in Worker Placement. Let''s connect!', 4.3, 34, '["Friendly Host", "PBC Veteran", "Tabletop King"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('jack.lewis425@outlook.com', 'password123', 'Crimson007491', 'Jack Lewis', 32, 'Delray Beach', '33445', 'Warhammer', 'N/A', 'Delray Beach native. Love Warhammer, dabble in Fitness / General Workout. Let''s connect!', 4.6, 38, '["Pro Gamer", "Tabletop King"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('grace.stewart913@hotmail.com', 'password123', 'GraceSte17', 'Grace Stewart', 20, 'Pahokee', '33476', 'Tabletop RPG', 'Steam Deck', 'Retired Tabletop RPG tryhard, now just vibing. Live in Pahokee, FL.', 4.6, 34, '["Pro Gamer", "Early Bird"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('denise.cox639@hotmail.com', 'password123', 'GhostDenise93', 'Denise Cox', 29, 'Singer Island', '33404', 'MMORPG', 'All Platforms', 'Passionate about MMORPG. Based in Singer Island, FL. Hit me up for games or meetups.', 4.3, 59, '["Friendly Host", "Early Bird"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('jason.parker516@gmail.com', 'password123', 'Crimson420134', 'Jason Parker', 52, 'West Palm Beach', '33409', 'Basketball', 'PlayStation', 'South FL local. Basketball enthusiast and weekend warrior. West Palm Beach represent!', 4.2, 33, '["PBC Veteran", "Tournament Ready"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('anthony.patel291@hotmail.com', 'password123', 'xXAnGodXx', 'Anthony Patel', 23, 'Wellington', '33414', 'Strategy Games', 'Xbox', 'South FL local. Strategy Games enthusiast and weekend warrior. Wellington represent!', 5.0, 59, '["Early Bird", "Tabletop King"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('luna.vega579@outlook.com', 'password123', 'EpicLuna51', 'Luna Vega', 45, 'North Palm Beach', '33408', 'Worker Placement', 'PC & Console', 'North Palm Beach native. Love Worker Placement, dabble in Social Deduction Games. Let''s connect!', 4.2, 38, '["Pro Gamer", "Tabletop King"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('finn.wright802@yahoo.com', 'password123', 'EchoDruid411', 'Finn Wright', 46, 'Wellington', '33414', 'Yoga', 'Steam Deck', 'Passionate about Yoga. Based in Wellington, FL. Hit me up for games or meetups.', 4.4, 52, '["Pro Gamer"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('damian.hernandez82@hotmail.com', 'password123', 'GrindGeneral954', 'Damian Hernandez', 41, 'Wellington', '33414', 'Biking / Cycling', 'N/A', 'New to the scene! Trying to find people who love Biking / Cycling in Wellington area.', 4.8, 33, '["Tabletop King", "Pro Gamer"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('axel.foster200@gmail.com', 'password123', 'AxelFos88', 'Axel Foster', 36, 'Lake Park', '33403', 'Weightlifting', 'All Platforms', 'Casual Weightlifting fan from Lake Park. Also enjoy Adventure Games on weekends.', 4.7, 46, '["Pro Gamer", "Tournament Ready"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('brian.allen563@outlook.com', 'password123', 'StealthBrian36', 'Brian Allen', 23, 'Boca Raton', '33433', 'Dungeons & Dragons', 'Mobile', 'South FL local. Dungeons & Dragons enthusiast and weekend warrior. Boca Raton represent!', 4.8, 51, '["Early Bird", "Tournament Ready"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('christian.vasquez711@icloud.com', 'password123', 'xXChBardXx', 'Christian Vasquez', 34, 'Juno Beach', '33408', 'Tabletop RPG', 'All Platforms', 'Local Juno Beach player. Into Tabletop RPG and Magic: The Gathering. Always looking for chill groups!', 4.6, 71, '["Friendly Host", "Tournament Ready"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('madison.hall409@outlook.com', 'password123', 'Jade239183', 'Madison Hall', 23, 'Palm Beach Gardens', '33410', 'Biking / Cycling', 'N/A', 'New to the scene! Trying to find people who love Biking / Cycling in Palm Beach Gardens area.', 4.5, 52, '["Friendly Host"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('joshua.griffin212@yahoo.com', 'password123', 'JoshuaGri41', 'Joshua Griffin', 34, 'Wellington', '33449', 'Card Games / TCG', 'PC & Console', 'New to the scene! Trying to find people who love Card Games / TCG in Wellington area.', 4.6, 73, '["Tabletop King", "PBC Veteran", "Early Bird"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('dallas.howard783@hotmail.com', 'password123', 'UltraDallas29', 'Dallas Howard', 29, 'Belle Glade', '33430', 'Worker Placement', 'N/A', 'Passionate about Worker Placement. Based in Belle Glade, FL. Hit me up for games or meetups.', 4.3, 7, '["Pro Gamer", "PBC Veteran", "Friendly Host"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('brian.nguyen13@yahoo.com', 'password123', 'xXBrMonkXx', 'Brian Nguyen', 18, 'Greenacres', '33463', 'Warhammer', 'PC & Console', 'Retired Warhammer tryhard, now just vibing. Live in Greenacres, FL.', 4.3, 11, '["Friendly Host", "Tabletop King", "PBC Veteran"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('justin.moore875@icloud.com', 'password123', 'AlphaJustin24', 'Justin Moore', 41, 'Royal Palm Beach', '33414', 'Open World', 'Nintendo Switch', 'Royal Palm Beach native. Love Open World, dabble in Puzzle Games. Let''s connect!', 4.3, 75, '["Pro Gamer"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('angel.delacroix432@icloud.com', 'password123', 'AngelDel90', 'Angel Delacroix', 29, 'West Palm Beach', '33401', 'Party Games', 'N/A', 'Casual Party Games fan from West Palm Beach. Also enjoy Triathlon on weekends.', 4.7, 79, '["Early Bird"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('luis.parker763@outlook.com', 'password123', 'TurboLuis47', 'Luis Parker', 46, 'Delray Beach', '33444', 'Puzzle Games', 'Xbox', 'Always down for Puzzle Games sessions. Delray Beach-based. Message me anytime!', 4.6, 26, '["Early Bird", "Tabletop King"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('bianca.perez391@hotmail.com', 'password123', 'BetaBianca81', 'Bianca Perez', 23, 'Tequesta', '33469', 'Weightlifting', 'N/A', 'Always down for Weightlifting sessions. Tequesta-based. Message me anytime!', 4.5, 66, '["Tournament Ready"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('michael.watson278@icloud.com', 'password123', 'RankedMichael76', 'Michael Watson', 43, 'Jupiter', '33477', 'Sports Games', 'Mobile', 'Passionate about Sports Games. Based in Jupiter, FL. Hit me up for games or meetups.', 2.6, 54, '["PBC Veteran", "Tournament Ready", "Early Bird"]'::jsonb, true);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('justin.diaz98@gmail.com', 'password123', 'xXJuClericXx', 'Justin Diaz', 24, 'Riviera Beach', '33407', 'Competitive FPS', 'All Platforms', 'Casual Competitive FPS fan from Riviera Beach. Also enjoy MMORPG on weekends.', 4.9, 41, '["Tournament Ready"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('maya.murphy540@yahoo.com', 'password123', 'Pixel420366', 'Maya Murphy', 26, 'Delray Beach', '33446', 'Triathlon', 'Mobile', 'Casual Triathlon fan from Delray Beach. Also enjoy Cooperative Board Games on weekends.', 4.6, 33, '["Tabletop King", "Early Bird", "Friendly Host"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('dominic.murphy423@outlook.com', 'password123', 'DominicMur48', 'Dominic Murphy', 41, 'Palm Beach Gardens', '33418', 'Open World', 'Mobile', 'Local Palm Beach Gardens player. Into Open World and First-Person Shooters. Always looking for chill groups!', 4.4, 78, '["Tournament Ready", "PBC Veteran", "Early Bird"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('claudia.long904@hotmail.com', 'password123', 'xXClSniperXx', 'Claudia Long', 44, 'Lake Worth Beach', '33460', 'Sports Games', 'Nintendo Switch', 'Lake Worth Beach native. Love Sports Games, dabble in Souls-like Games. Let''s connect!', 3.2, 46, '["Friendly Host", "Tournament Ready"]'::jsonb, true);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('michael.coleman279@hotmail.com', 'password123', 'xXMiQueenXx', 'Michael Coleman', 46, 'Palm Beach', '33480', 'Biking / Cycling', 'N/A', 'South FL local. Biking / Cycling enthusiast and weekend warrior. Palm Beach represent!', 4.9, 51, '["Tabletop King", "Early Bird"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('gavin.white239@gmail.com', 'password123', 'GavinWhi11', 'Gavin White', 18, 'Tequesta', '33469', 'Trading Card Games', 'N/A', 'Local Tequesta player. Into Trading Card Games and War Games. Always looking for chill groups!', 4.4, 71, '["Early Bird", "Tabletop King"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('marcus.kim557@icloud.com', 'password123', 'MarcusKim34', 'Marcus Kim', 22, 'Riviera Beach', '33407', 'Yoga', 'N/A', 'Local Riviera Beach player. Into Yoga and Fitness / General Workout. Always looking for chill groups!', 4.9, 75, '["Early Bird", "Tabletop King", "Tournament Ready"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('jose.nguyen682@yahoo.com', 'password123', 'xXJoGeneralXx', 'Jose Nguyen', 51, 'Delray Beach', '33444', 'Card Games / TCG', 'PC', 'Passionate about Card Games / TCG. Based in Delray Beach, FL. Hit me up for games or meetups.', 4.4, 75, '["Tabletop King"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('leo.sullivan16@yahoo.com', 'password123', 'OnyxLeo16', 'Leo Sullivan', 38, 'Manalapan', '33462', 'Weightlifting', 'PC & Console', 'Local Manalapan player. Into Weightlifting and Tennis. Always looking for chill groups!', 4.6, 20, '["Tabletop King"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('rebecca.taylor811@gmail.com', 'password123', 'RebeccaTay72', 'Rebecca Taylor', 52, 'Boynton Beach', '33435', 'Board Games', 'N/A', 'Local Boynton Beach player. Into Board Games and Yoga. Always looking for chill groups!', 4.5, 76, '["Early Bird"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('ariana.watson302@hotmail.com', 'password123', 'xXArQueenXx', 'Ariana Watson', 53, 'Tequesta', '33469', 'Kayaking', 'N/A', 'New to the scene! Trying to find people who love Kayaking in Tequesta area.', 4.8, 36, '["PBC Veteran"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('miguel.vasquez376@icloud.com', 'password123', 'Chill404519', 'Miguel Vasquez', 52, 'Jupiter', '33458', 'Trading Card Games', 'Steam Deck', 'South FL local. Trading Card Games enthusiast and weekend warrior. Jupiter represent!', 4.8, 77, '["PBC Veteran", "Early Bird"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('nora.mitchell99@hotmail.com', 'password123', 'Pixel561961', 'Nora Mitchell', 25, 'Greenacres', '33463', 'Tabletop RPG', 'N/A', 'Retired Tabletop RPG tryhard, now just vibing. Live in Greenacres, FL.', 4.8, 75, '["Pro Gamer"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('ashley.reyes51@outlook.com', 'password123', 'AshleyRey87', 'Ashley Reyes', 34, 'Singer Island', '33404', 'Battle Royale', 'PC', 'Local Singer Island player. Into Battle Royale and Horror Games. Always looking for chill groups!', 4.5, 14, '["PBC Veteran"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('david.castillo968@yahoo.com', 'password123', 'Inferno777237', 'David Castillo', 22, 'Palm Beach Gardens', '33418', 'Stand-Up Paddleboarding', 'N/A', 'Retired Stand-Up Paddleboarding tryhard, now just vibing. Live in Palm Beach Gardens, FL.', 4.5, 14, '["PBC Veteran"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('emma.patel691@icloud.com', 'password123', 'xXEm813Xx', 'Emma Patel', 40, 'Juno Beach', '33408', 'Biking / Cycling', 'N/A', 'Always down for Biking / Cycling sessions. Juno Beach-based. Message me anytime!', 4.3, 53, '["Friendly Host"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('ryan.mitchell624@yahoo.com', 'password123', 'RyanMit58', 'Ryan Mitchell', 38, 'Manalapan', '33462', 'Magic: The Gathering', 'Nintendo Switch', 'Local Manalapan player. Into Magic: The Gathering and Pickleball. Always looking for chill groups!', 4.4, 66, '["Friendly Host", "PBC Veteran"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('mason.roberts585@hotmail.com', 'password123', 'MasonRob22', 'Mason Roberts', 53, 'Pahokee', '33476', 'Social Deduction Games', 'N/A', 'South FL local. Social Deduction Games enthusiast and weekend warrior. Pahokee represent!', 4.7, 18, '["Tabletop King", "Tournament Ready", "Friendly Host"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('mia.campbell583@yahoo.com', 'password123', 'GrindVillain812', 'Mia Campbell', 43, 'Juno Beach', '33408', 'Softball', 'All Platforms', 'Casual Softball fan from Juno Beach. Also enjoy Adventure Games on weekends.', 4.2, 38, '["Friendly Host", "PBC Veteran"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('dennis.allen313@hotmail.com', 'password123', 'RogueRogue579', 'Dennis Allen', 21, 'Riviera Beach', '33404', 'Adventure Games', 'All Platforms', 'Riviera Beach native. Love Adventure Games, dabble in Sandbox Games. Let''s connect!', 4.3, 7, '["Tabletop King", "Pro Gamer"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('genesis.kim586@gmail.com', 'password123', 'xXGeGodXx', 'Genesis Kim', 48, 'Boca Raton', '33496', 'Soccer', 'Nintendo Switch', 'Casual Soccer fan from Boca Raton. Also enjoy Strategy Games on weekends.', 4.5, 5, '["Pro Gamer"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('lily.bryant332@hotmail.com', 'password123', 'Storm420424', 'Lily Bryant', 45, 'Jupiter', '33477', 'War Games', 'N/A', 'Always down for War Games sessions. Jupiter-based. Message me anytime!', 4.6, 75, '["Pro Gamer"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('diamond.morales452@gmail.com', 'password123', 'DiamondMor35', 'Diamond Morales', 27, 'Tequesta', '33469', 'Competitive FPS', 'Xbox', 'Always down for Competitive FPS sessions. Tequesta-based. Message me anytime!', 4.3, 44, '["Early Bird"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('ethan.jenkins24@outlook.com', 'password123', 'EthanJen78', 'Ethan Jenkins', 48, 'Tequesta', '33469', 'Trading Card Games', 'N/A', 'Local Tequesta player. Into Trading Card Games and Fitness / General Workout. Always looking for chill groups!', 4.9, 28, '["PBC Veteran", "Early Bird", "Tournament Ready"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('luis.diaz206@hotmail.com', 'password123', 'ShadowLuis60', 'Luis Diaz', 36, 'Boca Raton', '33431', 'Pickleball', 'N/A', 'Retired Pickleball tryhard, now just vibing. Live in Boca Raton, FL.', 4.3, 70, '["PBC Veteran"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('bianca.watson497@hotmail.com', 'password123', 'NovaQueen513', 'Bianca Watson', 38, 'Delray Beach', '33444', 'Beach Activities', 'N/A', 'Delray Beach native. Love Beach Activities, dabble in Soccer. Let''s connect!', 4.4, 6, '["Tournament Ready", "Early Bird"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('blake.king641@outlook.com', 'password123', 'BlakeKin74', 'Blake King', 40, 'Royal Palm Beach', '33411', 'Indie Games', 'All Platforms', 'Casual Indie Games fan from Royal Palm Beach. Also enjoy Miniature Games on weekends.', 4.8, 29, '["Pro Gamer"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('thomas.griffin437@outlook.com', 'password123', 'AlphaThomas70', 'Thomas Griffin', 27, 'Juno Beach', '33408', 'Beach Volleyball', 'Xbox', 'Juno Beach native. Love Beach Volleyball, dabble in Souls-like Games. Let''s connect!', 4.7, 12, '["PBC Veteran"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('noah.brown972@gmail.com', 'password123', 'NoahBro50', 'Noah Brown', 52, 'Palm Springs', '33461', 'Trading Card Games', 'Xbox', 'South FL local. Trading Card Games enthusiast and weekend warrior. Palm Springs represent!', 4.8, 76, '["Tournament Ready", "Tabletop King", "Friendly Host"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('destiny.rodriguez237@gmail.com', 'password123', 'CyberDestiny89', 'Destiny Rodriguez', 32, 'Wellington', '33414', 'Deck Building', 'PC', 'South FL local. Deck Building enthusiast and weekend warrior. Wellington represent!', 4.4, 29, '["Tabletop King"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('taylor.gonzalez68@yahoo.com', 'password123', 'xXTa954Xx', 'Taylor Gonzalez', 31, 'Lake Worth Beach', '33460', 'Competitive FPS', 'PC', 'New to the scene! Trying to find people who love Competitive FPS in Lake Worth Beach area.', 4.7, 70, '["Tournament Ready"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('alejandro.morales532@hotmail.com', 'password123', 'xXAl42Xx', 'Alejandro Morales', 33, 'West Palm Beach', '33409', 'Beach Volleyball', 'Mobile', 'Retired Beach Volleyball tryhard, now just vibing. Live in West Palm Beach, FL.', 5.0, 42, '["PBC Veteran"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('miguel.scott926@yahoo.com', 'password123', 'xXMi561Xx', 'Miguel Scott', 51, 'Boca Raton', '33431', 'Disc Golf', 'N/A', 'New to the scene! Trying to find people who love Disc Golf in Boca Raton area.', 4.7, 18, '["Tabletop King"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('brianna.edwards919@yahoo.com', 'password123', 'xXBrStrikerXx', 'Brianna Edwards', 55, 'Palm Beach', '33480', 'Sandbox Games', 'All Platforms', 'Palm Beach native. Love Sandbox Games, dabble in Bird Watching. Let''s connect!', 4.3, 35, '["Tournament Ready"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('samantha.roberts787@yahoo.com', 'password123', 'RubySamantha85', 'Samantha Roberts', 20, 'Riviera Beach', '33404', 'Rock Climbing', 'N/A', 'New to the scene! Trying to find people who love Rock Climbing in Riviera Beach area.', 4.4, 19, '["Friendly Host", "PBC Veteran", "Early Bird"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('melissa.stewart921@yahoo.com', 'password123', 'MelissaSte10', 'Melissa Stewart', 25, 'Boynton Beach', '33437', 'Warhammer', 'Steam Deck', 'Local Boynton Beach player. Into Warhammer and Social Deduction Games. Always looking for chill groups!', 4.7, 39, '["Tabletop King", "Pro Gamer"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('lily.roberts840@yahoo.com', 'password123', 'NovaMaster57', 'Lily Roberts', 53, 'Jupiter', '33477', 'Basketball', 'Mobile', 'Jupiter native. Love Basketball, dabble in Party Games. Let''s connect!', 4.7, 77, '["Tournament Ready"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('alejandro.wright954@gmail.com', 'password123', 'ChillHero331', 'Alejandro Wright', 41, 'Singer Island', '33404', 'Soccer', 'PC & Console', 'Casual Soccer fan from Singer Island. Also enjoy Running / Jogging on weekends.', 4.3, 19, '["Tournament Ready"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('justin.scott586@hotmail.com', 'password123', 'Crimson777706', 'Justin Scott', 24, 'Boca Raton', '33431', 'Social Deduction Games', 'N/A', 'New to the scene! Trying to find people who love Social Deduction Games in Boca Raton area.', 4.6, 30, '["Friendly Host", "Early Bird"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('austin.delacroix726@outlook.com', 'password123', 'AustinDel10', 'Austin Delacroix', 32, 'Boynton Beach', '33437', 'Platformers', 'Nintendo Switch', 'Casual Platformers fan from Boynton Beach. Also enjoy Competitive FPS on weekends.', 4.4, 38, '["Friendly Host", "Tournament Ready", "Tabletop King"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('maya.harris308@hotmail.com', 'password123', 'ChillMaya1', 'Maya Harris', 37, 'Boca Raton', '33433', 'Golf', 'Steam Deck', 'Boca Raton native. Love Golf, dabble in Indie Games. Let''s connect!', 2.7, 16, '["Tournament Ready"]'::jsonb, true);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('antonio.cruz918@outlook.com', 'password123', 'xXAnPBCXx', 'Antonio Cruz', 52, 'Palm Beach', '33480', 'Beach Activities', 'N/A', 'Always down for Beach Activities sessions. Palm Beach-based. Message me anytime!', 4.6, 18, '["PBC Veteran", "Pro Gamer", "Early Bird"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('rachel.brown861@gmail.com', 'password123', 'HyperRachel81', 'Rachel Brown', 35, 'Boynton Beach', '33435', 'Indie Games', 'Steam Deck', 'New to the scene! Trying to find people who love Indie Games in Boynton Beach area.', 4.2, 9, '["Tabletop King", "PBC Veteran", "Pro Gamer"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('morgan.gomez180@gmail.com', 'password123', 'LazyMorgan5', 'Morgan Gomez', 37, 'Lake Park', '33403', 'Eurogames', 'PC & Console', 'Lake Park native. Love Eurogames, dabble in Souls-like Games. Let''s connect!', 4.3, 64, '["Pro Gamer", "Early Bird"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('julia.williams397@hotmail.com', 'password123', 'DarkHero955', 'Julia Williams', 47, 'West Palm Beach', '33409', 'Worker Placement', 'Nintendo Switch', 'South FL local. Worker Placement enthusiast and weekend warrior. West Palm Beach represent!', 4.6, 17, '["Tournament Ready", "Pro Gamer", "Early Bird"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('cassidy.johnson280@yahoo.com', 'password123', 'CassidyJoh45', 'Cassidy Johnson', 25, 'Tequesta', '33469', 'Horror Games', 'Mobile', 'Tequesta native. Love Horror Games, dabble in Open World. Let''s connect!', 4.4, 51, '["PBC Veteran"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('david.jenkins455@gmail.com', 'password123', 'DavidJen13', 'David Jenkins', 52, 'Greenacres', '33467', 'Platformers', 'All Platforms', 'New to the scene! Trying to find people who love Platformers in Greenacres area.', 4.6, 26, '["Friendly Host"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('diamond.lee838@yahoo.com', 'password123', 'Hacked100783', 'Diamond Lee', 39, 'Palm Beach Gardens', '33418', 'CrossFit', 'N/A', 'New to the scene! Trying to find people who love CrossFit in Palm Beach Gardens area.', 5.0, 85, '["Tabletop King"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('amanda.green882@hotmail.com', 'password123', 'ModdedAmanda47', 'Amanda Green', 27, 'Wellington', '33414', 'Board Games', 'N/A', 'Wellington native. Love Board Games, dabble in Tabletop RPG. Let''s connect!', 4.4, 34, '["Early Bird", "Friendly Host", "PBC Veteran"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('maya.patel131@hotmail.com', 'password123', 'Ultra305732', 'Maya Patel', 54, 'Royal Palm Beach', '33411', 'Cooperative Board Games', 'N/A', 'Royal Palm Beach native. Love Cooperative Board Games, dabble in Party Games. Let''s connect!', 4.3, 20, '["PBC Veteran"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('antonio.martin214@hotmail.com', 'password123', 'xXAnBardXx44', 'Antonio Martin', 39, 'Boca Raton', '33433', 'Softball', 'N/A', 'New to the scene! Trying to find people who love Softball in Boca Raton area.', 4.8, 28, '["Tournament Ready", "Pro Gamer", "Early Bird"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('eva.russell569@gmail.com', 'password123', 'xXEvKingXx', 'Eva Russell', 38, 'Palm Beach', '33480', 'Soccer', 'N/A', 'Local Palm Beach player. Into Soccer and Hiking. Always looking for chill groups!', 4.8, 19, '["Tournament Ready", "PBC Veteran"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('hunter.thompson545@outlook.com', 'password123', 'xXHuWarlockXx', 'Hunter Thompson', 46, 'Boynton Beach', '33435', 'Cooperative Board Games', 'N/A', 'Retired Cooperative Board Games tryhard, now just vibing. Live in Boynton Beach, FL.', 4.7, 10, '["Tabletop King", "Early Bird"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('patrick.campbell627@hotmail.com', 'password123', 'xXPa786Xx', 'Patrick Campbell', 18, 'Singer Island', '33404', 'Triathlon', 'PC', 'Retired Triathlon tryhard, now just vibing. Live in Singer Island, FL.', 4.3, 37, '["Early Bird"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('noah.white391@icloud.com', 'password123', 'NoahWhi94', 'Noah White', 43, 'Riviera Beach', '33404', 'Puzzle Games', 'N/A', 'Riviera Beach native. Love Puzzle Games, dabble in Party Games. Let''s connect!', 4.3, 11, '["Early Bird", "Tabletop King", "Pro Gamer"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('grace.allen148@icloud.com', 'password123', 'xXGrPlayerXx', 'Grace Allen', 19, 'Boca Raton', '33433', 'Flag Football', 'All Platforms', 'New to the scene! Trying to find people who love Flag Football in Boca Raton area.', 4.2, 78, '["Tabletop King", "Tournament Ready", "Pro Gamer"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('leo.white421@hotmail.com', 'password123', 'PixelLeo5', 'Leo White', 35, 'Pahokee', '33476', 'Dungeons & Dragons', 'N/A', 'South FL local. Dungeons & Dragons enthusiast and weekend warrior. Pahokee represent!', 4.5, 59, '["Early Bird", "Pro Gamer"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('allison.reed912@hotmail.com', 'password123', 'OmegaWizard646', 'Allison Reed', 51, 'Boca Raton', '33496', 'Worker Placement', 'Steam Deck', 'Always down for Worker Placement sessions. Boca Raton-based. Message me anytime!', 4.3, 51, '["Tournament Ready", "Early Bird"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('tiffany.lee172@gmail.com', 'password123', 'GrindTiffany73', 'Tiffany Lee', 36, 'Palm Beach Gardens', '33410', 'Beach Volleyball', 'Steam Deck', 'Passionate about Beach Volleyball. Based in Palm Beach Gardens, FL. Hit me up for games or meetups.', 4.6, 7, '["Early Bird", "Pro Gamer"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('matthew.harris282@outlook.com', 'password123', 'RankedGamer619', 'Matthew Harris', 35, 'Delray Beach', '33446', 'War Games', 'Xbox', 'Always down for War Games sessions. Delray Beach-based. Message me anytime!', 4.4, 72, '["Tournament Ready", "Friendly Host"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('diego.cox771@icloud.com', 'password123', 'xXDiProXx', 'Diego Cox', 49, 'Boynton Beach', '33435', 'Basketball', 'N/A', 'Local Boynton Beach player. Into Basketball and Hiking. Always looking for chill groups!', 4.2, 60, '["Pro Gamer", "Friendly Host", "Tournament Ready"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('jake.ortiz309@icloud.com', 'password123', 'JakeOrt58', 'Jake Ortiz', 48, 'Riviera Beach', '33407', 'Magic: The Gathering', 'N/A', 'Always down for Magic: The Gathering sessions. Riviera Beach-based. Message me anytime!', 5.0, 31, '["Tabletop King"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('cassandra.walker940@hotmail.com', 'password123', 'CursedCassandra56', 'Cassandra Walker', 24, 'West Palm Beach', '33409', 'Miniature Games', 'Nintendo Switch', 'West Palm Beach native. Love Miniature Games, dabble in Cooperative Board Games. Let''s connect!', 4.8, 31, '["Tabletop King", "Early Bird"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('nicole.roberts852@gmail.com', 'password123', 'MegaRunner538', 'Nicole Roberts', 18, 'West Palm Beach', '33401', 'Golf', 'N/A', 'Casual Golf fan from West Palm Beach. Also enjoy Basketball on weekends.', 4.7, 30, '["Early Bird"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('denise.sullivan89@hotmail.com', 'password123', 'DeniseSul58', 'Denise Sullivan', 25, 'Delray Beach', '33445', 'Miniature Games', 'N/A', 'Always down for Miniature Games sessions. Delray Beach-based. Message me anytime!', 4.9, 33, '["PBC Veteran"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('luis.davis796@gmail.com', 'password123', 'xXLuGeneralXx', 'Luis Davis', 35, 'Boca Raton', '33433', 'Deck Building', 'Steam Deck', 'Retired Deck Building tryhard, now just vibing. Live in Boca Raton, FL.', 4.8, 29, '["Early Bird"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('kevin.scott733@outlook.com', 'password123', 'PixelSlayer73', 'Kevin Scott', 46, 'Delray Beach', '33444', 'Miniature Games', 'N/A', 'Local Delray Beach player. Into Miniature Games and Fitness / General Workout. Always looking for chill groups!', 4.3, 66, '["Tournament Ready", "Tabletop King"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('savannah.hill927@icloud.com', 'password123', 'Silver999963', 'Savannah Hill', 39, 'Boynton Beach', '33435', 'Tennis', 'PC & Console', 'South FL local. Tennis enthusiast and weekend warrior. Boynton Beach represent!', 4.6, 62, '["PBC Veteran", "Tournament Ready"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('sofia.brooks548@outlook.com', 'password123', 'BlessedAxe779', 'Sofia Brooks', 41, 'Boca Raton', '33496', 'Strategy Games', 'All Platforms', 'Always down for Strategy Games sessions. Boca Raton-based. Message me anytime!', 4.3, 79, '["PBC Veteran", "Pro Gamer"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('ariana.butler144@gmail.com', 'password123', 'ArianaBut13', 'Ariana Butler', 30, 'Tequesta', '33469', 'Disc Golf', 'N/A', 'Always down for Disc Golf sessions. Tequesta-based. Message me anytime!', 4.6, 43, '["Tabletop King", "PBC Veteran"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('carlos.miller827@hotmail.com', 'password123', 'xXCa007Xx', 'Carlos Miller', 31, 'Delray Beach', '33445', 'MMORPG', 'Steam Deck', 'New to the scene! Trying to find people who love MMORPG in Delray Beach area.', 4.9, 11, '["Friendly Host", "Tabletop King", "Pro Gamer"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('dion.bell15@yahoo.com', 'password123', 'PatchedHero841', 'Dion Bell', 26, 'Wellington', '33449', 'CrossFit', 'N/A', 'Casual CrossFit fan from Wellington. Also enjoy Fitness / General Workout on weekends.', 4.5, 22, '["PBC Veteran"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('damian.baptiste346@icloud.com', 'password123', 'StormDamian88', 'Damian Baptiste', 45, 'Lake Worth Beach', '33460', 'Fighting Games', 'Xbox', 'Always down for Fighting Games sessions. Lake Worth Beach-based. Message me anytime!', 4.6, 68, '["Early Bird"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('cody.diaz948@hotmail.com', 'password123', 'FrostRunner811', 'Cody Diaz', 33, 'Tequesta', '33469', 'Board Games', 'N/A', 'Passionate about Board Games. Based in Tequesta, FL. Hit me up for games or meetups.', 4.8, 56, '["PBC Veteran", "Friendly Host", "Pro Gamer"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('dawn.hughes709@yahoo.com', 'password123', 'DawnHug28', 'Dawn Hughes', 48, 'Lantana', '33462', 'Fighting Games', 'PC', 'Casual Fighting Games fan from Lantana. Also enjoy Card Games / TCG on weekends.', 4.6, 68, '["Early Bird", "Tabletop King"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('finn.reyes884@hotmail.com', 'password123', 'FinnRey69', 'Finn Reyes', 41, 'Delray Beach', '33444', 'Card Games / TCG', 'Xbox', 'Local Delray Beach player. Into Card Games / TCG and Competitive FPS. Always looking for chill groups!', 4.2, 34, '["Pro Gamer"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('riley.hughes258@outlook.com', 'password123', 'xXRiRangerXx', 'Riley Hughes', 45, 'Lake Worth Beach', '33461', 'Souls-like Games', 'PlayStation', 'New to the scene! Trying to find people who love Souls-like Games in Lake Worth Beach area.', 4.6, 32, '["Early Bird", "PBC Veteran", "Friendly Host"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('dawn.ross204@outlook.com', 'password123', 'DawnRos24', 'Dawn Ross', 44, 'Greenacres', '33463', 'Party Games', 'N/A', 'New to the scene! Trying to find people who love Party Games in Greenacres area.', 4.6, 85, '["Tabletop King", "PBC Veteran"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('danny.perez149@yahoo.com', 'password123', 'xXDaKingXx', 'Danny Perez', 45, 'Boca Raton', '33431', 'Strategy Games', 'PC', 'Passionate about Strategy Games. Based in Boca Raton, FL. Hit me up for games or meetups.', 4.9, 32, '["Pro Gamer"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('allison.nguyen779@outlook.com', 'password123', 'AllisonNgu47', 'Allison Nguyen', 28, 'Lantana', '33462', 'Flag Football', 'Mobile', 'Retired Flag Football tryhard, now just vibing. Live in Lantana, FL.', 4.9, 9, '["Friendly Host", "Tabletop King", "Tournament Ready"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('logan.hall594@yahoo.com', 'password123', 'LoganHal83', 'Logan Hall', 45, 'Greenacres', '33463', 'Party Games', 'N/A', 'New to the scene! Trying to find people who love Party Games in Greenacres area.', 4.7, 33, '["Friendly Host"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('elijah.nelson86@hotmail.com', 'password123', 'Savage777417', 'Elijah Nelson', 33, 'Belle Glade', '33430', 'Pickleball', 'N/A', 'South FL local. Pickleball enthusiast and weekend warrior. Belle Glade represent!', 4.6, 71, '["Tabletop King", "Friendly Host", "Tournament Ready"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('jacob.watson766@hotmail.com', 'password123', 'BetaAxe791', 'Jacob Watson', 54, 'Palm Beach', '33480', 'Puzzle Games', 'N/A', 'Local Palm Beach player. Into Puzzle Games and Weightlifting. Always looking for chill groups!', 4.8, 48, '["Pro Gamer"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('miguel.morgan590@yahoo.com', 'password123', 'Cobalt813344', 'Miguel Morgan', 52, 'Jupiter', '33477', 'Competitive FPS', 'Nintendo Switch', 'Casual Competitive FPS fan from Jupiter. Also enjoy Battle Royale on weekends.', 4.3, 49, '["Tournament Ready"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('christina.coleman893@yahoo.com', 'password123', 'ChristinaCol51', 'Christina Coleman', 55, 'Loxahatchee', '33470', 'Eurogames', 'PlayStation', 'South FL local. Eurogames enthusiast and weekend warrior. Loxahatchee represent!', 4.3, 25, '["PBC Veteran"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('adrian.smith193@icloud.com', 'password123', 'CyberSniper920', 'Adrian Smith', 22, 'Royal Palm Beach', '33414', 'Trading Card Games', 'N/A', 'Royal Palm Beach native. Love Trading Card Games, dabble in Fitness / General Workout. Let''s connect!', 4.6, 83, '["Friendly Host", "Tournament Ready", "Pro Gamer"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('julia.reed427@hotmail.com', 'password123', 'JuliaRee70', 'Julia Reed', 36, 'West Palm Beach', '33405', 'MOBA', 'Nintendo Switch', 'Always down for MOBA sessions. West Palm Beach-based. Message me anytime!', 4.5, 33, '["PBC Veteran", "Tournament Ready", "Tabletop King"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('taylor.ross498@hotmail.com', 'password123', 'xXTaAxeXx', 'Taylor Ross', 38, 'Greenacres', '33467', 'Deck Building', 'Mobile', 'Greenacres native. Love Deck Building, dabble in Simulation. Let''s connect!', 4.4, 70, '["Tournament Ready", "Friendly Host", "Tabletop King"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('christian.hughes860@yahoo.com', 'password123', 'ChristianHug40', 'Christian Hughes', 29, 'Boynton Beach', '33437', 'Dungeons & Dragons', 'N/A', 'Boynton Beach native. Love Dungeons & Dragons, dabble in Warhammer. Let''s connect!', 4.3, 72, '["Pro Gamer"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('ryan.nelson547@outlook.com', 'password123', 'ModdedMage415', 'Ryan Nelson', 28, 'North Palm Beach', '33408', 'Simulation', 'PlayStation', 'Local North Palm Beach player. Into Simulation and Card Games / TCG. Always looking for chill groups!', 4.6, 85, '["Tabletop King"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('hannah.turner316@gmail.com', 'password123', 'xXHaWarlockXx', 'Hannah Turner', 25, 'Palm Springs', '33461', 'Strategy Games', 'Nintendo Switch', 'Local Palm Springs player. Into Strategy Games and Co-op Games. Always looking for chill groups!', 4.7, 73, '["Tabletop King", "Friendly Host"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('diego.richardson525@icloud.com', 'password123', 'DiegoRic72', 'Diego Richardson', 23, 'Tequesta', '33469', 'MMORPG', 'PC', 'Always down for MMORPG sessions. Tequesta-based. Message me anytime!', 4.4, 40, '["Friendly Host", "Early Bird", "PBC Veteran"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('nathan.nelson221@icloud.com', 'password123', 'xXNaFLXx', 'Nathan Nelson', 23, 'Palm Springs', '33461', 'Dungeons & Dragons', 'PlayStation', 'Passionate about Dungeons & Dragons. Based in Palm Springs, FL. Hit me up for games or meetups.', 4.8, 82, '["PBC Veteran", "Friendly Host", "Early Bird"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('amara.mitchell180@hotmail.com', 'password123', 'xXAm999Xx', 'Amara Mitchell', 44, 'Jupiter', '33477', 'Worker Placement', 'N/A', 'South FL local. Worker Placement enthusiast and weekend warrior. Jupiter represent!', 4.9, 57, '["PBC Veteran"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('austin.robinson28@gmail.com', 'password123', 'AustinRob43', 'Austin Robinson', 32, 'Palm Beach', '33480', 'Rock Climbing', 'N/A', 'Casual Rock Climbing fan from Palm Beach. Also enjoy Biking / Cycling on weekends.', 4.8, 53, '["Tournament Ready", "Pro Gamer", "Friendly Host"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('brooklyn.collins994@gmail.com', 'password123', 'OnyxBrooklyn62', 'Brooklyn Collins', 49, 'Jupiter', '33477', 'Worker Placement', 'PC', 'New to the scene! Trying to find people who love Worker Placement in Jupiter area.', 4.8, 7, '["Pro Gamer", "Tabletop King", "PBC Veteran"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('grace.lee280@outlook.com', 'password123', 'xXGr404Xx', 'Grace Lee', 21, 'Boynton Beach', '33436', 'Flag Football', 'N/A', 'Boynton Beach native. Love Flag Football, dabble in Fitness / General Workout. Let''s connect!', 4.2, 66, '["Tabletop King", "PBC Veteran"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('elena.sanchez331@outlook.com', 'password123', 'ViperElena88', 'Elena Sanchez', 52, 'Boynton Beach', '33436', 'Souls-like Games', 'All Platforms', 'Passionate about Souls-like Games. Based in Boynton Beach, FL. Hit me up for games or meetups.', 4.2, 11, '["Early Bird", "Tournament Ready", "Pro Gamer"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('kevin.cruz852@yahoo.com', 'password123', 'MegaAxe939', 'Kevin Cruz', 32, 'Pahokee', '33476', 'Dungeons & Dragons', 'PC', 'Casual Dungeons & Dragons fan from Pahokee. Also enjoy Puzzle Games on weekends.', 4.5, 35, '["Early Bird", "Pro Gamer"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('gavin.vega315@yahoo.com', 'password123', 'GavinVeg26', 'Gavin Vega', 32, 'Boynton Beach', '33435', 'Board Games', 'N/A', 'Local Boynton Beach player. Into Board Games and Warhammer. Always looking for chill groups!', 4.8, 43, '["Pro Gamer"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('amanda.collins68@outlook.com', 'password123', 'ToxicRunner802', 'Amanda Collins', 20, 'Jupiter', '33458', 'Horror Games', 'Mobile', 'Always down for Horror Games sessions. Jupiter-based. Message me anytime!', 4.7, 52, '["Pro Gamer", "Tournament Ready"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('jacob.vega518@hotmail.com', 'password123', 'Inferno305593', 'Jacob Vega', 33, 'Pahokee', '33476', 'Trading Card Games', 'Steam Deck', 'Pahokee native. Love Trading Card Games, dabble in Strategy Games. Let''s connect!', 4.4, 6, '["Tournament Ready", "Early Bird", "PBC Veteran"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('wesley.turner855@outlook.com', 'password123', 'xXWeBladeXx', 'Wesley Turner', 29, 'Delray Beach', '33444', 'Tabletop RPG', 'PC & Console', 'Local Delray Beach player. Into Tabletop RPG and Worker Placement. Always looking for chill groups!', 4.4, 26, '["Friendly Host", "Pro Gamer", "PBC Veteran"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('diego.jones395@outlook.com', 'password123', 'xXDiBarbarianXx', 'Diego Jones', 25, 'Belle Glade', '33430', 'Puzzle Games', 'N/A', 'New to the scene! Trying to find people who love Puzzle Games in Belle Glade area.', 4.9, 12, '["Pro Gamer", "Tabletop King"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('robert.edwards689@gmail.com', 'password123', 'xXRoLanceXx', 'Robert Edwards', 49, 'West Palm Beach', '33401', 'Trading Card Games', 'N/A', 'West Palm Beach native. Love Trading Card Games, dabble in Cooperative Board Games. Let''s connect!', 4.3, 26, '["Tournament Ready"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('damian.lewis206@hotmail.com', 'password123', 'DamianLew6493', 'Damian Lewis', 39, 'Lake Worth Beach', '33460', 'Soccer', 'N/A', 'New to the scene! Trying to find people who love Soccer in Lake Worth Beach area.', 4.4, 17, '["Early Bird"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('emma.collins510@yahoo.com', 'password123', 'EmmaCol13', 'Emma Collins', 49, 'Jupiter', '33458', 'Competitive FPS', 'PlayStation', 'New to the scene! Trying to find people who love Competitive FPS in Jupiter area.', 4.8, 7, '["Early Bird", "Tournament Ready"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('allison.foster503@hotmail.com', 'password123', 'EmeraldAllison44', 'Allison Foster', 49, 'Palm Beach Gardens', '33410', 'Sandbox Games', 'Xbox', 'South FL local. Sandbox Games enthusiast and weekend warrior. Palm Beach Gardens represent!', 4.2, 37, '["Pro Gamer"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('jake.perez320@icloud.com', 'password123', 'xXJa100Xx', 'Jake Perez', 26, 'Manalapan', '33462', 'Disc Golf', 'N/A', 'Retired Disc Golf tryhard, now just vibing. Live in Manalapan, FL.', 4.4, 51, '["Pro Gamer", "PBC Veteran", "Tabletop King"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('diamond.turner329@gmail.com', 'password123', 'OnyxRanger132', 'Diamond Turner', 36, 'Royal Palm Beach', '33411', 'Yoga', 'N/A', 'Always down for Yoga sessions. Royal Palm Beach-based. Message me anytime!', 4.8, 42, '["PBC Veteran", "Friendly Host", "Tabletop King"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('taylor.king254@yahoo.com', 'password123', 'OnyxTaylor11', 'Taylor King', 33, 'Boca Raton', '33431', 'Sandbox Games', 'All Platforms', 'New to the scene! Trying to find people who love Sandbox Games in Boca Raton area.', 4.5, 67, '["Tournament Ready", "Pro Gamer"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('darryl.anderson585@icloud.com', 'password123', 'RubyDarryl13', 'Darryl Anderson', 42, 'Greenacres', '33463', 'Kayaking', 'N/A', 'Passionate about Kayaking. Based in Greenacres, FL. Hit me up for games or meetups.', 4.5, 68, '["Friendly Host", "PBC Veteran"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('christian.gomez49@outlook.com', 'password123', 'xXChFLXx', 'Christian Gomez', 34, 'Palm Beach Gardens', '33410', 'Beach Activities', 'Nintendo Switch', 'South FL local. Beach Activities enthusiast and weekend warrior. Palm Beach Gardens represent!', 4.6, 78, '["Early Bird", "PBC Veteran"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('ben.baptiste680@hotmail.com', 'password123', 'VoltBen54', 'Ben Baptiste', 45, 'Palm Beach Gardens', '33418', 'Hiking', 'Nintendo Switch', 'New to the scene! Trying to find people who love Hiking in Palm Beach Gardens area.', 4.7, 68, '["Tabletop King"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('marcus.sullivan958@hotmail.com', 'password123', 'AzureQueen374', 'Marcus Sullivan', 45, 'North Palm Beach', '33408', 'Rock Climbing', 'N/A', 'Casual Rock Climbing fan from North Palm Beach. Also enjoy Beach Activities on weekends.', 5.0, 15, '["Friendly Host", "Early Bird", "Pro Gamer"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('taylor.hill263@hotmail.com', 'password123', 'TaylorHil61', 'Taylor Hill', 28, 'Palm Beach Gardens', '33410', 'Sandbox Games', 'All Platforms', 'Local Palm Beach Gardens player. Into Sandbox Games and Card Games / TCG. Always looking for chill groups!', 4.3, 13, '["Friendly Host", "Tournament Ready", "Tabletop King"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('joshua.davis30@outlook.com', 'password123', 'FierceJoshua71', 'Joshua Davis', 26, 'Jupiter', '33477', 'Eurogames', 'All Platforms', 'Casual Eurogames fan from Jupiter. Also enjoy Simulation on weekends.', 4.7, 15, '["Tabletop King", "Early Bird"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('ethan.rogers535@hotmail.com', 'password123', 'GoldenEthan12', 'Ethan Rogers', 25, 'Pahokee', '33476', 'War Games', 'N/A', 'Pahokee native. Love War Games, dabble in Trading Card Games. Let''s connect!', 4.5, 60, '["Early Bird", "Tournament Ready"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('kayla.howard261@hotmail.com', 'password123', 'GoldenRogue384', 'Kayla Howard', 44, 'Tequesta', '33469', 'Running / Jogging', 'PC', 'Local Tequesta player. Into Running / Jogging and Bird Watching. Always looking for chill groups!', 4.2, 75, '["Early Bird", "PBC Veteran", "Tabletop King"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('chris.ward566@icloud.com', 'password123', 'RapidChris90', 'Chris Ward', 34, 'Wellington', '33449', 'First-Person Shooters', 'Nintendo Switch', 'Wellington native. Love First-Person Shooters, dabble in Adventure Games. Let''s connect!', 4.6, 64, '["PBC Veteran", "Pro Gamer"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('wesley.stewart809@gmail.com', 'password123', 'BrokenWesley11', 'Wesley Stewart', 44, 'Greenacres', '33463', 'Trading Card Games', 'PC & Console', 'Local Greenacres player. Into Trading Card Games and Flag Football. Always looking for chill groups!', 4.4, 63, '["Tabletop King", "Tournament Ready"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('chris.taylor811@yahoo.com', 'password123', 'UltraQueen644', 'Chris Taylor', 46, 'Boynton Beach', '33437', 'Souls-like Games', 'Xbox', 'Retired Souls-like Games tryhard, now just vibing. Live in Boynton Beach, FL.', 4.4, 14, '["Tabletop King", "Friendly Host", "PBC Veteran"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('noah.nelson267@yahoo.com', 'password123', 'CasualNoah37', 'Noah Nelson', 26, 'Loxahatchee', '33470', 'Board Games', 'N/A', 'Casual Board Games fan from Loxahatchee. Also enjoy Disc Golf on weekends.', 4.4, 65, '["PBC Veteran"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('dominic.ortiz719@yahoo.com', 'password123', 'UltraWarlock440', 'Dominic Ortiz', 34, 'Lake Worth Beach', '33460', 'Cooperative Board Games', 'N/A', 'Retired Cooperative Board Games tryhard, now just vibing. Live in Lake Worth Beach, FL.', 4.5, 74, '["Tournament Ready"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('alejandro.morales230@yahoo.com', 'password123', 'AlejandroMor44', 'Alejandro Morales', 25, 'Belle Glade', '33430', 'Strategy Games', 'All Platforms', 'Belle Glade native. Love Strategy Games, dabble in Simulation. Let''s connect!', 4.9, 8, '["Friendly Host"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('brooklyn.jackson633@icloud.com', 'password123', 'BrooklynJac57', 'Brooklyn Jackson', 33, 'Jupiter', '33458', 'Puzzle Games', 'N/A', 'Retired Puzzle Games tryhard, now just vibing. Live in Jupiter, FL.', 4.9, 20, '["PBC Veteran", "Friendly Host", "Early Bird"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('kayla.white754@hotmail.com', 'password123', 'BlazeKayla13', 'Kayla White', 45, 'Riviera Beach', '33404', 'Competitive FPS', 'All Platforms', 'Always down for Competitive FPS sessions. Riviera Beach-based. Message me anytime!', 4.2, 85, '["Tabletop King", "Pro Gamer"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('genesis.robinson184@outlook.com', 'password123', 'GenesisRob74', 'Genesis Robinson', 55, 'West Palm Beach', '33409', 'Dungeons & Dragons', 'N/A', 'Local West Palm Beach player. Into Dungeons & Dragons and Magic: The Gathering. Always looking for chill groups!', 4.6, 32, '["Tabletop King"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('gavin.phillips949@icloud.com', 'password123', 'PatchedGavin34', 'Gavin Phillips', 41, 'Jupiter', '33477', 'Card Games / TCG', 'Xbox', 'Jupiter native. Love Card Games / TCG, dabble in MMORPG. Let''s connect!', 4.9, 39, '["PBC Veteran", "Early Bird"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('cameron.parker723@icloud.com', 'password123', 'xXCaGamerXx', 'Cameron Parker', 28, 'Jupiter', '33458', 'Soccer', 'N/A', 'Casual Soccer fan from Jupiter. Also enjoy CrossFit on weekends.', 4.9, 78, '["PBC Veteran"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('maya.evans843@outlook.com', 'password123', 'MayaEva84', 'Maya Evans', 50, 'Boynton Beach', '33436', 'Card Games / TCG', 'PlayStation', 'South FL local. Card Games / TCG enthusiast and weekend warrior. Boynton Beach represent!', 4.6, 80, '["PBC Veteran"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('gabrielle.martinez952@gmail.com', 'password123', 'IronGabrielle4', 'Gabrielle Martinez', 55, 'Royal Palm Beach', '33414', 'Board Games', 'Nintendo Switch', 'South FL local. Board Games enthusiast and weekend warrior. Royal Palm Beach represent!', 4.3, 56, '["Early Bird", "Friendly Host"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('nora.baptiste561@hotmail.com', 'password123', 'xXNoStrikerXx', 'Nora Baptiste', 22, 'Boca Raton', '33431', 'Board Games', 'N/A', 'Retired Board Games tryhard, now just vibing. Live in Boca Raton, FL.', 2.6, 55, '["Tabletop King", "Friendly Host"]'::jsonb, true);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('sophia.hughes306@icloud.com', 'password123', 'xXSo42Xx', 'Sophia Hughes', 25, 'Boynton Beach', '33435', 'Bird Watching', 'N/A', 'New to the scene! Trying to find people who love Bird Watching in Boynton Beach area.', 4.3, 16, '["Friendly Host"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('zoe.martin577@hotmail.com', 'password123', 'xXZoStrikerXx', 'Zoe Martin', 35, 'Loxahatchee', '33470', 'Weightlifting', 'N/A', 'New to the scene! Trying to find people who love Weightlifting in Loxahatchee area.', 4.4, 30, '["Friendly Host"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('lara.taylor540@hotmail.com', 'password123', 'WolfAxe448', 'Lara Taylor', 49, 'Boynton Beach', '33435', 'Simulation', 'All Platforms', 'Local Boynton Beach player. Into Simulation and Sports Games. Always looking for chill groups!', 4.6, 16, '["PBC Veteran"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('cody.bryant111@hotmail.com', 'password123', 'xXCoShotgunXx', 'Cody Bryant', 50, 'West Palm Beach', '33409', 'Tabletop RPG', 'PC', 'South FL local. Tabletop RPG enthusiast and weekend warrior. West Palm Beach represent!', 4.9, 69, '["Friendly Host"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('nicole.russell639@outlook.com', 'password123', 'ModdedNicole24', 'Nicole Russell', 46, 'Palm Beach', '33480', 'CrossFit', 'N/A', 'Local Palm Beach player. Into CrossFit and Rock Climbing. Always looking for chill groups!', 4.7, 32, '["Tabletop King", "Pro Gamer"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('james.thomas709@icloud.com', 'password123', 'xXJaHeroXx', 'James Thomas', 47, 'Loxahatchee', '33470', 'Weightlifting', 'N/A', 'Local Loxahatchee player. Into Weightlifting and Running / Jogging. Always looking for chill groups!', 4.5, 11, '["Early Bird", "Pro Gamer"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('jessica.vega493@yahoo.com', 'password123', 'JessicaVeg65', 'Jessica Vega', 31, 'West Palm Beach', '33405', 'Party Games', 'Xbox', 'New to the scene! Trying to find people who love Party Games in West Palm Beach area.', 4.8, 15, '["Friendly Host"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('ariana.parker600@yahoo.com', 'password123', 'ArianaPar47', 'Ariana Parker', 46, 'West Palm Beach', '33405', 'Card Games / TCG', 'All Platforms', 'New to the scene! Trying to find people who love Card Games / TCG in West Palm Beach area.', 4.2, 54, '["Friendly Host", "Tabletop King"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('lena.white20@icloud.com', 'password123', 'JadeLena9', 'Lena White', 51, 'Boca Raton', '33431', 'Platformers', 'Steam Deck', 'Casual Platformers fan from Boca Raton. Also enjoy First-Person Shooters on weekends.', 4.5, 20, '["PBC Veteran"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('darryl.walker135@outlook.com', 'password123', 'xXDaShotgunXx', 'Darryl Walker', 47, 'Greenacres', '33467', 'Dungeons & Dragons', 'Steam Deck', 'New to the scene! Trying to find people who love Dungeons & Dragons in Greenacres area.', 4.7, 85, '["Early Bird", "Tabletop King"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('morgan.griffin49@gmail.com', 'password123', 'FixedMorgan34', 'Morgan Griffin', 53, 'Lake Worth Beach', '33461', 'Weightlifting', 'N/A', 'Passionate about Weightlifting. Based in Lake Worth Beach, FL. Hit me up for games or meetups.', 4.4, 55, '["Tabletop King", "Tournament Ready"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('dion.green230@icloud.com', 'password123', 'PhantomDion46', 'Dion Green', 53, 'Delray Beach', '33445', 'Martial Arts', 'PC', 'Delray Beach native. Love Martial Arts, dabble in CrossFit. Let''s connect!', 4.9, 38, '["Pro Gamer"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('finn.garcia746@outlook.com', 'password123', 'xXFi100Xx', 'Finn Garcia', 28, 'Royal Palm Beach', '33414', 'Puzzle Games', 'N/A', 'New to the scene! Trying to find people who love Puzzle Games in Royal Palm Beach area.', 4.4, 84, '["Tournament Ready"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('thomas.patel855@icloud.com', 'password123', 'WolfThomas65', 'Thomas Patel', 33, 'West Palm Beach', '33401', 'Dungeons & Dragons', 'N/A', 'Retired Dungeons & Dragons tryhard, now just vibing. Live in West Palm Beach, FL.', 5.0, 80, '["PBC Veteran", "Friendly Host"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('alexandra.vega967@gmail.com', 'password123', 'xXAlMasterXx', 'Alexandra Vega', 41, 'Lake Park', '33403', 'War Games', 'N/A', 'Retired War Games tryhard, now just vibing. Live in Lake Park, FL.', 4.4, 48, '["Pro Gamer", "Tabletop King"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('cameron.thompson60@hotmail.com', 'password123', 'MegaCameron52', 'Cameron Thompson', 54, 'Boynton Beach', '33435', 'Adventure Games', 'PlayStation', 'Always down for Adventure Games sessions. Boynton Beach-based. Message me anytime!', 4.5, 83, '["Early Bird"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('savannah.williams554@outlook.com', 'password123', 'SavannahWil21', 'Savannah Williams', 51, 'Delray Beach', '33446', 'Pickleball', 'Mobile', 'Passionate about Pickleball. Based in Delray Beach, FL. Hit me up for games or meetups.', 4.5, 77, '["Tabletop King", "Tournament Ready"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('connor.reyes643@hotmail.com', 'password123', 'StormConnor7', 'Connor Reyes', 34, 'Royal Palm Beach', '33414', 'Sports Games', 'Mobile', 'Royal Palm Beach native. Love Sports Games, dabble in Co-op Games. Let''s connect!', 4.5, 83, '["Early Bird", "Tournament Ready", "Pro Gamer"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('samantha.reed336@hotmail.com', 'password123', 'SamanthaRee56', 'Samantha Reed', 24, 'Wellington', '33449', 'Board Games', 'Nintendo Switch', 'Always down for Board Games sessions. Wellington-based. Message me anytime!', 4.2, 19, '["Pro Gamer", "Friendly Host", "Tournament Ready"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('bryan.miller532@icloud.com', 'password123', 'OnyxBryan64', 'Bryan Miller', 53, 'Singer Island', '33404', 'Worker Placement', 'Steam Deck', 'Passionate about Worker Placement. Based in Singer Island, FL. Hit me up for games or meetups.', 4.6, 51, '["Tabletop King"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('kayla.nguyen765@yahoo.com', 'password123', 'ModdedKayla16', 'Kayla Nguyen', 20, 'Loxahatchee', '33470', 'Basketball', 'N/A', 'Always down for Basketball sessions. Loxahatchee-based. Message me anytime!', 4.3, 35, '["Pro Gamer"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('nathan.long498@gmail.com', 'password123', 'NathanLon28', 'Nathan Long', 36, 'Palm Beach Gardens', '33418', 'Puzzle Games', 'All Platforms', 'South FL local. Puzzle Games enthusiast and weekend warrior. Palm Beach Gardens represent!', 4.2, 66, '["PBC Veteran"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('crystal.nelson487@hotmail.com', 'password123', 'CrystalNel27', 'Crystal Nelson', 42, 'Greenacres', '33467', 'Softball', 'N/A', 'Retired Softball tryhard, now just vibing. Live in Greenacres, FL.', 5.0, 40, '["Pro Gamer", "Tournament Ready"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('savannah.green554@gmail.com', 'password123', 'xXSa42Xx', 'Savannah Green', 39, 'Riviera Beach', '33407', 'Hiking', 'Nintendo Switch', 'Local Riviera Beach player. Into Hiking and CrossFit. Always looking for chill groups!', 4.6, 12, '["Pro Gamer"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('finn.thompson986@gmail.com', 'password123', 'LazyFinn27', 'Finn Thompson', 29, 'North Palm Beach', '33408', 'Beach Activities', 'N/A', 'Local North Palm Beach player. Into Beach Activities and Yoga. Always looking for chill groups!', 4.3, 17, '["PBC Veteran"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('paige.morris25@hotmail.com', 'password123', 'HyperPaige33', 'Paige Morris', 44, 'Boynton Beach', '33437', 'Magic: The Gathering', 'Mobile', 'Boynton Beach native. Love Magic: The Gathering, dabble in MMORPG. Let''s connect!', 4.3, 81, '["Friendly Host", "Early Bird"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('connor.scott28@gmail.com', 'password123', 'HyperConnor13', 'Connor Scott', 29, 'Greenacres', '33463', 'Warhammer', 'All Platforms', 'Local Greenacres player. Into Warhammer and Kayaking. Always looking for chill groups!', 4.5, 19, '["Tournament Ready", "Tabletop King"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('noah.ortiz68@icloud.com', 'password123', 'Mega404240', 'Noah Ortiz', 44, 'Palm Springs', '33461', 'Hiking', 'Xbox', 'Palm Springs native. Love Hiking, dabble in Running / Jogging. Let''s connect!', 4.4, 58, '["PBC Veteran", "Early Bird"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('lily.richardson463@gmail.com', 'password123', 'LuckyAxe985', 'Lily Richardson', 53, 'Manalapan', '33462', 'Cooperative Board Games', 'N/A', 'Always down for Cooperative Board Games sessions. Manalapan-based. Message me anytime!', 4.2, 46, '["Early Bird", "Friendly Host"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('kayla.ross47@yahoo.com', 'password123', 'EagleStriker405', 'Kayla Ross', 36, 'Pahokee', '33476', 'Miniature Games', 'PC & Console', 'Pahokee native. Love Miniature Games, dabble in Magic: The Gathering. Let''s connect!', 4.6, 30, '["Early Bird", "PBC Veteran"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('aiden.sanders924@gmail.com', 'password123', 'AidenSan62', 'Aiden Sanders', 18, 'Loxahatchee', '33470', 'Hiking', 'PlayStation', 'Always down for Hiking sessions. Loxahatchee-based. Message me anytime!', 4.2, 52, '["Early Bird", "Friendly Host"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('savannah.edwards474@outlook.com', 'password123', 'SavannahEdw66', 'Savannah Edwards', 25, 'West Palm Beach', '33401', 'Weightlifting', 'N/A', 'New to the scene! Trying to find people who love Weightlifting in West Palm Beach area.', 4.6, 48, '["Tabletop King", "Friendly Host", "PBC Veteran"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('ricky.barnes927@hotmail.com', 'password123', 'RickyBar10', 'Ricky Barnes', 49, 'Jupiter', '33477', 'Dungeons & Dragons', 'N/A', 'Jupiter native. Love Dungeons & Dragons, dabble in Worker Placement. Let''s connect!', 5.0, 54, '["Early Bird", "Pro Gamer"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('damian.russell131@outlook.com', 'password123', 'DamianRus76', 'Damian Russell', 22, 'Delray Beach', '33446', 'Rock Climbing', 'Mobile', 'New to the scene! Trying to find people who love Rock Climbing in Delray Beach area.', 5.0, 30, '["Tabletop King"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('austin.lewis906@yahoo.com', 'password123', 'Viper321431', 'Austin Lewis', 20, 'Lake Park', '33403', 'MOBA', 'PC', 'Retired MOBA tryhard, now just vibing. Live in Lake Park, FL.', 4.9, 28, '["Tabletop King", "Friendly Host"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('derek.hall338@outlook.com', 'password123', 'Rapid404100', 'Derek Hall', 28, 'Lake Worth Beach', '33460', 'CrossFit', 'Nintendo Switch', 'New to the scene! Trying to find people who love CrossFit in Lake Worth Beach area.', 4.5, 42, '["Early Bird", "Tournament Ready"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('elena.stewart128@gmail.com', 'password123', 'ModdedRanger387', 'Elena Stewart', 55, 'Tequesta', '33469', 'Simulation', 'PC', 'South FL local. Simulation enthusiast and weekend warrior. Tequesta represent!', 4.4, 26, '["Tabletop King", "Pro Gamer"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('santiago.miller239@hotmail.com', 'password123', 'BetaGeneral476', 'Santiago Miller', 44, 'Delray Beach', '33444', 'Pickleball', 'N/A', 'Casual Pickleball fan from Delray Beach. Also enjoy Martial Arts on weekends.', 4.4, 53, '["Early Bird", "Pro Gamer", "Friendly Host"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('emma.clark608@yahoo.com', 'password123', 'EmmaCla91', 'Emma Clark', 22, 'West Palm Beach', '33401', 'Tennis', 'N/A', 'West Palm Beach native. Love Tennis, dabble in War Games. Let''s connect!', 4.3, 22, '["Tournament Ready"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('nicholas.ross983@outlook.com', 'password123', 'OnyxNicholas70', 'Nicholas Ross', 50, 'Manalapan', '33462', 'Board Games', 'N/A', 'Local Manalapan player. Into Board Games and Worker Placement. Always looking for chill groups!', 4.4, 43, '["Tournament Ready", "Pro Gamer"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('tyler.king656@yahoo.com', 'password123', 'PhantomQueen684', 'Tyler King', 30, 'Lake Worth Beach', '33460', 'Party Games', 'N/A', 'New to the scene! Trying to find people who love Party Games in Lake Worth Beach area.', 5.0, 49, '["Friendly Host", "Tournament Ready", "PBC Veteran"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('kylie.adams478@hotmail.com', 'password123', 'KylieAda40', 'Kylie Adams', 32, 'Wellington', '33414', 'Horror Games', 'PC', 'Local Wellington player. Into Horror Games and Fitness / General Workout. Always looking for chill groups!', 4.3, 77, '["Early Bird", "PBC Veteran", "Pro Gamer"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('cole.coleman451@yahoo.com', 'password123', 'PixelCole4', 'Cole Coleman', 36, 'Boynton Beach', '33435', 'Eurogames', 'N/A', 'Boynton Beach native. Love Eurogames, dabble in Fitness / General Workout. Let''s connect!', 4.3, 51, '["Tabletop King", "Pro Gamer", "Early Bird"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('jose.anderson933@gmail.com', 'password123', 'Blessed007141', 'Jose Anderson', 34, 'Boynton Beach', '33437', 'Sports Games', 'All Platforms', 'Passionate about Sports Games. Based in Boynton Beach, FL. Hit me up for games or meetups.', 4.8, 53, '["Tabletop King", "PBC Veteran", "Tournament Ready"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('hector.cook546@icloud.com', 'password123', 'RogueHector77', 'Hector Cook', 30, 'Lake Worth Beach', '33460', 'Beach Activities', 'Steam Deck', 'Passionate about Beach Activities. Based in Lake Worth Beach, FL. Hit me up for games or meetups.', 4.3, 10, '["Friendly Host"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('amanda.mensah521@icloud.com', 'password123', 'GoldenAmanda67', 'Amanda Mensah', 28, 'Boca Raton', '33433', 'Soccer', 'N/A', 'Local Boca Raton player. Into Soccer and Swimming. Always looking for chill groups!', 4.8, 84, '["Tabletop King"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('justin.gonzalez884@yahoo.com', 'password123', 'xXJuDukeXx', 'Justin Gonzalez', 46, 'Lake Worth Beach', '33460', 'Dungeons & Dragons', 'N/A', 'Always down for Dungeons & Dragons sessions. Lake Worth Beach-based. Message me anytime!', 4.7, 40, '["Tabletop King"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('lauren.ross525@hotmail.com', 'password123', 'SuperLauren58', 'Lauren Ross', 47, 'West Palm Beach', '33409', 'Party Games', 'N/A', 'Passionate about Party Games. Based in West Palm Beach, FL. Hit me up for games or meetups.', 4.6, 46, '["Pro Gamer"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('rebecca.butler526@hotmail.com', 'password123', 'LazyLegend949', 'Rebecca Butler', 50, 'Palm Beach Gardens', '33410', 'Strategy Games', 'PC & Console', 'South FL local. Strategy Games enthusiast and weekend warrior. Palm Beach Gardens represent!', 4.3, 50, '["Pro Gamer", "Tabletop King", "Friendly Host"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('jessica.watson935@outlook.com', 'password123', 'ChillHero289', 'Jessica Watson', 52, 'Delray Beach', '33446', 'Flag Football', 'Nintendo Switch', 'New to the scene! Trying to find people who love Flag Football in Delray Beach area.', 4.4, 37, '["Pro Gamer"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('alexis.kim867@yahoo.com', 'password123', 'xXAlXLXx', 'Alexis Kim', 38, 'Boca Raton', '33496', 'Running / Jogging', 'PC', 'Always down for Running / Jogging sessions. Boca Raton-based. Message me anytime!', 4.7, 62, '["Pro Gamer", "Tournament Ready", "Tabletop King"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('owen.gonzalez703@icloud.com', 'password123', 'RogueOwen76', 'Owen Gonzalez', 45, 'Lantana', '33462', 'Strategy Games', 'PlayStation', 'New to the scene! Trying to find people who love Strategy Games in Lantana area.', 4.4, 44, '["Early Bird", "PBC Veteran"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('morgan.campbell692@hotmail.com', 'password123', 'MorganCam14', 'Morgan Campbell', 24, 'Boynton Beach', '33436', 'Simulation', 'Nintendo Switch', 'Passionate about Simulation. Based in Boynton Beach, FL. Hit me up for games or meetups.', 4.5, 50, '["Pro Gamer", "Tournament Ready"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('alejandro.brooks12@yahoo.com', 'password123', 'BrokenAlejandro53', 'Alejandro Brooks', 51, 'Royal Palm Beach', '33414', 'Trading Card Games', 'N/A', 'Royal Palm Beach native. Love Trading Card Games, dabble in Tabletop RPG. Let''s connect!', 5.0, 24, '["Pro Gamer"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('julia.jenkins163@hotmail.com', 'password123', 'OnyxJulia26', 'Julia Jenkins', 48, 'Manalapan', '33462', 'Sandbox Games', 'PlayStation', 'Casual Sandbox Games fan from Manalapan. Also enjoy Fitness / General Workout on weekends.', 4.3, 40, '["PBC Veteran", "Friendly Host"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('bryan.kelly472@icloud.com', 'password123', 'RankedStriker295', 'Bryan Kelly', 49, 'Juno Beach', '33408', 'Fighting Games', 'Xbox', 'Passionate about Fighting Games. Based in Juno Beach, FL. Hit me up for games or meetups.', 4.8, 60, '["Early Bird"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('sebastian.washington907@yahoo.com', 'password123', 'FixedSebastian81', 'Sebastian Washington', 33, 'West Palm Beach', '33409', 'Rock Climbing', 'PlayStation', 'Always down for Rock Climbing sessions. West Palm Beach-based. Message me anytime!', 4.6, 16, '["Friendly Host"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('tanner.nelson213@hotmail.com', 'password123', 'BetaMage75', 'Tanner Nelson', 34, 'Boynton Beach', '33436', 'First-Person Shooters', 'Xbox', 'New to the scene! Trying to find people who love First-Person Shooters in Boynton Beach area.', 4.4, 25, '["Tournament Ready"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('ariana.ortiz562@yahoo.com', 'password123', 'xXArPlayerXx', 'Ariana Ortiz', 23, 'Boca Raton', '33433', 'RPG', 'PlayStation', 'Retired RPG tryhard, now just vibing. Live in Boca Raton, FL.', 4.4, 32, '["Tournament Ready"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('james.bryant158@icloud.com', 'password123', 'NovaJames28', 'James Bryant', 35, 'West Palm Beach', '33401', 'Hiking', 'N/A', 'Passionate about Hiking. Based in West Palm Beach, FL. Hit me up for games or meetups.', 4.7, 63, '["Tournament Ready", "Early Bird", "Friendly Host"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('savannah.ward54@hotmail.com', 'password123', 'ShadowXL387', 'Savannah Ward', 46, 'Palm Beach Gardens', '33418', 'First-Person Shooters', 'PlayStation', 'Palm Beach Gardens native. Love First-Person Shooters, dabble in Competitive FPS. Let''s connect!', 4.6, 50, '["Early Bird", "PBC Veteran"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('charlotte.moore836@outlook.com', 'password123', 'JadeCharlotte81', 'Charlotte Moore', 24, 'Pahokee', '33476', 'Warhammer', 'All Platforms', 'Local Pahokee player. Into Warhammer and Bird Watching. Always looking for chill groups!', 4.8, 55, '["Pro Gamer", "Tournament Ready"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('savannah.gomez68@outlook.com', 'password123', 'PixelSavannah9', 'Savannah Gomez', 32, 'Palm Beach', '33480', 'Magic: The Gathering', 'PC & Console', 'Retired Magic: The Gathering tryhard, now just vibing. Live in Palm Beach, FL.', 4.6, 83, '["PBC Veteran", "Friendly Host", "Tournament Ready"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('grace.kelly872@icloud.com', 'password123', 'PhantomMage624', 'Grace Kelly', 38, 'Boynton Beach', '33437', 'Stand-Up Paddleboarding', 'PlayStation', 'Retired Stand-Up Paddleboarding tryhard, now just vibing. Live in Boynton Beach, FL.', 4.3, 17, '["Tabletop King", "Early Bird", "PBC Veteran"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('lily.smith141@outlook.com', 'password123', 'xXLiMythXx', 'Lily Smith', 21, 'Boca Raton', '33496', 'Competitive FPS', 'Steam Deck', 'Boca Raton native. Love Competitive FPS, dabble in Fitness / General Workout. Let''s connect!', 4.7, 14, '["Early Bird", "Tournament Ready", "Friendly Host"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('matthew.johnson811@icloud.com', 'password123', 'ToxicMatthew4', 'Matthew Johnson', 51, 'West Palm Beach', '33409', 'Fitness / General Workout', 'N/A', 'Casual Fitness / General Workout fan from West Palm Beach. Also enjoy Fitness / General Workout on weekends.', 4.5, 62, '["Tabletop King", "PBC Veteran"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('destiny.lopez188@icloud.com', 'password123', 'Blaze954504', 'Destiny Lopez', 38, 'Lake Park', '33403', 'MOBA', 'Nintendo Switch', 'Passionate about MOBA. Based in Lake Park, FL. Hit me up for games or meetups.', 4.6, 64, '["Early Bird"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('valentina.williams169@yahoo.com', 'password123', 'ValentinaWil64', 'Valentina Williams', 37, 'Palm Beach', '33480', 'Golf', 'N/A', 'Palm Beach native. Love Golf, dabble in Swimming. Let''s connect!', 5.0, 54, '["Tabletop King", "Early Bird"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('amanda.murphy625@icloud.com', 'password123', 'AmandaMur71', 'Amanda Murphy', 50, 'Manalapan', '33462', 'Party Games', 'Steam Deck', 'Manalapan native. Love Party Games, dabble in Deck Building. Let''s connect!', 4.9, 60, '["Early Bird", "Friendly Host"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('amanda.foster5@gmail.com', 'password123', 'GoldenAmanda52', 'Amanda Foster', 30, 'Boynton Beach', '33435', 'Social Deduction Games', 'Xbox', 'South FL local. Social Deduction Games enthusiast and weekend warrior. Boynton Beach represent!', 4.6, 53, '["PBC Veteran", "Early Bird"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('pedro.ramirez714@gmail.com', 'password123', 'xXPe239Xx', 'Pedro Ramirez', 41, 'Belle Glade', '33430', 'Magic: The Gathering', 'Nintendo Switch', 'Belle Glade native. Love Magic: The Gathering, dabble in Sandbox Games. Let''s connect!', 4.3, 30, '["Tabletop King", "Tournament Ready"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('bailey.coleman408@hotmail.com', 'password123', 'Azure321194', 'Bailey Coleman', 42, 'Boca Raton', '33496', 'Cooperative Board Games', 'N/A', 'Passionate about Cooperative Board Games. Based in Boca Raton, FL. Hit me up for games or meetups.', 4.2, 40, '["Tournament Ready"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('emma.sullivan834@yahoo.com', 'password123', 'RankedEmma27', 'Emma Sullivan', 40, 'Juno Beach', '33408', 'First-Person Shooters', 'PlayStation', 'Retired First-Person Shooters tryhard, now just vibing. Live in Juno Beach, FL.', 4.6, 24, '["Pro Gamer", "PBC Veteran"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('melissa.wilson181@outlook.com', 'password123', 'MelissaWil27', 'Melissa Wilson', 28, 'Manalapan', '33462', 'Strategy Games', 'Xbox', 'Retired Strategy Games tryhard, now just vibing. Live in Manalapan, FL.', 4.6, 12, '["PBC Veteran", "Friendly Host", "Early Bird"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('wesley.stewart82@outlook.com', 'password123', 'HyperGamer284', 'Wesley Stewart', 28, 'Delray Beach', '33444', 'Board Games', 'N/A', 'Local Delray Beach player. Into Board Games and Swimming. Always looking for chill groups!', 4.5, 13, '["Tabletop King", "Early Bird", "Tournament Ready"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('elena.gomez385@hotmail.com', 'password123', 'HackedElena63', 'Elena Gomez', 18, 'Lake Park', '33403', 'Puzzle Games', 'N/A', 'Local Lake Park player. Into Puzzle Games and Warhammer. Always looking for chill groups!', 2.6, 59, '["Pro Gamer"]'::jsonb, true);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('rebecca.kelly468@icloud.com', 'password123', 'RebeccaKel13', 'Rebecca Kelly', 18, 'Delray Beach', '33444', 'Bird Watching', 'N/A', 'New to the scene! Trying to find people who love Bird Watching in Delray Beach area.', 5.0, 76, '["Pro Gamer", "Tabletop King"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('brenda.mitchell654@outlook.com', 'password123', 'RapidCaptain895', 'Brenda Mitchell', 18, 'Lake Worth Beach', '33460', 'Trading Card Games', 'N/A', 'Retired Trading Card Games tryhard, now just vibing. Live in Lake Worth Beach, FL.', 4.6, 44, '["Pro Gamer", "Friendly Host"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('angel.thompson301@hotmail.com', 'password123', 'AngelTho28', 'Angel Thompson', 42, 'Delray Beach', '33444', 'Magic: The Gathering', 'N/A', 'New to the scene! Trying to find people who love Magic: The Gathering in Delray Beach area.', 4.7, 25, '["Early Bird"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('james.nelson679@hotmail.com', 'password123', 'JamesNel41', 'James Nelson', 48, 'Delray Beach', '33445', 'Biking / Cycling', 'N/A', 'South FL local. Biking / Cycling enthusiast and weekend warrior. Delray Beach represent!', 5.0, 59, '["Pro Gamer"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('kylie.williams975@gmail.com', 'password123', 'KylieWil78', 'Kylie Williams', 48, 'Jupiter', '33458', 'Triathlon', 'Mobile', 'Passionate about Triathlon. Based in Jupiter, FL. Hit me up for games or meetups.', 4.5, 35, '["Tournament Ready", "PBC Veteran"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('ethan.campbell960@yahoo.com', 'password123', 'RubyCaptain131', 'Ethan Campbell', 55, 'Greenacres', '33467', 'Puzzle Games', 'PC & Console', 'Casual Puzzle Games fan from Greenacres. Also enjoy Platformers on weekends.', 4.6, 35, '["Tournament Ready", "Pro Gamer", "PBC Veteran"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('emma.martinez873@icloud.com', 'password123', 'IronEmma38', 'Emma Martinez', 52, 'West Palm Beach', '33401', 'Trading Card Games', 'N/A', 'Local West Palm Beach player. Into Trading Card Games and Fitness / General Workout. Always looking for chill groups!', 4.6, 82, '["Tabletop King", "PBC Veteran"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('denise.johnson706@gmail.com', 'password123', 'CursedDenise91', 'Denise Johnson', 50, 'Palm Beach Gardens', '33418', 'Beach Activities', 'N/A', 'Casual Beach Activities fan from Palm Beach Gardens. Also enjoy Puzzle Games on weekends.', 4.5, 17, '["Friendly Host", "Pro Gamer"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('chris.kim745@icloud.com', 'password123', 'LuckyChris85', 'Chris Kim', 49, 'Boynton Beach', '33437', 'War Games', 'N/A', 'South FL local. War Games enthusiast and weekend warrior. Boynton Beach represent!', 4.5, 77, '["Tournament Ready", "Early Bird"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('jordan.washington100@yahoo.com', 'password123', 'ToxicJordan75', 'Jordan Washington', 43, 'Palm Springs', '33461', 'Triathlon', 'Nintendo Switch', 'Local Palm Springs player. Into Triathlon and Soccer. Always looking for chill groups!', 4.5, 30, '["Early Bird", "Pro Gamer", "Friendly Host"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('ricky.williams695@yahoo.com', 'password123', 'xXRiBladeXx', 'Ricky Williams', 24, 'Juno Beach', '33408', 'Tabletop RPG', 'Xbox', 'Retired Tabletop RPG tryhard, now just vibing. Live in Juno Beach, FL.', 4.4, 53, '["Pro Gamer", "Friendly Host", "Early Bird"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('lily.barnes407@icloud.com', 'password123', 'SavageLily77', 'Lily Barnes', 33, 'Delray Beach', '33445', 'Hiking', 'PC', 'Passionate about Hiking. Based in Delray Beach, FL. Hit me up for games or meetups.', 4.5, 67, '["Friendly Host", "Tournament Ready", "Early Bird"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('gabrielle.perez24@hotmail.com', 'password123', 'xXGaLegendXx', 'Gabrielle Perez', 32, 'Pahokee', '33476', 'Stand-Up Paddleboarding', 'N/A', 'Pahokee native. Love Stand-Up Paddleboarding, dabble in Running / Jogging. Let''s connect!', 4.5, 83, '["PBC Veteran", "Early Bird", "Tournament Ready"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('sophia.vasquez570@hotmail.com', 'password123', 'xXSoSlayerXx', 'Sophia Vasquez', 43, 'West Palm Beach', '33405', 'Fitness / General Workout', 'Xbox', 'New to the scene! Trying to find people who love Fitness / General Workout in West Palm Beach area.', 4.2, 8, '["Early Bird", "Tabletop King", "Pro Gamer"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('nicole.collins589@yahoo.com', 'password123', 'NicoleCol21', 'Nicole Collins', 26, 'West Palm Beach', '33409', 'Simulation', 'Xbox', 'Local West Palm Beach player. Into Simulation and Horror Games. Always looking for chill groups!', 4.3, 65, '["PBC Veteran", "Tabletop King"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('logan.james927@outlook.com', 'password123', 'xXLoPlayerXx', 'Logan James', 51, 'West Palm Beach', '33409', 'Miniature Games', 'PC', 'South FL local. Miniature Games enthusiast and weekend warrior. West Palm Beach represent!', 4.5, 67, '["Friendly Host"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('kevin.cooper606@outlook.com', 'password123', 'FrostKevin94', 'Kevin Cooper', 31, 'Palm Springs', '33461', 'Party Games', 'N/A', 'Palm Springs native. Love Party Games, dabble in Weightlifting. Let''s connect!', 4.4, 45, '["Tabletop King", "Pro Gamer"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('christian.garcia649@yahoo.com', 'password123', 'RubyChristian85', 'Christian Garcia', 35, 'Boca Raton', '33433', 'Adventure Games', 'Mobile', 'Passionate about Adventure Games. Based in Boca Raton, FL. Hit me up for games or meetups.', 4.3, 17, '["Early Bird", "Friendly Host"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('claudia.mitchell656@gmail.com', 'password123', 'ModdedClaudia43', 'Claudia Mitchell', 39, 'Boca Raton', '33433', 'Sports Games', 'PlayStation', 'South FL local. Sports Games enthusiast and weekend warrior. Boca Raton represent!', 4.5, 9, '["Early Bird", "Tournament Ready", "Friendly Host"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('darryl.morales542@outlook.com', 'password123', 'JadeDarryl35', 'Darryl Morales', 24, 'Belle Glade', '33430', 'Eurogames', 'N/A', 'Retired Eurogames tryhard, now just vibing. Live in Belle Glade, FL.', 4.6, 27, '["Tournament Ready", "PBC Veteran", "Early Bird"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('anthony.russell10@hotmail.com', 'password123', 'AnthonyRus94', 'Anthony Russell', 34, 'Delray Beach', '33446', 'Trading Card Games', 'All Platforms', 'Delray Beach native. Love Trading Card Games, dabble in War Games. Let''s connect!', 4.2, 39, '["Tournament Ready", "Tabletop King", "Early Bird"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('wesley.lee294@outlook.com', 'password123', 'xXWePaladinXx', 'Wesley Lee', 50, 'Palm Beach', '33480', 'Tabletop RPG', 'Steam Deck', 'Palm Beach native. Love Tabletop RPG, dabble in Tennis. Let''s connect!', 4.8, 37, '["PBC Veteran"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('anthony.phillips715@gmail.com', 'password123', 'xXAnKnightXx', 'Anthony Phillips', 52, 'Pahokee', '33476', 'Softball', 'N/A', 'Casual Softball fan from Pahokee. Also enjoy Cooperative Board Games on weekends.', 4.6, 50, '["Early Bird", "Tournament Ready"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('jasmine.bryant527@outlook.com', 'password123', 'SuperWitch389', 'Jasmine Bryant', 26, 'Royal Palm Beach', '33414', 'CrossFit', 'PC', 'Retired CrossFit tryhard, now just vibing. Live in Royal Palm Beach, FL.', 4.2, 60, '["Tabletop King"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('kevin.jenkins958@icloud.com', 'password123', 'xXKeHunterXx', 'Kevin Jenkins', 20, 'Pahokee', '33476', 'Board Games', 'N/A', 'Local Pahokee player. Into Board Games and Softball. Always looking for chill groups!', 2.7, 24, '["Tournament Ready", "Tabletop King", "Early Bird"]'::jsonb, true);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('elijah.morris87@hotmail.com', 'password123', 'ElijahMor62', 'Elijah Morris', 30, 'Belle Glade', '33430', 'Tennis', 'N/A', 'South FL local. Tennis enthusiast and weekend warrior. Belle Glade represent!', 4.9, 13, '["Pro Gamer"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('riley.morgan832@outlook.com', 'password123', 'Alpha420860', 'Riley Morgan', 52, 'Boynton Beach', '33437', 'Social Deduction Games', 'Mobile', 'Retired Social Deduction Games tryhard, now just vibing. Live in Boynton Beach, FL.', 4.6, 39, '["PBC Veteran", "Early Bird", "Friendly Host"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('tiffany.wright165@yahoo.com', 'password123', 'xXTi420Xx', 'Tiffany Wright', 20, 'Greenacres', '33467', 'War Games', 'Xbox', 'Local Greenacres player. Into War Games and Social Deduction Games. Always looking for chill groups!', 4.4, 46, '["Friendly Host", "Tournament Ready"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('gavin.cruz14@yahoo.com', 'password123', 'Epic561351', 'Gavin Cruz', 50, 'Royal Palm Beach', '33411', 'Tabletop RPG', 'N/A', 'Royal Palm Beach native. Love Tabletop RPG, dabble in War Games. Let''s connect!', 4.6, 17, '["PBC Veteran"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('logan.howard718@yahoo.com', 'password123', 'xXLoQueenXx', 'Logan Howard', 34, 'Delray Beach', '33445', 'RPG', 'PC', 'Delray Beach native. Love RPG, dabble in Yoga. Let''s connect!', 4.2, 48, '["Tournament Ready", "Pro Gamer"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('valentina.anderson886@gmail.com', 'password123', 'xXVaShotgunXx', 'Valentina Anderson', 23, 'Lake Worth Beach', '33460', 'Board Games', 'N/A', 'Local Lake Worth Beach player. Into Board Games and Worker Placement. Always looking for chill groups!', 4.8, 34, '["PBC Veteran"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('morgan.coleman288@outlook.com', 'password123', 'xXMoProXx', 'Morgan Coleman', 41, 'Jupiter', '33477', 'Indie Games', 'Steam Deck', 'Passionate about Indie Games. Based in Jupiter, FL. Hit me up for games or meetups.', 4.2, 72, '["Early Bird", "Friendly Host"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('victor.evans373@outlook.com', 'password123', 'StormVictor13', 'Victor Evans', 49, 'Jupiter', '33458', 'Horror Games', 'Mobile', 'Retired Horror Games tryhard, now just vibing. Live in Jupiter, FL.', 4.7, 71, '["Early Bird", "Friendly Host"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('dominic.clark43@hotmail.com', 'password123', 'DominicCla34', 'Dominic Clark', 25, 'Delray Beach', '33446', 'Soccer', 'All Platforms', 'South FL local. Soccer enthusiast and weekend warrior. Delray Beach represent!', 4.6, 20, '["PBC Veteran", "Pro Gamer"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('courtney.king645@gmail.com', 'password123', 'xXCoSlayerXx', 'Courtney King', 46, 'Royal Palm Beach', '33414', 'Swimming', 'Nintendo Switch', 'New to the scene! Trying to find people who love Swimming in Royal Palm Beach area.', 4.4, 59, '["PBC Veteran", "Tournament Ready"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('cassidy.ramirez449@hotmail.com', 'password123', 'xXCaClericXx', 'Cassidy Ramirez', 28, 'Boca Raton', '33433', 'Fighting Games', 'Nintendo Switch', 'Local Boca Raton player. Into Fighting Games and Fitness / General Workout. Always looking for chill groups!', 3.1, 15, '["Tabletop King", "PBC Veteran"]'::jsonb, true);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('brenda.nguyen266@outlook.com', 'password123', 'BrendaNgu47', 'Brenda Nguyen', 51, 'Pahokee', '33476', 'Sports Games', 'Xbox', 'South FL local. Sports Games enthusiast and weekend warrior. Pahokee represent!', 4.4, 41, '["Tabletop King"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('chris.taylor548@gmail.com', 'password123', 'SwiftChief648', 'Chris Taylor', 31, 'Wellington', '33449', 'Swimming', 'N/A', 'South FL local. Swimming enthusiast and weekend warrior. Wellington represent!', 4.5, 75, '["Tabletop King", "Friendly Host"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('olivia.brooks225@outlook.com', 'password123', 'OliviaBro42', 'Olivia Brooks', 40, 'West Palm Beach', '33401', 'Yoga', 'N/A', 'Casual Yoga fan from West Palm Beach. Also enjoy Hiking on weekends.', 4.4, 10, '["Early Bird"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('zach.gonzalez209@hotmail.com', 'password123', 'xXZaMasterXx', 'Zach Gonzalez', 35, 'Greenacres', '33463', 'Dungeons & Dragons', 'Nintendo Switch', 'Greenacres native. Love Dungeons & Dragons, dabble in Deck Building. Let''s connect!', 4.3, 12, '["Tournament Ready"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('maya.anderson907@yahoo.com', 'password123', 'xXMa007Xx', 'Maya Anderson', 28, 'Palm Beach Gardens', '33418', 'Deck Building', 'N/A', 'Passionate about Deck Building. Based in Palm Beach Gardens, FL. Hit me up for games or meetups.', 4.4, 56, '["PBC Veteran", "Friendly Host"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('bryan.cooper387@icloud.com', 'password123', 'Storm30514', 'Bryan Cooper', 24, 'West Palm Beach', '33401', 'War Games', 'PC & Console', 'Casual War Games fan from West Palm Beach. Also enjoy RPG on weekends.', 4.9, 81, '["Friendly Host", "PBC Veteran", "Pro Gamer"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('hannah.patterson836@yahoo.com', 'password123', 'PhantomHannah62', 'Hannah Patterson', 46, 'Juno Beach', '33408', 'Puzzle Games', 'Mobile', 'Retired Puzzle Games tryhard, now just vibing. Live in Juno Beach, FL.', 4.9, 37, '["Early Bird", "Pro Gamer", "PBC Veteran"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('hector.adams233@icloud.com', 'password123', 'xXHeMasterXx', 'Hector Adams', 19, 'Wellington', '33414', 'Fitness / General Workout', 'N/A', 'Wellington native. Love Fitness / General Workout, dabble in Triathlon. Let''s connect!', 4.2, 37, '["Tournament Ready", "Early Bird"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('ethan.gonzalez366@gmail.com', 'password123', 'StormEthan47', 'Ethan Gonzalez', 36, 'Delray Beach', '33444', 'Cooperative Board Games', 'N/A', 'Delray Beach native. Love Cooperative Board Games, dabble in Dungeons & Dragons. Let''s connect!', 4.9, 14, '["Friendly Host", "Pro Gamer"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('morgan.smith897@gmail.com', 'password123', 'ModdedMorgan64', 'Morgan Smith', 40, 'Palm Beach Gardens', '33410', 'MMORPG', 'PlayStation', 'Retired MMORPG tryhard, now just vibing. Live in Palm Beach Gardens, FL.', 4.4, 17, '["Tournament Ready", "Friendly Host"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('matthew.cox131@yahoo.com', 'password123', 'xXMaChiefXx', 'Matthew Cox', 38, 'Boca Raton', '33496', 'War Games', 'N/A', 'New to the scene! Trying to find people who love War Games in Boca Raton area.', 4.8, 52, '["Pro Gamer", "Tournament Ready", "PBC Veteran"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('cassidy.richardson86@hotmail.com', 'password123', 'xXCaPaladinXx', 'Cassidy Richardson', 42, 'Wellington', '33414', 'Strategy Games', 'Steam Deck', 'Local Wellington player. Into Strategy Games and Eurogames. Always looking for chill groups!', 4.3, 23, '["Tournament Ready", "PBC Veteran"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('pedro.lewis472@yahoo.com', 'password123', 'xXPeProXx', 'Pedro Lewis', 36, 'Delray Beach', '33446', 'First-Person Shooters', 'PlayStation', 'Passionate about First-Person Shooters. Based in Delray Beach, FL. Hit me up for games or meetups.', 4.4, 32, '["Tabletop King", "PBC Veteran"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('anthony.reyes151@outlook.com', 'password123', 'AnthonyRey20', 'Anthony Reyes', 19, 'Boynton Beach', '33436', 'Deck Building', 'Steam Deck', 'Always down for Deck Building sessions. Boynton Beach-based. Message me anytime!', 4.3, 19, '["Friendly Host"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('zach.okafor114@yahoo.com', 'password123', 'Fixed6933', 'Zach Okafor', 36, 'West Palm Beach', '33401', 'Miniature Games', 'N/A', 'South FL local. Miniature Games enthusiast and weekend warrior. West Palm Beach represent!', 5.0, 77, '["Friendly Host"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('dakota.price434@yahoo.com', 'password123', 'CyberDakota67', 'Dakota Price', 32, 'Palm Beach Gardens', '33418', 'Fighting Games', 'Steam Deck', 'Retired Fighting Games tryhard, now just vibing. Live in Palm Beach Gardens, FL.', 4.4, 85, '["PBC Veteran", "Tabletop King", "Tournament Ready"]'::jsonb, false);
-END $$;
-DO $$
-DECLARE u_id uuid; BEGIN
-  u_id := create_rollcall_prod_user('santiago.diaz663@icloud.com', 'password123', 'SantiagoDia44', 'Santiago Diaz', 41, 'Boca Raton', '33431', 'Magic: The Gathering', 'PlayStation', 'Local Boca Raton player. Into Magic: The Gathering and Open World. Always looking for chill groups!', 4.8, 67, '["Friendly Host"]'::jsonb, false);
-END $$;
+-- GENERATING 500 USERS (DOLLAR QUOTED)
+SELECT create_rollcall_prod_user($pbc$Email$pbc$, $pbc$password123$pbc$, $pbc$Gamer Handle$pbc$, $pbc$Display Name$pbc$, 25, $pbc$City$pbc$, $pbc$ZIP$pbc$, $pbc$Primary Interest$pbc$, $pbc$Platform$pbc$, $pbc$Bio$pbc$, 4.8, 48, $pbc$["Pro Gamer", "Early Bird", "Tabletop King"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$ethan.baker229@yahoo.com$pbc$, $pbc$password123$pbc$, $pbc$Epic42914$pbc$, $pbc$Ethan Baker$pbc$, 33, $pbc$Jupiter$pbc$, $pbc$33477$pbc$, $pbc$Sports Games$pbc$, $pbc$Nintendo Switch$pbc$, $pbc$Retired Sports Games tryhard, now just vibing. Live in Jupiter, FL.$pbc$, 4.4, 53, $pbc$["Early Bird", "Tournament Ready"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$kylie.nelson829@gmail.com$pbc$, $pbc$password123$pbc$, $pbc$KylieNel99$pbc$, $pbc$Kylie Nelson$pbc$, 35, $pbc$Singer Island$pbc$, $pbc$33404$pbc$, $pbc$Tabletop RPG$pbc$, $pbc$N/A$pbc$, $pbc$Always down for Tabletop RPG sessions. Singer Island-based. Message me anytime!$pbc$, 4.8, 61, $pbc$["Friendly Host", "Early Bird", "Tournament Ready"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$patrick.sanders748@icloud.com$pbc$, $pbc$password123$pbc$, $pbc$HackedGeneral81$pbc$, $pbc$Patrick Sanders$pbc$, 20, $pbc$Jupiter$pbc$, $pbc$33458$pbc$, $pbc$Miniature Games$pbc$, $pbc$PlayStation$pbc$, $pbc$New to the scene! Trying to find people who love Miniature Games in Jupiter area.$pbc$, 4.3, 13, $pbc$["PBC Veteran", "Tabletop King"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$riley.davis215@outlook.com$pbc$, $pbc$password123$pbc$, $pbc$Ivory404176$pbc$, $pbc$Riley Davis$pbc$, 40, $pbc$Royal Palm Beach$pbc$, $pbc$33414$pbc$, $pbc$Puzzle Games$pbc$, $pbc$PC$pbc$, $pbc$South FL local. Puzzle Games enthusiast and weekend warrior. Royal Palm Beach represent!$pbc$, 4.7, 7, $pbc$["Friendly Host", "Pro Gamer"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$damian.gomez218@icloud.com$pbc$, $pbc$password123$pbc$, $pbc$xXDa813Xx$pbc$, $pbc$Damian Gomez$pbc$, 38, $pbc$Juno Beach$pbc$, $pbc$33408$pbc$, $pbc$Disc Golf$pbc$, $pbc$N/A$pbc$, $pbc$Retired Disc Golf tryhard, now just vibing. Live in Juno Beach, FL.$pbc$, 4.8, 38, $pbc$["Tournament Ready", "Tabletop King", "Pro Gamer"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$ricky.gonzalez506@gmail.com$pbc$, $pbc$password123$pbc$, $pbc$BrokenGamer157$pbc$, $pbc$Ricky Gonzalez$pbc$, 50, $pbc$Delray Beach$pbc$, $pbc$33446$pbc$, $pbc$Worker Placement$pbc$, $pbc$N/A$pbc$, $pbc$South FL local. Worker Placement enthusiast and weekend warrior. Delray Beach represent!$pbc$, 4.9, 50, $pbc$["Tabletop King", "Friendly Host"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$paige.coleman162@icloud.com$pbc$, $pbc$password123$pbc$, $pbc$Grind813737$pbc$, $pbc$Paige Coleman$pbc$, 45, $pbc$Palm Beach Gardens$pbc$, $pbc$33410$pbc$, $pbc$Souls-like Games$pbc$, $pbc$PC$pbc$, $pbc$New to the scene! Trying to find people who love Souls-like Games in Palm Beach Gardens area.$pbc$, 4.8, 35, $pbc$["Pro Gamer", "Tournament Ready"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$blake.coleman246@gmail.com$pbc$, $pbc$password123$pbc$, $pbc$BlakeCol82$pbc$, $pbc$Blake Coleman$pbc$, 37, $pbc$Royal Palm Beach$pbc$, $pbc$33414$pbc$, $pbc$Soccer$pbc$, $pbc$Nintendo Switch$pbc$, $pbc$Retired Soccer tryhard, now just vibing. Live in Royal Palm Beach, FL.$pbc$, 4.7, 70, $pbc$["Tournament Ready", "Pro Gamer"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$ryan.murphy124@yahoo.com$pbc$, $pbc$password123$pbc$, $pbc$RyanMur18$pbc$, $pbc$Ryan Murphy$pbc$, 46, $pbc$Lake Park$pbc$, $pbc$33403$pbc$, $pbc$Weightlifting$pbc$, $pbc$PC$pbc$, $pbc$Casual Weightlifting fan from Lake Park. Also enjoy Battle Royale on weekends.$pbc$, 4.5, 25, $pbc$["Tabletop King", "PBC Veteran"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$matthew.torres553@yahoo.com$pbc$, $pbc$password123$pbc$, $pbc$xXMaProXx$pbc$, $pbc$Matthew Torres$pbc$, 31, $pbc$Belle Glade$pbc$, $pbc$33430$pbc$, $pbc$Bird Watching$pbc$, $pbc$N/A$pbc$, $pbc$Local Belle Glade player. Into Bird Watching and Rock Climbing. Always looking for chill groups!$pbc$, 4.8, 21, $pbc$["PBC Veteran", "Friendly Host", "Tabletop King"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$elijah.brooks820@gmail.com$pbc$, $pbc$password123$pbc$, $pbc$ElijahBro34$pbc$, $pbc$Elijah Brooks$pbc$, 39, $pbc$Riviera Beach$pbc$, $pbc$33407$pbc$, $pbc$Sandbox Games$pbc$, $pbc$PlayStation$pbc$, $pbc$Passionate about Sandbox Games. Based in Riviera Beach, FL. Hit me up for games or meetups.$pbc$, 4.4, 10, $pbc$["Friendly Host"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$chase.thomas993@gmail.com$pbc$, $pbc$password123$pbc$, $pbc$ChaseTho31$pbc$, $pbc$Chase Thomas$pbc$, 18, $pbc$North Palm Beach$pbc$, $pbc$33408$pbc$, $pbc$Dungeons & Dragons$pbc$, $pbc$N/A$pbc$, $pbc$Retired Dungeons & Dragons tryhard, now just vibing. Live in North Palm Beach, FL.$pbc$, 4.9, 14, $pbc$["PBC Veteran", "Friendly Host"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$madison.okafor434@hotmail.com$pbc$, $pbc$password123$pbc$, $pbc$xXMaMasterXx$pbc$, $pbc$Madison Okafor$pbc$, 36, $pbc$Palm Beach$pbc$, $pbc$33480$pbc$, $pbc$Basketball$pbc$, $pbc$PlayStation$pbc$, $pbc$Passionate about Basketball. Based in Palm Beach, FL. Hit me up for games or meetups.$pbc$, 5.0, 10, $pbc$["Tournament Ready", "Early Bird"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$leo.miller253@hotmail.com$pbc$, $pbc$password123$pbc$, $pbc$CobaltStriker430$pbc$, $pbc$Leo Miller$pbc$, 54, $pbc$Delray Beach$pbc$, $pbc$33445$pbc$, $pbc$Warhammer$pbc$, $pbc$Steam Deck$pbc$, $pbc$Local Delray Beach player. Into Warhammer and Magic: The Gathering. Always looking for chill groups!$pbc$, 4.2, 18, $pbc$["Early Bird"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$alexandra.smith76@hotmail.com$pbc$, $pbc$password123$pbc$, $pbc$AlexandraSmi74$pbc$, $pbc$Alexandra Smith$pbc$, 24, $pbc$Juno Beach$pbc$, $pbc$33408$pbc$, $pbc$Sandbox Games$pbc$, $pbc$Mobile$pbc$, $pbc$Juno Beach native. Love Sandbox Games, dabble in Cooperative Board Games. Let's connect!$pbc$, 4.6, 22, $pbc$["Tabletop King", "Tournament Ready"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$madison.coleman160@outlook.com$pbc$, $pbc$password123$pbc$, $pbc$IvoryMadison27$pbc$, $pbc$Madison Coleman$pbc$, 53, $pbc$Delray Beach$pbc$, $pbc$33444$pbc$, $pbc$Miniature Games$pbc$, $pbc$PC$pbc$, $pbc$South FL local. Miniature Games enthusiast and weekend warrior. Delray Beach represent!$pbc$, 4.5, 84, $pbc$["Pro Gamer", "PBC Veteran"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$jacob.wood723@icloud.com$pbc$, $pbc$password123$pbc$, $pbc$StormSlayer968$pbc$, $pbc$Jacob Wood$pbc$, 53, $pbc$Tequesta$pbc$, $pbc$33469$pbc$, $pbc$Basketball$pbc$, $pbc$Nintendo Switch$pbc$, $pbc$Always down for Basketball sessions. Tequesta-based. Message me anytime!$pbc$, 4.9, 66, $pbc$["Tabletop King"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$courtney.mitchell886@yahoo.com$pbc$, $pbc$password123$pbc$, $pbc$CourtneyMit62$pbc$, $pbc$Courtney Mitchell$pbc$, 33, $pbc$Boynton Beach$pbc$, $pbc$33435$pbc$, $pbc$Dungeons & Dragons$pbc$, $pbc$Steam Deck$pbc$, $pbc$New to the scene! Trying to find people who love Dungeons & Dragons in Boynton Beach area.$pbc$, 4.7, 39, $pbc$["Tournament Ready"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$pedro.jenkins25@yahoo.com$pbc$, $pbc$password123$pbc$, $pbc$xXPeBossXx$pbc$, $pbc$Pedro Jenkins$pbc$, 32, $pbc$Wellington$pbc$, $pbc$33414$pbc$, $pbc$Disc Golf$pbc$, $pbc$N/A$pbc$, $pbc$South FL local. Disc Golf enthusiast and weekend warrior. Wellington represent!$pbc$, 4.8, 52, $pbc$["Friendly Host"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$cameron.clark747@outlook.com$pbc$, $pbc$password123$pbc$, $pbc$xXCaBarbarianXx$pbc$, $pbc$Cameron Clark$pbc$, 40, $pbc$Manalapan$pbc$, $pbc$33462$pbc$, $pbc$Platformers$pbc$, $pbc$PC & Console$pbc$, $pbc$Passionate about Platformers. Based in Manalapan, FL. Hit me up for games or meetups.$pbc$, 3.1, 20, $pbc$["Early Bird", "Tabletop King", "Tournament Ready"]$pbc$::jsonb, true);
+SELECT create_rollcall_prod_user($pbc$mia.price335@icloud.com$pbc$, $pbc$password123$pbc$, $pbc$JadeMia17$pbc$, $pbc$Mia Price$pbc$, 44, $pbc$Palm Beach Gardens$pbc$, $pbc$33418$pbc$, $pbc$Open World$pbc$, $pbc$All Platforms$pbc$, $pbc$Always down for Open World sessions. Palm Beach Gardens-based. Message me anytime!$pbc$, 4.6, 35, $pbc$["PBC Veteran", "Early Bird"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$allison.murphy524@icloud.com$pbc$, $pbc$password123$pbc$, $pbc$AllisonMur94$pbc$, $pbc$Allison Murphy$pbc$, 31, $pbc$Tequesta$pbc$, $pbc$33469$pbc$, $pbc$Tennis$pbc$, $pbc$N/A$pbc$, $pbc$Local Tequesta player. Into Tennis and Warhammer. Always looking for chill groups!$pbc$, 4.3, 49, $pbc$["Early Bird", "Tabletop King"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$charlotte.hall467@icloud.com$pbc$, $pbc$password123$pbc$, $pbc$CharlotteHal99$pbc$, $pbc$Charlotte Hall$pbc$, 22, $pbc$Loxahatchee$pbc$, $pbc$33470$pbc$, $pbc$Pickleball$pbc$, $pbc$N/A$pbc$, $pbc$New to the scene! Trying to find people who love Pickleball in Loxahatchee area.$pbc$, 4.6, 24, $pbc$["Tournament Ready"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$chase.robinson468@yahoo.com$pbc$, $pbc$password123$pbc$, $pbc$xXCh420Xx$pbc$, $pbc$Chase Robinson$pbc$, 25, $pbc$Wellington$pbc$, $pbc$33449$pbc$, $pbc$Social Deduction Games$pbc$, $pbc$N/A$pbc$, $pbc$South FL local. Social Deduction Games enthusiast and weekend warrior. Wellington represent!$pbc$, 4.4, 80, $pbc$["Tournament Ready", "PBC Veteran"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$brittany.perez451@gmail.com$pbc$, $pbc$password123$pbc$, $pbc$OmegaBrittany35$pbc$, $pbc$Brittany Perez$pbc$, 35, $pbc$Wellington$pbc$, $pbc$33449$pbc$, $pbc$Adventure Games$pbc$, $pbc$Xbox$pbc$, $pbc$Passionate about Adventure Games. Based in Wellington, FL. Hit me up for games or meetups.$pbc$, 4.8, 85, $pbc$["Tabletop King"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$thomas.mitchell478@icloud.com$pbc$, $pbc$password123$pbc$, $pbc$Echo561431$pbc$, $pbc$Thomas Mitchell$pbc$, 52, $pbc$Greenacres$pbc$, $pbc$33467$pbc$, $pbc$Bird Watching$pbc$, $pbc$Nintendo Switch$pbc$, $pbc$South FL local. Bird Watching enthusiast and weekend warrior. Greenacres represent!$pbc$, 4.5, 10, $pbc$["Early Bird", "Tabletop King"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$victoria.perez345@icloud.com$pbc$, $pbc$password123$pbc$, $pbc$VictoriaPer69$pbc$, $pbc$Victoria Perez$pbc$, 42, $pbc$West Palm Beach$pbc$, $pbc$33405$pbc$, $pbc$Tabletop RPG$pbc$, $pbc$N/A$pbc$, $pbc$West Palm Beach native. Love Tabletop RPG, dabble in Fitness / General Workout. Let's connect!$pbc$, 4.3, 10, $pbc$["Friendly Host"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$alexis.evans389@outlook.com$pbc$, $pbc$password123$pbc$, $pbc$AlexisEva68$pbc$, $pbc$Alexis Evans$pbc$, 34, $pbc$Boca Raton$pbc$, $pbc$33431$pbc$, $pbc$Puzzle Games$pbc$, $pbc$N/A$pbc$, $pbc$Local Boca Raton player. Into Puzzle Games and Tabletop RPG. Always looking for chill groups!$pbc$, 4.3, 75, $pbc$["Tournament Ready", "Tabletop King", "Early Bird"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$pedro.gonzalez773@gmail.com$pbc$, $pbc$password123$pbc$, $pbc$PedroGon35$pbc$, $pbc$Pedro Gonzalez$pbc$, 20, $pbc$Boca Raton$pbc$, $pbc$33433$pbc$, $pbc$Cooperative Board Games$pbc$, $pbc$N/A$pbc$, $pbc$South FL local. Cooperative Board Games enthusiast and weekend warrior. Boca Raton represent!$pbc$, 5.0, 76, $pbc$["PBC Veteran", "Friendly Host"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$robert.diaz988@outlook.com$pbc$, $pbc$password123$pbc$, $pbc$OnyxMage952$pbc$, $pbc$Robert Diaz$pbc$, 28, $pbc$Delray Beach$pbc$, $pbc$33445$pbc$, $pbc$Stand-Up Paddleboarding$pbc$, $pbc$PlayStation$pbc$, $pbc$Always down for Stand-Up Paddleboarding sessions. Delray Beach-based. Message me anytime!$pbc$, 4.6, 63, $pbc$["Early Bird", "Tabletop King", "Friendly Host"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$cassidy.morgan519@outlook.com$pbc$, $pbc$password123$pbc$, $pbc$CursedShotgun843$pbc$, $pbc$Cassidy Morgan$pbc$, 22, $pbc$Royal Palm Beach$pbc$, $pbc$33414$pbc$, $pbc$Biking / Cycling$pbc$, $pbc$Mobile$pbc$, $pbc$Passionate about Biking / Cycling. Based in Royal Palm Beach, FL. Hit me up for games or meetups.$pbc$, 4.9, 81, $pbc$["Early Bird"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$matthew.nelson584@hotmail.com$pbc$, $pbc$password123$pbc$, $pbc$xXMaBossXx$pbc$, $pbc$Matthew Nelson$pbc$, 47, $pbc$Wellington$pbc$, $pbc$33449$pbc$, $pbc$Racing Games$pbc$, $pbc$Mobile$pbc$, $pbc$South FL local. Racing Games enthusiast and weekend warrior. Wellington represent!$pbc$, 5.0, 17, $pbc$["Tabletop King", "Tournament Ready"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$cole.allen88@yahoo.com$pbc$, $pbc$password123$pbc$, $pbc$xXCoWitchXx$pbc$, $pbc$Cole Allen$pbc$, 30, $pbc$Lake Park$pbc$, $pbc$33403$pbc$, $pbc$Tabletop RPG$pbc$, $pbc$N/A$pbc$, $pbc$South FL local. Tabletop RPG enthusiast and weekend warrior. Lake Park represent!$pbc$, 4.6, 52, $pbc$["PBC Veteran"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$dana.long544@outlook.com$pbc$, $pbc$password123$pbc$, $pbc$xXDa42Xx$pbc$, $pbc$Dana Long$pbc$, 53, $pbc$Loxahatchee$pbc$, $pbc$33470$pbc$, $pbc$Warhammer$pbc$, $pbc$N/A$pbc$, $pbc$Loxahatchee native. Love Warhammer, dabble in Tabletop RPG. Let's connect!$pbc$, 5.0, 26, $pbc$["PBC Veteran", "Pro Gamer", "Early Bird"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$jordan.gomez742@hotmail.com$pbc$, $pbc$password123$pbc$, $pbc$InfernoJordan25$pbc$, $pbc$Jordan Gomez$pbc$, 35, $pbc$Loxahatchee$pbc$, $pbc$33470$pbc$, $pbc$Open World$pbc$, $pbc$PC$pbc$, $pbc$South FL local. Open World enthusiast and weekend warrior. Loxahatchee represent!$pbc$, 4.4, 23, $pbc$["Early Bird", "Tabletop King", "Tournament Ready"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$gavin.sullivan894@gmail.com$pbc$, $pbc$password123$pbc$, $pbc$CrimsonGavin62$pbc$, $pbc$Gavin Sullivan$pbc$, 24, $pbc$Belle Glade$pbc$, $pbc$33430$pbc$, $pbc$Party Games$pbc$, $pbc$Mobile$pbc$, $pbc$Passionate about Party Games. Based in Belle Glade, FL. Hit me up for games or meetups.$pbc$, 4.2, 74, $pbc$["Early Bird"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$cole.zhao795@hotmail.com$pbc$, $pbc$password123$pbc$, $pbc$xXCoLanceXx$pbc$, $pbc$Cole Zhao$pbc$, 32, $pbc$Lantana$pbc$, $pbc$33462$pbc$, $pbc$Miniature Games$pbc$, $pbc$Xbox$pbc$, $pbc$Lantana native. Love Miniature Games, dabble in Racing Games. Let's connect!$pbc$, 4.7, 12, $pbc$["Tournament Ready"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$aiden.mitchell299@gmail.com$pbc$, $pbc$password123$pbc$, $pbc$AidenMit46$pbc$, $pbc$Aiden Mitchell$pbc$, 48, $pbc$Tequesta$pbc$, $pbc$33469$pbc$, $pbc$Co-op Games$pbc$, $pbc$All Platforms$pbc$, $pbc$Casual Co-op Games fan from Tequesta. Also enjoy Strategy Games on weekends.$pbc$, 5.0, 20, $pbc$["Friendly Host"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$isabella.hill62@yahoo.com$pbc$, $pbc$password123$pbc$, $pbc$IvoryIsabella96$pbc$, $pbc$Isabella Hill$pbc$, 22, $pbc$Boynton Beach$pbc$, $pbc$33435$pbc$, $pbc$Triathlon$pbc$, $pbc$N/A$pbc$, $pbc$New to the scene! Trying to find people who love Triathlon in Boynton Beach area.$pbc$, 4.7, 59, $pbc$["Tabletop King", "Friendly Host"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$wesley.butler753@outlook.com$pbc$, $pbc$password123$pbc$, $pbc$NeonWesley12$pbc$, $pbc$Wesley Butler$pbc$, 45, $pbc$West Palm Beach$pbc$, $pbc$33409$pbc$, $pbc$Battle Royale$pbc$, $pbc$Xbox$pbc$, $pbc$New to the scene! Trying to find people who love Battle Royale in West Palm Beach area.$pbc$, 4.5, 84, $pbc$["Tabletop King", "Friendly Host", "Tournament Ready"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$dylan.parker342@outlook.com$pbc$, $pbc$password123$pbc$, $pbc$CursedLord338$pbc$, $pbc$Dylan Parker$pbc$, 44, $pbc$Royal Palm Beach$pbc$, $pbc$33411$pbc$, $pbc$Deck Building$pbc$, $pbc$N/A$pbc$, $pbc$South FL local. Deck Building enthusiast and weekend warrior. Royal Palm Beach represent!$pbc$, 4.8, 49, $pbc$["Friendly Host", "Early Bird"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$nora.coleman845@gmail.com$pbc$, $pbc$password123$pbc$, $pbc$xXNoShotgunXx$pbc$, $pbc$Nora Coleman$pbc$, 50, $pbc$Riviera Beach$pbc$, $pbc$33407$pbc$, $pbc$Warhammer$pbc$, $pbc$N/A$pbc$, $pbc$New to the scene! Trying to find people who love Warhammer in Riviera Beach area.$pbc$, 4.9, 64, $pbc$["Tournament Ready", "Friendly Host", "Tabletop King"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$gabrielle.baker319@hotmail.com$pbc$, $pbc$password123$pbc$, $pbc$JadeShotgun96$pbc$, $pbc$Gabrielle Baker$pbc$, 28, $pbc$Wellington$pbc$, $pbc$33449$pbc$, $pbc$Beach Volleyball$pbc$, $pbc$Xbox$pbc$, $pbc$Wellington native. Love Beach Volleyball, dabble in Flag Football. Let's connect!$pbc$, 4.3, 29, $pbc$["Tabletop King", "Friendly Host"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$daniel.howard957@hotmail.com$pbc$, $pbc$password123$pbc$, $pbc$LuckyDaniel1$pbc$, $pbc$Daniel Howard$pbc$, 39, $pbc$Lantana$pbc$, $pbc$33462$pbc$, $pbc$Martial Arts$pbc$, $pbc$N/A$pbc$, $pbc$Retired Martial Arts tryhard, now just vibing. Live in Lantana, FL.$pbc$, 4.9, 64, $pbc$["Tabletop King", "Early Bird", "Pro Gamer"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$alejandro.jones586@icloud.com$pbc$, $pbc$password123$pbc$, $pbc$AlejandroJon62$pbc$, $pbc$Alejandro Jones$pbc$, 33, $pbc$Lake Worth Beach$pbc$, $pbc$33460$pbc$, $pbc$Deck Building$pbc$, $pbc$N/A$pbc$, $pbc$Always down for Deck Building sessions. Lake Worth Beach-based. Message me anytime!$pbc$, 4.5, 85, $pbc$["Early Bird", "Tabletop King", "Friendly Host"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$elijah.ruiz539@icloud.com$pbc$, $pbc$password123$pbc$, $pbc$GrindMaster420$pbc$, $pbc$Elijah Ruiz$pbc$, 24, $pbc$Tequesta$pbc$, $pbc$33469$pbc$, $pbc$Miniature Games$pbc$, $pbc$N/A$pbc$, $pbc$New to the scene! Trying to find people who love Miniature Games in Tequesta area.$pbc$, 4.3, 36, $pbc$["Tabletop King", "Pro Gamer"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$christina.barnes647@outlook.com$pbc$, $pbc$password123$pbc$, $pbc$ChristinaBar21$pbc$, $pbc$Christina Barnes$pbc$, 33, $pbc$Boca Raton$pbc$, $pbc$33433$pbc$, $pbc$Basketball$pbc$, $pbc$N/A$pbc$, $pbc$Always down for Basketball sessions. Boca Raton-based. Message me anytime!$pbc$, 5.0, 40, $pbc$["PBC Veteran"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$victor.cox422@hotmail.com$pbc$, $pbc$password123$pbc$, $pbc$VictorCox31$pbc$, $pbc$Victor Cox$pbc$, 51, $pbc$Wellington$pbc$, $pbc$33449$pbc$, $pbc$Running / Jogging$pbc$, $pbc$Steam Deck$pbc$, $pbc$Wellington native. Love Running / Jogging, dabble in Tennis. Let's connect!$pbc$, 4.9, 49, $pbc$["Tabletop King", "Pro Gamer", "Early Bird"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$david.murphy307@icloud.com$pbc$, $pbc$password123$pbc$, $pbc$BetaDavid39$pbc$, $pbc$David Murphy$pbc$, 55, $pbc$Royal Palm Beach$pbc$, $pbc$33411$pbc$, $pbc$Cooperative Board Games$pbc$, $pbc$N/A$pbc$, $pbc$Local Royal Palm Beach player. Into Cooperative Board Games and Magic: The Gathering. Always looking for chill groups!$pbc$, 4.5, 16, $pbc$["Tournament Ready", "Early Bird", "Friendly Host"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$serena.howard886@gmail.com$pbc$, $pbc$password123$pbc$, $pbc$xXSe561Xx$pbc$, $pbc$Serena Howard$pbc$, 54, $pbc$West Palm Beach$pbc$, $pbc$33401$pbc$, $pbc$MMORPG$pbc$, $pbc$PlayStation$pbc$, $pbc$Retired MMORPG tryhard, now just vibing. Live in West Palm Beach, FL.$pbc$, 4.5, 77, $pbc$["Tabletop King"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$jasmine.foster898@outlook.com$pbc$, $pbc$password123$pbc$, $pbc$BlessedJasmine22$pbc$, $pbc$Jasmine Foster$pbc$, 52, $pbc$Delray Beach$pbc$, $pbc$33446$pbc$, $pbc$Tabletop RPG$pbc$, $pbc$PC & Console$pbc$, $pbc$Local Delray Beach player. Into Tabletop RPG and Dungeons & Dragons. Always looking for chill groups!$pbc$, 4.4, 14, $pbc$["Friendly Host"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$madison.richardson378@outlook.com$pbc$, $pbc$password123$pbc$, $pbc$xXMa305Xx$pbc$, $pbc$Madison Richardson$pbc$, 47, $pbc$Delray Beach$pbc$, $pbc$33445$pbc$, $pbc$Tennis$pbc$, $pbc$N/A$pbc$, $pbc$Retired Tennis tryhard, now just vibing. Live in Delray Beach, FL.$pbc$, 4.4, 85, $pbc$["Tournament Ready", "Pro Gamer", "Tabletop King"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$eva.cooper312@icloud.com$pbc$, $pbc$password123$pbc$, $pbc$InfernoPro909$pbc$, $pbc$Eva Cooper$pbc$, 20, $pbc$West Palm Beach$pbc$, $pbc$33409$pbc$, $pbc$Softball$pbc$, $pbc$N/A$pbc$, $pbc$Retired Softball tryhard, now just vibing. Live in West Palm Beach, FL.$pbc$, 4.9, 73, $pbc$["Tournament Ready", "Friendly Host"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$matthew.barnes455@icloud.com$pbc$, $pbc$password123$pbc$, $pbc$MatthewBar56$pbc$, $pbc$Matthew Barnes$pbc$, 31, $pbc$Royal Palm Beach$pbc$, $pbc$33414$pbc$, $pbc$Yoga$pbc$, $pbc$N/A$pbc$, $pbc$Casual Yoga fan from Royal Palm Beach. Also enjoy Warhammer on weekends.$pbc$, 4.4, 44, $pbc$["Tabletop King", "Early Bird"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$demi.anderson250@yahoo.com$pbc$, $pbc$password123$pbc$, $pbc$DemiAnd18$pbc$, $pbc$Demi Anderson$pbc$, 39, $pbc$Boca Raton$pbc$, $pbc$33431$pbc$, $pbc$MMORPG$pbc$, $pbc$Mobile$pbc$, $pbc$South FL local. MMORPG enthusiast and weekend warrior. Boca Raton represent!$pbc$, 4.9, 23, $pbc$["Pro Gamer"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$jasmine.coleman16@outlook.com$pbc$, $pbc$password123$pbc$, $pbc$JasmineCol85$pbc$, $pbc$Jasmine Coleman$pbc$, 26, $pbc$West Palm Beach$pbc$, $pbc$33405$pbc$, $pbc$Platformers$pbc$, $pbc$PlayStation$pbc$, $pbc$Always down for Platformers sessions. West Palm Beach-based. Message me anytime!$pbc$, 4.7, 25, $pbc$["PBC Veteran"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$brenda.russell516@yahoo.com$pbc$, $pbc$password123$pbc$, $pbc$GrindPBC931$pbc$, $pbc$Brenda Russell$pbc$, 46, $pbc$Delray Beach$pbc$, $pbc$33444$pbc$, $pbc$Adventure Games$pbc$, $pbc$Steam Deck$pbc$, $pbc$Always down for Adventure Games sessions. Delray Beach-based. Message me anytime!$pbc$, 4.6, 52, $pbc$["Early Bird", "Friendly Host"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$destiny.cox282@hotmail.com$pbc$, $pbc$password123$pbc$, $pbc$HyperDestiny77$pbc$, $pbc$Destiny Cox$pbc$, 26, $pbc$Boca Raton$pbc$, $pbc$33433$pbc$, $pbc$Puzzle Games$pbc$, $pbc$Steam Deck$pbc$, $pbc$Always down for Puzzle Games sessions. Boca Raton-based. Message me anytime!$pbc$, 4.7, 60, $pbc$["Tabletop King"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$alejandro.miller321@icloud.com$pbc$, $pbc$password123$pbc$, $pbc$FierceAlejandro33$pbc$, $pbc$Alejandro Miller$pbc$, 24, $pbc$Lantana$pbc$, $pbc$33462$pbc$, $pbc$Platformers$pbc$, $pbc$PlayStation$pbc$, $pbc$Always down for Platformers sessions. Lantana-based. Message me anytime!$pbc$, 4.3, 55, $pbc$["Pro Gamer"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$genesis.robinson980@hotmail.com$pbc$, $pbc$password123$pbc$, $pbc$FierceGenesis16$pbc$, $pbc$Genesis Robinson$pbc$, 55, $pbc$Boca Raton$pbc$, $pbc$33431$pbc$, $pbc$Beach Volleyball$pbc$, $pbc$PlayStation$pbc$, $pbc$Always down for Beach Volleyball sessions. Boca Raton-based. Message me anytime!$pbc$, 4.7, 68, $pbc$["Pro Gamer", "Friendly Host"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$eva.zhao232@icloud.com$pbc$, $pbc$password123$pbc$, $pbc$Ivory239674$pbc$, $pbc$Eva Zhao$pbc$, 54, $pbc$Jupiter$pbc$, $pbc$33477$pbc$, $pbc$Eurogames$pbc$, $pbc$N/A$pbc$, $pbc$Retired Eurogames tryhard, now just vibing. Live in Jupiter, FL.$pbc$, 5.0, 20, $pbc$["Tournament Ready", "PBC Veteran", "Early Bird"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$daniel.cox765@hotmail.com$pbc$, $pbc$password123$pbc$, $pbc$DanielCox58$pbc$, $pbc$Daniel Cox$pbc$, 23, $pbc$West Palm Beach$pbc$, $pbc$33405$pbc$, $pbc$War Games$pbc$, $pbc$N/A$pbc$, $pbc$Local West Palm Beach player. Into War Games and Cooperative Board Games. Always looking for chill groups!$pbc$, 4.7, 85, $pbc$["Pro Gamer"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$ivan.davis279@icloud.com$pbc$, $pbc$password123$pbc$, $pbc$xXIvWitchXx$pbc$, $pbc$Ivan Davis$pbc$, 23, $pbc$Boca Raton$pbc$, $pbc$33431$pbc$, $pbc$Bird Watching$pbc$, $pbc$N/A$pbc$, $pbc$South FL local. Bird Watching enthusiast and weekend warrior. Boca Raton represent!$pbc$, 2.7, 8, $pbc$["Tournament Ready", "Early Bird", "Pro Gamer"]$pbc$::jsonb, true);
+SELECT create_rollcall_prod_user($pbc$dawn.perez47@yahoo.com$pbc$, $pbc$password123$pbc$, $pbc$xXDaBarbarianXx$pbc$, $pbc$Dawn Perez$pbc$, 37, $pbc$Lake Park$pbc$, $pbc$33403$pbc$, $pbc$Simulation$pbc$, $pbc$Steam Deck$pbc$, $pbc$Lake Park native. Love Simulation, dabble in Indie Games. Let's connect!$pbc$, 4.9, 82, $pbc$["Tabletop King", "Early Bird"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$genesis.lopez513@hotmail.com$pbc$, $pbc$password123$pbc$, $pbc$BlazeGenesis51$pbc$, $pbc$Genesis Lopez$pbc$, 32, $pbc$North Palm Beach$pbc$, $pbc$33408$pbc$, $pbc$Platformers$pbc$, $pbc$All Platforms$pbc$, $pbc$North Palm Beach native. Love Platformers, dabble in Co-op Games. Let's connect!$pbc$, 4.3, 39, $pbc$["Tournament Ready"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$dion.nguyen448@gmail.com$pbc$, $pbc$password123$pbc$, $pbc$DionNgu65$pbc$, $pbc$Dion Nguyen$pbc$, 23, $pbc$Royal Palm Beach$pbc$, $pbc$33414$pbc$, $pbc$Warhammer$pbc$, $pbc$N/A$pbc$, $pbc$Passionate about Warhammer. Based in Royal Palm Beach, FL. Hit me up for games or meetups.$pbc$, 4.3, 74, $pbc$["Tabletop King", "PBC Veteran"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$cassandra.ramirez360@yahoo.com$pbc$, $pbc$password123$pbc$, $pbc$CassandraRam23$pbc$, $pbc$Cassandra Ramirez$pbc$, 40, $pbc$Lake Worth Beach$pbc$, $pbc$33460$pbc$, $pbc$MOBA$pbc$, $pbc$Steam Deck$pbc$, $pbc$New to the scene! Trying to find people who love MOBA in Lake Worth Beach area.$pbc$, 4.6, 80, $pbc$["Pro Gamer", "Early Bird"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$crystal.taylor155@icloud.com$pbc$, $pbc$password123$pbc$, $pbc$CrimsonLance647$pbc$, $pbc$Crystal Taylor$pbc$, 38, $pbc$Greenacres$pbc$, $pbc$33463$pbc$, $pbc$Beach Volleyball$pbc$, $pbc$N/A$pbc$, $pbc$Local Greenacres player. Into Beach Volleyball and Fitness / General Workout. Always looking for chill groups!$pbc$, 4.2, 23, $pbc$["Tabletop King", "Early Bird", "PBC Veteran"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$chloe.long661@gmail.com$pbc$, $pbc$password123$pbc$, $pbc$xXChAxeXx$pbc$, $pbc$Chloe Long$pbc$, 22, $pbc$Palm Beach Gardens$pbc$, $pbc$33410$pbc$, $pbc$Kayaking$pbc$, $pbc$PlayStation$pbc$, $pbc$Passionate about Kayaking. Based in Palm Beach Gardens, FL. Hit me up for games or meetups.$pbc$, 4.7, 31, $pbc$["Tabletop King", "PBC Veteran"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$ben.taylor254@icloud.com$pbc$, $pbc$password123$pbc$, $pbc$xXBePaladinXx$pbc$, $pbc$Ben Taylor$pbc$, 20, $pbc$Boynton Beach$pbc$, $pbc$33437$pbc$, $pbc$War Games$pbc$, $pbc$N/A$pbc$, $pbc$Passionate about War Games. Based in Boynton Beach, FL. Hit me up for games or meetups.$pbc$, 4.7, 7, $pbc$["Pro Gamer"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$omar.carter291@outlook.com$pbc$, $pbc$password123$pbc$, $pbc$OmarCar52$pbc$, $pbc$Omar Carter$pbc$, 42, $pbc$Palm Springs$pbc$, $pbc$33461$pbc$, $pbc$Magic: The Gathering$pbc$, $pbc$PlayStation$pbc$, $pbc$Retired Magic: The Gathering tryhard, now just vibing. Live in Palm Springs, FL.$pbc$, 4.4, 45, $pbc$["Tabletop King", "PBC Veteran"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$bianca.lewis317@yahoo.com$pbc$, $pbc$password123$pbc$, $pbc$BiancaLew53$pbc$, $pbc$Bianca Lewis$pbc$, 41, $pbc$West Palm Beach$pbc$, $pbc$33405$pbc$, $pbc$Souls-like Games$pbc$, $pbc$Xbox$pbc$, $pbc$West Palm Beach native. Love Souls-like Games, dabble in Softball. Let's connect!$pbc$, 4.6, 23, $pbc$["Friendly Host", "Pro Gamer", "Tournament Ready"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$jacob.evans45@icloud.com$pbc$, $pbc$password123$pbc$, $pbc$EpicJacob93$pbc$, $pbc$Jacob Evans$pbc$, 46, $pbc$Boynton Beach$pbc$, $pbc$33436$pbc$, $pbc$Tennis$pbc$, $pbc$N/A$pbc$, $pbc$New to the scene! Trying to find people who love Tennis in Boynton Beach area.$pbc$, 4.6, 27, $pbc$["Pro Gamer", "Tabletop King"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$jordan.long473@outlook.com$pbc$, $pbc$password123$pbc$, $pbc$xXJoDruidXx$pbc$, $pbc$Jordan Long$pbc$, 46, $pbc$Juno Beach$pbc$, $pbc$33408$pbc$, $pbc$Hiking$pbc$, $pbc$PlayStation$pbc$, $pbc$Juno Beach native. Love Hiking, dabble in Horror Games. Let's connect!$pbc$, 4.8, 17, $pbc$["Tournament Ready"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$maria.nelson851@icloud.com$pbc$, $pbc$password123$pbc$, $pbc$ModdedAce837$pbc$, $pbc$Maria Nelson$pbc$, 27, $pbc$Pahokee$pbc$, $pbc$33476$pbc$, $pbc$Party Games$pbc$, $pbc$N/A$pbc$, $pbc$Always down for Party Games sessions. Pahokee-based. Message me anytime!$pbc$, 4.7, 61, $pbc$["Pro Gamer", "PBC Veteran", "Tabletop King"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$elijah.reyes141@gmail.com$pbc$, $pbc$password123$pbc$, $pbc$ModdedElijah61$pbc$, $pbc$Elijah Reyes$pbc$, 27, $pbc$Greenacres$pbc$, $pbc$33467$pbc$, $pbc$Strategy Games$pbc$, $pbc$All Platforms$pbc$, $pbc$Casual Strategy Games fan from Greenacres. Also enjoy MMORPG on weekends.$pbc$, 4.3, 45, $pbc$["Tournament Ready", "Friendly Host", "Tabletop King"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$morgan.collins430@hotmail.com$pbc$, $pbc$password123$pbc$, $pbc$xXMoSlayerXx$pbc$, $pbc$Morgan Collins$pbc$, 33, $pbc$Boca Raton$pbc$, $pbc$33431$pbc$, $pbc$Running / Jogging$pbc$, $pbc$PC & Console$pbc$, $pbc$Retired Running / Jogging tryhard, now just vibing. Live in Boca Raton, FL.$pbc$, 4.4, 53, $pbc$["Friendly Host", "PBC Veteran"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$jenna.torres999@outlook.com$pbc$, $pbc$password123$pbc$, $pbc$AzureRogue520$pbc$, $pbc$Jenna Torres$pbc$, 51, $pbc$Boca Raton$pbc$, $pbc$33496$pbc$, $pbc$Eurogames$pbc$, $pbc$PC & Console$pbc$, $pbc$Passionate about Eurogames. Based in Boca Raton, FL. Hit me up for games or meetups.$pbc$, 4.4, 77, $pbc$["Tabletop King", "Early Bird", "Friendly Host"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$dana.wood46@outlook.com$pbc$, $pbc$password123$pbc$, $pbc$LuckyDana83$pbc$, $pbc$Dana Wood$pbc$, 26, $pbc$Greenacres$pbc$, $pbc$33467$pbc$, $pbc$Trading Card Games$pbc$, $pbc$Nintendo Switch$pbc$, $pbc$South FL local. Trading Card Games enthusiast and weekend warrior. Greenacres represent!$pbc$, 4.5, 7, $pbc$["Tournament Ready"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$brenda.martinez260@gmail.com$pbc$, $pbc$password123$pbc$, $pbc$BrendaMar46$pbc$, $pbc$Brenda Martinez$pbc$, 48, $pbc$North Palm Beach$pbc$, $pbc$33408$pbc$, $pbc$Social Deduction Games$pbc$, $pbc$N/A$pbc$, $pbc$Retired Social Deduction Games tryhard, now just vibing. Live in North Palm Beach, FL.$pbc$, 3.0, 83, $pbc$["Early Bird", "Tabletop King", "Pro Gamer"]$pbc$::jsonb, true);
+SELECT create_rollcall_prod_user($pbc$owen.evans377@hotmail.com$pbc$, $pbc$password123$pbc$, $pbc$CasualOwen11$pbc$, $pbc$Owen Evans$pbc$, 49, $pbc$Belle Glade$pbc$, $pbc$33430$pbc$, $pbc$RPG$pbc$, $pbc$Mobile$pbc$, $pbc$Retired RPG tryhard, now just vibing. Live in Belle Glade, FL.$pbc$, 4.7, 52, $pbc$["Tournament Ready", "Tabletop King"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$jake.ward458@gmail.com$pbc$, $pbc$password123$pbc$, $pbc$CobaltJake56$pbc$, $pbc$Jake Ward$pbc$, 40, $pbc$Tequesta$pbc$, $pbc$33469$pbc$, $pbc$Bird Watching$pbc$, $pbc$N/A$pbc$, $pbc$Tequesta native. Love Bird Watching, dabble in Flag Football. Let's connect!$pbc$, 4.9, 47, $pbc$["Tabletop King", "Early Bird", "Friendly Host"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$brooklyn.cox130@gmail.com$pbc$, $pbc$password123$pbc$, $pbc$BrooklynCox92$pbc$, $pbc$Brooklyn Cox$pbc$, 20, $pbc$Tequesta$pbc$, $pbc$33469$pbc$, $pbc$Horror Games$pbc$, $pbc$PC & Console$pbc$, $pbc$South FL local. Horror Games enthusiast and weekend warrior. Tequesta represent!$pbc$, 4.7, 63, $pbc$["Early Bird", "PBC Veteran"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$logan.coleman512@hotmail.com$pbc$, $pbc$password123$pbc$, $pbc$xXLo321Xx$pbc$, $pbc$Logan Coleman$pbc$, 29, $pbc$West Palm Beach$pbc$, $pbc$33405$pbc$, $pbc$Kayaking$pbc$, $pbc$N/A$pbc$, $pbc$West Palm Beach native. Love Kayaking, dabble in Trading Card Games. Let's connect!$pbc$, 4.9, 58, $pbc$["PBC Veteran", "Tournament Ready"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$david.nelson90@outlook.com$pbc$, $pbc$password123$pbc$, $pbc$ClutchDavid9$pbc$, $pbc$David Nelson$pbc$, 46, $pbc$Boynton Beach$pbc$, $pbc$33437$pbc$, $pbc$Sports Games$pbc$, $pbc$PC & Console$pbc$, $pbc$Boynton Beach native. Love Sports Games, dabble in RPG. Let's connect!$pbc$, 4.6, 8, $pbc$["Pro Gamer"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$devon.campbell408@icloud.com$pbc$, $pbc$password123$pbc$, $pbc$xXDeXLXx$pbc$, $pbc$Devon Campbell$pbc$, 37, $pbc$Boca Raton$pbc$, $pbc$33433$pbc$, $pbc$Deck Building$pbc$, $pbc$N/A$pbc$, $pbc$Always down for Deck Building sessions. Boca Raton-based. Message me anytime!$pbc$, 4.7, 38, $pbc$["PBC Veteran", "Friendly Host", "Tabletop King"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$gavin.castillo187@yahoo.com$pbc$, $pbc$password123$pbc$, $pbc$xXGaDruidXx$pbc$, $pbc$Gavin Castillo$pbc$, 55, $pbc$Palm Springs$pbc$, $pbc$33461$pbc$, $pbc$Indie Games$pbc$, $pbc$Nintendo Switch$pbc$, $pbc$South FL local. Indie Games enthusiast and weekend warrior. Palm Springs represent!$pbc$, 4.4, 57, $pbc$["Early Bird", "Tournament Ready"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$diana.harris282@yahoo.com$pbc$, $pbc$password123$pbc$, $pbc$CobaltDiana69$pbc$, $pbc$Diana Harris$pbc$, 53, $pbc$Lake Worth Beach$pbc$, $pbc$33460$pbc$, $pbc$Fitness / General Workout$pbc$, $pbc$PC$pbc$, $pbc$South FL local. Fitness / General Workout enthusiast and weekend warrior. Lake Worth Beach represent!$pbc$, 4.8, 85, $pbc$["PBC Veteran", "Tabletop King"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$justin.patel633@gmail.com$pbc$, $pbc$password123$pbc$, $pbc$xXJu813Xx$pbc$, $pbc$Justin Patel$pbc$, 44, $pbc$Juno Beach$pbc$, $pbc$33408$pbc$, $pbc$Martial Arts$pbc$, $pbc$N/A$pbc$, $pbc$New to the scene! Trying to find people who love Martial Arts in Juno Beach area.$pbc$, 4.8, 45, $pbc$["Early Bird"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$alexis.garcia321@outlook.com$pbc$, $pbc$password123$pbc$, $pbc$UltraAlexis17$pbc$, $pbc$Alexis Garcia$pbc$, 27, $pbc$Greenacres$pbc$, $pbc$33467$pbc$, $pbc$RPG$pbc$, $pbc$Steam Deck$pbc$, $pbc$Passionate about RPG. Based in Greenacres, FL. Hit me up for games or meetups.$pbc$, 4.8, 22, $pbc$["Tabletop King", "Tournament Ready", "Friendly Host"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$chase.jackson255@yahoo.com$pbc$, $pbc$password123$pbc$, $pbc$HackedChase74$pbc$, $pbc$Chase Jackson$pbc$, 44, $pbc$Riviera Beach$pbc$, $pbc$33404$pbc$, $pbc$Beach Volleyball$pbc$, $pbc$N/A$pbc$, $pbc$New to the scene! Trying to find people who love Beach Volleyball in Riviera Beach area.$pbc$, 4.3, 10, $pbc$["Early Bird", "Tabletop King"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$liam.gomez50@gmail.com$pbc$, $pbc$password123$pbc$, $pbc$GoldenLiam77$pbc$, $pbc$Liam Gomez$pbc$, 40, $pbc$Singer Island$pbc$, $pbc$33404$pbc$, $pbc$MMORPG$pbc$, $pbc$PC & Console$pbc$, $pbc$Local Singer Island player. Into MMORPG and Racing Games. Always looking for chill groups!$pbc$, 4.8, 57, $pbc$["Friendly Host", "Pro Gamer", "PBC Veteran"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$sofia.bennett200@outlook.com$pbc$, $pbc$password123$pbc$, $pbc$BlazeSofia50$pbc$, $pbc$Sofia Bennett$pbc$, 53, $pbc$Juno Beach$pbc$, $pbc$33408$pbc$, $pbc$Kayaking$pbc$, $pbc$N/A$pbc$, $pbc$Always down for Kayaking sessions. Juno Beach-based. Message me anytime!$pbc$, 4.8, 55, $pbc$["Early Bird", "PBC Veteran", "Pro Gamer"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$owen.robinson204@hotmail.com$pbc$, $pbc$password123$pbc$, $pbc$xXOwDruidXx$pbc$, $pbc$Owen Robinson$pbc$, 27, $pbc$Royal Palm Beach$pbc$, $pbc$33414$pbc$, $pbc$Worker Placement$pbc$, $pbc$N/A$pbc$, $pbc$Royal Palm Beach native. Love Worker Placement, dabble in Deck Building. Let's connect!$pbc$, 4.5, 26, $pbc$["Tournament Ready", "Pro Gamer", "Tabletop King"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$olivia.scott403@hotmail.com$pbc$, $pbc$password123$pbc$, $pbc$OnyxOlivia44$pbc$, $pbc$Olivia Scott$pbc$, 28, $pbc$Greenacres$pbc$, $pbc$33463$pbc$, $pbc$Pickleball$pbc$, $pbc$N/A$pbc$, $pbc$South FL local. Pickleball enthusiast and weekend warrior. Greenacres represent!$pbc$, 4.7, 12, $pbc$["Tabletop King"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$brianna.sanchez991@hotmail.com$pbc$, $pbc$password123$pbc$, $pbc$BriannaSan16$pbc$, $pbc$Brianna Sanchez$pbc$, 34, $pbc$Loxahatchee$pbc$, $pbc$33470$pbc$, $pbc$Fitness / General Workout$pbc$, $pbc$N/A$pbc$, $pbc$Passionate about Fitness / General Workout. Based in Loxahatchee, FL. Hit me up for games or meetups.$pbc$, 4.6, 20, $pbc$["Tournament Ready"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$jessica.anderson429@yahoo.com$pbc$, $pbc$password123$pbc$, $pbc$xXJe1337Xx$pbc$, $pbc$Jessica Anderson$pbc$, 38, $pbc$Tequesta$pbc$, $pbc$33469$pbc$, $pbc$Worker Placement$pbc$, $pbc$PC & Console$pbc$, $pbc$Retired Worker Placement tryhard, now just vibing. Live in Tequesta, FL.$pbc$, 4.4, 58, $pbc$["Pro Gamer"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$nicole.edwards351@hotmail.com$pbc$, $pbc$password123$pbc$, $pbc$EpicNicole99$pbc$, $pbc$Nicole Edwards$pbc$, 52, $pbc$Palm Beach$pbc$, $pbc$33480$pbc$, $pbc$Open World$pbc$, $pbc$Nintendo Switch$pbc$, $pbc$Casual Open World fan from Palm Beach. Also enjoy Simulation on weekends.$pbc$, 4.3, 67, $pbc$["Tabletop King", "Early Bird", "Tournament Ready"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$ashley.johnson574@outlook.com$pbc$, $pbc$password123$pbc$, $pbc$StormAshley74$pbc$, $pbc$Ashley Johnson$pbc$, 40, $pbc$Loxahatchee$pbc$, $pbc$33470$pbc$, $pbc$MOBA$pbc$, $pbc$Mobile$pbc$, $pbc$South FL local. MOBA enthusiast and weekend warrior. Loxahatchee represent!$pbc$, 4.6, 5, $pbc$["Early Bird"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$hannah.clark249@gmail.com$pbc$, $pbc$password123$pbc$, $pbc$HannahCla91$pbc$, $pbc$Hannah Clark$pbc$, 33, $pbc$Singer Island$pbc$, $pbc$33404$pbc$, $pbc$Fitness / General Workout$pbc$, $pbc$N/A$pbc$, $pbc$Retired Fitness / General Workout tryhard, now just vibing. Live in Singer Island, FL.$pbc$, 4.3, 30, $pbc$["Pro Gamer", "PBC Veteran"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$angel.patterson329@outlook.com$pbc$, $pbc$password123$pbc$, $pbc$ModdedXL92$pbc$, $pbc$Angel Patterson$pbc$, 36, $pbc$Lake Worth Beach$pbc$, $pbc$33460$pbc$, $pbc$Fighting Games$pbc$, $pbc$Mobile$pbc$, $pbc$South FL local. Fighting Games enthusiast and weekend warrior. Lake Worth Beach represent!$pbc$, 4.6, 10, $pbc$["PBC Veteran", "Early Bird", "Pro Gamer"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$cynthia.sanders292@icloud.com$pbc$, $pbc$password123$pbc$, $pbc$xXCy813Xx$pbc$, $pbc$Cynthia Sanders$pbc$, 39, $pbc$Delray Beach$pbc$, $pbc$33444$pbc$, $pbc$Fighting Games$pbc$, $pbc$Mobile$pbc$, $pbc$Local Delray Beach player. Into Fighting Games and Sandbox Games. Always looking for chill groups!$pbc$, 4.8, 20, $pbc$["PBC Veteran", "Pro Gamer"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$owen.mensah691@yahoo.com$pbc$, $pbc$password123$pbc$, $pbc$OwenMen88$pbc$, $pbc$Owen Mensah$pbc$, 54, $pbc$Palm Beach Gardens$pbc$, $pbc$33410$pbc$, $pbc$Dungeons & Dragons$pbc$, $pbc$PC$pbc$, $pbc$Casual Dungeons & Dragons fan from Palm Beach Gardens. Also enjoy Indie Games on weekends.$pbc$, 5.0, 78, $pbc$["Friendly Host", "Early Bird"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$zoe.young310@hotmail.com$pbc$, $pbc$password123$pbc$, $pbc$Titan69369$pbc$, $pbc$Zoe Young$pbc$, 39, $pbc$Jupiter$pbc$, $pbc$33477$pbc$, $pbc$Souls-like Games$pbc$, $pbc$Nintendo Switch$pbc$, $pbc$New to the scene! Trying to find people who love Souls-like Games in Jupiter area.$pbc$, 4.9, 67, $pbc$["Tabletop King", "Early Bird", "Tournament Ready"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$ivan.nguyen719@hotmail.com$pbc$, $pbc$password123$pbc$, $pbc$xXIv100Xx$pbc$, $pbc$Ivan Nguyen$pbc$, 44, $pbc$Royal Palm Beach$pbc$, $pbc$33414$pbc$, $pbc$Martial Arts$pbc$, $pbc$PlayStation$pbc$, $pbc$Casual Martial Arts fan from Royal Palm Beach. Also enjoy Flag Football on weekends.$pbc$, 4.3, 23, $pbc$["Pro Gamer", "Friendly Host", "PBC Veteran"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$dakota.richardson336@hotmail.com$pbc$, $pbc$password123$pbc$, $pbc$xXDaGamerXx$pbc$, $pbc$Dakota Richardson$pbc$, 28, $pbc$Boynton Beach$pbc$, $pbc$33435$pbc$, $pbc$Basketball$pbc$, $pbc$N/A$pbc$, $pbc$Retired Basketball tryhard, now just vibing. Live in Boynton Beach, FL.$pbc$, 4.9, 73, $pbc$["Tabletop King", "Tournament Ready", "Early Bird"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$alejandro.rodriguez474@outlook.com$pbc$, $pbc$password123$pbc$, $pbc$UltraGod837$pbc$, $pbc$Alejandro Rodriguez$pbc$, 53, $pbc$Boca Raton$pbc$, $pbc$33431$pbc$, $pbc$Trading Card Games$pbc$, $pbc$N/A$pbc$, $pbc$Passionate about Trading Card Games. Based in Boca Raton, FL. Hit me up for games or meetups.$pbc$, 4.8, 9, $pbc$["PBC Veteran", "Tournament Ready", "Friendly Host"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$amanda.barnes185@yahoo.com$pbc$, $pbc$password123$pbc$, $pbc$xXAmCaptainXx$pbc$, $pbc$Amanda Barnes$pbc$, 44, $pbc$Palm Beach Gardens$pbc$, $pbc$33410$pbc$, $pbc$Bird Watching$pbc$, $pbc$Nintendo Switch$pbc$, $pbc$South FL local. Bird Watching enthusiast and weekend warrior. Palm Beach Gardens represent!$pbc$, 4.6, 59, $pbc$["Tabletop King", "Friendly Host", "Pro Gamer"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$alexis.turner545@icloud.com$pbc$, $pbc$password123$pbc$, $pbc$AlexisTur41$pbc$, $pbc$Alexis Turner$pbc$, 45, $pbc$North Palm Beach$pbc$, $pbc$33408$pbc$, $pbc$Basketball$pbc$, $pbc$N/A$pbc$, $pbc$Local North Palm Beach player. Into Basketball and Fitness / General Workout. Always looking for chill groups!$pbc$, 4.8, 29, $pbc$["Tabletop King", "Friendly Host", "Early Bird"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$liam.garcia609@gmail.com$pbc$, $pbc$password123$pbc$, $pbc$xXLiBarbarianXx$pbc$, $pbc$Liam Garcia$pbc$, 24, $pbc$Boca Raton$pbc$, $pbc$33433$pbc$, $pbc$MMORPG$pbc$, $pbc$PC & Console$pbc$, $pbc$Always down for MMORPG sessions. Boca Raton-based. Message me anytime!$pbc$, 4.4, 38, $pbc$["Pro Gamer"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$leo.james227@icloud.com$pbc$, $pbc$password123$pbc$, $pbc$ViperLeo8$pbc$, $pbc$Leo James$pbc$, 51, $pbc$Boynton Beach$pbc$, $pbc$33435$pbc$, $pbc$Eurogames$pbc$, $pbc$N/A$pbc$, $pbc$Retired Eurogames tryhard, now just vibing. Live in Boynton Beach, FL.$pbc$, 4.5, 78, $pbc$["Tabletop King", "Friendly Host"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$tanner.cruz189@hotmail.com$pbc$, $pbc$password123$pbc$, $pbc$xXTaProXx$pbc$, $pbc$Tanner Cruz$pbc$, 42, $pbc$Palm Beach Gardens$pbc$, $pbc$33418$pbc$, $pbc$Souls-like Games$pbc$, $pbc$PlayStation$pbc$, $pbc$Passionate about Souls-like Games. Based in Palm Beach Gardens, FL. Hit me up for games or meetups.$pbc$, 4.8, 48, $pbc$["Friendly Host", "Tournament Ready", "Early Bird"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$christian.williams275@icloud.com$pbc$, $pbc$password123$pbc$, $pbc$BrokenSlayer193$pbc$, $pbc$Christian Williams$pbc$, 21, $pbc$Lake Worth Beach$pbc$, $pbc$33460$pbc$, $pbc$Simulation$pbc$, $pbc$Nintendo Switch$pbc$, $pbc$Passionate about Simulation. Based in Lake Worth Beach, FL. Hit me up for games or meetups.$pbc$, 4.5, 66, $pbc$["Tabletop King", "Tournament Ready"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$anthony.hall938@yahoo.com$pbc$, $pbc$password123$pbc$, $pbc$ChillAnthony37$pbc$, $pbc$Anthony Hall$pbc$, 43, $pbc$Lake Worth Beach$pbc$, $pbc$33461$pbc$, $pbc$Worker Placement$pbc$, $pbc$N/A$pbc$, $pbc$Casual Worker Placement fan from Lake Worth Beach. Also enjoy Deck Building on weekends.$pbc$, 4.8, 71, $pbc$["Pro Gamer", "Early Bird"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$robert.johnson577@yahoo.com$pbc$, $pbc$password123$pbc$, $pbc$RobertJoh12$pbc$, $pbc$Robert Johnson$pbc$, 20, $pbc$Lantana$pbc$, $pbc$33462$pbc$, $pbc$Warhammer$pbc$, $pbc$N/A$pbc$, $pbc$New to the scene! Trying to find people who love Warhammer in Lantana area.$pbc$, 4.6, 68, $pbc$["Tabletop King", "PBC Veteran", "Tournament Ready"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$claudia.thomas782@icloud.com$pbc$, $pbc$password123$pbc$, $pbc$xXClAxeXx$pbc$, $pbc$Claudia Thomas$pbc$, 34, $pbc$Greenacres$pbc$, $pbc$33467$pbc$, $pbc$Biking / Cycling$pbc$, $pbc$N/A$pbc$, $pbc$Local Greenacres player. Into Biking / Cycling and Disc Golf. Always looking for chill groups!$pbc$, 4.4, 75, $pbc$["Pro Gamer", "PBC Veteran"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$derek.vasquez423@yahoo.com$pbc$, $pbc$password123$pbc$, $pbc$DerekVas18$pbc$, $pbc$Derek Vasquez$pbc$, 18, $pbc$Boca Raton$pbc$, $pbc$33431$pbc$, $pbc$Miniature Games$pbc$, $pbc$All Platforms$pbc$, $pbc$South FL local. Miniature Games enthusiast and weekend warrior. Boca Raton represent!$pbc$, 4.6, 48, $pbc$["Pro Gamer"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$christian.hughes833@icloud.com$pbc$, $pbc$password123$pbc$, $pbc$ChristianHug23$pbc$, $pbc$Christian Hughes$pbc$, 50, $pbc$West Palm Beach$pbc$, $pbc$33405$pbc$, $pbc$Swimming$pbc$, $pbc$N/A$pbc$, $pbc$Retired Swimming tryhard, now just vibing. Live in West Palm Beach, FL.$pbc$, 4.3, 14, $pbc$["PBC Veteran", "Tournament Ready", "Early Bird"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$alexandra.rodriguez308@gmail.com$pbc$, $pbc$password123$pbc$, $pbc$CyberSniper389$pbc$, $pbc$Alexandra Rodriguez$pbc$, 32, $pbc$Wellington$pbc$, $pbc$33449$pbc$, $pbc$Fighting Games$pbc$, $pbc$All Platforms$pbc$, $pbc$Passionate about Fighting Games. Based in Wellington, FL. Hit me up for games or meetups.$pbc$, 4.3, 81, $pbc$["Friendly Host", "PBC Veteran"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$cassandra.bell923@hotmail.com$pbc$, $pbc$password123$pbc$, $pbc$xXCaLegendXx$pbc$, $pbc$Cassandra Bell$pbc$, 31, $pbc$Wellington$pbc$, $pbc$33414$pbc$, $pbc$Pickleball$pbc$, $pbc$Nintendo Switch$pbc$, $pbc$Always down for Pickleball sessions. Wellington-based. Message me anytime!$pbc$, 4.8, 70, $pbc$["Tabletop King", "Friendly Host", "Early Bird"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$sara.young513@outlook.com$pbc$, $pbc$password123$pbc$, $pbc$InfernoBlade238$pbc$, $pbc$Sara Young$pbc$, 23, $pbc$Delray Beach$pbc$, $pbc$33446$pbc$, $pbc$Pickleball$pbc$, $pbc$N/A$pbc$, $pbc$Always down for Pickleball sessions. Delray Beach-based. Message me anytime!$pbc$, 4.8, 81, $pbc$["Pro Gamer"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$cody.lopez697@hotmail.com$pbc$, $pbc$password123$pbc$, $pbc$xXCoStrikerXx$pbc$, $pbc$Cody Lopez$pbc$, 29, $pbc$Manalapan$pbc$, $pbc$33462$pbc$, $pbc$Adventure Games$pbc$, $pbc$All Platforms$pbc$, $pbc$Passionate about Adventure Games. Based in Manalapan, FL. Hit me up for games or meetups.$pbc$, 4.8, 76, $pbc$["Early Bird", "Tabletop King", "PBC Veteran"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$dylan.adams369@outlook.com$pbc$, $pbc$password123$pbc$, $pbc$FrostStriker192$pbc$, $pbc$Dylan Adams$pbc$, 46, $pbc$Palm Beach Gardens$pbc$, $pbc$33418$pbc$, $pbc$Tabletop RPG$pbc$, $pbc$PC & Console$pbc$, $pbc$South FL local. Tabletop RPG enthusiast and weekend warrior. Palm Beach Gardens represent!$pbc$, 4.4, 67, $pbc$["Tournament Ready", "Tabletop King"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$taylor.martin927@yahoo.com$pbc$, $pbc$password123$pbc$, $pbc$TaylorMar97$pbc$, $pbc$Taylor Martin$pbc$, 53, $pbc$Boca Raton$pbc$, $pbc$33496$pbc$, $pbc$Dungeons & Dragons$pbc$, $pbc$N/A$pbc$, $pbc$South FL local. Dungeons & Dragons enthusiast and weekend warrior. Boca Raton represent!$pbc$, 4.3, 12, $pbc$["PBC Veteran"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$tiffany.james370@outlook.com$pbc$, $pbc$password123$pbc$, $pbc$TiffanyJam90$pbc$, $pbc$Tiffany James$pbc$, 22, $pbc$Loxahatchee$pbc$, $pbc$33470$pbc$, $pbc$Simulation$pbc$, $pbc$PC$pbc$, $pbc$Retired Simulation tryhard, now just vibing. Live in Loxahatchee, FL.$pbc$, 4.6, 10, $pbc$["Friendly Host"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$omar.murphy836@hotmail.com$pbc$, $pbc$password123$pbc$, $pbc$OmarMur48$pbc$, $pbc$Omar Murphy$pbc$, 45, $pbc$Greenacres$pbc$, $pbc$33467$pbc$, $pbc$Simulation$pbc$, $pbc$All Platforms$pbc$, $pbc$Always down for Simulation sessions. Greenacres-based. Message me anytime!$pbc$, 4.9, 30, $pbc$["Tournament Ready", "Friendly Host", "PBC Veteran"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$eva.rodriguez559@yahoo.com$pbc$, $pbc$password123$pbc$, $pbc$GrindAxe966$pbc$, $pbc$Eva Rodriguez$pbc$, 55, $pbc$Lake Worth Beach$pbc$, $pbc$33460$pbc$, $pbc$Simulation$pbc$, $pbc$All Platforms$pbc$, $pbc$New to the scene! Trying to find people who love Simulation in Lake Worth Beach area.$pbc$, 3.0, 14, $pbc$["Tabletop King", "Tournament Ready"]$pbc$::jsonb, true);
+SELECT create_rollcall_prod_user($pbc$danny.miller946@icloud.com$pbc$, $pbc$password123$pbc$, $pbc$LazyCaptain719$pbc$, $pbc$Danny Miller$pbc$, 50, $pbc$North Palm Beach$pbc$, $pbc$33408$pbc$, $pbc$Horror Games$pbc$, $pbc$All Platforms$pbc$, $pbc$Passionate about Horror Games. Based in North Palm Beach, FL. Hit me up for games or meetups.$pbc$, 4.9, 69, $pbc$["Tabletop King"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$axel.carter523@hotmail.com$pbc$, $pbc$password123$pbc$, $pbc$AxelCar67$pbc$, $pbc$Axel Carter$pbc$, 32, $pbc$Jupiter$pbc$, $pbc$33458$pbc$, $pbc$Pickleball$pbc$, $pbc$All Platforms$pbc$, $pbc$Jupiter native. Love Pickleball, dabble in Soccer. Let's connect!$pbc$, 4.7, 19, $pbc$["Tabletop King"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$pedro.jenkins804@yahoo.com$pbc$, $pbc$password123$pbc$, $pbc$xXPeChiefXx$pbc$, $pbc$Pedro Jenkins$pbc$, 47, $pbc$Greenacres$pbc$, $pbc$33467$pbc$, $pbc$Magic: The Gathering$pbc$, $pbc$N/A$pbc$, $pbc$Always down for Magic: The Gathering sessions. Greenacres-based. Message me anytime!$pbc$, 4.3, 41, $pbc$["Tournament Ready", "Friendly Host", "Tabletop King"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$emma.turner529@yahoo.com$pbc$, $pbc$password123$pbc$, $pbc$EmmaTur52$pbc$, $pbc$Emma Turner$pbc$, 33, $pbc$Boynton Beach$pbc$, $pbc$33436$pbc$, $pbc$Dungeons & Dragons$pbc$, $pbc$N/A$pbc$, $pbc$Retired Dungeons & Dragons tryhard, now just vibing. Live in Boynton Beach, FL.$pbc$, 4.7, 42, $pbc$["Pro Gamer", "Early Bird"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$serena.baker607@icloud.com$pbc$, $pbc$password123$pbc$, $pbc$xXSeKnightXx$pbc$, $pbc$Serena Baker$pbc$, 46, $pbc$Lake Worth Beach$pbc$, $pbc$33460$pbc$, $pbc$Fighting Games$pbc$, $pbc$PlayStation$pbc$, $pbc$New to the scene! Trying to find people who love Fighting Games in Lake Worth Beach area.$pbc$, 4.8, 63, $pbc$["PBC Veteran"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$cassandra.sullivan626@icloud.com$pbc$, $pbc$password123$pbc$, $pbc$StealthChief866$pbc$, $pbc$Cassandra Sullivan$pbc$, 42, $pbc$Greenacres$pbc$, $pbc$33463$pbc$, $pbc$Running / Jogging$pbc$, $pbc$PC & Console$pbc$, $pbc$Retired Running / Jogging tryhard, now just vibing. Live in Greenacres, FL.$pbc$, 4.6, 65, $pbc$["PBC Veteran"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$tiffany.sanchez393@icloud.com$pbc$, $pbc$password123$pbc$, $pbc$TiffanySan72$pbc$, $pbc$Tiffany Sanchez$pbc$, 54, $pbc$Delray Beach$pbc$, $pbc$33446$pbc$, $pbc$Dungeons & Dragons$pbc$, $pbc$N/A$pbc$, $pbc$Local Delray Beach player. Into Dungeons & Dragons and Martial Arts. Always looking for chill groups!$pbc$, 4.8, 21, $pbc$["PBC Veteran", "Tabletop King"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$ariana.cooper987@hotmail.com$pbc$, $pbc$password123$pbc$, $pbc$xXArShotgunXx$pbc$, $pbc$Ariana Cooper$pbc$, 42, $pbc$Lake Worth Beach$pbc$, $pbc$33460$pbc$, $pbc$Simulation$pbc$, $pbc$Nintendo Switch$pbc$, $pbc$Lake Worth Beach native. Love Simulation, dabble in Swimming. Let's connect!$pbc$, 4.7, 8, $pbc$["Friendly Host", "Pro Gamer", "Early Bird"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$alexandra.rodriguez524@gmail.com$pbc$, $pbc$password123$pbc$, $pbc$ViperXL557$pbc$, $pbc$Alexandra Rodriguez$pbc$, 53, $pbc$Belle Glade$pbc$, $pbc$33430$pbc$, $pbc$Tabletop RPG$pbc$, $pbc$Steam Deck$pbc$, $pbc$Passionate about Tabletop RPG. Based in Belle Glade, FL. Hit me up for games or meetups.$pbc$, 4.9, 23, $pbc$["Tabletop King"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$wesley.collins831@hotmail.com$pbc$, $pbc$password123$pbc$, $pbc$BrokenWesley91$pbc$, $pbc$Wesley Collins$pbc$, 31, $pbc$Wellington$pbc$, $pbc$33449$pbc$, $pbc$Strategy Games$pbc$, $pbc$PC$pbc$, $pbc$South FL local. Strategy Games enthusiast and weekend warrior. Wellington represent!$pbc$, 4.3, 9, $pbc$["PBC Veteran", "Early Bird", "Tabletop King"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$demi.richardson721@outlook.com$pbc$, $pbc$password123$pbc$, $pbc$RubyDemi35$pbc$, $pbc$Demi Richardson$pbc$, 38, $pbc$Boynton Beach$pbc$, $pbc$33436$pbc$, $pbc$Magic: The Gathering$pbc$, $pbc$N/A$pbc$, $pbc$Boynton Beach native. Love Magic: The Gathering, dabble in Fitness / General Workout. Let's connect!$pbc$, 2.7, 75, $pbc$["PBC Veteran", "Pro Gamer", "Tabletop King"]$pbc$::jsonb, true);
+SELECT create_rollcall_prod_user($pbc$logan.cox780@icloud.com$pbc$, $pbc$password123$pbc$, $pbc$xXLoMasterXx$pbc$, $pbc$Logan Cox$pbc$, 33, $pbc$Greenacres$pbc$, $pbc$33463$pbc$, $pbc$Miniature Games$pbc$, $pbc$N/A$pbc$, $pbc$South FL local. Miniature Games enthusiast and weekend warrior. Greenacres represent!$pbc$, 4.2, 40, $pbc$["Friendly Host", "Tournament Ready"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$robert.nguyen596@gmail.com$pbc$, $pbc$password123$pbc$, $pbc$GrindAxe651$pbc$, $pbc$Robert Nguyen$pbc$, 38, $pbc$Belle Glade$pbc$, $pbc$33430$pbc$, $pbc$Magic: The Gathering$pbc$, $pbc$Xbox$pbc$, $pbc$Always down for Magic: The Gathering sessions. Belle Glade-based. Message me anytime!$pbc$, 4.5, 25, $pbc$["Tabletop King", "Friendly Host", "Pro Gamer"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$chase.bell17@gmail.com$pbc$, $pbc$password123$pbc$, $pbc$ChaseBel66$pbc$, $pbc$Chase Bell$pbc$, 47, $pbc$Delray Beach$pbc$, $pbc$33444$pbc$, $pbc$Hiking$pbc$, $pbc$N/A$pbc$, $pbc$South FL local. Hiking enthusiast and weekend warrior. Delray Beach represent!$pbc$, 4.4, 48, $pbc$["Friendly Host"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$dylan.thomas85@outlook.com$pbc$, $pbc$password123$pbc$, $pbc$DylanTho16$pbc$, $pbc$Dylan Thomas$pbc$, 34, $pbc$Royal Palm Beach$pbc$, $pbc$33414$pbc$, $pbc$MOBA$pbc$, $pbc$PlayStation$pbc$, $pbc$Casual MOBA fan from Royal Palm Beach. Also enjoy RPG on weekends.$pbc$, 4.5, 26, $pbc$["Tabletop King", "Early Bird"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$brian.walker9@outlook.com$pbc$, $pbc$password123$pbc$, $pbc$BrokenBlade711$pbc$, $pbc$Brian Walker$pbc$, 18, $pbc$Tequesta$pbc$, $pbc$33469$pbc$, $pbc$RPG$pbc$, $pbc$PC & Console$pbc$, $pbc$Retired RPG tryhard, now just vibing. Live in Tequesta, FL.$pbc$, 4.8, 8, $pbc$["PBC Veteran"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$grace.taylor544@hotmail.com$pbc$, $pbc$password123$pbc$, $pbc$Cobalt69169$pbc$, $pbc$Grace Taylor$pbc$, 22, $pbc$Boynton Beach$pbc$, $pbc$33435$pbc$, $pbc$Sandbox Games$pbc$, $pbc$PlayStation$pbc$, $pbc$Retired Sandbox Games tryhard, now just vibing. Live in Boynton Beach, FL.$pbc$, 4.9, 7, $pbc$["Pro Gamer"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$pedro.morgan254@outlook.com$pbc$, $pbc$password123$pbc$, $pbc$OmegaCleric616$pbc$, $pbc$Pedro Morgan$pbc$, 26, $pbc$Greenacres$pbc$, $pbc$33463$pbc$, $pbc$Beach Volleyball$pbc$, $pbc$Mobile$pbc$, $pbc$Casual Beach Volleyball fan from Greenacres. Also enjoy Golf on weekends.$pbc$, 4.8, 7, $pbc$["Tabletop King"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$austin.martin512@hotmail.com$pbc$, $pbc$password123$pbc$, $pbc$Azure81313$pbc$, $pbc$Austin Martin$pbc$, 33, $pbc$Delray Beach$pbc$, $pbc$33445$pbc$, $pbc$Disc Golf$pbc$, $pbc$N/A$pbc$, $pbc$Local Delray Beach player. Into Disc Golf and Fitness / General Workout. Always looking for chill groups!$pbc$, 5.0, 8, $pbc$["Pro Gamer", "Early Bird", "Friendly Host"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$darryl.brown221@gmail.com$pbc$, $pbc$password123$pbc$, $pbc$LazySniper519$pbc$, $pbc$Darryl Brown$pbc$, 34, $pbc$West Palm Beach$pbc$, $pbc$33401$pbc$, $pbc$Miniature Games$pbc$, $pbc$N/A$pbc$, $pbc$South FL local. Miniature Games enthusiast and weekend warrior. West Palm Beach represent!$pbc$, 4.8, 85, $pbc$["Tournament Ready", "Friendly Host"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$diana.ramirez550@outlook.com$pbc$, $pbc$password123$pbc$, $pbc$xXDiMonkXx$pbc$, $pbc$Diana Ramirez$pbc$, 27, $pbc$Lake Worth Beach$pbc$, $pbc$33461$pbc$, $pbc$MOBA$pbc$, $pbc$PC$pbc$, $pbc$Lake Worth Beach native. Love MOBA, dabble in CrossFit. Let's connect!$pbc$, 4.3, 67, $pbc$["Early Bird"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$finn.allen168@icloud.com$pbc$, $pbc$password123$pbc$, $pbc$AzureFinn67$pbc$, $pbc$Finn Allen$pbc$, 18, $pbc$Delray Beach$pbc$, $pbc$33446$pbc$, $pbc$War Games$pbc$, $pbc$N/A$pbc$, $pbc$Retired War Games tryhard, now just vibing. Live in Delray Beach, FL.$pbc$, 4.9, 56, $pbc$["Friendly Host", "Tabletop King", "Early Bird"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$maria.reyes730@hotmail.com$pbc$, $pbc$password123$pbc$, $pbc$GoldenAxe524$pbc$, $pbc$Maria Reyes$pbc$, 34, $pbc$Boca Raton$pbc$, $pbc$33433$pbc$, $pbc$RPG$pbc$, $pbc$PC$pbc$, $pbc$New to the scene! Trying to find people who love RPG in Boca Raton area.$pbc$, 4.3, 20, $pbc$["Tabletop King", "Pro Gamer", "PBC Veteran"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$riley.martin954@gmail.com$pbc$, $pbc$password123$pbc$, $pbc$xXRiAceXx$pbc$, $pbc$Riley Martin$pbc$, 29, $pbc$Boynton Beach$pbc$, $pbc$33435$pbc$, $pbc$Tabletop RPG$pbc$, $pbc$Steam Deck$pbc$, $pbc$Always down for Tabletop RPG sessions. Boynton Beach-based. Message me anytime!$pbc$, 4.2, 65, $pbc$["Early Bird", "Tabletop King", "Tournament Ready"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$dominic.roberts378@yahoo.com$pbc$, $pbc$password123$pbc$, $pbc$RubyDominic39$pbc$, $pbc$Dominic Roberts$pbc$, 18, $pbc$Palm Beach$pbc$, $pbc$33480$pbc$, $pbc$Dungeons & Dragons$pbc$, $pbc$PC$pbc$, $pbc$Always down for Dungeons & Dragons sessions. Palm Beach-based. Message me anytime!$pbc$, 4.3, 82, $pbc$["PBC Veteran", "Friendly Host"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$axel.kelly870@outlook.com$pbc$, $pbc$password123$pbc$, $pbc$EchoPaladin244$pbc$, $pbc$Axel Kelly$pbc$, 42, $pbc$West Palm Beach$pbc$, $pbc$33401$pbc$, $pbc$Sports Games$pbc$, $pbc$PlayStation$pbc$, $pbc$Retired Sports Games tryhard, now just vibing. Live in West Palm Beach, FL.$pbc$, 4.9, 67, $pbc$["Friendly Host"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$derek.russell446@yahoo.com$pbc$, $pbc$password123$pbc$, $pbc$DerekRus47$pbc$, $pbc$Derek Russell$pbc$, 21, $pbc$Juno Beach$pbc$, $pbc$33408$pbc$, $pbc$Martial Arts$pbc$, $pbc$N/A$pbc$, $pbc$Passionate about Martial Arts. Based in Juno Beach, FL. Hit me up for games or meetups.$pbc$, 4.6, 15, $pbc$["Friendly Host", "Tabletop King"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$ivan.clark478@outlook.com$pbc$, $pbc$password123$pbc$, $pbc$xXIvGamerXx$pbc$, $pbc$Ivan Clark$pbc$, 46, $pbc$Boynton Beach$pbc$, $pbc$33436$pbc$, $pbc$Tabletop RPG$pbc$, $pbc$N/A$pbc$, $pbc$Local Boynton Beach player. Into Tabletop RPG and Fitness / General Workout. Always looking for chill groups!$pbc$, 4.5, 79, $pbc$["Early Bird", "Tabletop King", "Tournament Ready"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$kevin.castillo94@yahoo.com$pbc$, $pbc$password123$pbc$, $pbc$UltraKevin66$pbc$, $pbc$Kevin Castillo$pbc$, 27, $pbc$Greenacres$pbc$, $pbc$33463$pbc$, $pbc$Adventure Games$pbc$, $pbc$Steam Deck$pbc$, $pbc$Casual Adventure Games fan from Greenacres. Also enjoy Fitness / General Workout on weekends.$pbc$, 4.6, 61, $pbc$["Pro Gamer", "Friendly Host"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$elena.ortiz125@gmail.com$pbc$, $pbc$password123$pbc$, $pbc$BlessedXL228$pbc$, $pbc$Elena Ortiz$pbc$, 26, $pbc$Delray Beach$pbc$, $pbc$33444$pbc$, $pbc$Stand-Up Paddleboarding$pbc$, $pbc$Nintendo Switch$pbc$, $pbc$Delray Beach native. Love Stand-Up Paddleboarding, dabble in Swimming. Let's connect!$pbc$, 4.7, 8, $pbc$["Friendly Host", "PBC Veteran", "Tournament Ready"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$dylan.ruiz44@icloud.com$pbc$, $pbc$password123$pbc$, $pbc$Ghost239588$pbc$, $pbc$Dylan Ruiz$pbc$, 25, $pbc$Greenacres$pbc$, $pbc$33467$pbc$, $pbc$Biking / Cycling$pbc$, $pbc$N/A$pbc$, $pbc$South FL local. Biking / Cycling enthusiast and weekend warrior. Greenacres represent!$pbc$, 4.5, 84, $pbc$["Friendly Host"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$matthew.nelson629@hotmail.com$pbc$, $pbc$password123$pbc$, $pbc$MatthewNel92$pbc$, $pbc$Matthew Nelson$pbc$, 20, $pbc$Boynton Beach$pbc$, $pbc$33435$pbc$, $pbc$Party Games$pbc$, $pbc$PC$pbc$, $pbc$Always down for Party Games sessions. Boynton Beach-based. Message me anytime!$pbc$, 4.8, 25, $pbc$["Tabletop King", "PBC Veteran", "Friendly Host"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$anthony.rivera935@hotmail.com$pbc$, $pbc$password123$pbc$, $pbc$HyperAnthony35$pbc$, $pbc$Anthony Rivera$pbc$, 40, $pbc$Belle Glade$pbc$, $pbc$33430$pbc$, $pbc$Card Games / TCG$pbc$, $pbc$Nintendo Switch$pbc$, $pbc$Casual Card Games / TCG fan from Belle Glade. Also enjoy War Games on weekends.$pbc$, 4.8, 77, $pbc$["PBC Veteran"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$liam.hill783@yahoo.com$pbc$, $pbc$password123$pbc$, $pbc$xXLiChiefXx$pbc$, $pbc$Liam Hill$pbc$, 21, $pbc$North Palm Beach$pbc$, $pbc$33408$pbc$, $pbc$Pickleball$pbc$, $pbc$N/A$pbc$, $pbc$South FL local. Pickleball enthusiast and weekend warrior. North Palm Beach represent!$pbc$, 4.7, 60, $pbc$["Tournament Ready", "Friendly Host"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$jasmine.perez58@yahoo.com$pbc$, $pbc$password123$pbc$, $pbc$JasminePer12$pbc$, $pbc$Jasmine Perez$pbc$, 23, $pbc$West Palm Beach$pbc$, $pbc$33409$pbc$, $pbc$Beach Activities$pbc$, $pbc$PC$pbc$, $pbc$West Palm Beach native. Love Beach Activities, dabble in Fighting Games. Let's connect!$pbc$, 3.0, 60, $pbc$["Early Bird"]$pbc$::jsonb, true);
+SELECT create_rollcall_prod_user($pbc$ethan.ruiz984@gmail.com$pbc$, $pbc$password123$pbc$, $pbc$ClutchEthan85$pbc$, $pbc$Ethan Ruiz$pbc$, 41, $pbc$Lake Park$pbc$, $pbc$33403$pbc$, $pbc$Trading Card Games$pbc$, $pbc$Xbox$pbc$, $pbc$Always down for Trading Card Games sessions. Lake Park-based. Message me anytime!$pbc$, 4.5, 46, $pbc$["Pro Gamer", "Tabletop King"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$lara.torres388@outlook.com$pbc$, $pbc$password123$pbc$, $pbc$FrostLara23$pbc$, $pbc$Lara Torres$pbc$, 29, $pbc$Singer Island$pbc$, $pbc$33404$pbc$, $pbc$Kayaking$pbc$, $pbc$PlayStation$pbc$, $pbc$Always down for Kayaking sessions. Singer Island-based. Message me anytime!$pbc$, 4.8, 54, $pbc$["Friendly Host"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$derek.griffin172@gmail.com$pbc$, $pbc$password123$pbc$, $pbc$AlphaDerek2$pbc$, $pbc$Derek Griffin$pbc$, 38, $pbc$Royal Palm Beach$pbc$, $pbc$33411$pbc$, $pbc$Trading Card Games$pbc$, $pbc$N/A$pbc$, $pbc$Retired Trading Card Games tryhard, now just vibing. Live in Royal Palm Beach, FL.$pbc$, 4.8, 24, $pbc$["Tabletop King"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$jake.mitchell360@hotmail.com$pbc$, $pbc$password123$pbc$, $pbc$xXJaRunnerXx$pbc$, $pbc$Jake Mitchell$pbc$, 42, $pbc$Belle Glade$pbc$, $pbc$33430$pbc$, $pbc$Simulation$pbc$, $pbc$PC$pbc$, $pbc$Passionate about Simulation. Based in Belle Glade, FL. Hit me up for games or meetups.$pbc$, 5.0, 79, $pbc$["Tabletop King", "Pro Gamer"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$david.kim165@gmail.com$pbc$, $pbc$password123$pbc$, $pbc$PhantomBarbarian629$pbc$, $pbc$David Kim$pbc$, 42, $pbc$Boynton Beach$pbc$, $pbc$33436$pbc$, $pbc$RPG$pbc$, $pbc$Mobile$pbc$, $pbc$South FL local. RPG enthusiast and weekend warrior. Boynton Beach represent!$pbc$, 4.7, 55, $pbc$["Friendly Host"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$leo.carter586@hotmail.com$pbc$, $pbc$password123$pbc$, $pbc$xXLeMasterXx$pbc$, $pbc$Leo Carter$pbc$, 43, $pbc$Boca Raton$pbc$, $pbc$33431$pbc$, $pbc$Tabletop RPG$pbc$, $pbc$N/A$pbc$, $pbc$South FL local. Tabletop RPG enthusiast and weekend warrior. Boca Raton represent!$pbc$, 4.3, 25, $pbc$["Tournament Ready", "Tabletop King"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$diana.parker804@icloud.com$pbc$, $pbc$password123$pbc$, $pbc$xXDiWitchXx$pbc$, $pbc$Diana Parker$pbc$, 37, $pbc$Delray Beach$pbc$, $pbc$33445$pbc$, $pbc$Dungeons & Dragons$pbc$, $pbc$N/A$pbc$, $pbc$South FL local. Dungeons & Dragons enthusiast and weekend warrior. Delray Beach represent!$pbc$, 4.7, 16, $pbc$["Tabletop King", "Early Bird", "PBC Veteran"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$lara.reyes64@yahoo.com$pbc$, $pbc$password123$pbc$, $pbc$Cyber420353$pbc$, $pbc$Lara Reyes$pbc$, 54, $pbc$Jupiter$pbc$, $pbc$33477$pbc$, $pbc$Souls-like Games$pbc$, $pbc$Steam Deck$pbc$, $pbc$New to the scene! Trying to find people who love Souls-like Games in Jupiter area.$pbc$, 5.0, 19, $pbc$["Tabletop King"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$mia.butler515@hotmail.com$pbc$, $pbc$password123$pbc$, $pbc$MiaBut25$pbc$, $pbc$Mia Butler$pbc$, 20, $pbc$Riviera Beach$pbc$, $pbc$33407$pbc$, $pbc$MOBA$pbc$, $pbc$Mobile$pbc$, $pbc$Passionate about MOBA. Based in Riviera Beach, FL. Hit me up for games or meetups.$pbc$, 4.3, 81, $pbc$["Tournament Ready", "Friendly Host"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$dominic.martin566@outlook.com$pbc$, $pbc$password123$pbc$, $pbc$AzureDominic59$pbc$, $pbc$Dominic Martin$pbc$, 43, $pbc$Palm Springs$pbc$, $pbc$33461$pbc$, $pbc$Dungeons & Dragons$pbc$, $pbc$PlayStation$pbc$, $pbc$South FL local. Dungeons & Dragons enthusiast and weekend warrior. Palm Springs represent!$pbc$, 4.8, 53, $pbc$["Friendly Host"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$christian.king393@icloud.com$pbc$, $pbc$password123$pbc$, $pbc$xXChRangerXx$pbc$, $pbc$Christian King$pbc$, 34, $pbc$Lantana$pbc$, $pbc$33462$pbc$, $pbc$Triathlon$pbc$, $pbc$N/A$pbc$, $pbc$Casual Triathlon fan from Lantana. Also enjoy Yoga on weekends.$pbc$, 3.1, 54, $pbc$["Tabletop King", "PBC Veteran", "Tournament Ready"]$pbc$::jsonb, true);
+SELECT create_rollcall_prod_user($pbc$chase.wright919@outlook.com$pbc$, $pbc$password123$pbc$, $pbc$Phantom305813$pbc$, $pbc$Chase Wright$pbc$, 35, $pbc$Loxahatchee$pbc$, $pbc$33470$pbc$, $pbc$Beach Volleyball$pbc$, $pbc$PlayStation$pbc$, $pbc$Casual Beach Volleyball fan from Loxahatchee. Also enjoy Sandbox Games on weekends.$pbc$, 4.4, 49, $pbc$["Pro Gamer"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$tanner.wood889@outlook.com$pbc$, $pbc$password123$pbc$, $pbc$SilverPBC163$pbc$, $pbc$Tanner Wood$pbc$, 51, $pbc$Belle Glade$pbc$, $pbc$33430$pbc$, $pbc$Golf$pbc$, $pbc$Nintendo Switch$pbc$, $pbc$Local Belle Glade player. Into Golf and Battle Royale. Always looking for chill groups!$pbc$, 4.8, 82, $pbc$["Friendly Host"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$ricky.watson378@icloud.com$pbc$, $pbc$password123$pbc$, $pbc$xXRi404Xx$pbc$, $pbc$Ricky Watson$pbc$, 35, $pbc$Lake Worth Beach$pbc$, $pbc$33460$pbc$, $pbc$Dungeons & Dragons$pbc$, $pbc$N/A$pbc$, $pbc$Always down for Dungeons & Dragons sessions. Lake Worth Beach-based. Message me anytime!$pbc$, 4.6, 19, $pbc$["Tabletop King", "Early Bird", "PBC Veteran"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$patrick.davis292@gmail.com$pbc$, $pbc$password123$pbc$, $pbc$xXPaHunterXx$pbc$, $pbc$Patrick Davis$pbc$, 23, $pbc$Jupiter$pbc$, $pbc$33458$pbc$, $pbc$Hiking$pbc$, $pbc$Xbox$pbc$, $pbc$Casual Hiking fan from Jupiter. Also enjoy Rock Climbing on weekends.$pbc$, 4.6, 27, $pbc$["Tabletop King", "Early Bird"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$lucas.sanders434@icloud.com$pbc$, $pbc$password123$pbc$, $pbc$BetaLucas33$pbc$, $pbc$Lucas Sanders$pbc$, 35, $pbc$Palm Beach Gardens$pbc$, $pbc$33418$pbc$, $pbc$CrossFit$pbc$, $pbc$N/A$pbc$, $pbc$South FL local. CrossFit enthusiast and weekend warrior. Palm Beach Gardens represent!$pbc$, 4.5, 14, $pbc$["Tabletop King"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$mia.walker66@outlook.com$pbc$, $pbc$password123$pbc$, $pbc$RapidMia42$pbc$, $pbc$Mia Walker$pbc$, 48, $pbc$Delray Beach$pbc$, $pbc$33444$pbc$, $pbc$Basketball$pbc$, $pbc$N/A$pbc$, $pbc$Always down for Basketball sessions. Delray Beach-based. Message me anytime!$pbc$, 4.3, 53, $pbc$["Tabletop King", "Early Bird", "Tournament Ready"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$hannah.williams303@outlook.com$pbc$, $pbc$password123$pbc$, $pbc$xXHaSniperXx$pbc$, $pbc$Hannah Williams$pbc$, 49, $pbc$West Palm Beach$pbc$, $pbc$33405$pbc$, $pbc$Softball$pbc$, $pbc$Steam Deck$pbc$, $pbc$South FL local. Softball enthusiast and weekend warrior. West Palm Beach represent!$pbc$, 4.9, 15, $pbc$["Pro Gamer", "Tabletop King", "Early Bird"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$james.reyes301@gmail.com$pbc$, $pbc$password123$pbc$, $pbc$xXJaPlayerXx$pbc$, $pbc$James Reyes$pbc$, 29, $pbc$Palm Springs$pbc$, $pbc$33461$pbc$, $pbc$Warhammer$pbc$, $pbc$Mobile$pbc$, $pbc$New to the scene! Trying to find people who love Warhammer in Palm Springs area.$pbc$, 4.4, 84, $pbc$["Pro Gamer"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$chris.sullivan967@hotmail.com$pbc$, $pbc$password123$pbc$, $pbc$Crimson813200$pbc$, $pbc$Chris Sullivan$pbc$, 55, $pbc$Singer Island$pbc$, $pbc$33404$pbc$, $pbc$Dungeons & Dragons$pbc$, $pbc$All Platforms$pbc$, $pbc$Singer Island native. Love Dungeons & Dragons, dabble in Indie Games. Let's connect!$pbc$, 4.7, 42, $pbc$["Early Bird", "Tournament Ready", "Pro Gamer"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$nicole.white500@outlook.com$pbc$, $pbc$password123$pbc$, $pbc$NicoleWhi50$pbc$, $pbc$Nicole White$pbc$, 23, $pbc$Boynton Beach$pbc$, $pbc$33437$pbc$, $pbc$Fighting Games$pbc$, $pbc$Xbox$pbc$, $pbc$Retired Fighting Games tryhard, now just vibing. Live in Boynton Beach, FL.$pbc$, 4.6, 64, $pbc$["Friendly Host"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$sophia.morgan5@gmail.com$pbc$, $pbc$password123$pbc$, $pbc$SophiaMor57$pbc$, $pbc$Sophia Morgan$pbc$, 42, $pbc$Loxahatchee$pbc$, $pbc$33470$pbc$, $pbc$Hiking$pbc$, $pbc$N/A$pbc$, $pbc$Casual Hiking fan from Loxahatchee. Also enjoy Fitness / General Workout on weekends.$pbc$, 4.7, 81, $pbc$["Tabletop King"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$patrick.jenkins393@hotmail.com$pbc$, $pbc$password123$pbc$, $pbc$GhostPatrick9$pbc$, $pbc$Patrick Jenkins$pbc$, 24, $pbc$Delray Beach$pbc$, $pbc$33446$pbc$, $pbc$Fitness / General Workout$pbc$, $pbc$N/A$pbc$, $pbc$Delray Beach native. Love Fitness / General Workout, dabble in Running / Jogging. Let's connect!$pbc$, 4.4, 24, $pbc$["PBC Veteran", "Friendly Host"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$sophia.anderson745@yahoo.com$pbc$, $pbc$password123$pbc$, $pbc$SophiaAnd12$pbc$, $pbc$Sophia Anderson$pbc$, 32, $pbc$Wellington$pbc$, $pbc$33414$pbc$, $pbc$Basketball$pbc$, $pbc$N/A$pbc$, $pbc$Local Wellington player. Into Basketball and Yoga. Always looking for chill groups!$pbc$, 4.8, 76, $pbc$["Tabletop King", "Pro Gamer", "PBC Veteran"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$demi.bennett50@gmail.com$pbc$, $pbc$password123$pbc$, $pbc$xXDeLanceXx$pbc$, $pbc$Demi Bennett$pbc$, 19, $pbc$Delray Beach$pbc$, $pbc$33444$pbc$, $pbc$Golf$pbc$, $pbc$N/A$pbc$, $pbc$Local Delray Beach player. Into Golf and Fitness / General Workout. Always looking for chill groups!$pbc$, 4.6, 61, $pbc$["Pro Gamer", "Tabletop King", "PBC Veteran"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$morgan.moore277@hotmail.com$pbc$, $pbc$password123$pbc$, $pbc$MorganMoo63$pbc$, $pbc$Morgan Moore$pbc$, 51, $pbc$Delray Beach$pbc$, $pbc$33444$pbc$, $pbc$Card Games / TCG$pbc$, $pbc$Nintendo Switch$pbc$, $pbc$South FL local. Card Games / TCG enthusiast and weekend warrior. Delray Beach represent!$pbc$, 4.7, 31, $pbc$["Pro Gamer", "Friendly Host"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$brittany.foster303@yahoo.com$pbc$, $pbc$password123$pbc$, $pbc$JadeWitch933$pbc$, $pbc$Brittany Foster$pbc$, 44, $pbc$Royal Palm Beach$pbc$, $pbc$33411$pbc$, $pbc$MOBA$pbc$, $pbc$PlayStation$pbc$, $pbc$Passionate about MOBA. Based in Royal Palm Beach, FL. Hit me up for games or meetups.$pbc$, 4.6, 84, $pbc$["Early Bird", "PBC Veteran"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$luis.taylor304@outlook.com$pbc$, $pbc$password123$pbc$, $pbc$xXLuHunterXx$pbc$, $pbc$Luis Taylor$pbc$, 47, $pbc$Wellington$pbc$, $pbc$33414$pbc$, $pbc$Tabletop RPG$pbc$, $pbc$PC & Console$pbc$, $pbc$South FL local. Tabletop RPG enthusiast and weekend warrior. Wellington represent!$pbc$, 4.2, 5, $pbc$["Tabletop King", "PBC Veteran"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$dylan.long117@icloud.com$pbc$, $pbc$password123$pbc$, $pbc$xXDyAxeXx$pbc$, $pbc$Dylan Long$pbc$, 29, $pbc$Greenacres$pbc$, $pbc$33467$pbc$, $pbc$Running / Jogging$pbc$, $pbc$All Platforms$pbc$, $pbc$New to the scene! Trying to find people who love Running / Jogging in Greenacres area.$pbc$, 4.3, 74, $pbc$["Pro Gamer"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$jayden.scott627@gmail.com$pbc$, $pbc$password123$pbc$, $pbc$JaydenSco71$pbc$, $pbc$Jayden Scott$pbc$, 40, $pbc$Riviera Beach$pbc$, $pbc$33404$pbc$, $pbc$Indie Games$pbc$, $pbc$PC & Console$pbc$, $pbc$Passionate about Indie Games. Based in Riviera Beach, FL. Hit me up for games or meetups.$pbc$, 4.5, 54, $pbc$["Tabletop King", "Friendly Host", "PBC Veteran"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$victor.thompson355@icloud.com$pbc$, $pbc$password123$pbc$, $pbc$VictorTho81$pbc$, $pbc$Victor Thompson$pbc$, 48, $pbc$Wellington$pbc$, $pbc$33449$pbc$, $pbc$Fighting Games$pbc$, $pbc$PC & Console$pbc$, $pbc$Casual Fighting Games fan from Wellington. Also enjoy MOBA on weekends.$pbc$, 4.9, 24, $pbc$["Tournament Ready"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$claudia.taylor837@yahoo.com$pbc$, $pbc$password123$pbc$, $pbc$BetaLance821$pbc$, $pbc$Claudia Taylor$pbc$, 43, $pbc$Riviera Beach$pbc$, $pbc$33404$pbc$, $pbc$Trading Card Games$pbc$, $pbc$PC$pbc$, $pbc$South FL local. Trading Card Games enthusiast and weekend warrior. Riviera Beach represent!$pbc$, 4.2, 31, $pbc$["Tabletop King", "PBC Veteran"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$bianca.robinson974@outlook.com$pbc$, $pbc$password123$pbc$, $pbc$LuckyBianca7$pbc$, $pbc$Bianca Robinson$pbc$, 47, $pbc$Lake Worth Beach$pbc$, $pbc$33461$pbc$, $pbc$Fitness / General Workout$pbc$, $pbc$N/A$pbc$, $pbc$Local Lake Worth Beach player. Into Fitness / General Workout and Bird Watching. Always looking for chill groups!$pbc$, 4.2, 30, $pbc$["PBC Veteran", "Tabletop King"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$paige.lee535@outlook.com$pbc$, $pbc$password123$pbc$, $pbc$Pixel407169$pbc$, $pbc$Paige Lee$pbc$, 53, $pbc$Palm Beach Gardens$pbc$, $pbc$33410$pbc$, $pbc$Golf$pbc$, $pbc$N/A$pbc$, $pbc$Casual Golf fan from Palm Beach Gardens. Also enjoy Fitness / General Workout on weekends.$pbc$, 4.9, 46, $pbc$["Tournament Ready"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$alexandra.morales111@icloud.com$pbc$, $pbc$password123$pbc$, $pbc$Hacked404858$pbc$, $pbc$Alexandra Morales$pbc$, 39, $pbc$Lake Worth Beach$pbc$, $pbc$33460$pbc$, $pbc$Pickleball$pbc$, $pbc$Steam Deck$pbc$, $pbc$Lake Worth Beach native. Love Pickleball, dabble in Flag Football. Let's connect!$pbc$, 4.3, 83, $pbc$["Tournament Ready", "Early Bird"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$gavin.clark517@icloud.com$pbc$, $pbc$password123$pbc$, $pbc$xXGaBarbarianXx$pbc$, $pbc$Gavin Clark$pbc$, 38, $pbc$Riviera Beach$pbc$, $pbc$33404$pbc$, $pbc$Party Games$pbc$, $pbc$Nintendo Switch$pbc$, $pbc$South FL local. Party Games enthusiast and weekend warrior. Riviera Beach represent!$pbc$, 4.8, 85, $pbc$["Tabletop King"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$patrick.turner516@hotmail.com$pbc$, $pbc$password123$pbc$, $pbc$ClutchPatrick15$pbc$, $pbc$Patrick Turner$pbc$, 29, $pbc$Delray Beach$pbc$, $pbc$33446$pbc$, $pbc$Softball$pbc$, $pbc$N/A$pbc$, $pbc$Local Delray Beach player. Into Softball and Disc Golf. Always looking for chill groups!$pbc$, 4.4, 15, $pbc$["Tabletop King", "Early Bird", "Tournament Ready"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$santiago.cox205@outlook.com$pbc$, $pbc$password123$pbc$, $pbc$SantiagoCox46$pbc$, $pbc$Santiago Cox$pbc$, 21, $pbc$Boca Raton$pbc$, $pbc$33431$pbc$, $pbc$Eurogames$pbc$, $pbc$Nintendo Switch$pbc$, $pbc$Retired Eurogames tryhard, now just vibing. Live in Boca Raton, FL.$pbc$, 4.4, 66, $pbc$["Tabletop King"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$leo.ramirez949@icloud.com$pbc$, $pbc$password123$pbc$, $pbc$xXLeShotgunXx$pbc$, $pbc$Leo Ramirez$pbc$, 21, $pbc$Palm Beach Gardens$pbc$, $pbc$33410$pbc$, $pbc$Cooperative Board Games$pbc$, $pbc$N/A$pbc$, $pbc$Always down for Cooperative Board Games sessions. Palm Beach Gardens-based. Message me anytime!$pbc$, 4.7, 37, $pbc$["Tournament Ready", "Tabletop King", "PBC Veteran"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$darryl.rivera302@icloud.com$pbc$, $pbc$password123$pbc$, $pbc$DarrylRiv97$pbc$, $pbc$Darryl Rivera$pbc$, 30, $pbc$Lake Worth Beach$pbc$, $pbc$33460$pbc$, $pbc$Platformers$pbc$, $pbc$Xbox$pbc$, $pbc$South FL local. Platformers enthusiast and weekend warrior. Lake Worth Beach represent!$pbc$, 4.7, 7, $pbc$["Pro Gamer", "Friendly Host"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$amara.kelly41@yahoo.com$pbc$, $pbc$password123$pbc$, $pbc$IvoryAmara7$pbc$, $pbc$Amara Kelly$pbc$, 27, $pbc$Palm Beach$pbc$, $pbc$33480$pbc$, $pbc$Triathlon$pbc$, $pbc$N/A$pbc$, $pbc$Passionate about Triathlon. Based in Palm Beach, FL. Hit me up for games or meetups.$pbc$, 4.9, 47, $pbc$["Early Bird", "Tabletop King"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$ben.davis550@icloud.com$pbc$, $pbc$password123$pbc$, $pbc$StealthAce905$pbc$, $pbc$Ben Davis$pbc$, 52, $pbc$Lantana$pbc$, $pbc$33462$pbc$, $pbc$Worker Placement$pbc$, $pbc$Steam Deck$pbc$, $pbc$Casual Worker Placement fan from Lantana. Also enjoy Puzzle Games on weekends.$pbc$, 4.7, 78, $pbc$["PBC Veteran", "Early Bird", "Friendly Host"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$carlos.walker938@gmail.com$pbc$, $pbc$password123$pbc$, $pbc$xXCaGodXx$pbc$, $pbc$Carlos Walker$pbc$, 42, $pbc$Greenacres$pbc$, $pbc$33463$pbc$, $pbc$Magic: The Gathering$pbc$, $pbc$Xbox$pbc$, $pbc$Local Greenacres player. Into Magic: The Gathering and Golf. Always looking for chill groups!$pbc$, 4.4, 16, $pbc$["Tournament Ready"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$damian.garcia856@gmail.com$pbc$, $pbc$password123$pbc$, $pbc$DamianGar78$pbc$, $pbc$Damian Garcia$pbc$, 45, $pbc$Lake Worth Beach$pbc$, $pbc$33461$pbc$, $pbc$Indie Games$pbc$, $pbc$PC$pbc$, $pbc$Passionate about Indie Games. Based in Lake Worth Beach, FL. Hit me up for games or meetups.$pbc$, 4.4, 70, $pbc$["Pro Gamer"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$dallas.morales418@icloud.com$pbc$, $pbc$password123$pbc$, $pbc$xXDa404Xx$pbc$, $pbc$Dallas Morales$pbc$, 34, $pbc$Wellington$pbc$, $pbc$33414$pbc$, $pbc$Disc Golf$pbc$, $pbc$N/A$pbc$, $pbc$Passionate about Disc Golf. Based in Wellington, FL. Hit me up for games or meetups.$pbc$, 4.9, 29, $pbc$["PBC Veteran", "Early Bird", "Tabletop King"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$danny.bell951@hotmail.com$pbc$, $pbc$password123$pbc$, $pbc$WolfPBC703$pbc$, $pbc$Danny Bell$pbc$, 40, $pbc$Boca Raton$pbc$, $pbc$33433$pbc$, $pbc$Party Games$pbc$, $pbc$N/A$pbc$, $pbc$New to the scene! Trying to find people who love Party Games in Boca Raton area.$pbc$, 4.6, 81, $pbc$["Early Bird", "Pro Gamer"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$jack.richardson765@icloud.com$pbc$, $pbc$password123$pbc$, $pbc$RapidJack19$pbc$, $pbc$Jack Richardson$pbc$, 26, $pbc$Wellington$pbc$, $pbc$33414$pbc$, $pbc$First-Person Shooters$pbc$, $pbc$Nintendo Switch$pbc$, $pbc$Always down for First-Person Shooters sessions. Wellington-based. Message me anytime!$pbc$, 4.5, 44, $pbc$["Early Bird", "Pro Gamer"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$kayla.mitchell165@yahoo.com$pbc$, $pbc$password123$pbc$, $pbc$KaylaMit88$pbc$, $pbc$Kayla Mitchell$pbc$, 27, $pbc$Pahokee$pbc$, $pbc$33476$pbc$, $pbc$Disc Golf$pbc$, $pbc$N/A$pbc$, $pbc$Passionate about Disc Golf. Based in Pahokee, FL. Hit me up for games or meetups.$pbc$, 4.4, 56, $pbc$["Friendly Host", "PBC Veteran"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$michael.torres101@yahoo.com$pbc$, $pbc$password123$pbc$, $pbc$xXMiBossXx$pbc$, $pbc$Michael Torres$pbc$, 34, $pbc$Boca Raton$pbc$, $pbc$33433$pbc$, $pbc$Golf$pbc$, $pbc$N/A$pbc$, $pbc$New to the scene! Trying to find people who love Golf in Boca Raton area.$pbc$, 4.5, 20, $pbc$["PBC Veteran", "Tabletop King", "Early Bird"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$omar.scott157@hotmail.com$pbc$, $pbc$password123$pbc$, $pbc$CasualOmar41$pbc$, $pbc$Omar Scott$pbc$, 55, $pbc$Palm Beach Gardens$pbc$, $pbc$33418$pbc$, $pbc$Horror Games$pbc$, $pbc$Steam Deck$pbc$, $pbc$South FL local. Horror Games enthusiast and weekend warrior. Palm Beach Gardens represent!$pbc$, 4.4, 32, $pbc$["Early Bird"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$ariana.roberts662@hotmail.com$pbc$, $pbc$password123$pbc$, $pbc$BlessedLegend880$pbc$, $pbc$Ariana Roberts$pbc$, 29, $pbc$Delray Beach$pbc$, $pbc$33444$pbc$, $pbc$Softball$pbc$, $pbc$N/A$pbc$, $pbc$Local Delray Beach player. Into Softball and Fitness / General Workout. Always looking for chill groups!$pbc$, 4.7, 61, $pbc$["PBC Veteran"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$dana.ross218@gmail.com$pbc$, $pbc$password123$pbc$, $pbc$EmeraldDana70$pbc$, $pbc$Dana Ross$pbc$, 55, $pbc$Riviera Beach$pbc$, $pbc$33407$pbc$, $pbc$Sandbox Games$pbc$, $pbc$PC & Console$pbc$, $pbc$Casual Sandbox Games fan from Riviera Beach. Also enjoy Party Games on weekends.$pbc$, 2.6, 67, $pbc$["Tournament Ready"]$pbc$::jsonb, true);
+SELECT create_rollcall_prod_user($pbc$diamond.walker144@icloud.com$pbc$, $pbc$password123$pbc$, $pbc$DiamondWal32$pbc$, $pbc$Diamond Walker$pbc$, 50, $pbc$Boynton Beach$pbc$, $pbc$33436$pbc$, $pbc$Warhammer$pbc$, $pbc$N/A$pbc$, $pbc$Casual Warhammer fan from Boynton Beach. Also enjoy Tennis on weekends.$pbc$, 4.4, 49, $pbc$["Tabletop King", "PBC Veteran"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$carlos.torres930@outlook.com$pbc$, $pbc$password123$pbc$, $pbc$xXCaWizardXx$pbc$, $pbc$Carlos Torres$pbc$, 51, $pbc$Lake Worth Beach$pbc$, $pbc$33461$pbc$, $pbc$Cooperative Board Games$pbc$, $pbc$PlayStation$pbc$, $pbc$Retired Cooperative Board Games tryhard, now just vibing. Live in Lake Worth Beach, FL.$pbc$, 4.3, 75, $pbc$["Tabletop King", "Friendly Host", "Tournament Ready"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$lara.reed837@outlook.com$pbc$, $pbc$password123$pbc$, $pbc$xXLaPBCXx$pbc$, $pbc$Lara Reed$pbc$, 40, $pbc$Riviera Beach$pbc$, $pbc$33407$pbc$, $pbc$Sports Games$pbc$, $pbc$Mobile$pbc$, $pbc$Riviera Beach native. Love Sports Games, dabble in Worker Placement. Let's connect!$pbc$, 4.3, 26, $pbc$["Early Bird"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$jack.lewis425@outlook.com$pbc$, $pbc$password123$pbc$, $pbc$Crimson007491$pbc$, $pbc$Jack Lewis$pbc$, 32, $pbc$Delray Beach$pbc$, $pbc$33445$pbc$, $pbc$Warhammer$pbc$, $pbc$N/A$pbc$, $pbc$Delray Beach native. Love Warhammer, dabble in Fitness / General Workout. Let's connect!$pbc$, 4.2, 6, $pbc$["Tabletop King", "Tournament Ready", "Friendly Host"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$grace.stewart913@hotmail.com$pbc$, $pbc$password123$pbc$, $pbc$GraceSte17$pbc$, $pbc$Grace Stewart$pbc$, 20, $pbc$Pahokee$pbc$, $pbc$33476$pbc$, $pbc$Tabletop RPG$pbc$, $pbc$Steam Deck$pbc$, $pbc$Retired Tabletop RPG tryhard, now just vibing. Live in Pahokee, FL.$pbc$, 4.8, 13, $pbc$["Tournament Ready", "Early Bird", "Pro Gamer"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$denise.cox639@hotmail.com$pbc$, $pbc$password123$pbc$, $pbc$GhostDenise93$pbc$, $pbc$Denise Cox$pbc$, 29, $pbc$Singer Island$pbc$, $pbc$33404$pbc$, $pbc$MMORPG$pbc$, $pbc$All Platforms$pbc$, $pbc$Passionate about MMORPG. Based in Singer Island, FL. Hit me up for games or meetups.$pbc$, 4.8, 59, $pbc$["Friendly Host"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$jason.parker516@gmail.com$pbc$, $pbc$password123$pbc$, $pbc$Crimson420134$pbc$, $pbc$Jason Parker$pbc$, 52, $pbc$West Palm Beach$pbc$, $pbc$33409$pbc$, $pbc$Basketball$pbc$, $pbc$PlayStation$pbc$, $pbc$South FL local. Basketball enthusiast and weekend warrior. West Palm Beach represent!$pbc$, 4.8, 82, $pbc$["Pro Gamer"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$anthony.patel291@hotmail.com$pbc$, $pbc$password123$pbc$, $pbc$xXAnGodXx$pbc$, $pbc$Anthony Patel$pbc$, 23, $pbc$Wellington$pbc$, $pbc$33414$pbc$, $pbc$Strategy Games$pbc$, $pbc$Xbox$pbc$, $pbc$South FL local. Strategy Games enthusiast and weekend warrior. Wellington represent!$pbc$, 4.9, 65, $pbc$["Early Bird", "PBC Veteran", "Tournament Ready"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$luna.vega579@outlook.com$pbc$, $pbc$password123$pbc$, $pbc$EpicLuna51$pbc$, $pbc$Luna Vega$pbc$, 45, $pbc$North Palm Beach$pbc$, $pbc$33408$pbc$, $pbc$Worker Placement$pbc$, $pbc$PC & Console$pbc$, $pbc$North Palm Beach native. Love Worker Placement, dabble in Social Deduction Games. Let's connect!$pbc$, 4.8, 37, $pbc$["Pro Gamer", "Tabletop King"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$finn.wright802@yahoo.com$pbc$, $pbc$password123$pbc$, $pbc$EchoDruid411$pbc$, $pbc$Finn Wright$pbc$, 46, $pbc$Wellington$pbc$, $pbc$33414$pbc$, $pbc$Yoga$pbc$, $pbc$Steam Deck$pbc$, $pbc$Passionate about Yoga. Based in Wellington, FL. Hit me up for games or meetups.$pbc$, 4.3, 10, $pbc$["Tabletop King", "Friendly Host", "PBC Veteran"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$damian.hernandez82@hotmail.com$pbc$, $pbc$password123$pbc$, $pbc$GrindGeneral954$pbc$, $pbc$Damian Hernandez$pbc$, 41, $pbc$Wellington$pbc$, $pbc$33414$pbc$, $pbc$Biking / Cycling$pbc$, $pbc$N/A$pbc$, $pbc$New to the scene! Trying to find people who love Biking / Cycling in Wellington area.$pbc$, 4.3, 64, $pbc$["Tabletop King"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$axel.foster200@gmail.com$pbc$, $pbc$password123$pbc$, $pbc$AxelFos88$pbc$, $pbc$Axel Foster$pbc$, 36, $pbc$Lake Park$pbc$, $pbc$33403$pbc$, $pbc$Weightlifting$pbc$, $pbc$All Platforms$pbc$, $pbc$Casual Weightlifting fan from Lake Park. Also enjoy Adventure Games on weekends.$pbc$, 4.7, 55, $pbc$["Tabletop King"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$brian.allen563@outlook.com$pbc$, $pbc$password123$pbc$, $pbc$StealthBrian36$pbc$, $pbc$Brian Allen$pbc$, 23, $pbc$Boca Raton$pbc$, $pbc$33433$pbc$, $pbc$Dungeons & Dragons$pbc$, $pbc$Mobile$pbc$, $pbc$South FL local. Dungeons & Dragons enthusiast and weekend warrior. Boca Raton represent!$pbc$, 4.2, 20, $pbc$["Friendly Host", "Early Bird"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$christian.vasquez711@icloud.com$pbc$, $pbc$password123$pbc$, $pbc$xXChBardXx$pbc$, $pbc$Christian Vasquez$pbc$, 34, $pbc$Juno Beach$pbc$, $pbc$33408$pbc$, $pbc$Tabletop RPG$pbc$, $pbc$All Platforms$pbc$, $pbc$Local Juno Beach player. Into Tabletop RPG and Magic: The Gathering. Always looking for chill groups!$pbc$, 4.3, 56, $pbc$["PBC Veteran"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$madison.hall409@outlook.com$pbc$, $pbc$password123$pbc$, $pbc$Jade239183$pbc$, $pbc$Madison Hall$pbc$, 23, $pbc$Palm Beach Gardens$pbc$, $pbc$33410$pbc$, $pbc$Biking / Cycling$pbc$, $pbc$N/A$pbc$, $pbc$New to the scene! Trying to find people who love Biking / Cycling in Palm Beach Gardens area.$pbc$, 4.3, 54, $pbc$["PBC Veteran"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$joshua.griffin212@yahoo.com$pbc$, $pbc$password123$pbc$, $pbc$JoshuaGri41$pbc$, $pbc$Joshua Griffin$pbc$, 34, $pbc$Wellington$pbc$, $pbc$33449$pbc$, $pbc$Card Games / TCG$pbc$, $pbc$PC & Console$pbc$, $pbc$New to the scene! Trying to find people who love Card Games / TCG in Wellington area.$pbc$, 4.5, 19, $pbc$["Friendly Host", "Tabletop King", "Tournament Ready"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$dallas.howard783@hotmail.com$pbc$, $pbc$password123$pbc$, $pbc$UltraDallas29$pbc$, $pbc$Dallas Howard$pbc$, 29, $pbc$Belle Glade$pbc$, $pbc$33430$pbc$, $pbc$Worker Placement$pbc$, $pbc$N/A$pbc$, $pbc$Passionate about Worker Placement. Based in Belle Glade, FL. Hit me up for games or meetups.$pbc$, 4.7, 43, $pbc$["Early Bird", "PBC Veteran"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$brian.nguyen13@yahoo.com$pbc$, $pbc$password123$pbc$, $pbc$xXBrMonkXx$pbc$, $pbc$Brian Nguyen$pbc$, 18, $pbc$Greenacres$pbc$, $pbc$33463$pbc$, $pbc$Warhammer$pbc$, $pbc$PC & Console$pbc$, $pbc$Retired Warhammer tryhard, now just vibing. Live in Greenacres, FL.$pbc$, 4.3, 34, $pbc$["Tabletop King", "Tournament Ready"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$justin.moore875@icloud.com$pbc$, $pbc$password123$pbc$, $pbc$AlphaJustin24$pbc$, $pbc$Justin Moore$pbc$, 41, $pbc$Royal Palm Beach$pbc$, $pbc$33414$pbc$, $pbc$Open World$pbc$, $pbc$Nintendo Switch$pbc$, $pbc$Royal Palm Beach native. Love Open World, dabble in Puzzle Games. Let's connect!$pbc$, 4.5, 32, $pbc$["Friendly Host", "Tournament Ready", "PBC Veteran"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$angel.delacroix432@icloud.com$pbc$, $pbc$password123$pbc$, $pbc$AngelDel90$pbc$, $pbc$Angel Delacroix$pbc$, 29, $pbc$West Palm Beach$pbc$, $pbc$33401$pbc$, $pbc$Party Games$pbc$, $pbc$N/A$pbc$, $pbc$Casual Party Games fan from West Palm Beach. Also enjoy Triathlon on weekends.$pbc$, 4.3, 25, $pbc$["Tabletop King", "Early Bird"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$luis.parker763@outlook.com$pbc$, $pbc$password123$pbc$, $pbc$TurboLuis47$pbc$, $pbc$Luis Parker$pbc$, 46, $pbc$Delray Beach$pbc$, $pbc$33444$pbc$, $pbc$Puzzle Games$pbc$, $pbc$Xbox$pbc$, $pbc$Always down for Puzzle Games sessions. Delray Beach-based. Message me anytime!$pbc$, 4.8, 72, $pbc$["Pro Gamer", "Tabletop King"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$bianca.perez391@hotmail.com$pbc$, $pbc$password123$pbc$, $pbc$BetaBianca81$pbc$, $pbc$Bianca Perez$pbc$, 23, $pbc$Tequesta$pbc$, $pbc$33469$pbc$, $pbc$Weightlifting$pbc$, $pbc$N/A$pbc$, $pbc$Always down for Weightlifting sessions. Tequesta-based. Message me anytime!$pbc$, 4.9, 11, $pbc$["PBC Veteran", "Tournament Ready"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$michael.watson278@icloud.com$pbc$, $pbc$password123$pbc$, $pbc$RankedMichael76$pbc$, $pbc$Michael Watson$pbc$, 43, $pbc$Jupiter$pbc$, $pbc$33477$pbc$, $pbc$Sports Games$pbc$, $pbc$Mobile$pbc$, $pbc$Passionate about Sports Games. Based in Jupiter, FL. Hit me up for games or meetups.$pbc$, 4.4, 18, $pbc$["Tournament Ready"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$justin.diaz98@gmail.com$pbc$, $pbc$password123$pbc$, $pbc$xXJuClericXx$pbc$, $pbc$Justin Diaz$pbc$, 24, $pbc$Riviera Beach$pbc$, $pbc$33407$pbc$, $pbc$Competitive FPS$pbc$, $pbc$All Platforms$pbc$, $pbc$Casual Competitive FPS fan from Riviera Beach. Also enjoy MMORPG on weekends.$pbc$, 4.2, 9, $pbc$["Early Bird"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$maya.murphy540@yahoo.com$pbc$, $pbc$password123$pbc$, $pbc$Pixel420366$pbc$, $pbc$Maya Murphy$pbc$, 26, $pbc$Delray Beach$pbc$, $pbc$33446$pbc$, $pbc$Triathlon$pbc$, $pbc$Mobile$pbc$, $pbc$Casual Triathlon fan from Delray Beach. Also enjoy Cooperative Board Games on weekends.$pbc$, 4.8, 51, $pbc$["Tournament Ready", "Tabletop King"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$dominic.murphy423@outlook.com$pbc$, $pbc$password123$pbc$, $pbc$DominicMur48$pbc$, $pbc$Dominic Murphy$pbc$, 41, $pbc$Palm Beach Gardens$pbc$, $pbc$33418$pbc$, $pbc$Open World$pbc$, $pbc$Mobile$pbc$, $pbc$Local Palm Beach Gardens player. Into Open World and First-Person Shooters. Always looking for chill groups!$pbc$, 4.6, 54, $pbc$["Tabletop King", "PBC Veteran", "Tournament Ready"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$claudia.long904@hotmail.com$pbc$, $pbc$password123$pbc$, $pbc$xXClSniperXx$pbc$, $pbc$Claudia Long$pbc$, 44, $pbc$Lake Worth Beach$pbc$, $pbc$33460$pbc$, $pbc$Sports Games$pbc$, $pbc$Nintendo Switch$pbc$, $pbc$Lake Worth Beach native. Love Sports Games, dabble in Souls-like Games. Let's connect!$pbc$, 4.7, 59, $pbc$["Early Bird", "PBC Veteran", "Tournament Ready"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$michael.coleman279@hotmail.com$pbc$, $pbc$password123$pbc$, $pbc$xXMiQueenXx$pbc$, $pbc$Michael Coleman$pbc$, 46, $pbc$Palm Beach$pbc$, $pbc$33480$pbc$, $pbc$Biking / Cycling$pbc$, $pbc$N/A$pbc$, $pbc$South FL local. Biking / Cycling enthusiast and weekend warrior. Palm Beach represent!$pbc$, 4.3, 29, $pbc$["PBC Veteran", "Pro Gamer", "Tournament Ready"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$gavin.white239@gmail.com$pbc$, $pbc$password123$pbc$, $pbc$GavinWhi11$pbc$, $pbc$Gavin White$pbc$, 18, $pbc$Tequesta$pbc$, $pbc$33469$pbc$, $pbc$Trading Card Games$pbc$, $pbc$N/A$pbc$, $pbc$Local Tequesta player. Into Trading Card Games and War Games. Always looking for chill groups!$pbc$, 4.6, 67, $pbc$["Tournament Ready", "Pro Gamer", "Friendly Host"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$marcus.kim557@icloud.com$pbc$, $pbc$password123$pbc$, $pbc$MarcusKim34$pbc$, $pbc$Marcus Kim$pbc$, 22, $pbc$Riviera Beach$pbc$, $pbc$33407$pbc$, $pbc$Yoga$pbc$, $pbc$N/A$pbc$, $pbc$Local Riviera Beach player. Into Yoga and Fitness / General Workout. Always looking for chill groups!$pbc$, 4.7, 15, $pbc$["Tournament Ready", "Friendly Host"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$jose.nguyen682@yahoo.com$pbc$, $pbc$password123$pbc$, $pbc$xXJoGeneralXx$pbc$, $pbc$Jose Nguyen$pbc$, 51, $pbc$Delray Beach$pbc$, $pbc$33444$pbc$, $pbc$Card Games / TCG$pbc$, $pbc$PC$pbc$, $pbc$Passionate about Card Games / TCG. Based in Delray Beach, FL. Hit me up for games or meetups.$pbc$, 4.5, 56, $pbc$["Friendly Host", "Pro Gamer", "Tournament Ready"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$leo.sullivan16@yahoo.com$pbc$, $pbc$password123$pbc$, $pbc$OnyxLeo16$pbc$, $pbc$Leo Sullivan$pbc$, 38, $pbc$Manalapan$pbc$, $pbc$33462$pbc$, $pbc$Weightlifting$pbc$, $pbc$PC & Console$pbc$, $pbc$Local Manalapan player. Into Weightlifting and Tennis. Always looking for chill groups!$pbc$, 4.4, 50, $pbc$["PBC Veteran", "Pro Gamer", "Early Bird"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$rebecca.taylor811@gmail.com$pbc$, $pbc$password123$pbc$, $pbc$RebeccaTay72$pbc$, $pbc$Rebecca Taylor$pbc$, 52, $pbc$Boynton Beach$pbc$, $pbc$33435$pbc$, $pbc$Board Games$pbc$, $pbc$N/A$pbc$, $pbc$Local Boynton Beach player. Into Board Games and Yoga. Always looking for chill groups!$pbc$, 4.5, 77, $pbc$["Early Bird", "Friendly Host", "Tournament Ready"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$ariana.watson302@hotmail.com$pbc$, $pbc$password123$pbc$, $pbc$xXArQueenXx$pbc$, $pbc$Ariana Watson$pbc$, 53, $pbc$Tequesta$pbc$, $pbc$33469$pbc$, $pbc$Kayaking$pbc$, $pbc$N/A$pbc$, $pbc$New to the scene! Trying to find people who love Kayaking in Tequesta area.$pbc$, 4.5, 38, $pbc$["Tournament Ready", "Early Bird", "Tabletop King"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$miguel.vasquez376@icloud.com$pbc$, $pbc$password123$pbc$, $pbc$Chill404519$pbc$, $pbc$Miguel Vasquez$pbc$, 52, $pbc$Jupiter$pbc$, $pbc$33458$pbc$, $pbc$Trading Card Games$pbc$, $pbc$Steam Deck$pbc$, $pbc$South FL local. Trading Card Games enthusiast and weekend warrior. Jupiter represent!$pbc$, 4.8, 50, $pbc$["Tabletop King", "PBC Veteran"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$nora.mitchell99@hotmail.com$pbc$, $pbc$password123$pbc$, $pbc$Pixel561961$pbc$, $pbc$Nora Mitchell$pbc$, 25, $pbc$Greenacres$pbc$, $pbc$33463$pbc$, $pbc$Tabletop RPG$pbc$, $pbc$N/A$pbc$, $pbc$Retired Tabletop RPG tryhard, now just vibing. Live in Greenacres, FL.$pbc$, 4.9, 16, $pbc$["Tournament Ready"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$ashley.reyes51@outlook.com$pbc$, $pbc$password123$pbc$, $pbc$AshleyRey87$pbc$, $pbc$Ashley Reyes$pbc$, 34, $pbc$Singer Island$pbc$, $pbc$33404$pbc$, $pbc$Battle Royale$pbc$, $pbc$PC$pbc$, $pbc$Local Singer Island player. Into Battle Royale and Horror Games. Always looking for chill groups!$pbc$, 4.6, 21, $pbc$["PBC Veteran", "Friendly Host"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$david.castillo968@yahoo.com$pbc$, $pbc$password123$pbc$, $pbc$Inferno777237$pbc$, $pbc$David Castillo$pbc$, 22, $pbc$Palm Beach Gardens$pbc$, $pbc$33418$pbc$, $pbc$Stand-Up Paddleboarding$pbc$, $pbc$N/A$pbc$, $pbc$Retired Stand-Up Paddleboarding tryhard, now just vibing. Live in Palm Beach Gardens, FL.$pbc$, 4.3, 8, $pbc$["Tabletop King"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$emma.patel691@icloud.com$pbc$, $pbc$password123$pbc$, $pbc$xXEm813Xx$pbc$, $pbc$Emma Patel$pbc$, 40, $pbc$Juno Beach$pbc$, $pbc$33408$pbc$, $pbc$Biking / Cycling$pbc$, $pbc$N/A$pbc$, $pbc$Always down for Biking / Cycling sessions. Juno Beach-based. Message me anytime!$pbc$, 4.3, 5, $pbc$["PBC Veteran", "Pro Gamer", "Friendly Host"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$ryan.mitchell624@yahoo.com$pbc$, $pbc$password123$pbc$, $pbc$RyanMit58$pbc$, $pbc$Ryan Mitchell$pbc$, 38, $pbc$Manalapan$pbc$, $pbc$33462$pbc$, $pbc$Magic: The Gathering$pbc$, $pbc$Nintendo Switch$pbc$, $pbc$Local Manalapan player. Into Magic: The Gathering and Pickleball. Always looking for chill groups!$pbc$, 4.6, 57, $pbc$["Tournament Ready", "Friendly Host"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$mason.roberts585@hotmail.com$pbc$, $pbc$password123$pbc$, $pbc$MasonRob22$pbc$, $pbc$Mason Roberts$pbc$, 53, $pbc$Pahokee$pbc$, $pbc$33476$pbc$, $pbc$Social Deduction Games$pbc$, $pbc$N/A$pbc$, $pbc$South FL local. Social Deduction Games enthusiast and weekend warrior. Pahokee represent!$pbc$, 4.4, 8, $pbc$["Friendly Host", "PBC Veteran", "Early Bird"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$mia.campbell583@yahoo.com$pbc$, $pbc$password123$pbc$, $pbc$GrindVillain812$pbc$, $pbc$Mia Campbell$pbc$, 43, $pbc$Juno Beach$pbc$, $pbc$33408$pbc$, $pbc$Softball$pbc$, $pbc$All Platforms$pbc$, $pbc$Casual Softball fan from Juno Beach. Also enjoy Adventure Games on weekends.$pbc$, 4.2, 29, $pbc$["Friendly Host"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$dennis.allen313@hotmail.com$pbc$, $pbc$password123$pbc$, $pbc$RogueRogue579$pbc$, $pbc$Dennis Allen$pbc$, 21, $pbc$Riviera Beach$pbc$, $pbc$33404$pbc$, $pbc$Adventure Games$pbc$, $pbc$All Platforms$pbc$, $pbc$Riviera Beach native. Love Adventure Games, dabble in Sandbox Games. Let's connect!$pbc$, 4.3, 39, $pbc$["Tabletop King"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$genesis.kim586@gmail.com$pbc$, $pbc$password123$pbc$, $pbc$xXGeGodXx$pbc$, $pbc$Genesis Kim$pbc$, 48, $pbc$Boca Raton$pbc$, $pbc$33496$pbc$, $pbc$Soccer$pbc$, $pbc$Nintendo Switch$pbc$, $pbc$Casual Soccer fan from Boca Raton. Also enjoy Strategy Games on weekends.$pbc$, 4.9, 62, $pbc$["PBC Veteran"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$lily.bryant332@hotmail.com$pbc$, $pbc$password123$pbc$, $pbc$Storm420424$pbc$, $pbc$Lily Bryant$pbc$, 45, $pbc$Jupiter$pbc$, $pbc$33477$pbc$, $pbc$War Games$pbc$, $pbc$N/A$pbc$, $pbc$Always down for War Games sessions. Jupiter-based. Message me anytime!$pbc$, 4.8, 62, $pbc$["PBC Veteran"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$diamond.morales452@gmail.com$pbc$, $pbc$password123$pbc$, $pbc$DiamondMor35$pbc$, $pbc$Diamond Morales$pbc$, 27, $pbc$Tequesta$pbc$, $pbc$33469$pbc$, $pbc$Competitive FPS$pbc$, $pbc$Xbox$pbc$, $pbc$Always down for Competitive FPS sessions. Tequesta-based. Message me anytime!$pbc$, 4.4, 28, $pbc$["Tabletop King"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$ethan.jenkins24@outlook.com$pbc$, $pbc$password123$pbc$, $pbc$EthanJen78$pbc$, $pbc$Ethan Jenkins$pbc$, 48, $pbc$Tequesta$pbc$, $pbc$33469$pbc$, $pbc$Trading Card Games$pbc$, $pbc$N/A$pbc$, $pbc$Local Tequesta player. Into Trading Card Games and Fitness / General Workout. Always looking for chill groups!$pbc$, 4.2, 63, $pbc$["Early Bird"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$luis.diaz206@hotmail.com$pbc$, $pbc$password123$pbc$, $pbc$ShadowLuis60$pbc$, $pbc$Luis Diaz$pbc$, 36, $pbc$Boca Raton$pbc$, $pbc$33431$pbc$, $pbc$Pickleball$pbc$, $pbc$N/A$pbc$, $pbc$Retired Pickleball tryhard, now just vibing. Live in Boca Raton, FL.$pbc$, 4.7, 27, $pbc$["PBC Veteran", "Tabletop King", "Pro Gamer"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$bianca.watson497@hotmail.com$pbc$, $pbc$password123$pbc$, $pbc$NovaQueen513$pbc$, $pbc$Bianca Watson$pbc$, 38, $pbc$Delray Beach$pbc$, $pbc$33444$pbc$, $pbc$Beach Activities$pbc$, $pbc$N/A$pbc$, $pbc$Delray Beach native. Love Beach Activities, dabble in Soccer. Let's connect!$pbc$, 4.3, 50, $pbc$["Friendly Host"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$blake.king641@outlook.com$pbc$, $pbc$password123$pbc$, $pbc$BlakeKin74$pbc$, $pbc$Blake King$pbc$, 40, $pbc$Royal Palm Beach$pbc$, $pbc$33411$pbc$, $pbc$Indie Games$pbc$, $pbc$All Platforms$pbc$, $pbc$Casual Indie Games fan from Royal Palm Beach. Also enjoy Miniature Games on weekends.$pbc$, 4.8, 66, $pbc$["Friendly Host", "Tournament Ready"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$thomas.griffin437@outlook.com$pbc$, $pbc$password123$pbc$, $pbc$AlphaThomas70$pbc$, $pbc$Thomas Griffin$pbc$, 27, $pbc$Juno Beach$pbc$, $pbc$33408$pbc$, $pbc$Beach Volleyball$pbc$, $pbc$Xbox$pbc$, $pbc$Juno Beach native. Love Beach Volleyball, dabble in Souls-like Games. Let's connect!$pbc$, 4.6, 24, $pbc$["Tournament Ready", "Friendly Host"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$noah.brown972@gmail.com$pbc$, $pbc$password123$pbc$, $pbc$NoahBro50$pbc$, $pbc$Noah Brown$pbc$, 52, $pbc$Palm Springs$pbc$, $pbc$33461$pbc$, $pbc$Trading Card Games$pbc$, $pbc$Xbox$pbc$, $pbc$South FL local. Trading Card Games enthusiast and weekend warrior. Palm Springs represent!$pbc$, 4.6, 74, $pbc$["PBC Veteran", "Pro Gamer", "Friendly Host"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$destiny.rodriguez237@gmail.com$pbc$, $pbc$password123$pbc$, $pbc$CyberDestiny89$pbc$, $pbc$Destiny Rodriguez$pbc$, 32, $pbc$Wellington$pbc$, $pbc$33414$pbc$, $pbc$Deck Building$pbc$, $pbc$PC$pbc$, $pbc$South FL local. Deck Building enthusiast and weekend warrior. Wellington represent!$pbc$, 4.2, 31, $pbc$["Early Bird", "PBC Veteran"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$taylor.gonzalez68@yahoo.com$pbc$, $pbc$password123$pbc$, $pbc$xXTa954Xx$pbc$, $pbc$Taylor Gonzalez$pbc$, 31, $pbc$Lake Worth Beach$pbc$, $pbc$33460$pbc$, $pbc$Competitive FPS$pbc$, $pbc$PC$pbc$, $pbc$New to the scene! Trying to find people who love Competitive FPS in Lake Worth Beach area.$pbc$, 4.7, 51, $pbc$["PBC Veteran", "Friendly Host", "Pro Gamer"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$alejandro.morales532@hotmail.com$pbc$, $pbc$password123$pbc$, $pbc$xXAl42Xx$pbc$, $pbc$Alejandro Morales$pbc$, 33, $pbc$West Palm Beach$pbc$, $pbc$33409$pbc$, $pbc$Beach Volleyball$pbc$, $pbc$Mobile$pbc$, $pbc$Retired Beach Volleyball tryhard, now just vibing. Live in West Palm Beach, FL.$pbc$, 4.8, 77, $pbc$["Early Bird", "Tabletop King", "Friendly Host"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$miguel.scott926@yahoo.com$pbc$, $pbc$password123$pbc$, $pbc$xXMi561Xx$pbc$, $pbc$Miguel Scott$pbc$, 51, $pbc$Boca Raton$pbc$, $pbc$33431$pbc$, $pbc$Disc Golf$pbc$, $pbc$N/A$pbc$, $pbc$New to the scene! Trying to find people who love Disc Golf in Boca Raton area.$pbc$, 4.7, 42, $pbc$["Tournament Ready", "Pro Gamer", "Tabletop King"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$brianna.edwards919@yahoo.com$pbc$, $pbc$password123$pbc$, $pbc$xXBrStrikerXx$pbc$, $pbc$Brianna Edwards$pbc$, 55, $pbc$Palm Beach$pbc$, $pbc$33480$pbc$, $pbc$Sandbox Games$pbc$, $pbc$All Platforms$pbc$, $pbc$Palm Beach native. Love Sandbox Games, dabble in Bird Watching. Let's connect!$pbc$, 4.3, 5, $pbc$["Early Bird"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$samantha.roberts787@yahoo.com$pbc$, $pbc$password123$pbc$, $pbc$RubySamantha85$pbc$, $pbc$Samantha Roberts$pbc$, 20, $pbc$Riviera Beach$pbc$, $pbc$33404$pbc$, $pbc$Rock Climbing$pbc$, $pbc$N/A$pbc$, $pbc$New to the scene! Trying to find people who love Rock Climbing in Riviera Beach area.$pbc$, 4.5, 73, $pbc$["PBC Veteran"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$melissa.stewart921@yahoo.com$pbc$, $pbc$password123$pbc$, $pbc$MelissaSte10$pbc$, $pbc$Melissa Stewart$pbc$, 25, $pbc$Boynton Beach$pbc$, $pbc$33437$pbc$, $pbc$Warhammer$pbc$, $pbc$Steam Deck$pbc$, $pbc$Local Boynton Beach player. Into Warhammer and Social Deduction Games. Always looking for chill groups!$pbc$, 4.6, 61, $pbc$["Early Bird", "PBC Veteran"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$lily.roberts840@yahoo.com$pbc$, $pbc$password123$pbc$, $pbc$NovaMaster57$pbc$, $pbc$Lily Roberts$pbc$, 53, $pbc$Jupiter$pbc$, $pbc$33477$pbc$, $pbc$Basketball$pbc$, $pbc$Mobile$pbc$, $pbc$Jupiter native. Love Basketball, dabble in Party Games. Let's connect!$pbc$, 4.9, 57, $pbc$["Tournament Ready", "PBC Veteran", "Early Bird"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$alejandro.wright954@gmail.com$pbc$, $pbc$password123$pbc$, $pbc$ChillHero331$pbc$, $pbc$Alejandro Wright$pbc$, 41, $pbc$Singer Island$pbc$, $pbc$33404$pbc$, $pbc$Soccer$pbc$, $pbc$PC & Console$pbc$, $pbc$Casual Soccer fan from Singer Island. Also enjoy Running / Jogging on weekends.$pbc$, 4.8, 35, $pbc$["Tabletop King"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$justin.scott586@hotmail.com$pbc$, $pbc$password123$pbc$, $pbc$Crimson777706$pbc$, $pbc$Justin Scott$pbc$, 24, $pbc$Boca Raton$pbc$, $pbc$33431$pbc$, $pbc$Social Deduction Games$pbc$, $pbc$N/A$pbc$, $pbc$New to the scene! Trying to find people who love Social Deduction Games in Boca Raton area.$pbc$, 4.9, 57, $pbc$["Friendly Host", "Early Bird", "Tournament Ready"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$austin.delacroix726@outlook.com$pbc$, $pbc$password123$pbc$, $pbc$AustinDel10$pbc$, $pbc$Austin Delacroix$pbc$, 32, $pbc$Boynton Beach$pbc$, $pbc$33437$pbc$, $pbc$Platformers$pbc$, $pbc$Nintendo Switch$pbc$, $pbc$Casual Platformers fan from Boynton Beach. Also enjoy Competitive FPS on weekends.$pbc$, 4.5, 78, $pbc$["Tabletop King", "Friendly Host"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$maya.harris308@hotmail.com$pbc$, $pbc$password123$pbc$, $pbc$ChillMaya1$pbc$, $pbc$Maya Harris$pbc$, 37, $pbc$Boca Raton$pbc$, $pbc$33433$pbc$, $pbc$Golf$pbc$, $pbc$Steam Deck$pbc$, $pbc$Boca Raton native. Love Golf, dabble in Indie Games. Let's connect!$pbc$, 4.8, 19, $pbc$["Friendly Host"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$antonio.cruz918@outlook.com$pbc$, $pbc$password123$pbc$, $pbc$xXAnPBCXx$pbc$, $pbc$Antonio Cruz$pbc$, 52, $pbc$Palm Beach$pbc$, $pbc$33480$pbc$, $pbc$Beach Activities$pbc$, $pbc$N/A$pbc$, $pbc$Always down for Beach Activities sessions. Palm Beach-based. Message me anytime!$pbc$, 4.5, 74, $pbc$["Early Bird"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$rachel.brown861@gmail.com$pbc$, $pbc$password123$pbc$, $pbc$HyperRachel81$pbc$, $pbc$Rachel Brown$pbc$, 35, $pbc$Boynton Beach$pbc$, $pbc$33435$pbc$, $pbc$Indie Games$pbc$, $pbc$Steam Deck$pbc$, $pbc$New to the scene! Trying to find people who love Indie Games in Boynton Beach area.$pbc$, 4.5, 30, $pbc$["Early Bird"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$morgan.gomez180@gmail.com$pbc$, $pbc$password123$pbc$, $pbc$LazyMorgan5$pbc$, $pbc$Morgan Gomez$pbc$, 37, $pbc$Lake Park$pbc$, $pbc$33403$pbc$, $pbc$Eurogames$pbc$, $pbc$PC & Console$pbc$, $pbc$Lake Park native. Love Eurogames, dabble in Souls-like Games. Let's connect!$pbc$, 4.7, 28, $pbc$["Friendly Host", "Tournament Ready", "Early Bird"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$julia.williams397@hotmail.com$pbc$, $pbc$password123$pbc$, $pbc$DarkHero955$pbc$, $pbc$Julia Williams$pbc$, 47, $pbc$West Palm Beach$pbc$, $pbc$33409$pbc$, $pbc$Worker Placement$pbc$, $pbc$Nintendo Switch$pbc$, $pbc$South FL local. Worker Placement enthusiast and weekend warrior. West Palm Beach represent!$pbc$, 4.5, 80, $pbc$["Tabletop King"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$cassidy.johnson280@yahoo.com$pbc$, $pbc$password123$pbc$, $pbc$CassidyJoh45$pbc$, $pbc$Cassidy Johnson$pbc$, 25, $pbc$Tequesta$pbc$, $pbc$33469$pbc$, $pbc$Horror Games$pbc$, $pbc$Mobile$pbc$, $pbc$Tequesta native. Love Horror Games, dabble in Open World. Let's connect!$pbc$, 4.9, 12, $pbc$["Pro Gamer", "Tabletop King"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$david.jenkins455@gmail.com$pbc$, $pbc$password123$pbc$, $pbc$DavidJen13$pbc$, $pbc$David Jenkins$pbc$, 52, $pbc$Greenacres$pbc$, $pbc$33467$pbc$, $pbc$Platformers$pbc$, $pbc$All Platforms$pbc$, $pbc$New to the scene! Trying to find people who love Platformers in Greenacres area.$pbc$, 4.7, 82, $pbc$["Pro Gamer"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$diamond.lee838@yahoo.com$pbc$, $pbc$password123$pbc$, $pbc$Hacked100783$pbc$, $pbc$Diamond Lee$pbc$, 39, $pbc$Palm Beach Gardens$pbc$, $pbc$33418$pbc$, $pbc$CrossFit$pbc$, $pbc$N/A$pbc$, $pbc$New to the scene! Trying to find people who love CrossFit in Palm Beach Gardens area.$pbc$, 4.6, 68, $pbc$["Early Bird", "PBC Veteran", "Friendly Host"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$amanda.green882@hotmail.com$pbc$, $pbc$password123$pbc$, $pbc$ModdedAmanda47$pbc$, $pbc$Amanda Green$pbc$, 27, $pbc$Wellington$pbc$, $pbc$33414$pbc$, $pbc$Board Games$pbc$, $pbc$N/A$pbc$, $pbc$Wellington native. Love Board Games, dabble in Tabletop RPG. Let's connect!$pbc$, 4.4, 23, $pbc$["Pro Gamer"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$maya.patel131@hotmail.com$pbc$, $pbc$password123$pbc$, $pbc$Ultra305732$pbc$, $pbc$Maya Patel$pbc$, 54, $pbc$Royal Palm Beach$pbc$, $pbc$33411$pbc$, $pbc$Cooperative Board Games$pbc$, $pbc$N/A$pbc$, $pbc$Royal Palm Beach native. Love Cooperative Board Games, dabble in Party Games. Let's connect!$pbc$, 4.4, 21, $pbc$["Early Bird", "Pro Gamer"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$antonio.martin214@hotmail.com$pbc$, $pbc$password123$pbc$, $pbc$xXAnBardXx44$pbc$, $pbc$Antonio Martin$pbc$, 39, $pbc$Boca Raton$pbc$, $pbc$33433$pbc$, $pbc$Softball$pbc$, $pbc$N/A$pbc$, $pbc$New to the scene! Trying to find people who love Softball in Boca Raton area.$pbc$, 4.7, 84, $pbc$["PBC Veteran", "Pro Gamer"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$eva.russell569@gmail.com$pbc$, $pbc$password123$pbc$, $pbc$xXEvKingXx$pbc$, $pbc$Eva Russell$pbc$, 38, $pbc$Palm Beach$pbc$, $pbc$33480$pbc$, $pbc$Soccer$pbc$, $pbc$N/A$pbc$, $pbc$Local Palm Beach player. Into Soccer and Hiking. Always looking for chill groups!$pbc$, 4.3, 6, $pbc$["Early Bird"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$hunter.thompson545@outlook.com$pbc$, $pbc$password123$pbc$, $pbc$xXHuWarlockXx$pbc$, $pbc$Hunter Thompson$pbc$, 46, $pbc$Boynton Beach$pbc$, $pbc$33435$pbc$, $pbc$Cooperative Board Games$pbc$, $pbc$N/A$pbc$, $pbc$Retired Cooperative Board Games tryhard, now just vibing. Live in Boynton Beach, FL.$pbc$, 5.0, 83, $pbc$["Early Bird", "Pro Gamer", "Tournament Ready"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$patrick.campbell627@hotmail.com$pbc$, $pbc$password123$pbc$, $pbc$xXPa786Xx$pbc$, $pbc$Patrick Campbell$pbc$, 18, $pbc$Singer Island$pbc$, $pbc$33404$pbc$, $pbc$Triathlon$pbc$, $pbc$PC$pbc$, $pbc$Retired Triathlon tryhard, now just vibing. Live in Singer Island, FL.$pbc$, 4.8, 85, $pbc$["Friendly Host", "Tabletop King", "Tournament Ready"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$noah.white391@icloud.com$pbc$, $pbc$password123$pbc$, $pbc$NoahWhi94$pbc$, $pbc$Noah White$pbc$, 43, $pbc$Riviera Beach$pbc$, $pbc$33404$pbc$, $pbc$Puzzle Games$pbc$, $pbc$N/A$pbc$, $pbc$Riviera Beach native. Love Puzzle Games, dabble in Party Games. Let's connect!$pbc$, 5.0, 19, $pbc$["Early Bird", "Tournament Ready", "Pro Gamer"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$grace.allen148@icloud.com$pbc$, $pbc$password123$pbc$, $pbc$xXGrPlayerXx$pbc$, $pbc$Grace Allen$pbc$, 19, $pbc$Boca Raton$pbc$, $pbc$33433$pbc$, $pbc$Flag Football$pbc$, $pbc$All Platforms$pbc$, $pbc$New to the scene! Trying to find people who love Flag Football in Boca Raton area.$pbc$, 4.5, 46, $pbc$["PBC Veteran", "Tabletop King", "Early Bird"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$leo.white421@hotmail.com$pbc$, $pbc$password123$pbc$, $pbc$PixelLeo5$pbc$, $pbc$Leo White$pbc$, 35, $pbc$Pahokee$pbc$, $pbc$33476$pbc$, $pbc$Dungeons & Dragons$pbc$, $pbc$N/A$pbc$, $pbc$South FL local. Dungeons & Dragons enthusiast and weekend warrior. Pahokee represent!$pbc$, 4.2, 50, $pbc$["PBC Veteran", "Tournament Ready"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$allison.reed912@hotmail.com$pbc$, $pbc$password123$pbc$, $pbc$OmegaWizard646$pbc$, $pbc$Allison Reed$pbc$, 51, $pbc$Boca Raton$pbc$, $pbc$33496$pbc$, $pbc$Worker Placement$pbc$, $pbc$Steam Deck$pbc$, $pbc$Always down for Worker Placement sessions. Boca Raton-based. Message me anytime!$pbc$, 4.4, 76, $pbc$["Tournament Ready"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$tiffany.lee172@gmail.com$pbc$, $pbc$password123$pbc$, $pbc$GrindTiffany73$pbc$, $pbc$Tiffany Lee$pbc$, 36, $pbc$Palm Beach Gardens$pbc$, $pbc$33410$pbc$, $pbc$Beach Volleyball$pbc$, $pbc$Steam Deck$pbc$, $pbc$Passionate about Beach Volleyball. Based in Palm Beach Gardens, FL. Hit me up for games or meetups.$pbc$, 4.6, 78, $pbc$["PBC Veteran"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$matthew.harris282@outlook.com$pbc$, $pbc$password123$pbc$, $pbc$RankedGamer619$pbc$, $pbc$Matthew Harris$pbc$, 35, $pbc$Delray Beach$pbc$, $pbc$33446$pbc$, $pbc$War Games$pbc$, $pbc$Xbox$pbc$, $pbc$Always down for War Games sessions. Delray Beach-based. Message me anytime!$pbc$, 4.4, 22, $pbc$["Tournament Ready"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$diego.cox771@icloud.com$pbc$, $pbc$password123$pbc$, $pbc$xXDiProXx$pbc$, $pbc$Diego Cox$pbc$, 49, $pbc$Boynton Beach$pbc$, $pbc$33435$pbc$, $pbc$Basketball$pbc$, $pbc$N/A$pbc$, $pbc$Local Boynton Beach player. Into Basketball and Hiking. Always looking for chill groups!$pbc$, 5.0, 70, $pbc$["PBC Veteran", "Tabletop King"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$jake.ortiz309@icloud.com$pbc$, $pbc$password123$pbc$, $pbc$JakeOrt58$pbc$, $pbc$Jake Ortiz$pbc$, 48, $pbc$Riviera Beach$pbc$, $pbc$33407$pbc$, $pbc$Magic: The Gathering$pbc$, $pbc$N/A$pbc$, $pbc$Always down for Magic: The Gathering sessions. Riviera Beach-based. Message me anytime!$pbc$, 4.2, 46, $pbc$["Early Bird", "Tournament Ready"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$cassandra.walker940@hotmail.com$pbc$, $pbc$password123$pbc$, $pbc$CursedCassandra56$pbc$, $pbc$Cassandra Walker$pbc$, 24, $pbc$West Palm Beach$pbc$, $pbc$33409$pbc$, $pbc$Miniature Games$pbc$, $pbc$Nintendo Switch$pbc$, $pbc$West Palm Beach native. Love Miniature Games, dabble in Cooperative Board Games. Let's connect!$pbc$, 4.6, 69, $pbc$["PBC Veteran", "Tabletop King"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$nicole.roberts852@gmail.com$pbc$, $pbc$password123$pbc$, $pbc$MegaRunner538$pbc$, $pbc$Nicole Roberts$pbc$, 18, $pbc$West Palm Beach$pbc$, $pbc$33401$pbc$, $pbc$Golf$pbc$, $pbc$N/A$pbc$, $pbc$Casual Golf fan from West Palm Beach. Also enjoy Basketball on weekends.$pbc$, 4.5, 27, $pbc$["Tabletop King", "Pro Gamer", "PBC Veteran"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$denise.sullivan89@hotmail.com$pbc$, $pbc$password123$pbc$, $pbc$DeniseSul58$pbc$, $pbc$Denise Sullivan$pbc$, 25, $pbc$Delray Beach$pbc$, $pbc$33445$pbc$, $pbc$Miniature Games$pbc$, $pbc$N/A$pbc$, $pbc$Always down for Miniature Games sessions. Delray Beach-based. Message me anytime!$pbc$, 4.4, 53, $pbc$["Friendly Host", "Early Bird"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$luis.davis796@gmail.com$pbc$, $pbc$password123$pbc$, $pbc$xXLuGeneralXx$pbc$, $pbc$Luis Davis$pbc$, 35, $pbc$Boca Raton$pbc$, $pbc$33433$pbc$, $pbc$Deck Building$pbc$, $pbc$Steam Deck$pbc$, $pbc$Retired Deck Building tryhard, now just vibing. Live in Boca Raton, FL.$pbc$, 4.3, 67, $pbc$["PBC Veteran", "Friendly Host"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$kevin.scott733@outlook.com$pbc$, $pbc$password123$pbc$, $pbc$PixelSlayer73$pbc$, $pbc$Kevin Scott$pbc$, 46, $pbc$Delray Beach$pbc$, $pbc$33444$pbc$, $pbc$Miniature Games$pbc$, $pbc$N/A$pbc$, $pbc$Local Delray Beach player. Into Miniature Games and Fitness / General Workout. Always looking for chill groups!$pbc$, 4.7, 8, $pbc$["Early Bird"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$savannah.hill927@icloud.com$pbc$, $pbc$password123$pbc$, $pbc$Silver999963$pbc$, $pbc$Savannah Hill$pbc$, 39, $pbc$Boynton Beach$pbc$, $pbc$33435$pbc$, $pbc$Tennis$pbc$, $pbc$PC & Console$pbc$, $pbc$South FL local. Tennis enthusiast and weekend warrior. Boynton Beach represent!$pbc$, 4.3, 25, $pbc$["Friendly Host", "Tournament Ready"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$sofia.brooks548@outlook.com$pbc$, $pbc$password123$pbc$, $pbc$BlessedAxe779$pbc$, $pbc$Sofia Brooks$pbc$, 41, $pbc$Boca Raton$pbc$, $pbc$33496$pbc$, $pbc$Strategy Games$pbc$, $pbc$All Platforms$pbc$, $pbc$Always down for Strategy Games sessions. Boca Raton-based. Message me anytime!$pbc$, 4.9, 66, $pbc$["Tabletop King", "Early Bird"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$ariana.butler144@gmail.com$pbc$, $pbc$password123$pbc$, $pbc$ArianaBut13$pbc$, $pbc$Ariana Butler$pbc$, 30, $pbc$Tequesta$pbc$, $pbc$33469$pbc$, $pbc$Disc Golf$pbc$, $pbc$N/A$pbc$, $pbc$Always down for Disc Golf sessions. Tequesta-based. Message me anytime!$pbc$, 4.9, 72, $pbc$["Tournament Ready", "Pro Gamer", "Early Bird"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$carlos.miller827@hotmail.com$pbc$, $pbc$password123$pbc$, $pbc$xXCa007Xx$pbc$, $pbc$Carlos Miller$pbc$, 31, $pbc$Delray Beach$pbc$, $pbc$33445$pbc$, $pbc$MMORPG$pbc$, $pbc$Steam Deck$pbc$, $pbc$New to the scene! Trying to find people who love MMORPG in Delray Beach area.$pbc$, 4.9, 57, $pbc$["PBC Veteran", "Early Bird", "Pro Gamer"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$dion.bell15@yahoo.com$pbc$, $pbc$password123$pbc$, $pbc$PatchedHero841$pbc$, $pbc$Dion Bell$pbc$, 26, $pbc$Wellington$pbc$, $pbc$33449$pbc$, $pbc$CrossFit$pbc$, $pbc$N/A$pbc$, $pbc$Casual CrossFit fan from Wellington. Also enjoy Fitness / General Workout on weekends.$pbc$, 4.3, 52, $pbc$["Early Bird", "Tabletop King", "Tournament Ready"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$damian.baptiste346@icloud.com$pbc$, $pbc$password123$pbc$, $pbc$StormDamian88$pbc$, $pbc$Damian Baptiste$pbc$, 45, $pbc$Lake Worth Beach$pbc$, $pbc$33460$pbc$, $pbc$Fighting Games$pbc$, $pbc$Xbox$pbc$, $pbc$Always down for Fighting Games sessions. Lake Worth Beach-based. Message me anytime!$pbc$, 4.7, 79, $pbc$["Friendly Host"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$cody.diaz948@hotmail.com$pbc$, $pbc$password123$pbc$, $pbc$FrostRunner811$pbc$, $pbc$Cody Diaz$pbc$, 33, $pbc$Tequesta$pbc$, $pbc$33469$pbc$, $pbc$Board Games$pbc$, $pbc$N/A$pbc$, $pbc$Passionate about Board Games. Based in Tequesta, FL. Hit me up for games or meetups.$pbc$, 4.9, 33, $pbc$["Friendly Host", "Pro Gamer", "PBC Veteran"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$dawn.hughes709@yahoo.com$pbc$, $pbc$password123$pbc$, $pbc$DawnHug28$pbc$, $pbc$Dawn Hughes$pbc$, 48, $pbc$Lantana$pbc$, $pbc$33462$pbc$, $pbc$Fighting Games$pbc$, $pbc$PC$pbc$, $pbc$Casual Fighting Games fan from Lantana. Also enjoy Card Games / TCG on weekends.$pbc$, 4.2, 10, $pbc$["Tournament Ready", "Tabletop King", "Friendly Host"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$finn.reyes884@hotmail.com$pbc$, $pbc$password123$pbc$, $pbc$FinnRey69$pbc$, $pbc$Finn Reyes$pbc$, 41, $pbc$Delray Beach$pbc$, $pbc$33444$pbc$, $pbc$Card Games / TCG$pbc$, $pbc$Xbox$pbc$, $pbc$Local Delray Beach player. Into Card Games / TCG and Competitive FPS. Always looking for chill groups!$pbc$, 4.8, 82, $pbc$["Pro Gamer", "Early Bird"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$riley.hughes258@outlook.com$pbc$, $pbc$password123$pbc$, $pbc$xXRiRangerXx$pbc$, $pbc$Riley Hughes$pbc$, 45, $pbc$Lake Worth Beach$pbc$, $pbc$33461$pbc$, $pbc$Souls-like Games$pbc$, $pbc$PlayStation$pbc$, $pbc$New to the scene! Trying to find people who love Souls-like Games in Lake Worth Beach area.$pbc$, 4.5, 33, $pbc$["Tournament Ready", "Tabletop King"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$dawn.ross204@outlook.com$pbc$, $pbc$password123$pbc$, $pbc$DawnRos24$pbc$, $pbc$Dawn Ross$pbc$, 44, $pbc$Greenacres$pbc$, $pbc$33463$pbc$, $pbc$Party Games$pbc$, $pbc$N/A$pbc$, $pbc$New to the scene! Trying to find people who love Party Games in Greenacres area.$pbc$, 4.4, 54, $pbc$["Friendly Host"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$danny.perez149@yahoo.com$pbc$, $pbc$password123$pbc$, $pbc$xXDaKingXx$pbc$, $pbc$Danny Perez$pbc$, 45, $pbc$Boca Raton$pbc$, $pbc$33431$pbc$, $pbc$Strategy Games$pbc$, $pbc$PC$pbc$, $pbc$Passionate about Strategy Games. Based in Boca Raton, FL. Hit me up for games or meetups.$pbc$, 4.4, 31, $pbc$["Friendly Host", "PBC Veteran", "Tabletop King"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$allison.nguyen779@outlook.com$pbc$, $pbc$password123$pbc$, $pbc$AllisonNgu47$pbc$, $pbc$Allison Nguyen$pbc$, 28, $pbc$Lantana$pbc$, $pbc$33462$pbc$, $pbc$Flag Football$pbc$, $pbc$Mobile$pbc$, $pbc$Retired Flag Football tryhard, now just vibing. Live in Lantana, FL.$pbc$, 4.3, 42, $pbc$["Pro Gamer"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$logan.hall594@yahoo.com$pbc$, $pbc$password123$pbc$, $pbc$LoganHal83$pbc$, $pbc$Logan Hall$pbc$, 45, $pbc$Greenacres$pbc$, $pbc$33463$pbc$, $pbc$Party Games$pbc$, $pbc$N/A$pbc$, $pbc$New to the scene! Trying to find people who love Party Games in Greenacres area.$pbc$, 4.6, 55, $pbc$["Early Bird", "Pro Gamer"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$elijah.nelson86@hotmail.com$pbc$, $pbc$password123$pbc$, $pbc$Savage777417$pbc$, $pbc$Elijah Nelson$pbc$, 33, $pbc$Belle Glade$pbc$, $pbc$33430$pbc$, $pbc$Pickleball$pbc$, $pbc$N/A$pbc$, $pbc$South FL local. Pickleball enthusiast and weekend warrior. Belle Glade represent!$pbc$, 4.5, 47, $pbc$["Tabletop King"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$jacob.watson766@hotmail.com$pbc$, $pbc$password123$pbc$, $pbc$BetaAxe791$pbc$, $pbc$Jacob Watson$pbc$, 54, $pbc$Palm Beach$pbc$, $pbc$33480$pbc$, $pbc$Puzzle Games$pbc$, $pbc$N/A$pbc$, $pbc$Local Palm Beach player. Into Puzzle Games and Weightlifting. Always looking for chill groups!$pbc$, 4.9, 52, $pbc$["Tabletop King", "Friendly Host"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$miguel.morgan590@yahoo.com$pbc$, $pbc$password123$pbc$, $pbc$Cobalt813344$pbc$, $pbc$Miguel Morgan$pbc$, 52, $pbc$Jupiter$pbc$, $pbc$33477$pbc$, $pbc$Competitive FPS$pbc$, $pbc$Nintendo Switch$pbc$, $pbc$Casual Competitive FPS fan from Jupiter. Also enjoy Battle Royale on weekends.$pbc$, 4.3, 59, $pbc$["PBC Veteran", "Pro Gamer", "Tabletop King"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$christina.coleman893@yahoo.com$pbc$, $pbc$password123$pbc$, $pbc$ChristinaCol51$pbc$, $pbc$Christina Coleman$pbc$, 55, $pbc$Loxahatchee$pbc$, $pbc$33470$pbc$, $pbc$Eurogames$pbc$, $pbc$PlayStation$pbc$, $pbc$South FL local. Eurogames enthusiast and weekend warrior. Loxahatchee represent!$pbc$, 4.9, 7, $pbc$["PBC Veteran", "Pro Gamer"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$adrian.smith193@icloud.com$pbc$, $pbc$password123$pbc$, $pbc$CyberSniper920$pbc$, $pbc$Adrian Smith$pbc$, 22, $pbc$Royal Palm Beach$pbc$, $pbc$33414$pbc$, $pbc$Trading Card Games$pbc$, $pbc$N/A$pbc$, $pbc$Royal Palm Beach native. Love Trading Card Games, dabble in Fitness / General Workout. Let's connect!$pbc$, 5.0, 51, $pbc$["Tabletop King", "Tournament Ready", "Friendly Host"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$julia.reed427@hotmail.com$pbc$, $pbc$password123$pbc$, $pbc$JuliaRee70$pbc$, $pbc$Julia Reed$pbc$, 36, $pbc$West Palm Beach$pbc$, $pbc$33405$pbc$, $pbc$MOBA$pbc$, $pbc$Nintendo Switch$pbc$, $pbc$Always down for MOBA sessions. West Palm Beach-based. Message me anytime!$pbc$, 4.3, 31, $pbc$["PBC Veteran", "Tabletop King"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$taylor.ross498@hotmail.com$pbc$, $pbc$password123$pbc$, $pbc$xXTaAxeXx$pbc$, $pbc$Taylor Ross$pbc$, 38, $pbc$Greenacres$pbc$, $pbc$33467$pbc$, $pbc$Deck Building$pbc$, $pbc$Mobile$pbc$, $pbc$Greenacres native. Love Deck Building, dabble in Simulation. Let's connect!$pbc$, 4.4, 29, $pbc$["Friendly Host"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$christian.hughes860@yahoo.com$pbc$, $pbc$password123$pbc$, $pbc$ChristianHug40$pbc$, $pbc$Christian Hughes$pbc$, 29, $pbc$Boynton Beach$pbc$, $pbc$33437$pbc$, $pbc$Dungeons & Dragons$pbc$, $pbc$N/A$pbc$, $pbc$Boynton Beach native. Love Dungeons & Dragons, dabble in Warhammer. Let's connect!$pbc$, 4.7, 41, $pbc$["Pro Gamer"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$ryan.nelson547@outlook.com$pbc$, $pbc$password123$pbc$, $pbc$ModdedMage415$pbc$, $pbc$Ryan Nelson$pbc$, 28, $pbc$North Palm Beach$pbc$, $pbc$33408$pbc$, $pbc$Simulation$pbc$, $pbc$PlayStation$pbc$, $pbc$Local North Palm Beach player. Into Simulation and Card Games / TCG. Always looking for chill groups!$pbc$, 4.2, 39, $pbc$["Tournament Ready"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$hannah.turner316@gmail.com$pbc$, $pbc$password123$pbc$, $pbc$xXHaWarlockXx$pbc$, $pbc$Hannah Turner$pbc$, 25, $pbc$Palm Springs$pbc$, $pbc$33461$pbc$, $pbc$Strategy Games$pbc$, $pbc$Nintendo Switch$pbc$, $pbc$Local Palm Springs player. Into Strategy Games and Co-op Games. Always looking for chill groups!$pbc$, 5.0, 24, $pbc$["Pro Gamer", "Tabletop King", "Tournament Ready"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$diego.richardson525@icloud.com$pbc$, $pbc$password123$pbc$, $pbc$DiegoRic72$pbc$, $pbc$Diego Richardson$pbc$, 23, $pbc$Tequesta$pbc$, $pbc$33469$pbc$, $pbc$MMORPG$pbc$, $pbc$PC$pbc$, $pbc$Always down for MMORPG sessions. Tequesta-based. Message me anytime!$pbc$, 4.5, 82, $pbc$["Friendly Host"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$nathan.nelson221@icloud.com$pbc$, $pbc$password123$pbc$, $pbc$xXNaFLXx$pbc$, $pbc$Nathan Nelson$pbc$, 23, $pbc$Palm Springs$pbc$, $pbc$33461$pbc$, $pbc$Dungeons & Dragons$pbc$, $pbc$PlayStation$pbc$, $pbc$Passionate about Dungeons & Dragons. Based in Palm Springs, FL. Hit me up for games or meetups.$pbc$, 4.5, 67, $pbc$["PBC Veteran", "Friendly Host"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$amara.mitchell180@hotmail.com$pbc$, $pbc$password123$pbc$, $pbc$xXAm999Xx$pbc$, $pbc$Amara Mitchell$pbc$, 44, $pbc$Jupiter$pbc$, $pbc$33477$pbc$, $pbc$Worker Placement$pbc$, $pbc$N/A$pbc$, $pbc$South FL local. Worker Placement enthusiast and weekend warrior. Jupiter represent!$pbc$, 5.0, 39, $pbc$["Tournament Ready"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$austin.robinson28@gmail.com$pbc$, $pbc$password123$pbc$, $pbc$AustinRob43$pbc$, $pbc$Austin Robinson$pbc$, 32, $pbc$Palm Beach$pbc$, $pbc$33480$pbc$, $pbc$Rock Climbing$pbc$, $pbc$N/A$pbc$, $pbc$Casual Rock Climbing fan from Palm Beach. Also enjoy Biking / Cycling on weekends.$pbc$, 4.6, 14, $pbc$["Early Bird"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$brooklyn.collins994@gmail.com$pbc$, $pbc$password123$pbc$, $pbc$OnyxBrooklyn62$pbc$, $pbc$Brooklyn Collins$pbc$, 49, $pbc$Jupiter$pbc$, $pbc$33477$pbc$, $pbc$Worker Placement$pbc$, $pbc$PC$pbc$, $pbc$New to the scene! Trying to find people who love Worker Placement in Jupiter area.$pbc$, 4.9, 62, $pbc$["PBC Veteran"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$grace.lee280@outlook.com$pbc$, $pbc$password123$pbc$, $pbc$xXGr404Xx$pbc$, $pbc$Grace Lee$pbc$, 21, $pbc$Boynton Beach$pbc$, $pbc$33436$pbc$, $pbc$Flag Football$pbc$, $pbc$N/A$pbc$, $pbc$Boynton Beach native. Love Flag Football, dabble in Fitness / General Workout. Let's connect!$pbc$, 4.5, 48, $pbc$["Friendly Host"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$elena.sanchez331@outlook.com$pbc$, $pbc$password123$pbc$, $pbc$ViperElena88$pbc$, $pbc$Elena Sanchez$pbc$, 52, $pbc$Boynton Beach$pbc$, $pbc$33436$pbc$, $pbc$Souls-like Games$pbc$, $pbc$All Platforms$pbc$, $pbc$Passionate about Souls-like Games. Based in Boynton Beach, FL. Hit me up for games or meetups.$pbc$, 4.8, 47, $pbc$["Pro Gamer", "Friendly Host"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$kevin.cruz852@yahoo.com$pbc$, $pbc$password123$pbc$, $pbc$MegaAxe939$pbc$, $pbc$Kevin Cruz$pbc$, 32, $pbc$Pahokee$pbc$, $pbc$33476$pbc$, $pbc$Dungeons & Dragons$pbc$, $pbc$PC$pbc$, $pbc$Casual Dungeons & Dragons fan from Pahokee. Also enjoy Puzzle Games on weekends.$pbc$, 4.6, 9, $pbc$["Tabletop King"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$gavin.vega315@yahoo.com$pbc$, $pbc$password123$pbc$, $pbc$GavinVeg26$pbc$, $pbc$Gavin Vega$pbc$, 32, $pbc$Boynton Beach$pbc$, $pbc$33435$pbc$, $pbc$Board Games$pbc$, $pbc$N/A$pbc$, $pbc$Local Boynton Beach player. Into Board Games and Warhammer. Always looking for chill groups!$pbc$, 4.8, 22, $pbc$["Tabletop King", "Pro Gamer", "PBC Veteran"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$amanda.collins68@outlook.com$pbc$, $pbc$password123$pbc$, $pbc$ToxicRunner802$pbc$, $pbc$Amanda Collins$pbc$, 20, $pbc$Jupiter$pbc$, $pbc$33458$pbc$, $pbc$Horror Games$pbc$, $pbc$Mobile$pbc$, $pbc$Always down for Horror Games sessions. Jupiter-based. Message me anytime!$pbc$, 4.7, 6, $pbc$["PBC Veteran", "Tabletop King", "Tournament Ready"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$jacob.vega518@hotmail.com$pbc$, $pbc$password123$pbc$, $pbc$Inferno305593$pbc$, $pbc$Jacob Vega$pbc$, 33, $pbc$Pahokee$pbc$, $pbc$33476$pbc$, $pbc$Trading Card Games$pbc$, $pbc$Steam Deck$pbc$, $pbc$Pahokee native. Love Trading Card Games, dabble in Strategy Games. Let's connect!$pbc$, 5.0, 45, $pbc$["Tournament Ready"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$wesley.turner855@outlook.com$pbc$, $pbc$password123$pbc$, $pbc$xXWeBladeXx$pbc$, $pbc$Wesley Turner$pbc$, 29, $pbc$Delray Beach$pbc$, $pbc$33444$pbc$, $pbc$Tabletop RPG$pbc$, $pbc$PC & Console$pbc$, $pbc$Local Delray Beach player. Into Tabletop RPG and Worker Placement. Always looking for chill groups!$pbc$, 4.4, 15, $pbc$["Early Bird", "Tabletop King"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$diego.jones395@outlook.com$pbc$, $pbc$password123$pbc$, $pbc$xXDiBarbarianXx$pbc$, $pbc$Diego Jones$pbc$, 25, $pbc$Belle Glade$pbc$, $pbc$33430$pbc$, $pbc$Puzzle Games$pbc$, $pbc$N/A$pbc$, $pbc$New to the scene! Trying to find people who love Puzzle Games in Belle Glade area.$pbc$, 4.6, 43, $pbc$["PBC Veteran", "Tournament Ready"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$robert.edwards689@gmail.com$pbc$, $pbc$password123$pbc$, $pbc$xXRoLanceXx$pbc$, $pbc$Robert Edwards$pbc$, 49, $pbc$West Palm Beach$pbc$, $pbc$33401$pbc$, $pbc$Trading Card Games$pbc$, $pbc$N/A$pbc$, $pbc$West Palm Beach native. Love Trading Card Games, dabble in Cooperative Board Games. Let's connect!$pbc$, 4.6, 63, $pbc$["Pro Gamer"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$damian.lewis206@hotmail.com$pbc$, $pbc$password123$pbc$, $pbc$DamianLew6493$pbc$, $pbc$Damian Lewis$pbc$, 39, $pbc$Lake Worth Beach$pbc$, $pbc$33460$pbc$, $pbc$Soccer$pbc$, $pbc$N/A$pbc$, $pbc$New to the scene! Trying to find people who love Soccer in Lake Worth Beach area.$pbc$, 4.5, 22, $pbc$["Friendly Host", "Tabletop King"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$emma.collins510@yahoo.com$pbc$, $pbc$password123$pbc$, $pbc$EmmaCol13$pbc$, $pbc$Emma Collins$pbc$, 49, $pbc$Jupiter$pbc$, $pbc$33458$pbc$, $pbc$Competitive FPS$pbc$, $pbc$PlayStation$pbc$, $pbc$New to the scene! Trying to find people who love Competitive FPS in Jupiter area.$pbc$, 4.6, 50, $pbc$["Friendly Host"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$allison.foster503@hotmail.com$pbc$, $pbc$password123$pbc$, $pbc$EmeraldAllison44$pbc$, $pbc$Allison Foster$pbc$, 49, $pbc$Palm Beach Gardens$pbc$, $pbc$33410$pbc$, $pbc$Sandbox Games$pbc$, $pbc$Xbox$pbc$, $pbc$South FL local. Sandbox Games enthusiast and weekend warrior. Palm Beach Gardens represent!$pbc$, 4.5, 12, $pbc$["Pro Gamer", "Friendly Host"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$jake.perez320@icloud.com$pbc$, $pbc$password123$pbc$, $pbc$xXJa100Xx$pbc$, $pbc$Jake Perez$pbc$, 26, $pbc$Manalapan$pbc$, $pbc$33462$pbc$, $pbc$Disc Golf$pbc$, $pbc$N/A$pbc$, $pbc$Retired Disc Golf tryhard, now just vibing. Live in Manalapan, FL.$pbc$, 4.4, 9, $pbc$["PBC Veteran", "Early Bird", "Pro Gamer"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$diamond.turner329@gmail.com$pbc$, $pbc$password123$pbc$, $pbc$OnyxRanger132$pbc$, $pbc$Diamond Turner$pbc$, 36, $pbc$Royal Palm Beach$pbc$, $pbc$33411$pbc$, $pbc$Yoga$pbc$, $pbc$N/A$pbc$, $pbc$Always down for Yoga sessions. Royal Palm Beach-based. Message me anytime!$pbc$, 4.8, 34, $pbc$["Tournament Ready", "Tabletop King"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$taylor.king254@yahoo.com$pbc$, $pbc$password123$pbc$, $pbc$OnyxTaylor11$pbc$, $pbc$Taylor King$pbc$, 33, $pbc$Boca Raton$pbc$, $pbc$33431$pbc$, $pbc$Sandbox Games$pbc$, $pbc$All Platforms$pbc$, $pbc$New to the scene! Trying to find people who love Sandbox Games in Boca Raton area.$pbc$, 4.7, 61, $pbc$["PBC Veteran"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$darryl.anderson585@icloud.com$pbc$, $pbc$password123$pbc$, $pbc$RubyDarryl13$pbc$, $pbc$Darryl Anderson$pbc$, 42, $pbc$Greenacres$pbc$, $pbc$33463$pbc$, $pbc$Kayaking$pbc$, $pbc$N/A$pbc$, $pbc$Passionate about Kayaking. Based in Greenacres, FL. Hit me up for games or meetups.$pbc$, 4.2, 41, $pbc$["Friendly Host", "PBC Veteran"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$christian.gomez49@outlook.com$pbc$, $pbc$password123$pbc$, $pbc$xXChFLXx$pbc$, $pbc$Christian Gomez$pbc$, 34, $pbc$Palm Beach Gardens$pbc$, $pbc$33410$pbc$, $pbc$Beach Activities$pbc$, $pbc$Nintendo Switch$pbc$, $pbc$South FL local. Beach Activities enthusiast and weekend warrior. Palm Beach Gardens represent!$pbc$, 4.4, 47, $pbc$["Tournament Ready"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$ben.baptiste680@hotmail.com$pbc$, $pbc$password123$pbc$, $pbc$VoltBen54$pbc$, $pbc$Ben Baptiste$pbc$, 45, $pbc$Palm Beach Gardens$pbc$, $pbc$33418$pbc$, $pbc$Hiking$pbc$, $pbc$Nintendo Switch$pbc$, $pbc$New to the scene! Trying to find people who love Hiking in Palm Beach Gardens area.$pbc$, 4.4, 57, $pbc$["PBC Veteran", "Pro Gamer", "Tabletop King"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$marcus.sullivan958@hotmail.com$pbc$, $pbc$password123$pbc$, $pbc$AzureQueen374$pbc$, $pbc$Marcus Sullivan$pbc$, 45, $pbc$North Palm Beach$pbc$, $pbc$33408$pbc$, $pbc$Rock Climbing$pbc$, $pbc$N/A$pbc$, $pbc$Casual Rock Climbing fan from North Palm Beach. Also enjoy Beach Activities on weekends.$pbc$, 4.3, 42, $pbc$["Friendly Host", "Pro Gamer"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$taylor.hill263@hotmail.com$pbc$, $pbc$password123$pbc$, $pbc$TaylorHil61$pbc$, $pbc$Taylor Hill$pbc$, 28, $pbc$Palm Beach Gardens$pbc$, $pbc$33410$pbc$, $pbc$Sandbox Games$pbc$, $pbc$All Platforms$pbc$, $pbc$Local Palm Beach Gardens player. Into Sandbox Games and Card Games / TCG. Always looking for chill groups!$pbc$, 4.3, 22, $pbc$["Tournament Ready", "Pro Gamer", "Friendly Host"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$joshua.davis30@outlook.com$pbc$, $pbc$password123$pbc$, $pbc$FierceJoshua71$pbc$, $pbc$Joshua Davis$pbc$, 26, $pbc$Jupiter$pbc$, $pbc$33477$pbc$, $pbc$Eurogames$pbc$, $pbc$All Platforms$pbc$, $pbc$Casual Eurogames fan from Jupiter. Also enjoy Simulation on weekends.$pbc$, 4.7, 61, $pbc$["Friendly Host", "Tournament Ready", "Early Bird"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$ethan.rogers535@hotmail.com$pbc$, $pbc$password123$pbc$, $pbc$GoldenEthan12$pbc$, $pbc$Ethan Rogers$pbc$, 25, $pbc$Pahokee$pbc$, $pbc$33476$pbc$, $pbc$War Games$pbc$, $pbc$N/A$pbc$, $pbc$Pahokee native. Love War Games, dabble in Trading Card Games. Let's connect!$pbc$, 2.8, 57, $pbc$["Pro Gamer", "Tournament Ready", "Tabletop King"]$pbc$::jsonb, true);
+SELECT create_rollcall_prod_user($pbc$kayla.howard261@hotmail.com$pbc$, $pbc$password123$pbc$, $pbc$GoldenRogue384$pbc$, $pbc$Kayla Howard$pbc$, 44, $pbc$Tequesta$pbc$, $pbc$33469$pbc$, $pbc$Running / Jogging$pbc$, $pbc$PC$pbc$, $pbc$Local Tequesta player. Into Running / Jogging and Bird Watching. Always looking for chill groups!$pbc$, 4.4, 35, $pbc$["Tournament Ready", "Friendly Host"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$chris.ward566@icloud.com$pbc$, $pbc$password123$pbc$, $pbc$RapidChris90$pbc$, $pbc$Chris Ward$pbc$, 34, $pbc$Wellington$pbc$, $pbc$33449$pbc$, $pbc$First-Person Shooters$pbc$, $pbc$Nintendo Switch$pbc$, $pbc$Wellington native. Love First-Person Shooters, dabble in Adventure Games. Let's connect!$pbc$, 4.4, 53, $pbc$["Pro Gamer"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$wesley.stewart809@gmail.com$pbc$, $pbc$password123$pbc$, $pbc$BrokenWesley11$pbc$, $pbc$Wesley Stewart$pbc$, 44, $pbc$Greenacres$pbc$, $pbc$33463$pbc$, $pbc$Trading Card Games$pbc$, $pbc$PC & Console$pbc$, $pbc$Local Greenacres player. Into Trading Card Games and Flag Football. Always looking for chill groups!$pbc$, 4.8, 15, $pbc$["PBC Veteran", "Early Bird"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$chris.taylor811@yahoo.com$pbc$, $pbc$password123$pbc$, $pbc$UltraQueen644$pbc$, $pbc$Chris Taylor$pbc$, 46, $pbc$Boynton Beach$pbc$, $pbc$33437$pbc$, $pbc$Souls-like Games$pbc$, $pbc$Xbox$pbc$, $pbc$Retired Souls-like Games tryhard, now just vibing. Live in Boynton Beach, FL.$pbc$, 4.6, 70, $pbc$["Friendly Host"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$noah.nelson267@yahoo.com$pbc$, $pbc$password123$pbc$, $pbc$CasualNoah37$pbc$, $pbc$Noah Nelson$pbc$, 26, $pbc$Loxahatchee$pbc$, $pbc$33470$pbc$, $pbc$Board Games$pbc$, $pbc$N/A$pbc$, $pbc$Casual Board Games fan from Loxahatchee. Also enjoy Disc Golf on weekends.$pbc$, 4.6, 18, $pbc$["Tournament Ready", "Tabletop King"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$dominic.ortiz719@yahoo.com$pbc$, $pbc$password123$pbc$, $pbc$UltraWarlock440$pbc$, $pbc$Dominic Ortiz$pbc$, 34, $pbc$Lake Worth Beach$pbc$, $pbc$33460$pbc$, $pbc$Cooperative Board Games$pbc$, $pbc$N/A$pbc$, $pbc$Retired Cooperative Board Games tryhard, now just vibing. Live in Lake Worth Beach, FL.$pbc$, 4.7, 82, $pbc$["Tournament Ready"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$alejandro.morales230@yahoo.com$pbc$, $pbc$password123$pbc$, $pbc$AlejandroMor44$pbc$, $pbc$Alejandro Morales$pbc$, 25, $pbc$Belle Glade$pbc$, $pbc$33430$pbc$, $pbc$Strategy Games$pbc$, $pbc$All Platforms$pbc$, $pbc$Belle Glade native. Love Strategy Games, dabble in Simulation. Let's connect!$pbc$, 4.3, 25, $pbc$["Pro Gamer", "Early Bird"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$brooklyn.jackson633@icloud.com$pbc$, $pbc$password123$pbc$, $pbc$BrooklynJac57$pbc$, $pbc$Brooklyn Jackson$pbc$, 33, $pbc$Jupiter$pbc$, $pbc$33458$pbc$, $pbc$Puzzle Games$pbc$, $pbc$N/A$pbc$, $pbc$Retired Puzzle Games tryhard, now just vibing. Live in Jupiter, FL.$pbc$, 4.2, 37, $pbc$["Tabletop King", "Tournament Ready", "PBC Veteran"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$kayla.white754@hotmail.com$pbc$, $pbc$password123$pbc$, $pbc$BlazeKayla13$pbc$, $pbc$Kayla White$pbc$, 45, $pbc$Riviera Beach$pbc$, $pbc$33404$pbc$, $pbc$Competitive FPS$pbc$, $pbc$All Platforms$pbc$, $pbc$Always down for Competitive FPS sessions. Riviera Beach-based. Message me anytime!$pbc$, 4.4, 31, $pbc$["Tournament Ready", "Friendly Host", "Early Bird"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$genesis.robinson184@outlook.com$pbc$, $pbc$password123$pbc$, $pbc$GenesisRob74$pbc$, $pbc$Genesis Robinson$pbc$, 55, $pbc$West Palm Beach$pbc$, $pbc$33409$pbc$, $pbc$Dungeons & Dragons$pbc$, $pbc$N/A$pbc$, $pbc$Local West Palm Beach player. Into Dungeons & Dragons and Magic: The Gathering. Always looking for chill groups!$pbc$, 4.9, 60, $pbc$["Pro Gamer", "PBC Veteran"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$gavin.phillips949@icloud.com$pbc$, $pbc$password123$pbc$, $pbc$PatchedGavin34$pbc$, $pbc$Gavin Phillips$pbc$, 41, $pbc$Jupiter$pbc$, $pbc$33477$pbc$, $pbc$Card Games / TCG$pbc$, $pbc$Xbox$pbc$, $pbc$Jupiter native. Love Card Games / TCG, dabble in MMORPG. Let's connect!$pbc$, 4.3, 64, $pbc$["Pro Gamer", "Tabletop King"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$cameron.parker723@icloud.com$pbc$, $pbc$password123$pbc$, $pbc$xXCaGamerXx$pbc$, $pbc$Cameron Parker$pbc$, 28, $pbc$Jupiter$pbc$, $pbc$33458$pbc$, $pbc$Soccer$pbc$, $pbc$N/A$pbc$, $pbc$Casual Soccer fan from Jupiter. Also enjoy CrossFit on weekends.$pbc$, 4.4, 34, $pbc$["Tournament Ready"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$maya.evans843@outlook.com$pbc$, $pbc$password123$pbc$, $pbc$MayaEva84$pbc$, $pbc$Maya Evans$pbc$, 50, $pbc$Boynton Beach$pbc$, $pbc$33436$pbc$, $pbc$Card Games / TCG$pbc$, $pbc$PlayStation$pbc$, $pbc$South FL local. Card Games / TCG enthusiast and weekend warrior. Boynton Beach represent!$pbc$, 4.8, 62, $pbc$["Friendly Host"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$gabrielle.martinez952@gmail.com$pbc$, $pbc$password123$pbc$, $pbc$IronGabrielle4$pbc$, $pbc$Gabrielle Martinez$pbc$, 55, $pbc$Royal Palm Beach$pbc$, $pbc$33414$pbc$, $pbc$Board Games$pbc$, $pbc$Nintendo Switch$pbc$, $pbc$South FL local. Board Games enthusiast and weekend warrior. Royal Palm Beach represent!$pbc$, 4.8, 54, $pbc$["Pro Gamer"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$nora.baptiste561@hotmail.com$pbc$, $pbc$password123$pbc$, $pbc$xXNoStrikerXx$pbc$, $pbc$Nora Baptiste$pbc$, 22, $pbc$Boca Raton$pbc$, $pbc$33431$pbc$, $pbc$Board Games$pbc$, $pbc$N/A$pbc$, $pbc$Retired Board Games tryhard, now just vibing. Live in Boca Raton, FL.$pbc$, 4.9, 30, $pbc$["Friendly Host", "Tabletop King"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$sophia.hughes306@icloud.com$pbc$, $pbc$password123$pbc$, $pbc$xXSo42Xx$pbc$, $pbc$Sophia Hughes$pbc$, 25, $pbc$Boynton Beach$pbc$, $pbc$33435$pbc$, $pbc$Bird Watching$pbc$, $pbc$N/A$pbc$, $pbc$New to the scene! Trying to find people who love Bird Watching in Boynton Beach area.$pbc$, 4.6, 24, $pbc$["Tournament Ready", "Tabletop King"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$zoe.martin577@hotmail.com$pbc$, $pbc$password123$pbc$, $pbc$xXZoStrikerXx$pbc$, $pbc$Zoe Martin$pbc$, 35, $pbc$Loxahatchee$pbc$, $pbc$33470$pbc$, $pbc$Weightlifting$pbc$, $pbc$N/A$pbc$, $pbc$New to the scene! Trying to find people who love Weightlifting in Loxahatchee area.$pbc$, 4.7, 7, $pbc$["Pro Gamer", "Tournament Ready"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$lara.taylor540@hotmail.com$pbc$, $pbc$password123$pbc$, $pbc$WolfAxe448$pbc$, $pbc$Lara Taylor$pbc$, 49, $pbc$Boynton Beach$pbc$, $pbc$33435$pbc$, $pbc$Simulation$pbc$, $pbc$All Platforms$pbc$, $pbc$Local Boynton Beach player. Into Simulation and Sports Games. Always looking for chill groups!$pbc$, 4.4, 51, $pbc$["Early Bird", "Friendly Host"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$cody.bryant111@hotmail.com$pbc$, $pbc$password123$pbc$, $pbc$xXCoShotgunXx$pbc$, $pbc$Cody Bryant$pbc$, 50, $pbc$West Palm Beach$pbc$, $pbc$33409$pbc$, $pbc$Tabletop RPG$pbc$, $pbc$PC$pbc$, $pbc$South FL local. Tabletop RPG enthusiast and weekend warrior. West Palm Beach represent!$pbc$, 4.9, 62, $pbc$["Early Bird", "Pro Gamer"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$nicole.russell639@outlook.com$pbc$, $pbc$password123$pbc$, $pbc$ModdedNicole24$pbc$, $pbc$Nicole Russell$pbc$, 46, $pbc$Palm Beach$pbc$, $pbc$33480$pbc$, $pbc$CrossFit$pbc$, $pbc$N/A$pbc$, $pbc$Local Palm Beach player. Into CrossFit and Rock Climbing. Always looking for chill groups!$pbc$, 4.6, 80, $pbc$["Tabletop King"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$james.thomas709@icloud.com$pbc$, $pbc$password123$pbc$, $pbc$xXJaHeroXx$pbc$, $pbc$James Thomas$pbc$, 47, $pbc$Loxahatchee$pbc$, $pbc$33470$pbc$, $pbc$Weightlifting$pbc$, $pbc$N/A$pbc$, $pbc$Local Loxahatchee player. Into Weightlifting and Running / Jogging. Always looking for chill groups!$pbc$, 4.9, 34, $pbc$["Tournament Ready"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$jessica.vega493@yahoo.com$pbc$, $pbc$password123$pbc$, $pbc$JessicaVeg65$pbc$, $pbc$Jessica Vega$pbc$, 31, $pbc$West Palm Beach$pbc$, $pbc$33405$pbc$, $pbc$Party Games$pbc$, $pbc$Xbox$pbc$, $pbc$New to the scene! Trying to find people who love Party Games in West Palm Beach area.$pbc$, 4.8, 49, $pbc$["Pro Gamer"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$ariana.parker600@yahoo.com$pbc$, $pbc$password123$pbc$, $pbc$ArianaPar47$pbc$, $pbc$Ariana Parker$pbc$, 46, $pbc$West Palm Beach$pbc$, $pbc$33405$pbc$, $pbc$Card Games / TCG$pbc$, $pbc$All Platforms$pbc$, $pbc$New to the scene! Trying to find people who love Card Games / TCG in West Palm Beach area.$pbc$, 5.0, 78, $pbc$["Friendly Host", "Early Bird", "Tournament Ready"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$lena.white20@icloud.com$pbc$, $pbc$password123$pbc$, $pbc$JadeLena9$pbc$, $pbc$Lena White$pbc$, 51, $pbc$Boca Raton$pbc$, $pbc$33431$pbc$, $pbc$Platformers$pbc$, $pbc$Steam Deck$pbc$, $pbc$Casual Platformers fan from Boca Raton. Also enjoy First-Person Shooters on weekends.$pbc$, 4.5, 76, $pbc$["Pro Gamer", "Tournament Ready"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$darryl.walker135@outlook.com$pbc$, $pbc$password123$pbc$, $pbc$xXDaShotgunXx$pbc$, $pbc$Darryl Walker$pbc$, 47, $pbc$Greenacres$pbc$, $pbc$33467$pbc$, $pbc$Dungeons & Dragons$pbc$, $pbc$Steam Deck$pbc$, $pbc$New to the scene! Trying to find people who love Dungeons & Dragons in Greenacres area.$pbc$, 4.6, 59, $pbc$["Tabletop King", "Friendly Host", "Tournament Ready"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$morgan.griffin49@gmail.com$pbc$, $pbc$password123$pbc$, $pbc$FixedMorgan34$pbc$, $pbc$Morgan Griffin$pbc$, 53, $pbc$Lake Worth Beach$pbc$, $pbc$33461$pbc$, $pbc$Weightlifting$pbc$, $pbc$N/A$pbc$, $pbc$Passionate about Weightlifting. Based in Lake Worth Beach, FL. Hit me up for games or meetups.$pbc$, 4.8, 59, $pbc$["Tournament Ready"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$dion.green230@icloud.com$pbc$, $pbc$password123$pbc$, $pbc$PhantomDion46$pbc$, $pbc$Dion Green$pbc$, 53, $pbc$Delray Beach$pbc$, $pbc$33445$pbc$, $pbc$Martial Arts$pbc$, $pbc$PC$pbc$, $pbc$Delray Beach native. Love Martial Arts, dabble in CrossFit. Let's connect!$pbc$, 4.6, 30, $pbc$["Pro Gamer", "Tabletop King"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$finn.garcia746@outlook.com$pbc$, $pbc$password123$pbc$, $pbc$xXFi100Xx$pbc$, $pbc$Finn Garcia$pbc$, 28, $pbc$Royal Palm Beach$pbc$, $pbc$33414$pbc$, $pbc$Puzzle Games$pbc$, $pbc$N/A$pbc$, $pbc$New to the scene! Trying to find people who love Puzzle Games in Royal Palm Beach area.$pbc$, 4.3, 13, $pbc$["Friendly Host", "Pro Gamer"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$thomas.patel855@icloud.com$pbc$, $pbc$password123$pbc$, $pbc$WolfThomas65$pbc$, $pbc$Thomas Patel$pbc$, 33, $pbc$West Palm Beach$pbc$, $pbc$33401$pbc$, $pbc$Dungeons & Dragons$pbc$, $pbc$N/A$pbc$, $pbc$Retired Dungeons & Dragons tryhard, now just vibing. Live in West Palm Beach, FL.$pbc$, 4.7, 18, $pbc$["Friendly Host"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$alexandra.vega967@gmail.com$pbc$, $pbc$password123$pbc$, $pbc$xXAlMasterXx$pbc$, $pbc$Alexandra Vega$pbc$, 41, $pbc$Lake Park$pbc$, $pbc$33403$pbc$, $pbc$War Games$pbc$, $pbc$N/A$pbc$, $pbc$Retired War Games tryhard, now just vibing. Live in Lake Park, FL.$pbc$, 4.5, 19, $pbc$["Tournament Ready", "Pro Gamer"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$cameron.thompson60@hotmail.com$pbc$, $pbc$password123$pbc$, $pbc$MegaCameron52$pbc$, $pbc$Cameron Thompson$pbc$, 54, $pbc$Boynton Beach$pbc$, $pbc$33435$pbc$, $pbc$Adventure Games$pbc$, $pbc$PlayStation$pbc$, $pbc$Always down for Adventure Games sessions. Boynton Beach-based. Message me anytime!$pbc$, 4.3, 69, $pbc$["Early Bird", "Friendly Host", "Pro Gamer"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$savannah.williams554@outlook.com$pbc$, $pbc$password123$pbc$, $pbc$SavannahWil21$pbc$, $pbc$Savannah Williams$pbc$, 51, $pbc$Delray Beach$pbc$, $pbc$33446$pbc$, $pbc$Pickleball$pbc$, $pbc$Mobile$pbc$, $pbc$Passionate about Pickleball. Based in Delray Beach, FL. Hit me up for games or meetups.$pbc$, 4.7, 10, $pbc$["Tabletop King", "PBC Veteran", "Early Bird"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$connor.reyes643@hotmail.com$pbc$, $pbc$password123$pbc$, $pbc$StormConnor7$pbc$, $pbc$Connor Reyes$pbc$, 34, $pbc$Royal Palm Beach$pbc$, $pbc$33414$pbc$, $pbc$Sports Games$pbc$, $pbc$Mobile$pbc$, $pbc$Royal Palm Beach native. Love Sports Games, dabble in Co-op Games. Let's connect!$pbc$, 4.3, 82, $pbc$["Tournament Ready", "Pro Gamer"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$samantha.reed336@hotmail.com$pbc$, $pbc$password123$pbc$, $pbc$SamanthaRee56$pbc$, $pbc$Samantha Reed$pbc$, 24, $pbc$Wellington$pbc$, $pbc$33449$pbc$, $pbc$Board Games$pbc$, $pbc$Nintendo Switch$pbc$, $pbc$Always down for Board Games sessions. Wellington-based. Message me anytime!$pbc$, 4.6, 79, $pbc$["Tabletop King", "Tournament Ready"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$bryan.miller532@icloud.com$pbc$, $pbc$password123$pbc$, $pbc$OnyxBryan64$pbc$, $pbc$Bryan Miller$pbc$, 53, $pbc$Singer Island$pbc$, $pbc$33404$pbc$, $pbc$Worker Placement$pbc$, $pbc$Steam Deck$pbc$, $pbc$Passionate about Worker Placement. Based in Singer Island, FL. Hit me up for games or meetups.$pbc$, 4.6, 26, $pbc$["PBC Veteran"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$kayla.nguyen765@yahoo.com$pbc$, $pbc$password123$pbc$, $pbc$ModdedKayla16$pbc$, $pbc$Kayla Nguyen$pbc$, 20, $pbc$Loxahatchee$pbc$, $pbc$33470$pbc$, $pbc$Basketball$pbc$, $pbc$N/A$pbc$, $pbc$Always down for Basketball sessions. Loxahatchee-based. Message me anytime!$pbc$, 4.8, 52, $pbc$["Tabletop King", "Early Bird", "Tournament Ready"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$nathan.long498@gmail.com$pbc$, $pbc$password123$pbc$, $pbc$NathanLon28$pbc$, $pbc$Nathan Long$pbc$, 36, $pbc$Palm Beach Gardens$pbc$, $pbc$33418$pbc$, $pbc$Puzzle Games$pbc$, $pbc$All Platforms$pbc$, $pbc$South FL local. Puzzle Games enthusiast and weekend warrior. Palm Beach Gardens represent!$pbc$, 4.9, 39, $pbc$["Tournament Ready"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$crystal.nelson487@hotmail.com$pbc$, $pbc$password123$pbc$, $pbc$CrystalNel27$pbc$, $pbc$Crystal Nelson$pbc$, 42, $pbc$Greenacres$pbc$, $pbc$33467$pbc$, $pbc$Softball$pbc$, $pbc$N/A$pbc$, $pbc$Retired Softball tryhard, now just vibing. Live in Greenacres, FL.$pbc$, 4.3, 61, $pbc$["Early Bird"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$savannah.green554@gmail.com$pbc$, $pbc$password123$pbc$, $pbc$xXSa42Xx$pbc$, $pbc$Savannah Green$pbc$, 39, $pbc$Riviera Beach$pbc$, $pbc$33407$pbc$, $pbc$Hiking$pbc$, $pbc$Nintendo Switch$pbc$, $pbc$Local Riviera Beach player. Into Hiking and CrossFit. Always looking for chill groups!$pbc$, 4.2, 71, $pbc$["Early Bird", "Pro Gamer", "PBC Veteran"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$finn.thompson986@gmail.com$pbc$, $pbc$password123$pbc$, $pbc$LazyFinn27$pbc$, $pbc$Finn Thompson$pbc$, 29, $pbc$North Palm Beach$pbc$, $pbc$33408$pbc$, $pbc$Beach Activities$pbc$, $pbc$N/A$pbc$, $pbc$Local North Palm Beach player. Into Beach Activities and Yoga. Always looking for chill groups!$pbc$, 4.8, 7, $pbc$["PBC Veteran", "Tournament Ready", "Pro Gamer"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$paige.morris25@hotmail.com$pbc$, $pbc$password123$pbc$, $pbc$HyperPaige33$pbc$, $pbc$Paige Morris$pbc$, 44, $pbc$Boynton Beach$pbc$, $pbc$33437$pbc$, $pbc$Magic: The Gathering$pbc$, $pbc$Mobile$pbc$, $pbc$Boynton Beach native. Love Magic: The Gathering, dabble in MMORPG. Let's connect!$pbc$, 5.0, 81, $pbc$["PBC Veteran", "Friendly Host"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$connor.scott28@gmail.com$pbc$, $pbc$password123$pbc$, $pbc$HyperConnor13$pbc$, $pbc$Connor Scott$pbc$, 29, $pbc$Greenacres$pbc$, $pbc$33463$pbc$, $pbc$Warhammer$pbc$, $pbc$All Platforms$pbc$, $pbc$Local Greenacres player. Into Warhammer and Kayaking. Always looking for chill groups!$pbc$, 4.5, 54, $pbc$["Tabletop King", "Early Bird", "Tournament Ready"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$noah.ortiz68@icloud.com$pbc$, $pbc$password123$pbc$, $pbc$Mega404240$pbc$, $pbc$Noah Ortiz$pbc$, 44, $pbc$Palm Springs$pbc$, $pbc$33461$pbc$, $pbc$Hiking$pbc$, $pbc$Xbox$pbc$, $pbc$Palm Springs native. Love Hiking, dabble in Running / Jogging. Let's connect!$pbc$, 4.2, 27, $pbc$["PBC Veteran"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$lily.richardson463@gmail.com$pbc$, $pbc$password123$pbc$, $pbc$LuckyAxe985$pbc$, $pbc$Lily Richardson$pbc$, 53, $pbc$Manalapan$pbc$, $pbc$33462$pbc$, $pbc$Cooperative Board Games$pbc$, $pbc$N/A$pbc$, $pbc$Always down for Cooperative Board Games sessions. Manalapan-based. Message me anytime!$pbc$, 4.5, 12, $pbc$["Tabletop King"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$kayla.ross47@yahoo.com$pbc$, $pbc$password123$pbc$, $pbc$EagleStriker405$pbc$, $pbc$Kayla Ross$pbc$, 36, $pbc$Pahokee$pbc$, $pbc$33476$pbc$, $pbc$Miniature Games$pbc$, $pbc$PC & Console$pbc$, $pbc$Pahokee native. Love Miniature Games, dabble in Magic: The Gathering. Let's connect!$pbc$, 4.4, 45, $pbc$["Tabletop King", "Pro Gamer", "PBC Veteran"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$aiden.sanders924@gmail.com$pbc$, $pbc$password123$pbc$, $pbc$AidenSan62$pbc$, $pbc$Aiden Sanders$pbc$, 18, $pbc$Loxahatchee$pbc$, $pbc$33470$pbc$, $pbc$Hiking$pbc$, $pbc$PlayStation$pbc$, $pbc$Always down for Hiking sessions. Loxahatchee-based. Message me anytime!$pbc$, 4.4, 26, $pbc$["Tabletop King", "PBC Veteran"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$savannah.edwards474@outlook.com$pbc$, $pbc$password123$pbc$, $pbc$SavannahEdw66$pbc$, $pbc$Savannah Edwards$pbc$, 25, $pbc$West Palm Beach$pbc$, $pbc$33401$pbc$, $pbc$Weightlifting$pbc$, $pbc$N/A$pbc$, $pbc$New to the scene! Trying to find people who love Weightlifting in West Palm Beach area.$pbc$, 4.5, 21, $pbc$["Tabletop King", "Friendly Host"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$ricky.barnes927@hotmail.com$pbc$, $pbc$password123$pbc$, $pbc$RickyBar10$pbc$, $pbc$Ricky Barnes$pbc$, 49, $pbc$Jupiter$pbc$, $pbc$33477$pbc$, $pbc$Dungeons & Dragons$pbc$, $pbc$N/A$pbc$, $pbc$Jupiter native. Love Dungeons & Dragons, dabble in Worker Placement. Let's connect!$pbc$, 4.4, 31, $pbc$["Pro Gamer", "PBC Veteran", "Early Bird"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$damian.russell131@outlook.com$pbc$, $pbc$password123$pbc$, $pbc$DamianRus76$pbc$, $pbc$Damian Russell$pbc$, 22, $pbc$Delray Beach$pbc$, $pbc$33446$pbc$, $pbc$Rock Climbing$pbc$, $pbc$Mobile$pbc$, $pbc$New to the scene! Trying to find people who love Rock Climbing in Delray Beach area.$pbc$, 4.9, 36, $pbc$["Early Bird"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$austin.lewis906@yahoo.com$pbc$, $pbc$password123$pbc$, $pbc$Viper321431$pbc$, $pbc$Austin Lewis$pbc$, 20, $pbc$Lake Park$pbc$, $pbc$33403$pbc$, $pbc$MOBA$pbc$, $pbc$PC$pbc$, $pbc$Retired MOBA tryhard, now just vibing. Live in Lake Park, FL.$pbc$, 4.7, 76, $pbc$["Friendly Host", "Tabletop King", "Early Bird"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$derek.hall338@outlook.com$pbc$, $pbc$password123$pbc$, $pbc$Rapid404100$pbc$, $pbc$Derek Hall$pbc$, 28, $pbc$Lake Worth Beach$pbc$, $pbc$33460$pbc$, $pbc$CrossFit$pbc$, $pbc$Nintendo Switch$pbc$, $pbc$New to the scene! Trying to find people who love CrossFit in Lake Worth Beach area.$pbc$, 4.3, 75, $pbc$["Early Bird", "Tournament Ready"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$elena.stewart128@gmail.com$pbc$, $pbc$password123$pbc$, $pbc$ModdedRanger387$pbc$, $pbc$Elena Stewart$pbc$, 55, $pbc$Tequesta$pbc$, $pbc$33469$pbc$, $pbc$Simulation$pbc$, $pbc$PC$pbc$, $pbc$South FL local. Simulation enthusiast and weekend warrior. Tequesta represent!$pbc$, 4.9, 83, $pbc$["Tabletop King", "Friendly Host", "Pro Gamer"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$santiago.miller239@hotmail.com$pbc$, $pbc$password123$pbc$, $pbc$BetaGeneral476$pbc$, $pbc$Santiago Miller$pbc$, 44, $pbc$Delray Beach$pbc$, $pbc$33444$pbc$, $pbc$Pickleball$pbc$, $pbc$N/A$pbc$, $pbc$Casual Pickleball fan from Delray Beach. Also enjoy Martial Arts on weekends.$pbc$, 4.4, 39, $pbc$["PBC Veteran", "Friendly Host"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$emma.clark608@yahoo.com$pbc$, $pbc$password123$pbc$, $pbc$EmmaCla91$pbc$, $pbc$Emma Clark$pbc$, 22, $pbc$West Palm Beach$pbc$, $pbc$33401$pbc$, $pbc$Tennis$pbc$, $pbc$N/A$pbc$, $pbc$West Palm Beach native. Love Tennis, dabble in War Games. Let's connect!$pbc$, 4.4, 16, $pbc$["Pro Gamer", "PBC Veteran", "Friendly Host"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$nicholas.ross983@outlook.com$pbc$, $pbc$password123$pbc$, $pbc$OnyxNicholas70$pbc$, $pbc$Nicholas Ross$pbc$, 50, $pbc$Manalapan$pbc$, $pbc$33462$pbc$, $pbc$Board Games$pbc$, $pbc$N/A$pbc$, $pbc$Local Manalapan player. Into Board Games and Worker Placement. Always looking for chill groups!$pbc$, 4.9, 74, $pbc$["Friendly Host", "Tabletop King", "Early Bird"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$tyler.king656@yahoo.com$pbc$, $pbc$password123$pbc$, $pbc$PhantomQueen684$pbc$, $pbc$Tyler King$pbc$, 30, $pbc$Lake Worth Beach$pbc$, $pbc$33460$pbc$, $pbc$Party Games$pbc$, $pbc$N/A$pbc$, $pbc$New to the scene! Trying to find people who love Party Games in Lake Worth Beach area.$pbc$, 4.9, 18, $pbc$["Early Bird", "Friendly Host"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$kylie.adams478@hotmail.com$pbc$, $pbc$password123$pbc$, $pbc$KylieAda40$pbc$, $pbc$Kylie Adams$pbc$, 32, $pbc$Wellington$pbc$, $pbc$33414$pbc$, $pbc$Horror Games$pbc$, $pbc$PC$pbc$, $pbc$Local Wellington player. Into Horror Games and Fitness / General Workout. Always looking for chill groups!$pbc$, 5.0, 49, $pbc$["Tournament Ready", "PBC Veteran", "Pro Gamer"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$cole.coleman451@yahoo.com$pbc$, $pbc$password123$pbc$, $pbc$PixelCole4$pbc$, $pbc$Cole Coleman$pbc$, 36, $pbc$Boynton Beach$pbc$, $pbc$33435$pbc$, $pbc$Eurogames$pbc$, $pbc$N/A$pbc$, $pbc$Boynton Beach native. Love Eurogames, dabble in Fitness / General Workout. Let's connect!$pbc$, 5.0, 28, $pbc$["PBC Veteran", "Tournament Ready"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$jose.anderson933@gmail.com$pbc$, $pbc$password123$pbc$, $pbc$Blessed007141$pbc$, $pbc$Jose Anderson$pbc$, 34, $pbc$Boynton Beach$pbc$, $pbc$33437$pbc$, $pbc$Sports Games$pbc$, $pbc$All Platforms$pbc$, $pbc$Passionate about Sports Games. Based in Boynton Beach, FL. Hit me up for games or meetups.$pbc$, 4.9, 53, $pbc$["Early Bird"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$hector.cook546@icloud.com$pbc$, $pbc$password123$pbc$, $pbc$RogueHector77$pbc$, $pbc$Hector Cook$pbc$, 30, $pbc$Lake Worth Beach$pbc$, $pbc$33460$pbc$, $pbc$Beach Activities$pbc$, $pbc$Steam Deck$pbc$, $pbc$Passionate about Beach Activities. Based in Lake Worth Beach, FL. Hit me up for games or meetups.$pbc$, 4.3, 47, $pbc$["Friendly Host", "Early Bird", "Tabletop King"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$amanda.mensah521@icloud.com$pbc$, $pbc$password123$pbc$, $pbc$GoldenAmanda67$pbc$, $pbc$Amanda Mensah$pbc$, 28, $pbc$Boca Raton$pbc$, $pbc$33433$pbc$, $pbc$Soccer$pbc$, $pbc$N/A$pbc$, $pbc$Local Boca Raton player. Into Soccer and Swimming. Always looking for chill groups!$pbc$, 4.9, 37, $pbc$["PBC Veteran", "Pro Gamer"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$justin.gonzalez884@yahoo.com$pbc$, $pbc$password123$pbc$, $pbc$xXJuDukeXx$pbc$, $pbc$Justin Gonzalez$pbc$, 46, $pbc$Lake Worth Beach$pbc$, $pbc$33460$pbc$, $pbc$Dungeons & Dragons$pbc$, $pbc$N/A$pbc$, $pbc$Always down for Dungeons & Dragons sessions. Lake Worth Beach-based. Message me anytime!$pbc$, 4.5, 36, $pbc$["Friendly Host", "Pro Gamer"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$lauren.ross525@hotmail.com$pbc$, $pbc$password123$pbc$, $pbc$SuperLauren58$pbc$, $pbc$Lauren Ross$pbc$, 47, $pbc$West Palm Beach$pbc$, $pbc$33409$pbc$, $pbc$Party Games$pbc$, $pbc$N/A$pbc$, $pbc$Passionate about Party Games. Based in West Palm Beach, FL. Hit me up for games or meetups.$pbc$, 4.5, 76, $pbc$["Tabletop King", "Friendly Host", "Tournament Ready"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$rebecca.butler526@hotmail.com$pbc$, $pbc$password123$pbc$, $pbc$LazyLegend949$pbc$, $pbc$Rebecca Butler$pbc$, 50, $pbc$Palm Beach Gardens$pbc$, $pbc$33410$pbc$, $pbc$Strategy Games$pbc$, $pbc$PC & Console$pbc$, $pbc$South FL local. Strategy Games enthusiast and weekend warrior. Palm Beach Gardens represent!$pbc$, 4.2, 50, $pbc$["PBC Veteran", "Early Bird"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$jessica.watson935@outlook.com$pbc$, $pbc$password123$pbc$, $pbc$ChillHero289$pbc$, $pbc$Jessica Watson$pbc$, 52, $pbc$Delray Beach$pbc$, $pbc$33446$pbc$, $pbc$Flag Football$pbc$, $pbc$Nintendo Switch$pbc$, $pbc$New to the scene! Trying to find people who love Flag Football in Delray Beach area.$pbc$, 4.7, 81, $pbc$["Pro Gamer", "Tournament Ready"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$alexis.kim867@yahoo.com$pbc$, $pbc$password123$pbc$, $pbc$xXAlXLXx$pbc$, $pbc$Alexis Kim$pbc$, 38, $pbc$Boca Raton$pbc$, $pbc$33496$pbc$, $pbc$Running / Jogging$pbc$, $pbc$PC$pbc$, $pbc$Always down for Running / Jogging sessions. Boca Raton-based. Message me anytime!$pbc$, 4.9, 62, $pbc$["Pro Gamer", "Tabletop King"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$owen.gonzalez703@icloud.com$pbc$, $pbc$password123$pbc$, $pbc$RogueOwen76$pbc$, $pbc$Owen Gonzalez$pbc$, 45, $pbc$Lantana$pbc$, $pbc$33462$pbc$, $pbc$Strategy Games$pbc$, $pbc$PlayStation$pbc$, $pbc$New to the scene! Trying to find people who love Strategy Games in Lantana area.$pbc$, 4.5, 17, $pbc$["Friendly Host", "Tabletop King"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$morgan.campbell692@hotmail.com$pbc$, $pbc$password123$pbc$, $pbc$MorganCam14$pbc$, $pbc$Morgan Campbell$pbc$, 24, $pbc$Boynton Beach$pbc$, $pbc$33436$pbc$, $pbc$Simulation$pbc$, $pbc$Nintendo Switch$pbc$, $pbc$Passionate about Simulation. Based in Boynton Beach, FL. Hit me up for games or meetups.$pbc$, 4.9, 39, $pbc$["Friendly Host", "Tournament Ready"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$alejandro.brooks12@yahoo.com$pbc$, $pbc$password123$pbc$, $pbc$BrokenAlejandro53$pbc$, $pbc$Alejandro Brooks$pbc$, 51, $pbc$Royal Palm Beach$pbc$, $pbc$33414$pbc$, $pbc$Trading Card Games$pbc$, $pbc$N/A$pbc$, $pbc$Royal Palm Beach native. Love Trading Card Games, dabble in Tabletop RPG. Let's connect!$pbc$, 4.2, 60, $pbc$["PBC Veteran", "Early Bird", "Tournament Ready"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$julia.jenkins163@hotmail.com$pbc$, $pbc$password123$pbc$, $pbc$OnyxJulia26$pbc$, $pbc$Julia Jenkins$pbc$, 48, $pbc$Manalapan$pbc$, $pbc$33462$pbc$, $pbc$Sandbox Games$pbc$, $pbc$PlayStation$pbc$, $pbc$Casual Sandbox Games fan from Manalapan. Also enjoy Fitness / General Workout on weekends.$pbc$, 4.9, 29, $pbc$["Pro Gamer", "Friendly Host", "Tabletop King"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$bryan.kelly472@icloud.com$pbc$, $pbc$password123$pbc$, $pbc$RankedStriker295$pbc$, $pbc$Bryan Kelly$pbc$, 49, $pbc$Juno Beach$pbc$, $pbc$33408$pbc$, $pbc$Fighting Games$pbc$, $pbc$Xbox$pbc$, $pbc$Passionate about Fighting Games. Based in Juno Beach, FL. Hit me up for games or meetups.$pbc$, 4.2, 42, $pbc$["PBC Veteran", "Tabletop King"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$sebastian.washington907@yahoo.com$pbc$, $pbc$password123$pbc$, $pbc$FixedSebastian81$pbc$, $pbc$Sebastian Washington$pbc$, 33, $pbc$West Palm Beach$pbc$, $pbc$33409$pbc$, $pbc$Rock Climbing$pbc$, $pbc$PlayStation$pbc$, $pbc$Always down for Rock Climbing sessions. West Palm Beach-based. Message me anytime!$pbc$, 4.4, 63, $pbc$["Tabletop King"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$tanner.nelson213@hotmail.com$pbc$, $pbc$password123$pbc$, $pbc$BetaMage75$pbc$, $pbc$Tanner Nelson$pbc$, 34, $pbc$Boynton Beach$pbc$, $pbc$33436$pbc$, $pbc$First-Person Shooters$pbc$, $pbc$Xbox$pbc$, $pbc$New to the scene! Trying to find people who love First-Person Shooters in Boynton Beach area.$pbc$, 4.7, 52, $pbc$["Pro Gamer", "Tabletop King"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$ariana.ortiz562@yahoo.com$pbc$, $pbc$password123$pbc$, $pbc$xXArPlayerXx$pbc$, $pbc$Ariana Ortiz$pbc$, 23, $pbc$Boca Raton$pbc$, $pbc$33433$pbc$, $pbc$RPG$pbc$, $pbc$PlayStation$pbc$, $pbc$Retired RPG tryhard, now just vibing. Live in Boca Raton, FL.$pbc$, 4.7, 38, $pbc$["Friendly Host", "Tabletop King"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$james.bryant158@icloud.com$pbc$, $pbc$password123$pbc$, $pbc$NovaJames28$pbc$, $pbc$James Bryant$pbc$, 35, $pbc$West Palm Beach$pbc$, $pbc$33401$pbc$, $pbc$Hiking$pbc$, $pbc$N/A$pbc$, $pbc$Passionate about Hiking. Based in West Palm Beach, FL. Hit me up for games or meetups.$pbc$, 4.6, 13, $pbc$["Early Bird"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$savannah.ward54@hotmail.com$pbc$, $pbc$password123$pbc$, $pbc$ShadowXL387$pbc$, $pbc$Savannah Ward$pbc$, 46, $pbc$Palm Beach Gardens$pbc$, $pbc$33418$pbc$, $pbc$First-Person Shooters$pbc$, $pbc$PlayStation$pbc$, $pbc$Palm Beach Gardens native. Love First-Person Shooters, dabble in Competitive FPS. Let's connect!$pbc$, 4.5, 16, $pbc$["Tabletop King", "PBC Veteran"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$charlotte.moore836@outlook.com$pbc$, $pbc$password123$pbc$, $pbc$JadeCharlotte81$pbc$, $pbc$Charlotte Moore$pbc$, 24, $pbc$Pahokee$pbc$, $pbc$33476$pbc$, $pbc$Warhammer$pbc$, $pbc$All Platforms$pbc$, $pbc$Local Pahokee player. Into Warhammer and Bird Watching. Always looking for chill groups!$pbc$, 4.4, 79, $pbc$["Early Bird", "Tournament Ready", "Friendly Host"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$savannah.gomez68@outlook.com$pbc$, $pbc$password123$pbc$, $pbc$PixelSavannah9$pbc$, $pbc$Savannah Gomez$pbc$, 32, $pbc$Palm Beach$pbc$, $pbc$33480$pbc$, $pbc$Magic: The Gathering$pbc$, $pbc$PC & Console$pbc$, $pbc$Retired Magic: The Gathering tryhard, now just vibing. Live in Palm Beach, FL.$pbc$, 4.8, 8, $pbc$["Tabletop King", "Early Bird"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$grace.kelly872@icloud.com$pbc$, $pbc$password123$pbc$, $pbc$PhantomMage624$pbc$, $pbc$Grace Kelly$pbc$, 38, $pbc$Boynton Beach$pbc$, $pbc$33437$pbc$, $pbc$Stand-Up Paddleboarding$pbc$, $pbc$PlayStation$pbc$, $pbc$Retired Stand-Up Paddleboarding tryhard, now just vibing. Live in Boynton Beach, FL.$pbc$, 4.7, 31, $pbc$["PBC Veteran"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$lily.smith141@outlook.com$pbc$, $pbc$password123$pbc$, $pbc$xXLiMythXx$pbc$, $pbc$Lily Smith$pbc$, 21, $pbc$Boca Raton$pbc$, $pbc$33496$pbc$, $pbc$Competitive FPS$pbc$, $pbc$Steam Deck$pbc$, $pbc$Boca Raton native. Love Competitive FPS, dabble in Fitness / General Workout. Let's connect!$pbc$, 4.5, 9, $pbc$["Friendly Host"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$matthew.johnson811@icloud.com$pbc$, $pbc$password123$pbc$, $pbc$ToxicMatthew4$pbc$, $pbc$Matthew Johnson$pbc$, 51, $pbc$West Palm Beach$pbc$, $pbc$33409$pbc$, $pbc$Fitness / General Workout$pbc$, $pbc$N/A$pbc$, $pbc$Casual Fitness / General Workout fan from West Palm Beach. Also enjoy Fitness / General Workout on weekends.$pbc$, 4.5, 13, $pbc$["PBC Veteran", "Friendly Host"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$destiny.lopez188@icloud.com$pbc$, $pbc$password123$pbc$, $pbc$Blaze954504$pbc$, $pbc$Destiny Lopez$pbc$, 38, $pbc$Lake Park$pbc$, $pbc$33403$pbc$, $pbc$MOBA$pbc$, $pbc$Nintendo Switch$pbc$, $pbc$Passionate about MOBA. Based in Lake Park, FL. Hit me up for games or meetups.$pbc$, 4.9, 78, $pbc$["Tournament Ready"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$valentina.williams169@yahoo.com$pbc$, $pbc$password123$pbc$, $pbc$ValentinaWil64$pbc$, $pbc$Valentina Williams$pbc$, 37, $pbc$Palm Beach$pbc$, $pbc$33480$pbc$, $pbc$Golf$pbc$, $pbc$N/A$pbc$, $pbc$Palm Beach native. Love Golf, dabble in Swimming. Let's connect!$pbc$, 5.0, 63, $pbc$["Pro Gamer", "Tabletop King", "Tournament Ready"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$amanda.murphy625@icloud.com$pbc$, $pbc$password123$pbc$, $pbc$AmandaMur71$pbc$, $pbc$Amanda Murphy$pbc$, 50, $pbc$Manalapan$pbc$, $pbc$33462$pbc$, $pbc$Party Games$pbc$, $pbc$Steam Deck$pbc$, $pbc$Manalapan native. Love Party Games, dabble in Deck Building. Let's connect!$pbc$, 3.0, 41, $pbc$["Pro Gamer"]$pbc$::jsonb, true);
+SELECT create_rollcall_prod_user($pbc$amanda.foster5@gmail.com$pbc$, $pbc$password123$pbc$, $pbc$GoldenAmanda52$pbc$, $pbc$Amanda Foster$pbc$, 30, $pbc$Boynton Beach$pbc$, $pbc$33435$pbc$, $pbc$Social Deduction Games$pbc$, $pbc$Xbox$pbc$, $pbc$South FL local. Social Deduction Games enthusiast and weekend warrior. Boynton Beach represent!$pbc$, 4.6, 15, $pbc$["Tournament Ready"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$pedro.ramirez714@gmail.com$pbc$, $pbc$password123$pbc$, $pbc$xXPe239Xx$pbc$, $pbc$Pedro Ramirez$pbc$, 41, $pbc$Belle Glade$pbc$, $pbc$33430$pbc$, $pbc$Magic: The Gathering$pbc$, $pbc$Nintendo Switch$pbc$, $pbc$Belle Glade native. Love Magic: The Gathering, dabble in Sandbox Games. Let's connect!$pbc$, 4.3, 27, $pbc$["Pro Gamer", "Tournament Ready"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$bailey.coleman408@hotmail.com$pbc$, $pbc$password123$pbc$, $pbc$Azure321194$pbc$, $pbc$Bailey Coleman$pbc$, 42, $pbc$Boca Raton$pbc$, $pbc$33496$pbc$, $pbc$Cooperative Board Games$pbc$, $pbc$N/A$pbc$, $pbc$Passionate about Cooperative Board Games. Based in Boca Raton, FL. Hit me up for games or meetups.$pbc$, 4.4, 28, $pbc$["Friendly Host", "PBC Veteran"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$emma.sullivan834@yahoo.com$pbc$, $pbc$password123$pbc$, $pbc$RankedEmma27$pbc$, $pbc$Emma Sullivan$pbc$, 40, $pbc$Juno Beach$pbc$, $pbc$33408$pbc$, $pbc$First-Person Shooters$pbc$, $pbc$PlayStation$pbc$, $pbc$Retired First-Person Shooters tryhard, now just vibing. Live in Juno Beach, FL.$pbc$, 4.5, 56, $pbc$["Tabletop King"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$melissa.wilson181@outlook.com$pbc$, $pbc$password123$pbc$, $pbc$MelissaWil27$pbc$, $pbc$Melissa Wilson$pbc$, 28, $pbc$Manalapan$pbc$, $pbc$33462$pbc$, $pbc$Strategy Games$pbc$, $pbc$Xbox$pbc$, $pbc$Retired Strategy Games tryhard, now just vibing. Live in Manalapan, FL.$pbc$, 4.9, 84, $pbc$["Pro Gamer", "Tournament Ready"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$wesley.stewart82@outlook.com$pbc$, $pbc$password123$pbc$, $pbc$HyperGamer284$pbc$, $pbc$Wesley Stewart$pbc$, 28, $pbc$Delray Beach$pbc$, $pbc$33444$pbc$, $pbc$Board Games$pbc$, $pbc$N/A$pbc$, $pbc$Local Delray Beach player. Into Board Games and Swimming. Always looking for chill groups!$pbc$, 4.2, 40, $pbc$["PBC Veteran", "Friendly Host"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$elena.gomez385@hotmail.com$pbc$, $pbc$password123$pbc$, $pbc$HackedElena63$pbc$, $pbc$Elena Gomez$pbc$, 18, $pbc$Lake Park$pbc$, $pbc$33403$pbc$, $pbc$Puzzle Games$pbc$, $pbc$N/A$pbc$, $pbc$Local Lake Park player. Into Puzzle Games and Warhammer. Always looking for chill groups!$pbc$, 4.2, 14, $pbc$["PBC Veteran", "Pro Gamer"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$rebecca.kelly468@icloud.com$pbc$, $pbc$password123$pbc$, $pbc$RebeccaKel13$pbc$, $pbc$Rebecca Kelly$pbc$, 18, $pbc$Delray Beach$pbc$, $pbc$33444$pbc$, $pbc$Bird Watching$pbc$, $pbc$N/A$pbc$, $pbc$New to the scene! Trying to find people who love Bird Watching in Delray Beach area.$pbc$, 4.4, 18, $pbc$["Pro Gamer"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$brenda.mitchell654@outlook.com$pbc$, $pbc$password123$pbc$, $pbc$RapidCaptain895$pbc$, $pbc$Brenda Mitchell$pbc$, 18, $pbc$Lake Worth Beach$pbc$, $pbc$33460$pbc$, $pbc$Trading Card Games$pbc$, $pbc$N/A$pbc$, $pbc$Retired Trading Card Games tryhard, now just vibing. Live in Lake Worth Beach, FL.$pbc$, 4.9, 58, $pbc$["Tournament Ready", "Friendly Host"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$angel.thompson301@hotmail.com$pbc$, $pbc$password123$pbc$, $pbc$AngelTho28$pbc$, $pbc$Angel Thompson$pbc$, 42, $pbc$Delray Beach$pbc$, $pbc$33444$pbc$, $pbc$Magic: The Gathering$pbc$, $pbc$N/A$pbc$, $pbc$New to the scene! Trying to find people who love Magic: The Gathering in Delray Beach area.$pbc$, 4.5, 62, $pbc$["Friendly Host"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$james.nelson679@hotmail.com$pbc$, $pbc$password123$pbc$, $pbc$JamesNel41$pbc$, $pbc$James Nelson$pbc$, 48, $pbc$Delray Beach$pbc$, $pbc$33445$pbc$, $pbc$Biking / Cycling$pbc$, $pbc$N/A$pbc$, $pbc$South FL local. Biking / Cycling enthusiast and weekend warrior. Delray Beach represent!$pbc$, 4.5, 66, $pbc$["Pro Gamer", "Tabletop King"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$kylie.williams975@gmail.com$pbc$, $pbc$password123$pbc$, $pbc$KylieWil78$pbc$, $pbc$Kylie Williams$pbc$, 48, $pbc$Jupiter$pbc$, $pbc$33458$pbc$, $pbc$Triathlon$pbc$, $pbc$Mobile$pbc$, $pbc$Passionate about Triathlon. Based in Jupiter, FL. Hit me up for games or meetups.$pbc$, 4.5, 62, $pbc$["Tournament Ready", "PBC Veteran", "Tabletop King"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$ethan.campbell960@yahoo.com$pbc$, $pbc$password123$pbc$, $pbc$RubyCaptain131$pbc$, $pbc$Ethan Campbell$pbc$, 55, $pbc$Greenacres$pbc$, $pbc$33467$pbc$, $pbc$Puzzle Games$pbc$, $pbc$PC & Console$pbc$, $pbc$Casual Puzzle Games fan from Greenacres. Also enjoy Platformers on weekends.$pbc$, 4.5, 54, $pbc$["Tabletop King"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$emma.martinez873@icloud.com$pbc$, $pbc$password123$pbc$, $pbc$IronEmma38$pbc$, $pbc$Emma Martinez$pbc$, 52, $pbc$West Palm Beach$pbc$, $pbc$33401$pbc$, $pbc$Trading Card Games$pbc$, $pbc$N/A$pbc$, $pbc$Local West Palm Beach player. Into Trading Card Games and Fitness / General Workout. Always looking for chill groups!$pbc$, 4.5, 41, $pbc$["PBC Veteran"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$denise.johnson706@gmail.com$pbc$, $pbc$password123$pbc$, $pbc$CursedDenise91$pbc$, $pbc$Denise Johnson$pbc$, 50, $pbc$Palm Beach Gardens$pbc$, $pbc$33418$pbc$, $pbc$Beach Activities$pbc$, $pbc$N/A$pbc$, $pbc$Casual Beach Activities fan from Palm Beach Gardens. Also enjoy Puzzle Games on weekends.$pbc$, 4.7, 33, $pbc$["Tabletop King", "Tournament Ready", "Early Bird"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$chris.kim745@icloud.com$pbc$, $pbc$password123$pbc$, $pbc$LuckyChris85$pbc$, $pbc$Chris Kim$pbc$, 49, $pbc$Boynton Beach$pbc$, $pbc$33437$pbc$, $pbc$War Games$pbc$, $pbc$N/A$pbc$, $pbc$South FL local. War Games enthusiast and weekend warrior. Boynton Beach represent!$pbc$, 5.0, 35, $pbc$["Tournament Ready", "Tabletop King"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$jordan.washington100@yahoo.com$pbc$, $pbc$password123$pbc$, $pbc$ToxicJordan75$pbc$, $pbc$Jordan Washington$pbc$, 43, $pbc$Palm Springs$pbc$, $pbc$33461$pbc$, $pbc$Triathlon$pbc$, $pbc$Nintendo Switch$pbc$, $pbc$Local Palm Springs player. Into Triathlon and Soccer. Always looking for chill groups!$pbc$, 4.7, 15, $pbc$["Tournament Ready"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$ricky.williams695@yahoo.com$pbc$, $pbc$password123$pbc$, $pbc$xXRiBladeXx$pbc$, $pbc$Ricky Williams$pbc$, 24, $pbc$Juno Beach$pbc$, $pbc$33408$pbc$, $pbc$Tabletop RPG$pbc$, $pbc$Xbox$pbc$, $pbc$Retired Tabletop RPG tryhard, now just vibing. Live in Juno Beach, FL.$pbc$, 4.3, 40, $pbc$["Tabletop King", "Tournament Ready"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$lily.barnes407@icloud.com$pbc$, $pbc$password123$pbc$, $pbc$SavageLily77$pbc$, $pbc$Lily Barnes$pbc$, 33, $pbc$Delray Beach$pbc$, $pbc$33445$pbc$, $pbc$Hiking$pbc$, $pbc$PC$pbc$, $pbc$Passionate about Hiking. Based in Delray Beach, FL. Hit me up for games or meetups.$pbc$, 4.4, 72, $pbc$["Friendly Host"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$gabrielle.perez24@hotmail.com$pbc$, $pbc$password123$pbc$, $pbc$xXGaLegendXx$pbc$, $pbc$Gabrielle Perez$pbc$, 32, $pbc$Pahokee$pbc$, $pbc$33476$pbc$, $pbc$Stand-Up Paddleboarding$pbc$, $pbc$N/A$pbc$, $pbc$Pahokee native. Love Stand-Up Paddleboarding, dabble in Running / Jogging. Let's connect!$pbc$, 4.5, 10, $pbc$["Tabletop King", "PBC Veteran", "Tournament Ready"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$sophia.vasquez570@hotmail.com$pbc$, $pbc$password123$pbc$, $pbc$xXSoSlayerXx$pbc$, $pbc$Sophia Vasquez$pbc$, 43, $pbc$West Palm Beach$pbc$, $pbc$33405$pbc$, $pbc$Fitness / General Workout$pbc$, $pbc$Xbox$pbc$, $pbc$New to the scene! Trying to find people who love Fitness / General Workout in West Palm Beach area.$pbc$, 4.7, 19, $pbc$["Tabletop King", "Pro Gamer"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$nicole.collins589@yahoo.com$pbc$, $pbc$password123$pbc$, $pbc$NicoleCol21$pbc$, $pbc$Nicole Collins$pbc$, 26, $pbc$West Palm Beach$pbc$, $pbc$33409$pbc$, $pbc$Simulation$pbc$, $pbc$Xbox$pbc$, $pbc$Local West Palm Beach player. Into Simulation and Horror Games. Always looking for chill groups!$pbc$, 4.7, 13, $pbc$["Tournament Ready", "Pro Gamer", "Tabletop King"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$logan.james927@outlook.com$pbc$, $pbc$password123$pbc$, $pbc$xXLoPlayerXx$pbc$, $pbc$Logan James$pbc$, 51, $pbc$West Palm Beach$pbc$, $pbc$33409$pbc$, $pbc$Miniature Games$pbc$, $pbc$PC$pbc$, $pbc$South FL local. Miniature Games enthusiast and weekend warrior. West Palm Beach represent!$pbc$, 4.4, 41, $pbc$["Tournament Ready", "Early Bird", "Friendly Host"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$kevin.cooper606@outlook.com$pbc$, $pbc$password123$pbc$, $pbc$FrostKevin94$pbc$, $pbc$Kevin Cooper$pbc$, 31, $pbc$Palm Springs$pbc$, $pbc$33461$pbc$, $pbc$Party Games$pbc$, $pbc$N/A$pbc$, $pbc$Palm Springs native. Love Party Games, dabble in Weightlifting. Let's connect!$pbc$, 4.5, 53, $pbc$["Early Bird", "Tabletop King"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$christian.garcia649@yahoo.com$pbc$, $pbc$password123$pbc$, $pbc$RubyChristian85$pbc$, $pbc$Christian Garcia$pbc$, 35, $pbc$Boca Raton$pbc$, $pbc$33433$pbc$, $pbc$Adventure Games$pbc$, $pbc$Mobile$pbc$, $pbc$Passionate about Adventure Games. Based in Boca Raton, FL. Hit me up for games or meetups.$pbc$, 4.4, 45, $pbc$["Early Bird", "PBC Veteran"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$claudia.mitchell656@gmail.com$pbc$, $pbc$password123$pbc$, $pbc$ModdedClaudia43$pbc$, $pbc$Claudia Mitchell$pbc$, 39, $pbc$Boca Raton$pbc$, $pbc$33433$pbc$, $pbc$Sports Games$pbc$, $pbc$PlayStation$pbc$, $pbc$South FL local. Sports Games enthusiast and weekend warrior. Boca Raton represent!$pbc$, 4.7, 9, $pbc$["Tabletop King"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$darryl.morales542@outlook.com$pbc$, $pbc$password123$pbc$, $pbc$JadeDarryl35$pbc$, $pbc$Darryl Morales$pbc$, 24, $pbc$Belle Glade$pbc$, $pbc$33430$pbc$, $pbc$Eurogames$pbc$, $pbc$N/A$pbc$, $pbc$Retired Eurogames tryhard, now just vibing. Live in Belle Glade, FL.$pbc$, 4.5, 55, $pbc$["Tournament Ready", "Friendly Host"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$anthony.russell10@hotmail.com$pbc$, $pbc$password123$pbc$, $pbc$AnthonyRus94$pbc$, $pbc$Anthony Russell$pbc$, 34, $pbc$Delray Beach$pbc$, $pbc$33446$pbc$, $pbc$Trading Card Games$pbc$, $pbc$All Platforms$pbc$, $pbc$Delray Beach native. Love Trading Card Games, dabble in War Games. Let's connect!$pbc$, 4.5, 32, $pbc$["Friendly Host", "Tournament Ready", "Pro Gamer"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$wesley.lee294@outlook.com$pbc$, $pbc$password123$pbc$, $pbc$xXWePaladinXx$pbc$, $pbc$Wesley Lee$pbc$, 50, $pbc$Palm Beach$pbc$, $pbc$33480$pbc$, $pbc$Tabletop RPG$pbc$, $pbc$Steam Deck$pbc$, $pbc$Palm Beach native. Love Tabletop RPG, dabble in Tennis. Let's connect!$pbc$, 4.4, 36, $pbc$["Pro Gamer", "Tournament Ready"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$anthony.phillips715@gmail.com$pbc$, $pbc$password123$pbc$, $pbc$xXAnKnightXx$pbc$, $pbc$Anthony Phillips$pbc$, 52, $pbc$Pahokee$pbc$, $pbc$33476$pbc$, $pbc$Softball$pbc$, $pbc$N/A$pbc$, $pbc$Casual Softball fan from Pahokee. Also enjoy Cooperative Board Games on weekends.$pbc$, 4.2, 39, $pbc$["PBC Veteran"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$jasmine.bryant527@outlook.com$pbc$, $pbc$password123$pbc$, $pbc$SuperWitch389$pbc$, $pbc$Jasmine Bryant$pbc$, 26, $pbc$Royal Palm Beach$pbc$, $pbc$33414$pbc$, $pbc$CrossFit$pbc$, $pbc$PC$pbc$, $pbc$Retired CrossFit tryhard, now just vibing. Live in Royal Palm Beach, FL.$pbc$, 4.9, 75, $pbc$["Early Bird", "Friendly Host"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$kevin.jenkins958@icloud.com$pbc$, $pbc$password123$pbc$, $pbc$xXKeHunterXx$pbc$, $pbc$Kevin Jenkins$pbc$, 20, $pbc$Pahokee$pbc$, $pbc$33476$pbc$, $pbc$Board Games$pbc$, $pbc$N/A$pbc$, $pbc$Local Pahokee player. Into Board Games and Softball. Always looking for chill groups!$pbc$, 4.8, 22, $pbc$["Tabletop King", "Early Bird", "Tournament Ready"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$elijah.morris87@hotmail.com$pbc$, $pbc$password123$pbc$, $pbc$ElijahMor62$pbc$, $pbc$Elijah Morris$pbc$, 30, $pbc$Belle Glade$pbc$, $pbc$33430$pbc$, $pbc$Tennis$pbc$, $pbc$N/A$pbc$, $pbc$South FL local. Tennis enthusiast and weekend warrior. Belle Glade represent!$pbc$, 4.3, 13, $pbc$["Early Bird"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$riley.morgan832@outlook.com$pbc$, $pbc$password123$pbc$, $pbc$Alpha420860$pbc$, $pbc$Riley Morgan$pbc$, 52, $pbc$Boynton Beach$pbc$, $pbc$33437$pbc$, $pbc$Social Deduction Games$pbc$, $pbc$Mobile$pbc$, $pbc$Retired Social Deduction Games tryhard, now just vibing. Live in Boynton Beach, FL.$pbc$, 4.9, 67, $pbc$["Tabletop King", "Early Bird", "PBC Veteran"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$tiffany.wright165@yahoo.com$pbc$, $pbc$password123$pbc$, $pbc$xXTi420Xx$pbc$, $pbc$Tiffany Wright$pbc$, 20, $pbc$Greenacres$pbc$, $pbc$33467$pbc$, $pbc$War Games$pbc$, $pbc$Xbox$pbc$, $pbc$Local Greenacres player. Into War Games and Social Deduction Games. Always looking for chill groups!$pbc$, 5.0, 78, $pbc$["Tabletop King"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$gavin.cruz14@yahoo.com$pbc$, $pbc$password123$pbc$, $pbc$Epic561351$pbc$, $pbc$Gavin Cruz$pbc$, 50, $pbc$Royal Palm Beach$pbc$, $pbc$33411$pbc$, $pbc$Tabletop RPG$pbc$, $pbc$N/A$pbc$, $pbc$Royal Palm Beach native. Love Tabletop RPG, dabble in War Games. Let's connect!$pbc$, 4.6, 37, $pbc$["Tabletop King"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$logan.howard718@yahoo.com$pbc$, $pbc$password123$pbc$, $pbc$xXLoQueenXx$pbc$, $pbc$Logan Howard$pbc$, 34, $pbc$Delray Beach$pbc$, $pbc$33445$pbc$, $pbc$RPG$pbc$, $pbc$PC$pbc$, $pbc$Delray Beach native. Love RPG, dabble in Yoga. Let's connect!$pbc$, 4.3, 57, $pbc$["Tabletop King"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$valentina.anderson886@gmail.com$pbc$, $pbc$password123$pbc$, $pbc$xXVaShotgunXx$pbc$, $pbc$Valentina Anderson$pbc$, 23, $pbc$Lake Worth Beach$pbc$, $pbc$33460$pbc$, $pbc$Board Games$pbc$, $pbc$N/A$pbc$, $pbc$Local Lake Worth Beach player. Into Board Games and Worker Placement. Always looking for chill groups!$pbc$, 4.4, 42, $pbc$["Tabletop King", "Tournament Ready"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$morgan.coleman288@outlook.com$pbc$, $pbc$password123$pbc$, $pbc$xXMoProXx$pbc$, $pbc$Morgan Coleman$pbc$, 41, $pbc$Jupiter$pbc$, $pbc$33477$pbc$, $pbc$Indie Games$pbc$, $pbc$Steam Deck$pbc$, $pbc$Passionate about Indie Games. Based in Jupiter, FL. Hit me up for games or meetups.$pbc$, 4.7, 57, $pbc$["Tournament Ready", "Pro Gamer"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$victor.evans373@outlook.com$pbc$, $pbc$password123$pbc$, $pbc$StormVictor13$pbc$, $pbc$Victor Evans$pbc$, 49, $pbc$Jupiter$pbc$, $pbc$33458$pbc$, $pbc$Horror Games$pbc$, $pbc$Mobile$pbc$, $pbc$Retired Horror Games tryhard, now just vibing. Live in Jupiter, FL.$pbc$, 4.9, 9, $pbc$["Tabletop King", "Tournament Ready"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$dominic.clark43@hotmail.com$pbc$, $pbc$password123$pbc$, $pbc$DominicCla34$pbc$, $pbc$Dominic Clark$pbc$, 25, $pbc$Delray Beach$pbc$, $pbc$33446$pbc$, $pbc$Soccer$pbc$, $pbc$All Platforms$pbc$, $pbc$South FL local. Soccer enthusiast and weekend warrior. Delray Beach represent!$pbc$, 4.3, 63, $pbc$["Early Bird", "Friendly Host"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$courtney.king645@gmail.com$pbc$, $pbc$password123$pbc$, $pbc$xXCoSlayerXx$pbc$, $pbc$Courtney King$pbc$, 46, $pbc$Royal Palm Beach$pbc$, $pbc$33414$pbc$, $pbc$Swimming$pbc$, $pbc$Nintendo Switch$pbc$, $pbc$New to the scene! Trying to find people who love Swimming in Royal Palm Beach area.$pbc$, 4.3, 10, $pbc$["Pro Gamer", "Friendly Host"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$cassidy.ramirez449@hotmail.com$pbc$, $pbc$password123$pbc$, $pbc$xXCaClericXx$pbc$, $pbc$Cassidy Ramirez$pbc$, 28, $pbc$Boca Raton$pbc$, $pbc$33433$pbc$, $pbc$Fighting Games$pbc$, $pbc$Nintendo Switch$pbc$, $pbc$Local Boca Raton player. Into Fighting Games and Fitness / General Workout. Always looking for chill groups!$pbc$, 4.9, 55, $pbc$["Pro Gamer"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$brenda.nguyen266@outlook.com$pbc$, $pbc$password123$pbc$, $pbc$BrendaNgu47$pbc$, $pbc$Brenda Nguyen$pbc$, 51, $pbc$Pahokee$pbc$, $pbc$33476$pbc$, $pbc$Sports Games$pbc$, $pbc$Xbox$pbc$, $pbc$South FL local. Sports Games enthusiast and weekend warrior. Pahokee represent!$pbc$, 4.9, 13, $pbc$["Pro Gamer", "Friendly Host"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$chris.taylor548@gmail.com$pbc$, $pbc$password123$pbc$, $pbc$SwiftChief648$pbc$, $pbc$Chris Taylor$pbc$, 31, $pbc$Wellington$pbc$, $pbc$33449$pbc$, $pbc$Swimming$pbc$, $pbc$N/A$pbc$, $pbc$South FL local. Swimming enthusiast and weekend warrior. Wellington represent!$pbc$, 4.3, 58, $pbc$["Friendly Host", "Early Bird", "PBC Veteran"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$olivia.brooks225@outlook.com$pbc$, $pbc$password123$pbc$, $pbc$OliviaBro42$pbc$, $pbc$Olivia Brooks$pbc$, 40, $pbc$West Palm Beach$pbc$, $pbc$33401$pbc$, $pbc$Yoga$pbc$, $pbc$N/A$pbc$, $pbc$Casual Yoga fan from West Palm Beach. Also enjoy Hiking on weekends.$pbc$, 4.5, 11, $pbc$["PBC Veteran"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$zach.gonzalez209@hotmail.com$pbc$, $pbc$password123$pbc$, $pbc$xXZaMasterXx$pbc$, $pbc$Zach Gonzalez$pbc$, 35, $pbc$Greenacres$pbc$, $pbc$33463$pbc$, $pbc$Dungeons & Dragons$pbc$, $pbc$Nintendo Switch$pbc$, $pbc$Greenacres native. Love Dungeons & Dragons, dabble in Deck Building. Let's connect!$pbc$, 4.9, 75, $pbc$["Friendly Host", "Tabletop King", "Tournament Ready"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$maya.anderson907@yahoo.com$pbc$, $pbc$password123$pbc$, $pbc$xXMa007Xx$pbc$, $pbc$Maya Anderson$pbc$, 28, $pbc$Palm Beach Gardens$pbc$, $pbc$33418$pbc$, $pbc$Deck Building$pbc$, $pbc$N/A$pbc$, $pbc$Passionate about Deck Building. Based in Palm Beach Gardens, FL. Hit me up for games or meetups.$pbc$, 4.4, 65, $pbc$["PBC Veteran"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$bryan.cooper387@icloud.com$pbc$, $pbc$password123$pbc$, $pbc$Storm30514$pbc$, $pbc$Bryan Cooper$pbc$, 24, $pbc$West Palm Beach$pbc$, $pbc$33401$pbc$, $pbc$War Games$pbc$, $pbc$PC & Console$pbc$, $pbc$Casual War Games fan from West Palm Beach. Also enjoy RPG on weekends.$pbc$, 4.8, 16, $pbc$["PBC Veteran"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$hannah.patterson836@yahoo.com$pbc$, $pbc$password123$pbc$, $pbc$PhantomHannah62$pbc$, $pbc$Hannah Patterson$pbc$, 46, $pbc$Juno Beach$pbc$, $pbc$33408$pbc$, $pbc$Puzzle Games$pbc$, $pbc$Mobile$pbc$, $pbc$Retired Puzzle Games tryhard, now just vibing. Live in Juno Beach, FL.$pbc$, 4.3, 42, $pbc$["Friendly Host"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$hector.adams233@icloud.com$pbc$, $pbc$password123$pbc$, $pbc$xXHeMasterXx$pbc$, $pbc$Hector Adams$pbc$, 19, $pbc$Wellington$pbc$, $pbc$33414$pbc$, $pbc$Fitness / General Workout$pbc$, $pbc$N/A$pbc$, $pbc$Wellington native. Love Fitness / General Workout, dabble in Triathlon. Let's connect!$pbc$, 4.2, 55, $pbc$["Tournament Ready", "Friendly Host"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$ethan.gonzalez366@gmail.com$pbc$, $pbc$password123$pbc$, $pbc$StormEthan47$pbc$, $pbc$Ethan Gonzalez$pbc$, 36, $pbc$Delray Beach$pbc$, $pbc$33444$pbc$, $pbc$Cooperative Board Games$pbc$, $pbc$N/A$pbc$, $pbc$Delray Beach native. Love Cooperative Board Games, dabble in Dungeons & Dragons. Let's connect!$pbc$, 3.2, 24, $pbc$["PBC Veteran", "Tournament Ready"]$pbc$::jsonb, true);
+SELECT create_rollcall_prod_user($pbc$morgan.smith897@gmail.com$pbc$, $pbc$password123$pbc$, $pbc$ModdedMorgan64$pbc$, $pbc$Morgan Smith$pbc$, 40, $pbc$Palm Beach Gardens$pbc$, $pbc$33410$pbc$, $pbc$MMORPG$pbc$, $pbc$PlayStation$pbc$, $pbc$Retired MMORPG tryhard, now just vibing. Live in Palm Beach Gardens, FL.$pbc$, 4.5, 38, $pbc$["PBC Veteran"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$matthew.cox131@yahoo.com$pbc$, $pbc$password123$pbc$, $pbc$xXMaChiefXx$pbc$, $pbc$Matthew Cox$pbc$, 38, $pbc$Boca Raton$pbc$, $pbc$33496$pbc$, $pbc$War Games$pbc$, $pbc$N/A$pbc$, $pbc$New to the scene! Trying to find people who love War Games in Boca Raton area.$pbc$, 4.3, 19, $pbc$["Tournament Ready"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$cassidy.richardson86@hotmail.com$pbc$, $pbc$password123$pbc$, $pbc$xXCaPaladinXx$pbc$, $pbc$Cassidy Richardson$pbc$, 42, $pbc$Wellington$pbc$, $pbc$33414$pbc$, $pbc$Strategy Games$pbc$, $pbc$Steam Deck$pbc$, $pbc$Local Wellington player. Into Strategy Games and Eurogames. Always looking for chill groups!$pbc$, 4.4, 73, $pbc$["Early Bird", "Tournament Ready"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$pedro.lewis472@yahoo.com$pbc$, $pbc$password123$pbc$, $pbc$xXPeProXx$pbc$, $pbc$Pedro Lewis$pbc$, 36, $pbc$Delray Beach$pbc$, $pbc$33446$pbc$, $pbc$First-Person Shooters$pbc$, $pbc$PlayStation$pbc$, $pbc$Passionate about First-Person Shooters. Based in Delray Beach, FL. Hit me up for games or meetups.$pbc$, 3.2, 29, $pbc$["PBC Veteran", "Friendly Host", "Tabletop King"]$pbc$::jsonb, true);
+SELECT create_rollcall_prod_user($pbc$anthony.reyes151@outlook.com$pbc$, $pbc$password123$pbc$, $pbc$AnthonyRey20$pbc$, $pbc$Anthony Reyes$pbc$, 19, $pbc$Boynton Beach$pbc$, $pbc$33436$pbc$, $pbc$Deck Building$pbc$, $pbc$Steam Deck$pbc$, $pbc$Always down for Deck Building sessions. Boynton Beach-based. Message me anytime!$pbc$, 5.0, 14, $pbc$["Tournament Ready", "Friendly Host"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$zach.okafor114@yahoo.com$pbc$, $pbc$password123$pbc$, $pbc$Fixed6933$pbc$, $pbc$Zach Okafor$pbc$, 36, $pbc$West Palm Beach$pbc$, $pbc$33401$pbc$, $pbc$Miniature Games$pbc$, $pbc$N/A$pbc$, $pbc$South FL local. Miniature Games enthusiast and weekend warrior. West Palm Beach represent!$pbc$, 4.9, 78, $pbc$["PBC Veteran"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$dakota.price434@yahoo.com$pbc$, $pbc$password123$pbc$, $pbc$CyberDakota67$pbc$, $pbc$Dakota Price$pbc$, 32, $pbc$Palm Beach Gardens$pbc$, $pbc$33418$pbc$, $pbc$Fighting Games$pbc$, $pbc$Steam Deck$pbc$, $pbc$Retired Fighting Games tryhard, now just vibing. Live in Palm Beach Gardens, FL.$pbc$, 4.7, 43, $pbc$["Pro Gamer", "Tabletop King"]$pbc$::jsonb, false);
+SELECT create_rollcall_prod_user($pbc$santiago.diaz663@icloud.com$pbc$, $pbc$password123$pbc$, $pbc$SantiagoDia44$pbc$, $pbc$Santiago Diaz$pbc$, 41, $pbc$Boca Raton$pbc$, $pbc$33431$pbc$, $pbc$Magic: The Gathering$pbc$, $pbc$PlayStation$pbc$, $pbc$Local Boca Raton player. Into Magic: The Gathering and Open World. Always looking for chill groups!$pbc$, 4.4, 7, $pbc$["PBC Veteran"]$pbc$::jsonb, false);
 
--- GENERATING 60+ GROUPS
-INSERT INTO public.groups (name, category, city, description, capacity, members, skill, coords, image) VALUES ('Warzone 2.0 PBC', 'FPS Gaming', 'Lake Worth', 'Join the Warzone 2.0 PBC community in Lake Worth. Open for all residents.', 8, 1, 'Competitive', ARRAY[26.7276, -80.1091], 'https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=800');
-INSERT INTO public.groups (name, category, city, description, capacity, members, skill, coords, image) VALUES ('Valorant WPB Hub', 'FPS Gaming', 'Jupiter', 'Join the Valorant WPB Hub community in Jupiter. Open for all residents.', 8, 1, 'Competitive', ARRAY[26.3506, -80.1149], 'https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=800');
-INSERT INTO public.groups (name, category, city, description, capacity, members, skill, coords, image) VALUES ('Apex Legends Squads', 'FPS Gaming', 'Delray Beach', 'Join the Apex Legends Squads community in Delray Beach. Open for all residents.', 8, 1, 'Intermediate', ARRAY[26.3903, -80.0008], 'https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=800');
-INSERT INTO public.groups (name, category, city, description, capacity, members, skill, coords, image) VALUES ('LoL Florida West', 'FPS Gaming', 'Jupiter', 'Join the LoL Florida West community in Jupiter. Open for all residents.', 12, 1, 'Competitive', ARRAY[26.4012, -80.1834], 'https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=800');
-INSERT INTO public.groups (name, category, city, description, capacity, members, skill, coords, image) VALUES ('Fortnite Zero Build', 'FPS Gaming', 'Lake Worth', 'Join the Fortnite Zero Build community in Lake Worth. Open for all residents.', 8, 1, 'Casual', ARRAY[26.5268, -80.1088], 'https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=800');
-INSERT INTO public.groups (name, category, city, description, capacity, members, skill, coords, image) VALUES ('Minecraft Survival', 'FPS Gaming', 'Palm Beach Gardens', 'Join the Minecraft Survival community in Palm Beach Gardens. Open for all residents.', 12, 1, 'Intermediate', ARRAY[26.5625, -80.0118], 'https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=800');
-INSERT INTO public.groups (name, category, city, description, capacity, members, skill, coords, image) VALUES ('Roblox Dev Group', 'FPS Gaming', 'Wellington', 'Join the Roblox Dev Group community in Wellington. Open for all residents.', 20, 1, 'Pro', ARRAY[26.4099, -80.1798], 'https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=800');
-INSERT INTO public.groups (name, category, city, description, capacity, members, skill, coords, image) VALUES ('CS:GO Veterans', 'FPS Gaming', 'Lake Worth', 'Join the CS:GO Veterans community in Lake Worth. Open for all residents.', 50, 1, 'Casual', ARRAY[26.6167, -80.0659], 'https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=800');
-INSERT INTO public.groups (name, category, city, description, capacity, members, skill, coords, image) VALUES ('Overwatch 2 Mains', 'FPS Gaming', 'Delray Beach', 'Join the Overwatch 2 Mains community in Delray Beach. Open for all residents.', 20, 1, 'Intermediate', ARRAY[26.7572, -80.082], 'https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=800');
-INSERT INTO public.groups (name, category, city, description, capacity, members, skill, coords, image) VALUES ('FIFA 24 Pro Clubs', 'FPS Gaming', 'Delray Beach', 'Join the FIFA 24 Pro Clubs community in Delray Beach. Open for all residents.', 12, 1, 'Intermediate', ARRAY[26.7279, -80.0425], 'https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=800');
-INSERT INTO public.groups (name, category, city, description, capacity, members, skill, coords, image) VALUES ('Madden 24 PBC League', 'FPS Gaming', 'Boca Raton', 'Join the Madden 24 PBC League community in Boca Raton. Open for all residents.', 50, 1, 'Intermediate', ARRAY[26.6105, -80.0009], 'https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=800');
-INSERT INTO public.groups (name, category, city, description, capacity, members, skill, coords, image) VALUES ('NBA 2K24 Parks', 'FPS Gaming', 'Jupiter', 'Join the NBA 2K24 Parks community in Jupiter. Open for all residents.', 20, 1, 'Pro', ARRAY[26.7316, -80.0487], 'https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=800');
-INSERT INTO public.groups (name, category, city, description, capacity, members, skill, coords, image) VALUES ('Street Fighter 6', 'FPS Gaming', 'West Palm Beach', 'Join the Street Fighter 6 community in West Palm Beach. Open for all residents.', 20, 1, 'Competitive', ARRAY[26.5694, -80.1538], 'https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=800');
-INSERT INTO public.groups (name, category, city, description, capacity, members, skill, coords, image) VALUES ('Tekken 8 Dojo', 'FPS Gaming', 'Jupiter', 'Join the Tekken 8 Dojo community in Jupiter. Open for all residents.', 8, 1, 'Intermediate', ARRAY[26.5793, -80.1204], 'https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=800');
-INSERT INTO public.groups (name, category, city, description, capacity, members, skill, coords, image) VALUES ('MK1 Tournament Hub', 'FPS Gaming', 'Delray Beach', 'Join the MK1 Tournament Hub community in Delray Beach. Open for all residents.', 12, 1, 'Intermediate', ARRAY[26.6927, -80.0741], 'https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=800');
-INSERT INTO public.groups (name, category, city, description, capacity, members, skill, coords, image) VALUES ('Elden Ring Co-op', 'FPS Gaming', 'Lake Worth', 'Join the Elden Ring Co-op community in Lake Worth. Open for all residents.', 20, 1, 'Intermediate', ARRAY[26.3923, -80.1013], 'https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=800');
-INSERT INTO public.groups (name, category, city, description, capacity, members, skill, coords, image) VALUES ('Baldur's Gate 3 Party', 'FPS Gaming', 'Lake Worth', 'Join the Baldur's Gate 3 Party community in Lake Worth. Open for all residents.', 50, 1, 'Intermediate', ARRAY[26.3932, -80.1563], 'https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=800');
-INSERT INTO public.groups (name, category, city, description, capacity, members, skill, coords, image) VALUES ('Helldivers 2 PBC', 'FPS Gaming', 'West Palm Beach', 'Join the Helldivers 2 PBC community in West Palm Beach. Open for all residents.', 12, 1, 'Competitive', ARRAY[26.8993, -80.0062], 'https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=800');
-INSERT INTO public.groups (name, category, city, description, capacity, members, skill, coords, image) VALUES ('Palworld Builders', 'FPS Gaming', 'Wellington', 'Join the Palworld Builders community in Wellington. Open for all residents.', 12, 1, 'Intermediate', ARRAY[26.3749, -80.1034], 'https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=800');
-INSERT INTO public.groups (name, category, city, description, capacity, members, skill, coords, image) VALUES ('Destiny 2 Raids', 'FPS Gaming', 'Lake Worth', 'Join the Destiny 2 Raids community in Lake Worth. Open for all residents.', 8, 1, 'Casual', ARRAY[26.3042, -80.1725], 'https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=800');
-INSERT INTO public.groups (name, category, city, description, capacity, members, skill, coords, image) VALUES ('StarCraft BW Masters', 'FPS Gaming', 'West Palm Beach', 'Join the StarCraft BW Masters community in West Palm Beach. Open for all residents.', 50, 1, 'Pro', ARRAY[26.4242, -80.1429], 'https://images.unsplash.com/photo-1550745679-562174279c27?q=80&w=800');
-INSERT INTO public.groups (name, category, city, description, capacity, members, skill, coords, image) VALUES ('Diablo II Resurrected', 'FPS Gaming', 'Wellington', 'Join the Diablo II Resurrected community in Wellington. Open for all residents.', 12, 1, 'Casual', ARRAY[26.4916, -80.1298], 'https://images.unsplash.com/photo-1550745679-562174279c27?q=80&w=800');
-INSERT INTO public.groups (name, category, city, description, capacity, members, skill, coords, image) VALUES ('Quake III Arena', 'FPS Gaming', 'Jupiter', 'Join the Quake III Arena community in Jupiter. Open for all residents.', 50, 1, 'Intermediate', ARRAY[26.5602, -80.0847], 'https://images.unsplash.com/photo-1550745679-562174279c27?q=80&w=800');
-INSERT INTO public.groups (name, category, city, description, capacity, members, skill, coords, image) VALUES ('Age of Empires II', 'FPS Gaming', 'Jupiter', 'Join the Age of Empires II community in Jupiter. Open for all residents.', 50, 1, 'Casual', ARRAY[26.5258, -80.0118], 'https://images.unsplash.com/photo-1550745679-562174279c27?q=80&w=800');
-INSERT INTO public.groups (name, category, city, description, capacity, members, skill, coords, image) VALUES ('Smash Melee PBC', 'FPS Gaming', 'Jupiter', 'Join the Smash Melee PBC community in Jupiter. Open for all residents.', 12, 1, 'Competitive', ARRAY[26.7074, -80.1139], 'https://images.unsplash.com/photo-1550745679-562174279c27?q=80&w=800');
-INSERT INTO public.groups (name, category, city, description, capacity, members, skill, coords, image) VALUES ('Halo 3 Customs', 'FPS Gaming', 'Delray Beach', 'Join the Halo 3 Customs community in Delray Beach. Open for all residents.', 20, 1, 'Intermediate', ARRAY[26.4901, -80.196], 'https://images.unsplash.com/photo-1550745679-562174279c27?q=80&w=800');
-INSERT INTO public.groups (name, category, city, description, capacity, members, skill, coords, image) VALUES ('WOW Classic Guild', 'FPS Gaming', 'Wellington', 'Join the WOW Classic Guild community in Wellington. Open for all residents.', 8, 1, 'Competitive', ARRAY[26.4933, -80.0332], 'https://images.unsplash.com/photo-1550745679-562174279c27?q=80&w=800');
-INSERT INTO public.groups (name, category, city, description, capacity, members, skill, coords, image) VALUES ('D&D 5e PBC', 'Dungeons & Dragons', 'Palm Beach Gardens', 'Join the D&D 5e PBC community in Palm Beach Gardens. Open for all residents.', 12, 1, 'Pro', ARRAY[26.5676, -80.0326], 'https://images.unsplash.com/photo-1611996591638-8055c06d152f?q=80&w=800');
-INSERT INTO public.groups (name, category, city, description, capacity, members, skill, coords, image) VALUES ('Pathfinder 2e Society', 'Dungeons & Dragons', 'Delray Beach', 'Join the Pathfinder 2e Society community in Delray Beach. Open for all residents.', 20, 1, 'Pro', ARRAY[26.5545, -80.1981], 'https://images.unsplash.com/photo-1611996591638-8055c06d152f?q=80&w=800');
-INSERT INTO public.groups (name, category, city, description, capacity, members, skill, coords, image) VALUES ('Warhammer 40k WPB', 'Dungeons & Dragons', 'Jupiter', 'Join the Warhammer 40k WPB community in Jupiter. Open for all residents.', 50, 1, 'Intermediate', ARRAY[26.819, -80.1429], 'https://images.unsplash.com/photo-1611996591638-8055c06d152f?q=80&w=800');
-INSERT INTO public.groups (name, category, city, description, capacity, members, skill, coords, image) VALUES ('Catan Nights', 'Dungeons & Dragons', 'West Palm Beach', 'Join the Catan Nights community in West Palm Beach. Open for all residents.', 50, 1, 'Pro', ARRAY[26.6509, -80.1422], 'https://images.unsplash.com/photo-1611996591638-8055c06d152f?q=80&w=800');
-INSERT INTO public.groups (name, category, city, description, capacity, members, skill, coords, image) VALUES ('Ticket to Ride', 'Dungeons & Dragons', 'West Palm Beach', 'Join the Ticket to Ride community in West Palm Beach. Open for all residents.', 20, 1, 'Casual', ARRAY[26.8989, -80.1425], 'https://images.unsplash.com/photo-1611996591638-8055c06d152f?q=80&w=800');
-INSERT INTO public.groups (name, category, city, description, capacity, members, skill, coords, image) VALUES ('Pandemic Squad', 'Dungeons & Dragons', 'Wellington', 'Join the Pandemic Squad community in Wellington. Open for all residents.', 50, 1, 'Competitive', ARRAY[26.8723, -80.1927], 'https://images.unsplash.com/photo-1611996591638-8055c06d152f?q=80&w=800');
-INSERT INTO public.groups (name, category, city, description, capacity, members, skill, coords, image) VALUES ('Terraforming Mars', 'Dungeons & Dragons', 'Palm Beach Gardens', 'Join the Terraforming Mars community in Palm Beach Gardens. Open for all residents.', 12, 1, 'Casual', ARRAY[26.5426, -80.1451], 'https://images.unsplash.com/photo-1611996591638-8055c06d152f?q=80&w=800');
-INSERT INTO public.groups (name, category, city, description, capacity, members, skill, coords, image) VALUES ('Gloomhaven Party', 'Dungeons & Dragons', 'Delray Beach', 'Join the Gloomhaven Party community in Delray Beach. Open for all residents.', 12, 1, 'Competitive', ARRAY[26.7049, -80.1992], 'https://images.unsplash.com/photo-1611996591638-8055c06d152f?q=80&w=800');
-INSERT INTO public.groups (name, category, city, description, capacity, members, skill, coords, image) VALUES ('Scythe PBC', 'Dungeons & Dragons', 'Jupiter', 'Join the Scythe PBC community in Jupiter. Open for all residents.', 50, 1, 'Intermediate', ARRAY[26.8965, -80.0718], 'https://images.unsplash.com/photo-1611996591638-8055c06d152f?q=80&w=800');
-INSERT INTO public.groups (name, category, city, description, capacity, members, skill, coords, image) VALUES ('7 Wonders Club', 'Dungeons & Dragons', 'Palm Beach Gardens', 'Join the 7 Wonders Club community in Palm Beach Gardens. Open for all residents.', 8, 1, 'Intermediate', ARRAY[26.4637, -80.0264], 'https://images.unsplash.com/photo-1611996591638-8055c06d152f?q=80&w=800');
-INSERT INTO public.groups (name, category, city, description, capacity, members, skill, coords, image) VALUES ('MTG Commander PBC', 'Board Games', 'Wellington', 'Join the MTG Commander PBC community in Wellington. Open for all residents.', 50, 1, 'Pro', ARRAY[26.5268, -80.1095], 'https://images.unsplash.com/photo-1606167668584-78701c57f13d?q=80&w=800');
-INSERT INTO public.groups (name, category, city, description, capacity, members, skill, coords, image) VALUES ('Poker WPB High Stakes', 'Board Games', 'Delray Beach', 'Join the Poker WPB High Stakes community in Delray Beach. Open for all residents.', 50, 1, 'Pro', ARRAY[26.8517, -80.1677], 'https://images.unsplash.com/photo-1606167668584-78701c57f13d?q=80&w=800');
-INSERT INTO public.groups (name, category, city, description, capacity, members, skill, coords, image) VALUES ('Bridge Masters', 'Board Games', 'Boca Raton', 'Join the Bridge Masters community in Boca Raton. Open for all residents.', 12, 1, 'Competitive', ARRAY[26.555, -80.163], 'https://images.unsplash.com/photo-1606167668584-78701c57f13d?q=80&w=800');
-INSERT INTO public.groups (name, category, city, description, capacity, members, skill, coords, image) VALUES ('Euchre Club', 'Board Games', 'Jupiter', 'Join the Euchre Club community in Jupiter. Open for all residents.', 20, 1, 'Intermediate', ARRAY[26.3036, -80.08], 'https://images.unsplash.com/photo-1606167668584-78701c57f13d?q=80&w=800');
-INSERT INTO public.groups (name, category, city, description, capacity, members, skill, coords, image) VALUES ('Hearthstone Local', 'Board Games', 'Wellington', 'Join the Hearthstone Local community in Wellington. Open for all residents.', 20, 1, 'Intermediate', ARRAY[26.4754, -80.1515], 'https://images.unsplash.com/photo-1606167668584-78701c57f13d?q=80&w=800');
-INSERT INTO public.groups (name, category, city, description, capacity, members, skill, coords, image) VALUES ('Pokemon TCG Hub', 'Board Games', 'Jupiter', 'Join the Pokemon TCG Hub community in Jupiter. Open for all residents.', 50, 1, 'Competitive', ARRAY[26.8238, -80.001], 'https://images.unsplash.com/photo-1606167668584-78701c57f13d?q=80&w=800');
-INSERT INTO public.groups (name, category, city, description, capacity, members, skill, coords, image) VALUES ('Yu-Gi-Oh PBC', 'Board Games', 'Jupiter', 'Join the Yu-Gi-Oh PBC community in Jupiter. Open for all residents.', 8, 1, 'Casual', ARRAY[26.4744, -80.1878], 'https://images.unsplash.com/photo-1606167668584-78701c57f13d?q=80&w=800');
-INSERT INTO public.groups (name, category, city, description, capacity, members, skill, coords, image) VALUES ('Pickleball Lake Worth', 'Soccer', 'Palm Beach Gardens', 'Join the Pickleball Lake Worth community in Palm Beach Gardens. Open for all residents.', 12, 1, 'Intermediate', ARRAY[26.7061, -80.0399], 'https://images.unsplash.com/photo-1574629810360-7efbbe195018?q=80&w=800');
-INSERT INTO public.groups (name, category, city, description, capacity, members, skill, coords, image) VALUES ('Soccer WPB League', 'Soccer', 'Lake Worth', 'Join the Soccer WPB League community in Lake Worth. Open for all residents.', 12, 1, 'Pro', ARRAY[26.4028, -80.1184], 'https://images.unsplash.com/photo-1574629810360-7efbbe195018?q=80&w=800');
-INSERT INTO public.groups (name, category, city, description, capacity, members, skill, coords, image) VALUES ('Tennis PBC Open', 'Soccer', 'Delray Beach', 'Join the Tennis PBC Open community in Delray Beach. Open for all residents.', 20, 1, 'Competitive', ARRAY[26.5079, -80.0832], 'https://images.unsplash.com/photo-1574629810360-7efbbe195018?q=80&w=800');
-INSERT INTO public.groups (name, category, city, description, capacity, members, skill, coords, image) VALUES ('Basketball Courts', 'Soccer', 'West Palm Beach', 'Join the Basketball Courts community in West Palm Beach. Open for all residents.', 50, 1, 'Pro', ARRAY[26.6395, -80.0033], 'https://images.unsplash.com/photo-1574629810360-7efbbe195018?q=80&w=800');
-INSERT INTO public.groups (name, category, city, description, capacity, members, skill, coords, image) VALUES ('Golf PBC Society', 'Soccer', 'Lake Worth', 'Join the Golf PBC Society community in Lake Worth. Open for all residents.', 12, 1, 'Competitive', ARRAY[26.8018, -80.0511], 'https://images.unsplash.com/photo-1574629810360-7efbbe195018?q=80&w=800');
-INSERT INTO public.groups (name, category, city, description, capacity, members, skill, coords, image) VALUES ('Volleyball Beach Hub', 'Soccer', 'Wellington', 'Join the Volleyball Beach Hub community in Wellington. Open for all residents.', 50, 1, 'Intermediate', ARRAY[26.8262, -80.1911], 'https://images.unsplash.com/photo-1574629810360-7efbbe195018?q=80&w=800');
-INSERT INTO public.groups (name, category, city, description, capacity, members, skill, coords, image) VALUES ('Running PBC', 'Soccer', 'Wellington', 'Join the Running PBC community in Wellington. Open for all residents.', 50, 1, 'Casual', ARRAY[26.6811, -80.0218], 'https://images.unsplash.com/photo-1574629810360-7efbbe195018?q=80&w=800');
-INSERT INTO public.groups (name, category, city, description, capacity, members, skill, coords, image) VALUES ('Cycling WPB', 'Soccer', 'Delray Beach', 'Join the Cycling WPB community in Delray Beach. Open for all residents.', 12, 1, 'Competitive', ARRAY[26.356, -80.1959], 'https://images.unsplash.com/photo-1574629810360-7efbbe195018?q=80&w=800');
-INSERT INTO public.groups (name, category, city, description, capacity, members, skill, coords, image) VALUES ('Swimming PBC', 'Soccer', 'Boca Raton', 'Join the Swimming PBC community in Boca Raton. Open for all residents.', 12, 1, 'Competitive', ARRAY[26.346, -80.0373], 'https://images.unsplash.com/photo-1574629810360-7efbbe195018?q=80&w=800');
-INSERT INTO public.groups (name, category, city, description, capacity, members, skill, coords, image) VALUES ('Padel Club', 'Soccer', 'Boca Raton', 'Join the Padel Club community in Boca Raton. Open for all residents.', 12, 1, 'Intermediate', ARRAY[26.8558, -80.0453], 'https://images.unsplash.com/photo-1574629810360-7efbbe195018?q=80&w=800');
-INSERT INTO public.groups (name, category, city, description, capacity, members, skill, coords, image) VALUES ('Photography WPB', 'Other', 'Palm Beach Gardens', 'Join the Photography WPB community in Palm Beach Gardens. Open for all residents.', 20, 1, 'Competitive', ARRAY[26.8091, -80.1522], 'https://images.unsplash.com/photo-1513364776144-60967b0f800f?q=80&w=800');
-INSERT INTO public.groups (name, category, city, description, capacity, members, skill, coords, image) VALUES ('Bird Watching Everglades', 'Other', 'Palm Beach Gardens', 'Join the Bird Watching Everglades community in Palm Beach Gardens. Open for all residents.', 50, 1, 'Competitive', ARRAY[26.8322, -80.1867], 'https://images.unsplash.com/photo-1513364776144-60967b0f800f?q=80&w=800');
-INSERT INTO public.groups (name, category, city, description, capacity, members, skill, coords, image) VALUES ('Digital Painting', 'Other', 'Boca Raton', 'Join the Digital Painting community in Boca Raton. Open for all residents.', 50, 1, 'Casual', ARRAY[26.768, -80.0327], 'https://images.unsplash.com/photo-1513364776144-60967b0f800f?q=80&w=800');
-INSERT INTO public.groups (name, category, city, description, capacity, members, skill, coords, image) VALUES ('Pottery PBC', 'Other', 'West Palm Beach', 'Join the Pottery PBC community in West Palm Beach. Open for all residents.', 8, 1, 'Pro', ARRAY[26.7598, -80.154], 'https://images.unsplash.com/photo-1513364776144-60967b0f800f?q=80&w=800');
-INSERT INTO public.groups (name, category, city, description, capacity, members, skill, coords, image) VALUES ('Urban Sketching', 'Other', 'Palm Beach Gardens', 'Join the Urban Sketching community in Palm Beach Gardens. Open for all residents.', 50, 1, 'Competitive', ARRAY[26.6462, -80.1882], 'https://images.unsplash.com/photo-1513364776144-60967b0f800f?q=80&w=800');
-INSERT INTO public.groups (name, category, city, description, capacity, members, skill, coords, image) VALUES ('Gardening PBC', 'Other', 'Wellington', 'Join the Gardening PBC community in Wellington. Open for all residents.', 12, 1, 'Competitive', ARRAY[26.3693, -80.1733], 'https://images.unsplash.com/photo-1513364776144-60967b0f800f?q=80&w=800');
-INSERT INTO public.groups (name, category, city, description, capacity, members, skill, coords, image) VALUES ('Cooking Class', 'Other', 'Palm Beach Gardens', 'Join the Cooking Class community in Palm Beach Gardens. Open for all residents.', 20, 1, 'Pro', ARRAY[26.8219, -80.0483], 'https://images.unsplash.com/photo-1513364776144-60967b0f800f?q=80&w=800');
-INSERT INTO public.groups (name, category, city, description, capacity, members, skill, coords, image) VALUES ('Hiking Florida Trails', 'Other', 'Jupiter', 'Join the Hiking Florida Trails community in Jupiter. Open for all residents.', 20, 1, 'Competitive', ARRAY[26.5306, -80.1649], 'https://images.unsplash.com/photo-1513364776144-60967b0f800f?q=80&w=800');
-INSERT INTO public.groups (name, category, city, description, capacity, members, skill, coords, image) VALUES ('Surfing WPB', 'Other', 'Delray Beach', 'Join the Surfing WPB community in Delray Beach. Open for all residents.', 8, 1, 'Competitive', ARRAY[26.4995, -80.1264], 'https://images.unsplash.com/photo-1513364776144-60967b0f800f?q=80&w=800');
+-- GENERATING 60+ GROUPS (DOLLAR QUOTED)
+INSERT INTO public.groups (name, category, city, description, capacity, members, skill, coords, image) VALUES ($pbc$Warzone 2.0 PBC$pbc$, $pbc$FPS Gaming$pbc$, $pbc$Palm Beach Gardens$pbc$, $pbc$Join the Warzone 2.0 PBC community in Palm Beach Gardens. Open for all residents.$pbc$, 20, 1, $pbc$Intermediate$pbc$, ARRAY[26.6058, -80.1614], $pbc$https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=800$pbc$);
+INSERT INTO public.groups (name, category, city, description, capacity, members, skill, coords, image) VALUES ($pbc$Valorant WPB Hub$pbc$, $pbc$FPS Gaming$pbc$, $pbc$Wellington$pbc$, $pbc$Join the Valorant WPB Hub community in Wellington. Open for all residents.$pbc$, 50, 1, $pbc$Casual$pbc$, ARRAY[26.8151, -80.0098], $pbc$https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=800$pbc$);
+INSERT INTO public.groups (name, category, city, description, capacity, members, skill, coords, image) VALUES ($pbc$Apex Legends Squads$pbc$, $pbc$FPS Gaming$pbc$, $pbc$West Palm Beach$pbc$, $pbc$Join the Apex Legends Squads community in West Palm Beach. Open for all residents.$pbc$, 50, 1, $pbc$Pro$pbc$, ARRAY[26.5684, -80.19], $pbc$https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=800$pbc$);
+INSERT INTO public.groups (name, category, city, description, capacity, members, skill, coords, image) VALUES ($pbc$LoL Florida West$pbc$, $pbc$FPS Gaming$pbc$, $pbc$Boca Raton$pbc$, $pbc$Join the LoL Florida West community in Boca Raton. Open for all residents.$pbc$, 50, 1, $pbc$Pro$pbc$, ARRAY[26.391, -80.183], $pbc$https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=800$pbc$);
+INSERT INTO public.groups (name, category, city, description, capacity, members, skill, coords, image) VALUES ($pbc$Fortnite Zero Build$pbc$, $pbc$FPS Gaming$pbc$, $pbc$Lake Worth$pbc$, $pbc$Join the Fortnite Zero Build community in Lake Worth. Open for all residents.$pbc$, 12, 1, $pbc$Intermediate$pbc$, ARRAY[26.4173, -80.0347], $pbc$https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=800$pbc$);
+INSERT INTO public.groups (name, category, city, description, capacity, members, skill, coords, image) VALUES ($pbc$Minecraft Survival$pbc$, $pbc$FPS Gaming$pbc$, $pbc$Wellington$pbc$, $pbc$Join the Minecraft Survival community in Wellington. Open for all residents.$pbc$, 8, 1, $pbc$Casual$pbc$, ARRAY[26.5448, -80.1868], $pbc$https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=800$pbc$);
+INSERT INTO public.groups (name, category, city, description, capacity, members, skill, coords, image) VALUES ($pbc$Roblox Dev Group$pbc$, $pbc$FPS Gaming$pbc$, $pbc$Wellington$pbc$, $pbc$Join the Roblox Dev Group community in Wellington. Open for all residents.$pbc$, 20, 1, $pbc$Intermediate$pbc$, ARRAY[26.4809, -80.1219], $pbc$https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=800$pbc$);
+INSERT INTO public.groups (name, category, city, description, capacity, members, skill, coords, image) VALUES ($pbc$CS:GO Veterans$pbc$, $pbc$FPS Gaming$pbc$, $pbc$Jupiter$pbc$, $pbc$Join the CS:GO Veterans community in Jupiter. Open for all residents.$pbc$, 12, 1, $pbc$Casual$pbc$, ARRAY[26.4766, -80.147], $pbc$https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=800$pbc$);
+INSERT INTO public.groups (name, category, city, description, capacity, members, skill, coords, image) VALUES ($pbc$Overwatch 2 Mains$pbc$, $pbc$FPS Gaming$pbc$, $pbc$Palm Beach Gardens$pbc$, $pbc$Join the Overwatch 2 Mains community in Palm Beach Gardens. Open for all residents.$pbc$, 12, 1, $pbc$Casual$pbc$, ARRAY[26.8037, -80.1881], $pbc$https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=800$pbc$);
+INSERT INTO public.groups (name, category, city, description, capacity, members, skill, coords, image) VALUES ($pbc$FIFA 24 Pro Clubs$pbc$, $pbc$FPS Gaming$pbc$, $pbc$Delray Beach$pbc$, $pbc$Join the FIFA 24 Pro Clubs community in Delray Beach. Open for all residents.$pbc$, 20, 1, $pbc$Casual$pbc$, ARRAY[26.6316, -80.1472], $pbc$https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=800$pbc$);
+INSERT INTO public.groups (name, category, city, description, capacity, members, skill, coords, image) VALUES ($pbc$Madden 24 PBC League$pbc$, $pbc$FPS Gaming$pbc$, $pbc$Lake Worth$pbc$, $pbc$Join the Madden 24 PBC League community in Lake Worth. Open for all residents.$pbc$, 50, 1, $pbc$Intermediate$pbc$, ARRAY[26.8021, -80.0401], $pbc$https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=800$pbc$);
+INSERT INTO public.groups (name, category, city, description, capacity, members, skill, coords, image) VALUES ($pbc$NBA 2K24 Parks$pbc$, $pbc$FPS Gaming$pbc$, $pbc$West Palm Beach$pbc$, $pbc$Join the NBA 2K24 Parks community in West Palm Beach. Open for all residents.$pbc$, 8, 1, $pbc$Competitive$pbc$, ARRAY[26.4924, -80.0707], $pbc$https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=800$pbc$);
+INSERT INTO public.groups (name, category, city, description, capacity, members, skill, coords, image) VALUES ($pbc$Street Fighter 6$pbc$, $pbc$FPS Gaming$pbc$, $pbc$West Palm Beach$pbc$, $pbc$Join the Street Fighter 6 community in West Palm Beach. Open for all residents.$pbc$, 20, 1, $pbc$Pro$pbc$, ARRAY[26.8474, -80.0283], $pbc$https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=800$pbc$);
+INSERT INTO public.groups (name, category, city, description, capacity, members, skill, coords, image) VALUES ($pbc$Tekken 8 Dojo$pbc$, $pbc$FPS Gaming$pbc$, $pbc$Jupiter$pbc$, $pbc$Join the Tekken 8 Dojo community in Jupiter. Open for all residents.$pbc$, 50, 1, $pbc$Pro$pbc$, ARRAY[26.8457, -80.1159], $pbc$https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=800$pbc$);
+INSERT INTO public.groups (name, category, city, description, capacity, members, skill, coords, image) VALUES ($pbc$MK1 Tournament Hub$pbc$, $pbc$FPS Gaming$pbc$, $pbc$West Palm Beach$pbc$, $pbc$Join the MK1 Tournament Hub community in West Palm Beach. Open for all residents.$pbc$, 50, 1, $pbc$Intermediate$pbc$, ARRAY[26.7466, -80.0139], $pbc$https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=800$pbc$);
+INSERT INTO public.groups (name, category, city, description, capacity, members, skill, coords, image) VALUES ($pbc$Elden Ring Co-op$pbc$, $pbc$FPS Gaming$pbc$, $pbc$Jupiter$pbc$, $pbc$Join the Elden Ring Co-op community in Jupiter. Open for all residents.$pbc$, 12, 1, $pbc$Intermediate$pbc$, ARRAY[26.5659, -80.0611], $pbc$https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=800$pbc$);
+INSERT INTO public.groups (name, category, city, description, capacity, members, skill, coords, image) VALUES ($pbc$Baldur's Gate 3 Party$pbc$, $pbc$FPS Gaming$pbc$, $pbc$Wellington$pbc$, $pbc$Join the Baldur's Gate 3 Party community in Wellington. Open for all residents.$pbc$, 20, 1, $pbc$Intermediate$pbc$, ARRAY[26.8957, -80.0014], $pbc$https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=800$pbc$);
+INSERT INTO public.groups (name, category, city, description, capacity, members, skill, coords, image) VALUES ($pbc$Helldivers 2 PBC$pbc$, $pbc$FPS Gaming$pbc$, $pbc$Palm Beach Gardens$pbc$, $pbc$Join the Helldivers 2 PBC community in Palm Beach Gardens. Open for all residents.$pbc$, 8, 1, $pbc$Competitive$pbc$, ARRAY[26.5004, -80.1755], $pbc$https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=800$pbc$);
+INSERT INTO public.groups (name, category, city, description, capacity, members, skill, coords, image) VALUES ($pbc$Palworld Builders$pbc$, $pbc$FPS Gaming$pbc$, $pbc$West Palm Beach$pbc$, $pbc$Join the Palworld Builders community in West Palm Beach. Open for all residents.$pbc$, 12, 1, $pbc$Intermediate$pbc$, ARRAY[26.7505, -80.1939], $pbc$https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=800$pbc$);
+INSERT INTO public.groups (name, category, city, description, capacity, members, skill, coords, image) VALUES ($pbc$Destiny 2 Raids$pbc$, $pbc$FPS Gaming$pbc$, $pbc$Palm Beach Gardens$pbc$, $pbc$Join the Destiny 2 Raids community in Palm Beach Gardens. Open for all residents.$pbc$, 20, 1, $pbc$Intermediate$pbc$, ARRAY[26.5428, -80.1663], $pbc$https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=800$pbc$);
+INSERT INTO public.groups (name, category, city, description, capacity, members, skill, coords, image) VALUES ($pbc$StarCraft BW Masters$pbc$, $pbc$FPS Gaming$pbc$, $pbc$Boca Raton$pbc$, $pbc$Join the StarCraft BW Masters community in Boca Raton. Open for all residents.$pbc$, 8, 1, $pbc$Pro$pbc$, ARRAY[26.4902, -80.049], $pbc$https://images.unsplash.com/photo-1550745679-562174279c27?q=80&w=800$pbc$);
+INSERT INTO public.groups (name, category, city, description, capacity, members, skill, coords, image) VALUES ($pbc$Diablo II Resurrected$pbc$, $pbc$FPS Gaming$pbc$, $pbc$Palm Beach Gardens$pbc$, $pbc$Join the Diablo II Resurrected community in Palm Beach Gardens. Open for all residents.$pbc$, 20, 1, $pbc$Competitive$pbc$, ARRAY[26.7093, -80.048], $pbc$https://images.unsplash.com/photo-1550745679-562174279c27?q=80&w=800$pbc$);
+INSERT INTO public.groups (name, category, city, description, capacity, members, skill, coords, image) VALUES ($pbc$Quake III Arena$pbc$, $pbc$FPS Gaming$pbc$, $pbc$Delray Beach$pbc$, $pbc$Join the Quake III Arena community in Delray Beach. Open for all residents.$pbc$, 20, 1, $pbc$Casual$pbc$, ARRAY[26.5833, -80.1609], $pbc$https://images.unsplash.com/photo-1550745679-562174279c27?q=80&w=800$pbc$);
+INSERT INTO public.groups (name, category, city, description, capacity, members, skill, coords, image) VALUES ($pbc$Age of Empires II$pbc$, $pbc$FPS Gaming$pbc$, $pbc$Boca Raton$pbc$, $pbc$Join the Age of Empires II community in Boca Raton. Open for all residents.$pbc$, 8, 1, $pbc$Competitive$pbc$, ARRAY[26.7886, -80.092], $pbc$https://images.unsplash.com/photo-1550745679-562174279c27?q=80&w=800$pbc$);
+INSERT INTO public.groups (name, category, city, description, capacity, members, skill, coords, image) VALUES ($pbc$Smash Melee PBC$pbc$, $pbc$FPS Gaming$pbc$, $pbc$Jupiter$pbc$, $pbc$Join the Smash Melee PBC community in Jupiter. Open for all residents.$pbc$, 20, 1, $pbc$Casual$pbc$, ARRAY[26.8751, -80.1688], $pbc$https://images.unsplash.com/photo-1550745679-562174279c27?q=80&w=800$pbc$);
+INSERT INTO public.groups (name, category, city, description, capacity, members, skill, coords, image) VALUES ($pbc$Halo 3 Customs$pbc$, $pbc$FPS Gaming$pbc$, $pbc$Jupiter$pbc$, $pbc$Join the Halo 3 Customs community in Jupiter. Open for all residents.$pbc$, 8, 1, $pbc$Competitive$pbc$, ARRAY[26.3286, -80.1411], $pbc$https://images.unsplash.com/photo-1550745679-562174279c27?q=80&w=800$pbc$);
+INSERT INTO public.groups (name, category, city, description, capacity, members, skill, coords, image) VALUES ($pbc$WOW Classic Guild$pbc$, $pbc$FPS Gaming$pbc$, $pbc$Boca Raton$pbc$, $pbc$Join the WOW Classic Guild community in Boca Raton. Open for all residents.$pbc$, 8, 1, $pbc$Intermediate$pbc$, ARRAY[26.3734, -80.1467], $pbc$https://images.unsplash.com/photo-1550745679-562174279c27?q=80&w=800$pbc$);
+INSERT INTO public.groups (name, category, city, description, capacity, members, skill, coords, image) VALUES ($pbc$D&D 5e PBC$pbc$, $pbc$Dungeons & Dragons$pbc$, $pbc$Wellington$pbc$, $pbc$Join the D&D 5e PBC community in Wellington. Open for all residents.$pbc$, 12, 1, $pbc$Competitive$pbc$, ARRAY[26.8396, -80.083], $pbc$https://images.unsplash.com/photo-1611996591638-8055c06d152f?q=80&w=800$pbc$);
+INSERT INTO public.groups (name, category, city, description, capacity, members, skill, coords, image) VALUES ($pbc$Pathfinder 2e Society$pbc$, $pbc$Dungeons & Dragons$pbc$, $pbc$West Palm Beach$pbc$, $pbc$Join the Pathfinder 2e Society community in West Palm Beach. Open for all residents.$pbc$, 50, 1, $pbc$Pro$pbc$, ARRAY[26.3233, -80.035], $pbc$https://images.unsplash.com/photo-1611996591638-8055c06d152f?q=80&w=800$pbc$);
+INSERT INTO public.groups (name, category, city, description, capacity, members, skill, coords, image) VALUES ($pbc$Warhammer 40k WPB$pbc$, $pbc$Dungeons & Dragons$pbc$, $pbc$Boca Raton$pbc$, $pbc$Join the Warhammer 40k WPB community in Boca Raton. Open for all residents.$pbc$, 8, 1, $pbc$Pro$pbc$, ARRAY[26.7251, -80.0281], $pbc$https://images.unsplash.com/photo-1611996591638-8055c06d152f?q=80&w=800$pbc$);
+INSERT INTO public.groups (name, category, city, description, capacity, members, skill, coords, image) VALUES ($pbc$Catan Nights$pbc$, $pbc$Dungeons & Dragons$pbc$, $pbc$West Palm Beach$pbc$, $pbc$Join the Catan Nights community in West Palm Beach. Open for all residents.$pbc$, 12, 1, $pbc$Competitive$pbc$, ARRAY[26.4124, -80.1384], $pbc$https://images.unsplash.com/photo-1611996591638-8055c06d152f?q=80&w=800$pbc$);
+INSERT INTO public.groups (name, category, city, description, capacity, members, skill, coords, image) VALUES ($pbc$Ticket to Ride$pbc$, $pbc$Dungeons & Dragons$pbc$, $pbc$Palm Beach Gardens$pbc$, $pbc$Join the Ticket to Ride community in Palm Beach Gardens. Open for all residents.$pbc$, 12, 1, $pbc$Pro$pbc$, ARRAY[26.7418, -80.0892], $pbc$https://images.unsplash.com/photo-1611996591638-8055c06d152f?q=80&w=800$pbc$);
+INSERT INTO public.groups (name, category, city, description, capacity, members, skill, coords, image) VALUES ($pbc$Pandemic Squad$pbc$, $pbc$Dungeons & Dragons$pbc$, $pbc$West Palm Beach$pbc$, $pbc$Join the Pandemic Squad community in West Palm Beach. Open for all residents.$pbc$, 12, 1, $pbc$Intermediate$pbc$, ARRAY[26.8913, -80.1822], $pbc$https://images.unsplash.com/photo-1611996591638-8055c06d152f?q=80&w=800$pbc$);
+INSERT INTO public.groups (name, category, city, description, capacity, members, skill, coords, image) VALUES ($pbc$Terraforming Mars$pbc$, $pbc$Dungeons & Dragons$pbc$, $pbc$Jupiter$pbc$, $pbc$Join the Terraforming Mars community in Jupiter. Open for all residents.$pbc$, 20, 1, $pbc$Intermediate$pbc$, ARRAY[26.8255, -80.1306], $pbc$https://images.unsplash.com/photo-1611996591638-8055c06d152f?q=80&w=800$pbc$);
+INSERT INTO public.groups (name, category, city, description, capacity, members, skill, coords, image) VALUES ($pbc$Gloomhaven Party$pbc$, $pbc$Dungeons & Dragons$pbc$, $pbc$Lake Worth$pbc$, $pbc$Join the Gloomhaven Party community in Lake Worth. Open for all residents.$pbc$, 50, 1, $pbc$Pro$pbc$, ARRAY[26.4591, -80.0555], $pbc$https://images.unsplash.com/photo-1611996591638-8055c06d152f?q=80&w=800$pbc$);
+INSERT INTO public.groups (name, category, city, description, capacity, members, skill, coords, image) VALUES ($pbc$Scythe PBC$pbc$, $pbc$Dungeons & Dragons$pbc$, $pbc$Delray Beach$pbc$, $pbc$Join the Scythe PBC community in Delray Beach. Open for all residents.$pbc$, 50, 1, $pbc$Competitive$pbc$, ARRAY[26.6713, -80.1269], $pbc$https://images.unsplash.com/photo-1611996591638-8055c06d152f?q=80&w=800$pbc$);
+INSERT INTO public.groups (name, category, city, description, capacity, members, skill, coords, image) VALUES ($pbc$7 Wonders Club$pbc$, $pbc$Dungeons & Dragons$pbc$, $pbc$Jupiter$pbc$, $pbc$Join the 7 Wonders Club community in Jupiter. Open for all residents.$pbc$, 20, 1, $pbc$Intermediate$pbc$, ARRAY[26.3584, -80.1204], $pbc$https://images.unsplash.com/photo-1611996591638-8055c06d152f?q=80&w=800$pbc$);
+INSERT INTO public.groups (name, category, city, description, capacity, members, skill, coords, image) VALUES ($pbc$MTG Commander PBC$pbc$, $pbc$Board Games$pbc$, $pbc$Jupiter$pbc$, $pbc$Join the MTG Commander PBC community in Jupiter. Open for all residents.$pbc$, 50, 1, $pbc$Intermediate$pbc$, ARRAY[26.7153, -80.142], $pbc$https://images.unsplash.com/photo-1606167668584-78701c57f13d?q=80&w=800$pbc$);
+INSERT INTO public.groups (name, category, city, description, capacity, members, skill, coords, image) VALUES ($pbc$Poker WPB High Stakes$pbc$, $pbc$Board Games$pbc$, $pbc$Boca Raton$pbc$, $pbc$Join the Poker WPB High Stakes community in Boca Raton. Open for all residents.$pbc$, 50, 1, $pbc$Intermediate$pbc$, ARRAY[26.5468, -80.0229], $pbc$https://images.unsplash.com/photo-1606167668584-78701c57f13d?q=80&w=800$pbc$);
+INSERT INTO public.groups (name, category, city, description, capacity, members, skill, coords, image) VALUES ($pbc$Bridge Masters$pbc$, $pbc$Board Games$pbc$, $pbc$Boca Raton$pbc$, $pbc$Join the Bridge Masters community in Boca Raton. Open for all residents.$pbc$, 20, 1, $pbc$Intermediate$pbc$, ARRAY[26.8416, -80.0985], $pbc$https://images.unsplash.com/photo-1606167668584-78701c57f13d?q=80&w=800$pbc$);
+INSERT INTO public.groups (name, category, city, description, capacity, members, skill, coords, image) VALUES ($pbc$Euchre Club$pbc$, $pbc$Board Games$pbc$, $pbc$Wellington$pbc$, $pbc$Join the Euchre Club community in Wellington. Open for all residents.$pbc$, 50, 1, $pbc$Pro$pbc$, ARRAY[26.8607, -80.0506], $pbc$https://images.unsplash.com/photo-1606167668584-78701c57f13d?q=80&w=800$pbc$);
+INSERT INTO public.groups (name, category, city, description, capacity, members, skill, coords, image) VALUES ($pbc$Hearthstone Local$pbc$, $pbc$Board Games$pbc$, $pbc$Wellington$pbc$, $pbc$Join the Hearthstone Local community in Wellington. Open for all residents.$pbc$, 8, 1, $pbc$Pro$pbc$, ARRAY[26.3917, -80.1488], $pbc$https://images.unsplash.com/photo-1606167668584-78701c57f13d?q=80&w=800$pbc$);
+INSERT INTO public.groups (name, category, city, description, capacity, members, skill, coords, image) VALUES ($pbc$Pokemon TCG Hub$pbc$, $pbc$Board Games$pbc$, $pbc$Delray Beach$pbc$, $pbc$Join the Pokemon TCG Hub community in Delray Beach. Open for all residents.$pbc$, 8, 1, $pbc$Casual$pbc$, ARRAY[26.8133, -80.0887], $pbc$https://images.unsplash.com/photo-1606167668584-78701c57f13d?q=80&w=800$pbc$);
+INSERT INTO public.groups (name, category, city, description, capacity, members, skill, coords, image) VALUES ($pbc$Yu-Gi-Oh PBC$pbc$, $pbc$Board Games$pbc$, $pbc$West Palm Beach$pbc$, $pbc$Join the Yu-Gi-Oh PBC community in West Palm Beach. Open for all residents.$pbc$, 8, 1, $pbc$Intermediate$pbc$, ARRAY[26.8372, -80.1055], $pbc$https://images.unsplash.com/photo-1606167668584-78701c57f13d?q=80&w=800$pbc$);
+INSERT INTO public.groups (name, category, city, description, capacity, members, skill, coords, image) VALUES ($pbc$Pickleball Lake Worth$pbc$, $pbc$Soccer$pbc$, $pbc$West Palm Beach$pbc$, $pbc$Join the Pickleball Lake Worth community in West Palm Beach. Open for all residents.$pbc$, 20, 1, $pbc$Competitive$pbc$, ARRAY[26.7105, -80.005], $pbc$https://images.unsplash.com/photo-1574629810360-7efbbe195018?q=80&w=800$pbc$);
+INSERT INTO public.groups (name, category, city, description, capacity, members, skill, coords, image) VALUES ($pbc$Soccer WPB League$pbc$, $pbc$Soccer$pbc$, $pbc$Wellington$pbc$, $pbc$Join the Soccer WPB League community in Wellington. Open for all residents.$pbc$, 8, 1, $pbc$Intermediate$pbc$, ARRAY[26.7539, -80.0142], $pbc$https://images.unsplash.com/photo-1574629810360-7efbbe195018?q=80&w=800$pbc$);
+INSERT INTO public.groups (name, category, city, description, capacity, members, skill, coords, image) VALUES ($pbc$Tennis PBC Open$pbc$, $pbc$Soccer$pbc$, $pbc$West Palm Beach$pbc$, $pbc$Join the Tennis PBC Open community in West Palm Beach. Open for all residents.$pbc$, 8, 1, $pbc$Pro$pbc$, ARRAY[26.5525, -80.0709], $pbc$https://images.unsplash.com/photo-1574629810360-7efbbe195018?q=80&w=800$pbc$);
+INSERT INTO public.groups (name, category, city, description, capacity, members, skill, coords, image) VALUES ($pbc$Basketball Courts$pbc$, $pbc$Soccer$pbc$, $pbc$Palm Beach Gardens$pbc$, $pbc$Join the Basketball Courts community in Palm Beach Gardens. Open for all residents.$pbc$, 8, 1, $pbc$Casual$pbc$, ARRAY[26.8634, -80.1868], $pbc$https://images.unsplash.com/photo-1574629810360-7efbbe195018?q=80&w=800$pbc$);
+INSERT INTO public.groups (name, category, city, description, capacity, members, skill, coords, image) VALUES ($pbc$Golf PBC Society$pbc$, $pbc$Soccer$pbc$, $pbc$Jupiter$pbc$, $pbc$Join the Golf PBC Society community in Jupiter. Open for all residents.$pbc$, 50, 1, $pbc$Intermediate$pbc$, ARRAY[26.6527, -80.0658], $pbc$https://images.unsplash.com/photo-1574629810360-7efbbe195018?q=80&w=800$pbc$);
+INSERT INTO public.groups (name, category, city, description, capacity, members, skill, coords, image) VALUES ($pbc$Volleyball Beach Hub$pbc$, $pbc$Soccer$pbc$, $pbc$Jupiter$pbc$, $pbc$Join the Volleyball Beach Hub community in Jupiter. Open for all residents.$pbc$, 20, 1, $pbc$Competitive$pbc$, ARRAY[26.6938, -80.0477], $pbc$https://images.unsplash.com/photo-1574629810360-7efbbe195018?q=80&w=800$pbc$);
+INSERT INTO public.groups (name, category, city, description, capacity, members, skill, coords, image) VALUES ($pbc$Running PBC$pbc$, $pbc$Soccer$pbc$, $pbc$Wellington$pbc$, $pbc$Join the Running PBC community in Wellington. Open for all residents.$pbc$, 20, 1, $pbc$Pro$pbc$, ARRAY[26.7879, -80.1318], $pbc$https://images.unsplash.com/photo-1574629810360-7efbbe195018?q=80&w=800$pbc$);
+INSERT INTO public.groups (name, category, city, description, capacity, members, skill, coords, image) VALUES ($pbc$Cycling WPB$pbc$, $pbc$Soccer$pbc$, $pbc$Lake Worth$pbc$, $pbc$Join the Cycling WPB community in Lake Worth. Open for all residents.$pbc$, 20, 1, $pbc$Intermediate$pbc$, ARRAY[26.3844, -80.0676], $pbc$https://images.unsplash.com/photo-1574629810360-7efbbe195018?q=80&w=800$pbc$);
+INSERT INTO public.groups (name, category, city, description, capacity, members, skill, coords, image) VALUES ($pbc$Swimming PBC$pbc$, $pbc$Soccer$pbc$, $pbc$Wellington$pbc$, $pbc$Join the Swimming PBC community in Wellington. Open for all residents.$pbc$, 50, 1, $pbc$Intermediate$pbc$, ARRAY[26.6563, -80.1225], $pbc$https://images.unsplash.com/photo-1574629810360-7efbbe195018?q=80&w=800$pbc$);
+INSERT INTO public.groups (name, category, city, description, capacity, members, skill, coords, image) VALUES ($pbc$Padel Club$pbc$, $pbc$Soccer$pbc$, $pbc$Lake Worth$pbc$, $pbc$Join the Padel Club community in Lake Worth. Open for all residents.$pbc$, 50, 1, $pbc$Pro$pbc$, ARRAY[26.7596, -80.0707], $pbc$https://images.unsplash.com/photo-1574629810360-7efbbe195018?q=80&w=800$pbc$);
+INSERT INTO public.groups (name, category, city, description, capacity, members, skill, coords, image) VALUES ($pbc$Photography WPB$pbc$, $pbc$Other$pbc$, $pbc$Jupiter$pbc$, $pbc$Join the Photography WPB community in Jupiter. Open for all residents.$pbc$, 12, 1, $pbc$Casual$pbc$, ARRAY[26.6902, -80.084], $pbc$https://images.unsplash.com/photo-1513364776144-60967b0f800f?q=80&w=800$pbc$);
+INSERT INTO public.groups (name, category, city, description, capacity, members, skill, coords, image) VALUES ($pbc$Bird Watching Everglades$pbc$, $pbc$Other$pbc$, $pbc$Wellington$pbc$, $pbc$Join the Bird Watching Everglades community in Wellington. Open for all residents.$pbc$, 20, 1, $pbc$Intermediate$pbc$, ARRAY[26.3287, -80.0114], $pbc$https://images.unsplash.com/photo-1513364776144-60967b0f800f?q=80&w=800$pbc$);
+INSERT INTO public.groups (name, category, city, description, capacity, members, skill, coords, image) VALUES ($pbc$Digital Painting$pbc$, $pbc$Other$pbc$, $pbc$West Palm Beach$pbc$, $pbc$Join the Digital Painting community in West Palm Beach. Open for all residents.$pbc$, 50, 1, $pbc$Intermediate$pbc$, ARRAY[26.6819, -80.175], $pbc$https://images.unsplash.com/photo-1513364776144-60967b0f800f?q=80&w=800$pbc$);
+INSERT INTO public.groups (name, category, city, description, capacity, members, skill, coords, image) VALUES ($pbc$Pottery PBC$pbc$, $pbc$Other$pbc$, $pbc$Jupiter$pbc$, $pbc$Join the Pottery PBC community in Jupiter. Open for all residents.$pbc$, 50, 1, $pbc$Intermediate$pbc$, ARRAY[26.5439, -80.1927], $pbc$https://images.unsplash.com/photo-1513364776144-60967b0f800f?q=80&w=800$pbc$);
+INSERT INTO public.groups (name, category, city, description, capacity, members, skill, coords, image) VALUES ($pbc$Urban Sketching$pbc$, $pbc$Other$pbc$, $pbc$Delray Beach$pbc$, $pbc$Join the Urban Sketching community in Delray Beach. Open for all residents.$pbc$, 8, 1, $pbc$Intermediate$pbc$, ARRAY[26.4218, -80.0486], $pbc$https://images.unsplash.com/photo-1513364776144-60967b0f800f?q=80&w=800$pbc$);
+INSERT INTO public.groups (name, category, city, description, capacity, members, skill, coords, image) VALUES ($pbc$Gardening PBC$pbc$, $pbc$Other$pbc$, $pbc$Boca Raton$pbc$, $pbc$Join the Gardening PBC community in Boca Raton. Open for all residents.$pbc$, 50, 1, $pbc$Pro$pbc$, ARRAY[26.3703, -80.052], $pbc$https://images.unsplash.com/photo-1513364776144-60967b0f800f?q=80&w=800$pbc$);
+INSERT INTO public.groups (name, category, city, description, capacity, members, skill, coords, image) VALUES ($pbc$Cooking Class$pbc$, $pbc$Other$pbc$, $pbc$Wellington$pbc$, $pbc$Join the Cooking Class community in Wellington. Open for all residents.$pbc$, 8, 1, $pbc$Casual$pbc$, ARRAY[26.3077, -80.0278], $pbc$https://images.unsplash.com/photo-1513364776144-60967b0f800f?q=80&w=800$pbc$);
+INSERT INTO public.groups (name, category, city, description, capacity, members, skill, coords, image) VALUES ($pbc$Hiking Florida Trails$pbc$, $pbc$Other$pbc$, $pbc$Wellington$pbc$, $pbc$Join the Hiking Florida Trails community in Wellington. Open for all residents.$pbc$, 8, 1, $pbc$Intermediate$pbc$, ARRAY[26.625, -80.1085], $pbc$https://images.unsplash.com/photo-1513364776144-60967b0f800f?q=80&w=800$pbc$);
+INSERT INTO public.groups (name, category, city, description, capacity, members, skill, coords, image) VALUES ($pbc$Surfing WPB$pbc$, $pbc$Other$pbc$, $pbc$Jupiter$pbc$, $pbc$Join the Surfing WPB community in Jupiter. Open for all residents.$pbc$, 50, 1, $pbc$Competitive$pbc$, ARRAY[26.6942, -80.1144], $pbc$https://images.unsplash.com/photo-1513364776144-60967b0f800f?q=80&w=800$pbc$);
 
 -- RANDOMIZING 500 USERS INTO MEMBERSHIPS
 
@@ -2116,15 +616,11 @@ DO $$
 DECLARE
     u RECORD;
     g RECORD;
-    membership_count int;
 BEGIN
     FOR u IN SELECT id FROM public.profiles LOOP
-        -- Join 2 to 5 random groups
         FOR g IN (SELECT id FROM public.groups ORDER BY random() LIMIT (random()*3 + 2)::int) LOOP
-            -- Check if already member
             IF NOT EXISTS (SELECT 1 FROM public.memberships WHERE user_id = u.id AND group_id = g.id) THEN
                 INSERT INTO public.memberships (user_id, group_id) VALUES (u.id, g.id);
-                -- Update member count
                 UPDATE public.groups SET members = members + 1 WHERE id = g.id;
             END IF;
         END LOOP;

@@ -33,7 +33,7 @@ def get_data():
 
 def clean_val(val):
     if val is None: return ""
-    return str(val).replace('\n', ' ').replace('\r', ' ').replace("'", "''").strip()
+    return str(val).replace('\n', ' ').replace('\r', ' ').strip()
 
 # CATEGORY POOLS
 GAMING_MODERN = [
@@ -72,7 +72,7 @@ SKILLS = ["Casual", "Intermediate", "Competitive", "Pro"]
 rows = get_data()
 
 with open(output_sql, 'w') as f:
-    f.write("-- ROLLCALL PRODUCTION FINAL SYNC (MASSIVE POPULATION)\n\n")
+    f.write("-- ROLLCALL PRODUCTION FINAL SYNC (MASSIVE POPULATION - HARDENED)\n\n")
     f.write("TRUNCATE auth.users CASCADE;\n")
     f.write("TRUNCATE public.profiles CASCADE;\n")
     f.write("TRUNCATE public.groups CASCADE;\n")
@@ -121,11 +121,11 @@ $$ LANGUAGE plpgsql SECURITY DEFINER;
     badges_pool = ["PBC Veteran", "Early Bird", "Pro Gamer", "Tabletop King", "Friendly Host", "Tournament Ready"]
     
     # Generate 500 Users
-    f.write("-- GENERATING 500 USERS\n")
+    f.write("-- GENERATING 500 USERS (DOLLAR QUOTED)\n")
     for r in rows[2:502]:
         if len(r) < 16: continue
         email = clean_val(r[3])
-        password = "password123" # Standardized for demo
+        password = "password123"
         handle = clean_val(r[2])
         name = clean_val(r[1])
         age = r[5] if str(r[5]).isdigit() else "25"
@@ -139,7 +139,7 @@ $$ LANGUAGE plpgsql SECURITY DEFINER;
         reviews = random.randint(5, 85)
         user_badges = random.sample(badges_pool, random.randint(1, 3))
         
-        f.write(f"DO $$\nDECLARE u_id uuid; BEGIN\n  u_id := create_rollcall_prod_user('{email}', '{password}', '{handle}', '{name}', {age}, '{city}', '{zip_code}', '{interest}', '{platform}', '{bio}', {rating}, {reviews}, '{json.dumps(user_badges)}'::jsonb, {'true' if is_flagged else 'false'});\nEND $$;\n")
+        f.write(f"SELECT create_rollcall_prod_user($pbc${email}$pbc$, $pbc${password}$pbc$, $pbc${handle}$pbc$, $pbc${name}$pbc$, {age}, $pbc${city}$pbc$, $pbc${zip_code}$pbc$, $pbc${interest}$pbc$, $pbc${platform}$pbc$, $pbc${bio}$pbc$, {rating}, {reviews}, $pbc${json.dumps(user_badges)}$pbc$::jsonb, {'true' if is_flagged else 'false'});\n")
 
     # Group Generation Logic
     all_group_configs = [
@@ -151,17 +151,16 @@ $$ LANGUAGE plpgsql SECURITY DEFINER;
         (ART_HOBBIES, "Other", "https://images.unsplash.com/photo-1513364776144-60967b0f800f?q=80&w=800")
     ]
 
-    f.write("\n-- GENERATING 60+ GROUPS\n")
-    group_ids_placeholder = []
+    f.write("\n-- GENERATING 60+ GROUPS (DOLLAR QUOTED)\n")
     for names, category, img in all_group_configs:
         for name in names:
             city = random.choice(CITIES)
             skill = random.choice(SKILLS)
             cap = random.choice([8, 12, 20, 50])
-            # Coords for PBC roughly
             lat = round(random.uniform(26.3, 26.9), 4)
             lng = round(random.uniform(-80.2, -80.0), 4)
-            f.write(f"INSERT INTO public.groups (name, category, city, description, capacity, members, skill, coords, image) VALUES ('{name}', '{category}', '{city}', 'Join the {name} community in {city}. Open for all residents.', {cap}, 1, '{skill}', ARRAY[{lat}, {lng}], '{img}');\n")
+            desc = f"Join the {name} community in {city}. Open for all residents."
+            f.write(f"INSERT INTO public.groups (name, category, city, description, capacity, members, skill, coords, image) VALUES ($pbc${name}$pbc$, $pbc${category}$pbc$, $pbc${city}$pbc$, $pbc${desc}$pbc$, {cap}, 1, $pbc${skill}$pbc$, ARRAY[{lat}, {lng}], $pbc${img}$pbc$);\n")
 
     f.write("\n-- RANDOMIZING 500 USERS INTO MEMBERSHIPS\n")
     f.write("""
@@ -169,15 +168,11 @@ DO $$
 DECLARE
     u RECORD;
     g RECORD;
-    membership_count int;
 BEGIN
     FOR u IN SELECT id FROM public.profiles LOOP
-        -- Join 2 to 5 random groups
         FOR g IN (SELECT id FROM public.groups ORDER BY random() LIMIT (random()*3 + 2)::int) LOOP
-            -- Check if already member
             IF NOT EXISTS (SELECT 1 FROM public.memberships WHERE user_id = u.id AND group_id = g.id) THEN
                 INSERT INTO public.memberships (user_id, group_id) VALUES (u.id, g.id);
-                -- Update member count
                 UPDATE public.groups SET members = members + 1 WHERE id = g.id;
             END IF;
         END LOOP;
@@ -185,4 +180,4 @@ BEGIN
 END $$;
 """)
 
-print(f"SUCCESS: Expanded Seed Script '{output_sql}' generated.")
+print(f"SUCCESS: Hardened Seed Script '{output_sql}' generated.")
