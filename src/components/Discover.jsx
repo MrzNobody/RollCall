@@ -5,6 +5,8 @@ import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import { supabase } from '../lib/supabase';
 import { mockGroups } from '../data/mockGroups';
+import WaitlistModal from './WaitlistModal';
+import { Rocket } from 'lucide-react';
 
 const DefaultIcon = L.icon({
     iconUrl: 'https://unpkg.com/leaflet@1.7.1/dist/images/marker-icon.png',
@@ -72,6 +74,7 @@ const Discover = ({ onSelectGroup }) => {
   const [groups, setGroups] = useState([]);
   const [loading, setLoading] = useState(true);
   const [activeCategory, setActiveCategory] = useState('All');
+  const [showWaitlist, setShowWaitlist] = useState(false);
   const [isLive, setIsLive] = useState(false);
 
   useEffect(() => {
@@ -183,6 +186,26 @@ const Discover = ({ onSelectGroup }) => {
             {filteredGroups.map(group => (
               <GroupCard key={group.id} group={group} onClick={() => onSelectGroup(group)} />
             ))}
+
+            {filteredGroups.length === 0 && (
+              <div className="col-span-full flex flex-col items-center justify-center py-32 text-center space-y-8 animate-fade-in">
+                <div className="w-24 h-24 bg-white/5 rounded-[2.5rem] flex items-center justify-center border border-white/5">
+                  <Rocket className="w-12 h-12 text-text-muted opacity-20" />
+                </div>
+                <div className="space-y-4">
+                  <h3 className="text-2xl font-black text-text-primary">No communities here yet</h3>
+                  <p className="text-sm text-text-muted max-w-xs mx-auto font-medium">
+                    We're currently focusing our pilot on <span className="text-brand-primary font-bold">Palm Beach County</span>. Want us to expand to your neighborhood next?
+                  </p>
+                  <button 
+                    onClick={() => setShowWaitlist(true)}
+                    className="bg-brand-primary px-8 py-4 rounded-2xl font-black text-xs uppercase tracking-widest text-white hover:bg-brand-primary/80 transition-all shadow-lg shadow-brand-primary/20"
+                  >
+                    Join the Expansion Waitlist
+                  </button>
+                </div>
+              </div>
+            )}
           </div>
         ) : (
           <div className="absolute inset-0 z-0 animate-fade-in">
@@ -268,6 +291,12 @@ const Discover = ({ onSelectGroup }) => {
           </div>
         )}
       </div>
+
+      <WaitlistModal 
+        isOpen={showWaitlist} 
+        onClose={() => setShowWaitlist(false)} 
+        initialCity={searchQuery}
+      />
     </div>
   );
 };
