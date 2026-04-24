@@ -3,7 +3,6 @@ import xml.etree.ElementTree as ET
 import json
 import random
 
-# XLSX Extraction Logic
 xlsx_path = 'RollCall_Demo_Data.xlsx'
 output_sql = 'production_final_sync.sql'
 
@@ -37,7 +36,7 @@ def clean_val(val):
 badges_pool = ["PBC Veteran", "Early Bird", "Pro Gamer", "Tabletop King", "Friendly Host", "Tournament Ready"]
 
 with open(output_sql, 'w') as f:
-    f.write("-- ROLLCALL PRODUCTION FINAL SYNC (ULTRA-SECURE TOKEN QUOTING)\n\n")
+    f.write("-- ROLLCALL PRODUCTION FINAL SYNC (SUPABASE HARDENED)\n\n")
     f.write("TRUNCATE auth.users CASCADE;\n")
     f.write("TRUNCATE public.profiles CASCADE;\n\n")
 
@@ -55,14 +54,24 @@ BEGIN
   INSERT INTO auth.users (
     instance_id, id, aud, role, email, encrypted_password, 
     email_confirmed_at, raw_app_meta_data, raw_user_meta_data, 
-    created_at, updated_at, confirmation_token
+    created_at, updated_at, confirmation_token, 
+    recovery_token, email_change_token_new, email_change,
+    is_super_admin, phone, phone_confirmed_at, phone_change, 
+    phone_change_token, email_change_token_current, 
+    email_change_confirm_status, banned_until, reauthentication_token,
+    is_sso_user, is_anonymous
   )
   VALUES (
     '00000000-0000-0000-0000-000000000000', new_user_id, 'authenticated', 'authenticated', 
     u_email, crypt(u_password, gen_salt('bf', 10)), now(), 
     '{"provider":"email","providers":["email"]}', 
     jsonb_build_object('full_name', u_name, 'username', u_handle),
-    now(), now(), ''
+    now(), now(), '', 
+    '', '', '', 
+    false, NULL, NULL, '', 
+    '', '', 
+    0, NULL, '', 
+    false, false
   );
 
   INSERT INTO public.profiles (
@@ -98,7 +107,6 @@ $$ LANGUAGE plpgsql SECURITY DEFINER;
         reviews = random.randint(5, 85)
         user_badges = random.sample(badges_pool, random.randint(1, 3))
         
-        # Using $pbc$ as a UNIQUE TOKEN to prevent any character within the string from breaking the SQL
         f.write(f"SELECT create_rollcall_prod_user($pbc${email}$pbc$, $pbc${password}$pbc$, $pbc${handle}$pbc$, $pbc${name}$pbc$, {age}, $pbc${city}$pbc$, $pbc${zip_code}$pbc$, $pbc${interest}$pbc$, $pbc${platform}$pbc$, $pbc${bio}$pbc$, {rating}, {reviews}, $pbc${json.dumps(user_badges)}$pbc$::jsonb, {'true' if is_flagged else 'false'});\n")
 
-print(f"SUCCESS: Ultra-Secure '{output_sql}' generated.")
+print(f"SUCCESS: Supabase-Hardened '{output_sql}' generated.")
