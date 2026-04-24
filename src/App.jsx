@@ -182,6 +182,75 @@ const CategoryChip = ({ label, icon: Icon, colorClass, onClick, count }) => (
   </motion.button>
 );
 
+const LatestFeed = () => {
+  const [latest, setLatest] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchLatest = async () => {
+      try {
+        const { data, error } = await supabase
+          .from('groups')
+          .select('name, category, city, image, members')
+          .order('created_at', { ascending: false })
+          .limit(5);
+        
+        if (error) throw error;
+        setLatest(data || []);
+      } catch (err) {
+        console.error('Error fetching latest:', err);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchLatest();
+  }, []);
+
+  if (loading) return (
+    <div className="w-full max-w-7xl mx-auto px-6 mt-12 overflow-hidden">
+      <div className="flex gap-6 overflow-x-auto pb-8 no-scrollbar -mx-6 px-6">
+        {[1,2,3,4,5].map(i => (
+          <div key={i} className="min-w-[300px] h-60 bg-white/5 rounded-3xl border border-white/10 animate-pulse" />
+        ))}
+      </div>
+    </div>
+  );
+
+  if (latest.length === 0) return null;
+
+  return (
+    <div className="w-full max-w-7xl mx-auto px-6 mt-12 animate-fade-in">
+      <div className="flex items-center justify-between mb-8">
+        <h3 className="text-sm font-black uppercase tracking-[0.3em] text-brand-secondary">Latest in Palm Beach County</h3>
+        <div className="h-px flex-1 bg-white/5 mx-6" />
+      </div>
+      <div className="flex gap-6 overflow-x-auto pb-8 no-scrollbar -mx-6 px-6">
+        {latest.map((group, i) => (
+          <motion.div 
+            key={group.name}
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: i * 0.1 }}
+            className="min-w-[300px] glass p-4 rounded-3xl border border-white/10 group cursor-pointer"
+          >
+            <div className="relative h-32 rounded-2xl overflow-hidden mb-4">
+              <img src={group.image} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+              <div className="absolute top-2 left-2 px-2 py-1 bg-brand-primary rounded-lg text-[8px] font-black uppercase tracking-widest text-white shadow-lg shadow-brand-primary/40">
+                {group.category}
+              </div>
+            </div>
+            <h4 className="font-bold text-text-primary mb-1">{group.name}</h4>
+            <div className="flex items-center justify-between text-[10px] text-text-secondary font-bold uppercase tracking-wider">
+              <span>{group.city}</span>
+              <span className="flex items-center gap-1"><Users className="w-3 h-3" /> {group.members}</span>
+            </div>
+          </motion.div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
 function App() {
   const [step, setStep] = useState('hero');
   const [selectedGroup, setSelectedGroup] = useState(null);
@@ -316,7 +385,10 @@ function App() {
               <CategoryChip label="Sports" icon={categoryCounts['Soccer'] ? Trophy : MapPin} count={categoryCounts['Soccer']} colorClass="border-blue-500/30 text-blue-500" onClick={() => setSelectedCategory('Soccer')} />
               <CategoryChip label="& More" icon={Sparkles} count={categoryCounts['Other']} colorClass="border-orange-500/30 text-orange-500" onClick={() => setSelectedCategory('Other')} />
             </div>
-            <div className="flex flex-col md:flex-row gap-4">
+
+            <LatestFeed />
+
+            <div className="flex flex-col md:flex-row gap-4 mt-20">
               <button onClick={() => user ? setStep('dashboard') : setShowAuth(true)} className="bg-text-primary text-surface-950 px-12 py-5 rounded-3xl font-black text-sm flex items-center justify-center gap-2 hover:scale-105 transition-all shadow-2xl">Start Discovering <ChevronRight className="w-5 h-5 flex-shrink-0" /></button>
               <button onClick={() => setStep('discover')} className="glass px-12 py-5 rounded-3xl font-black text-sm hover:bg-white/10 transition-all text-text-primary">View Local Map</button>
             </div>
