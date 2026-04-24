@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { supabase } from '../lib/supabase';
-import { LayoutGrid, Users, Settings, LogOut, ChevronRight, MapPin, MessageSquare, Zap, Shield } from 'lucide-react';
+import { LayoutGrid, Users, Settings, LogOut, ChevronRight, MapPin, MessageSquare, Zap, Shield, Award } from 'lucide-react';
 import { motion } from 'framer-motion';
+import BadgeShelf from './BadgeShelf';
 
 const StatCard = ({ title, value, icon, color }) => (
   <div className="glass p-6 rounded-3xl border border-white/5 space-y-2">
@@ -98,8 +99,12 @@ const Dashboard = ({ user, onSelectGroup, onEnterAdmin }) => {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
-          <div className="lg:col-span-2 space-y-6">
-            <h3 className="text-xl font-black tracking-tight">Your Communities</h3>
+          <div className="lg:col-span-2 space-y-12">
+            {/* Phase 3: Badge Shelf */}
+            <BadgeShelf userId={user?.id} />
+
+            <div className="space-y-6">
+              <h3 className="text-xl font-black tracking-tight">Your Communities</h3>
             {loading ? (
               <div className="flex items-center justify-center py-20">
                 <div className="w-8 h-8 border-2 border-brand-primary border-t-transparent rounded-full animate-spin" />
