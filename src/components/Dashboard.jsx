@@ -3,6 +3,7 @@ import { supabase } from '../lib/supabase';
 import { LayoutGrid, Users, Settings, LogOut, ChevronRight, MapPin, MessageSquare, Zap, Shield, Award } from 'lucide-react';
 import { motion } from 'framer-motion';
 import BadgeShelf from './BadgeShelf';
+import DirectMessages from './DirectMessages';
 
 const StatCard = ({ title, value, icon, color }) => (
   <div className="glass p-6 rounded-3xl border border-white/5 space-y-2">
@@ -36,6 +37,7 @@ const JoinedGroupCard = ({ group, onClick }) => (
 const Dashboard = ({ user, onSelectGroup, onEnterAdmin }) => {
   const [joinedGroups, setJoinedGroups] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [showMessages, setShowMessages] = useState(false);
 
   useEffect(() => {
     const fetchJoinedGroups = async () => {
@@ -82,6 +84,13 @@ const Dashboard = ({ user, onSelectGroup, onEnterAdmin }) => {
           </div>
           <div className="flex items-center gap-4">
             <button 
+              onClick={() => setShowMessages(true)}
+              className="glass p-3 rounded-2xl border border-white/10 text-text-muted hover:text-brand-primary hover:border-brand-primary/30 transition-all relative"
+            >
+              <MessageSquare className="w-5 h-5" />
+              <div className="absolute top-2 right-2 w-2 h-2 bg-brand-primary rounded-full animate-pulse" />
+            </button>
+            <button 
               onClick={onEnterAdmin}
               className="glass px-6 py-3 rounded-2xl border border-brand-primary/30 text-brand-primary font-black text-xs uppercase tracking-widest flex items-center gap-2 hover:bg-brand-primary/10 transition-all"
             >
@@ -126,6 +135,10 @@ const Dashboard = ({ user, onSelectGroup, onEnterAdmin }) => {
           </div>
         </div>
       </div>
+
+      {showMessages && (
+        <DirectMessages user={user} onClose={() => setShowMessages(false)} />
+      )}
     </div>
   );
 };
