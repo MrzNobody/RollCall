@@ -1,6 +1,7 @@
 import { ChevronLeft, Calendar, MessageSquare, MapPin, Users, ShieldCheck, Gamepad2, ScrollText, Send, User, CheckCircle2, Flag } from 'lucide-react';
 import ReportModal from './ReportModal';
 import Forum from './Forum';
+import CalendarView from './CalendarView';
 import { clsx } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 import { supabase } from '../lib/supabase';
@@ -243,6 +244,10 @@ const GroupDetail = ({ group, onBack, user }) => {
 
           {activeTab === 'forum' && (
             <Forum groupId={group.id} user={user} />
+          )}
+
+          {activeTab === 'session info' && (
+            <CalendarView groupId={group.id} user={user} />
           )}
         </div>
 
