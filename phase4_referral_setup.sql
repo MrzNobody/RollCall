@@ -16,17 +16,13 @@ CREATE TABLE IF NOT EXISTS public.referrals (
     created_at timestamp with time zone DEFAULT now()
 );
 
--- 3. Function to generate unique codes for existing users
-DO $$
-DECLARE
-    p RECORD;
-BEGIN
-    FOR p IN SELECT id, username FROM public.profiles LOOP
-        INSERT INTO public.referral_codes (user_id, code)
-        VALUES (p.id, LOWER(SUBSTRING(p.username, 1, 4)) || '-' || SUBSTRING(gen_random_uuid()::text, 1, 6))
-        ON CONFLICT (user_id) DO NOTHING;
-    END FOR;
-END $$;
+-- 3. Generate unique codes for existing users (High Performance Set-Based)
+INSERT INTO public.referral_codes (user_id, code)
+SELECT 
+    id, 
+    LOWER(SUBSTRING(username, 1, 4)) || '-' || SUBSTRING(gen_random_uuid()::text, 1, 6)
+FROM public.profiles
+ON CONFLICT (user_id) DO NOTHING;
 
 COMMENT ON TABLE public.referral_codes IS 'Personalized invite codes for residents.';
 COMMENT ON TABLE public.referrals IS 'Tracking successful neighbor recruitments.';
