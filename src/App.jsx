@@ -182,7 +182,7 @@ const CategoryChip = ({ label, icon: Icon, colorClass, onClick, count }) => (
   </motion.button>
 );
 
-const LatestFeed = () => {
+const LatestFeed = ({ user, onAuthRequired }) => {
   const [latest, setLatest] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -231,13 +231,19 @@ const LatestFeed = () => {
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: i * 0.1 }}
-            className="min-w-[300px] glass p-4 rounded-3xl border border-white/10 group cursor-pointer"
+            onClick={() => user ? null : onAuthRequired()}
+            className={`min-w-[300px] glass p-4 rounded-3xl border border-white/10 group ${user ? 'cursor-pointer hover:border-brand-primary/30' : 'cursor-default'}`}
           >
             <div className="relative h-32 rounded-2xl overflow-hidden mb-4">
               <img src={group.image} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
               <div className="absolute top-2 left-2 px-2 py-1 bg-brand-primary rounded-lg text-[8px] font-black uppercase tracking-widest text-white shadow-lg shadow-brand-primary/40">
                 {group.category}
               </div>
+              {!user && (
+                <div className="absolute inset-0 bg-surface-950/40 backdrop-blur-[2px] flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                   <span className="text-[8px] font-black uppercase tracking-widest text-white px-3 py-1.5 bg-black/60 rounded-full border border-white/10">Sign in to View</span>
+                </div>
+              )}
             </div>
             <h4 className="font-bold text-text-primary mb-1">{group.name}</h4>
             <div className="flex items-center justify-between text-[10px] text-text-secondary font-bold uppercase tracking-wider">
@@ -386,11 +392,11 @@ function App() {
               <CategoryChip label="& More" icon={Sparkles} count={categoryCounts['Other']} colorClass="border-orange-500/30 text-orange-500" onClick={() => setSelectedCategory('Other')} />
             </div>
 
-            <LatestFeed />
+            <LatestFeed user={user} onAuthRequired={() => setShowAuth(true)} />
 
             <div className="flex flex-col md:flex-row gap-4 mt-20">
               <button onClick={() => user ? setStep('dashboard') : setShowAuth(true)} className="bg-text-primary text-surface-950 px-12 py-5 rounded-3xl font-black text-sm flex items-center justify-center gap-2 hover:scale-105 transition-all shadow-2xl">Start Discovering <ChevronRight className="w-5 h-5 flex-shrink-0" /></button>
-              <button onClick={() => setStep('discover')} className="glass px-12 py-5 rounded-3xl font-black text-sm hover:bg-white/10 transition-all text-text-primary">View Local Map</button>
+              <button onClick={() => user ? setStep('discover') : setShowAuth(true)} className="glass px-12 py-5 rounded-3xl font-black text-sm hover:bg-white/10 transition-all text-text-primary">View Local Map</button>
             </div>
           </motion.main>
         )}
