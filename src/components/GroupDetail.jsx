@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { ChevronLeft, Calendar, MessageSquare, MapPin, Users, ShieldCheck, Gamepad2, ScrollText, Send, User, CheckCircle2 } from 'lucide-react';
+import { ChevronLeft, Calendar, MessageSquare, MapPin, Users, ShieldCheck, Gamepad2, ScrollText, Send, User, CheckCircle2, Flag } from 'lucide-react';
+import ReportModal from './ReportModal';
 import { clsx } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 import { supabase } from '../lib/supabase';
@@ -29,6 +29,7 @@ const GroupDetail = ({ group, onBack, user }) => {
   const [isJoined, setIsJoined] = useState(false);
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState('');
+  const [showReport, setShowReport] = useState(false);
   const chatEndRef = useRef(null);
 
   useEffect(() => {
@@ -265,8 +266,24 @@ const GroupDetail = ({ group, onBack, user }) => {
               "By joining this group, you agree to the RollCall Community Standards for Palm Beach County."
             </p>
           </div>
+
+          <button 
+            onClick={() => setShowReport(true)}
+            className="w-full py-4 rounded-[2rem] bg-rose-500/5 border border-rose-500/20 text-rose-500 text-[10px] font-black uppercase tracking-widest flex items-center justify-center gap-2 hover:bg-rose-500/10 transition-all"
+          >
+            <Flag className="w-4 h-4" />
+            Report Community
+          </button>
         </div>
       </div>
+
+      <ReportModal 
+        isOpen={showReport}
+        onClose={() => setShowReport(false)}
+        targetId={group.id}
+        targetType="group"
+        targetName={group.name}
+      />
     </div>
   );
 };

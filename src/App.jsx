@@ -6,6 +6,7 @@ import GroupDetail from './components/GroupDetail';
 import CreateGroup from './components/CreateGroup';
 import Dashboard from './components/Dashboard';
 import Auth from './components/Auth';
+import AdminDashboard from './components/AdminDashboard';
 import { supabase } from './lib/supabase';
 
 // High-Fidelity PRD Logo: 6-Node Hexagonal Network with Center Hub
@@ -400,9 +401,11 @@ function App() {
             </div>
           </motion.main>
         )}
-        {step === 'dashboard' && <motion.main key="dashboard" className="flex-1 min-h-[50vh]"><Dashboard user={user} onSelectGroup={(g) => { setSelectedGroup(g); setStep('groupDetail'); }} /></motion.main>}
-        {step === 'discover' && <motion.main key="discover" className="flex-1"><Discover onSelectGroup={(g) => { setSelectedGroup(g); setStep('groupDetail'); }} /></motion.main>}
-        {step === 'groupDetail' && selectedGroup && <motion.main key="detail" className="flex-1"><GroupDetail group={selectedGroup} user={user} onBack={() => setStep('discover')} /></motion.main>}
+        {step === 'dashboard' && <Dashboard onSelectGroup={(g) => { setSelectedGroup(g); setStep('group-detail'); }} onCreateGroup={() => setStep('create-group')} onEnterDiscover={() => setStep('discover')} onEnterAdmin={() => setStep('admin')} />}
+          {step === 'discover' && <Discover onSelectGroup={(g) => { setSelectedGroup(g); setStep('group-detail'); }} />}
+          {step === 'create-group' && <CreateGroup onCreated={() => setStep('dashboard')} onCancel={() => setStep('dashboard')} />}
+          {step === 'group-detail' && <GroupDetail group={selectedGroup} onBack={() => setStep('dashboard')} />}
+          {step === 'admin' && <AdminDashboard onBack={() => setStep('dashboard')} />}
         {step === 'createGroup' && <motion.main key="create" className="flex-1"><CreateGroup userId={user?.id} onBack={() => setStep('dashboard')} onSuccess={(g) => { setSelectedGroup(g); setStep('groupDetail'); }} /></motion.main>}
       </AnimatePresence>
       {step !== 'hero' && (

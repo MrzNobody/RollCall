@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { supabase } from '../lib/supabase';
-import { LayoutGrid, Users, Settings, LogOut, ChevronRight, MapPin, MessageSquare, Zap } from 'lucide-react';
+import { LayoutGrid, Users, Settings, LogOut, ChevronRight, MapPin, MessageSquare, Zap, Shield } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 const StatCard = ({ title, value, icon, color }) => (
@@ -32,7 +32,7 @@ const JoinedGroupCard = ({ group, onClick }) => (
   </div>
 );
 
-const Dashboard = ({ user, onSelectGroup }) => {
+const Dashboard = ({ user, onSelectGroup, onEnterAdmin }) => {
   const [joinedGroups, setJoinedGroups] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -78,6 +78,15 @@ const Dashboard = ({ user, onSelectGroup }) => {
               <span className="px-3 py-1 bg-brand-secondary/10 text-brand-secondary border border-brand-secondary/30 rounded-full text-[10px] font-black tracking-widest uppercase">Member Dashboard</span>
             </div>
             <h1 className="text-5xl font-black tracking-tighter">Welcome back, <span className="gradient-text">{user?.email.split('@')[0]}</span></h1>
+          </div>
+          <div className="flex items-center gap-4">
+            <button 
+              onClick={onEnterAdmin}
+              className="glass px-6 py-3 rounded-2xl border border-brand-primary/30 text-brand-primary font-black text-xs uppercase tracking-widest flex items-center gap-2 hover:bg-brand-primary/10 transition-all"
+            >
+              <Shield className="w-4 h-4" />
+              Admin Command
+            </button>
           </div>
         </div>
 
