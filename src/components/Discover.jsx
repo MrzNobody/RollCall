@@ -13,37 +13,58 @@ const DefaultIcon = L.icon({
     iconAnchor: [12, 41]
 });
 
-const GroupCard = ({ group, onClick }) => (
-  <div 
-    onClick={onClick}
-    className="glass rounded-3xl overflow-hidden group hover:border-brand-primary/30 transition-all flex flex-col h-full cursor-pointer active:scale-[0.98]"
-  >
-    <div className="relative h-32 md:h-40 overflow-hidden">
-      <img src={group.image} alt={group.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-      <div className="absolute top-2 left-2 px-2 py-1 bg-black/60 backdrop-blur-md rounded-lg text-[9px] font-black tracking-widest uppercase border border-white/10">
-        {group.category}
-      </div>
-      <div className="absolute bottom-2 right-2 px-2 py-1 bg-brand-primary rounded-lg text-[9px] font-black tracking-widest uppercase shadow-lg shadow-brand-primary/40">
-        {group.skill}
-      </div>
-    </div>
-    <div className="p-4 md:p-5 flex-1 flex flex-col">
-      <h3 className="font-bold text-base md:text-lg mb-1 group-hover:text-brand-primary transition-colors truncate text-text-primary">{group.name}</h3>
-      <div className="flex items-center gap-2 text-text-secondary text-[10px] md:text-xs mb-3">
-        <span>{group.city}</span>
-        <span>•</span>
-        <div className="flex items-center gap-1">
-          <Users className="w-3 h-3" />
-          {group.members}/{group.capacity}
+const GroupCard = ({ group, onClick }) => {
+  const handleGetDirections = (e) => {
+    e.stopPropagation();
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        const { latitude, longitude } = position.coords;
+        window.open(`https://www.google.com/maps/dir/?api=1&origin=${latitude},${longitude}&destination=${group.coords[0]},${group.coords[1]}`, '_blank');
+      }, () => {
+        window.open(`https://www.google.com/maps/dir/?api=1&destination=${group.coords[0]},${group.coords[1]}`, '_blank');
+      });
+    }
+  };
+
+  return (
+    <div 
+      onClick={onClick}
+      className="glass rounded-3xl overflow-hidden group hover:border-brand-primary/30 transition-all flex flex-col h-full cursor-pointer active:scale-[0.98]"
+    >
+      <div className="relative h-32 md:h-40 overflow-hidden">
+        <img src={group.image} alt={group.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+        <div className="absolute top-2 left-2 px-2 py-1 bg-black/60 backdrop-blur-md rounded-lg text-[9px] font-black tracking-widest uppercase border border-white/10">
+          {group.category}
+        </div>
+        <div className="absolute bottom-2 right-2 px-2 py-1 bg-brand-primary rounded-lg text-[9px] font-black tracking-widest uppercase shadow-lg shadow-brand-primary/40">
+          {group.skill}
         </div>
       </div>
-      <button className="mt-auto w-full py-2.5 md:py-3 bg-white/5 border border-white/10 rounded-xl font-bold text-xs hover:bg-brand-primary group-hover:border-brand-primary transition-all flex items-center justify-center gap-2 text-text-primary">
-        View Group
-        <ChevronRight className="w-4 h-4" />
-      </button>
+      <div className="p-4 md:p-5 flex-1 flex flex-col">
+        <h3 className="font-bold text-base md:text-lg mb-1 group-hover:text-brand-primary transition-colors truncate text-text-primary">{group.name}</h3>
+        <div className="flex items-center gap-2 text-text-secondary text-[10px] md:text-xs mb-3">
+          <span>{group.city}</span>
+          <span>•</span>
+          <div className="flex items-center gap-1">
+            <Users className="w-3 h-3" />
+            {group.members}/{group.capacity}
+          </div>
+        </div>
+        <div className="flex gap-2 mt-auto">
+          <button className="flex-1 py-2.5 bg-white/5 border border-white/10 rounded-xl font-bold text-[10px] hover:bg-brand-primary group-hover:border-brand-primary transition-all flex items-center justify-center gap-2 text-text-primary">
+            Details
+          </button>
+          <button 
+            onClick={handleGetDirections}
+            className="px-4 py-2.5 bg-brand-secondary/20 border border-brand-secondary/30 rounded-xl font-bold text-[10px] hover:bg-brand-secondary text-brand-secondary hover:text-white transition-all flex items-center justify-center gap-2"
+          >
+            Route
+          </button>
+        </div>
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 const Discover = ({ onSelectGroup }) => {
   const [view, setView] = useState('list');
@@ -151,16 +172,16 @@ const Discover = ({ onSelectGroup }) => {
               zoomControl={false}
             >
               <LayersControl position="topright">
+                <LayersControl.BaseLayer name="Street Map" checked={document.documentElement.classList.contains('theme-light')}>
+                  <TileLayer
+                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                    attribution='&copy; OpenStreetMap'
+                  />
+                </LayersControl.BaseLayer>
+
                 <LayersControl.BaseLayer name="Clean Dark" checked={!document.documentElement.classList.contains('theme-light')}>
                   <TileLayer
                     url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
-                    attribution='&copy; CARTO'
-                  />
-                </LayersControl.BaseLayer>
-                
-                <LayersControl.BaseLayer name="Clean Light" checked={document.documentElement.classList.contains('theme-light')}>
-                  <TileLayer
-                    url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
                     attribution='&copy; CARTO'
                   />
                 </LayersControl.BaseLayer>
@@ -184,12 +205,27 @@ const Discover = ({ onSelectGroup }) => {
                     <div className="p-2 min-w-[150px]">
                       <h4 className="font-bold text-slate-900 text-xs mb-1">{group.name}</h4>
                       <p className="text-[9px] text-slate-500 mb-2 uppercase font-black tracking-tighter">{group.city} • {group.category}</p>
-                      <button 
-                        onClick={() => onSelectGroup(group)}
-                        className="w-full py-2 bg-brand-primary text-white rounded-lg text-[10px] font-black uppercase tracking-widest shadow-md active:scale-95 transition-transform"
-                      >
-                        Details
-                      </button>
+                      <div className="flex gap-2">
+                        <button 
+                          onClick={() => onSelectGroup(group)}
+                          className="flex-1 py-2 bg-slate-100 text-slate-900 rounded-lg text-[9px] font-black uppercase tracking-widest hover:bg-slate-200 transition-all"
+                        >
+                          Details
+                        </button>
+                        <button 
+                          onClick={() => {
+                            if (navigator.geolocation) {
+                              navigator.geolocation.getCurrentPosition((position) => {
+                                const { latitude, longitude } = position.coords;
+                                window.open(`https://www.google.com/maps/dir/?api=1&origin=${latitude},${longitude}&destination=${group.coords[0]},${group.coords[1]}`, '_blank');
+                              });
+                            }
+                          }}
+                          className="px-3 py-2 bg-brand-primary text-white rounded-lg text-[9px] font-black uppercase tracking-widest shadow-md active:scale-95 transition-transform"
+                        >
+                          Route
+                        </button>
+                      </div>
                     </div>
                   </Popup>
                 </Marker>
