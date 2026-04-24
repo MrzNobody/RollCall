@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import BadgeShelf from './BadgeShelf';
 import DirectMessages from './DirectMessages';
 import RecommendedGroups from './RecommendedGroups';
+import ReferralBanner from './ReferralBanner';
 
 const StatCard = ({ title, value, icon, color }) => (
   <div className="glass p-6 rounded-3xl border border-white/5 space-y-2">
@@ -115,6 +116,9 @@ const Dashboard = ({ user, onSelectGroup, onEnterAdmin }) => {
 
             {/* Phase 4: Personalized Recommendations */}
             <RecommendedGroups user={user} onSelectGroup={onSelectGroup} />
+
+            {/* Phase 4: Viral Growth */}
+            <ReferralBanner userId={user?.id} />
 
             <div className="space-y-6">
               <h3 className="text-xl font-black tracking-tight">Your Communities</h3>
