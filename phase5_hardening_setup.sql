@@ -1,5 +1,8 @@
 -- ROLLCALL PHASE 5: INSTITUTIONAL HARDENING & COMPLIANCE SCHEMA
 
+-- 0. Add is_admin to profiles (Security Master Key)
+ALTER TABLE public.profiles ADD COLUMN IF NOT EXISTS is_admin boolean DEFAULT false;
+
 -- 1. Support Tickets Table
 CREATE TABLE IF NOT EXISTS public.support_tickets (
     id uuid DEFAULT gen_random_uuid() PRIMARY KEY,
