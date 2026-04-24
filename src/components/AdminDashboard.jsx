@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { 
   Shield, Users, AlertTriangle, CheckCircle, XCircle, 
   Search, Filter, ChevronRight, MessageSquare, Flag,
-  ArrowUpRight, ArrowDownRight, Clock, ShieldAlert, LifeBuoy
+  Search, Filter, ChevronRight, MessageSquare, Flag,
+  ArrowUpRight, ArrowDownRight, Clock, ShieldAlert, LifeBuoy, Globe
 } from 'lucide-react';
 import { supabase } from '../lib/supabase';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -11,6 +12,7 @@ const AdminDashboard = () => {
   const [reports, setReports] = useState([]);
   const [tickets, setTickets] = useState([]);
   const [logs, setLogs] = useState([]);
+  const [counties, setCounties] = useState([]);
   const [stats, setStats] = useState({
     totalUsers: 0,
     activeReports: 0,
@@ -62,6 +64,13 @@ const AdminDashboard = () => {
         .order('created_at', { ascending: false })
         .limit(50);
       setLogs(logsData || []);
+
+      // Fetch Counties
+      const { data: countiesData } = await supabase
+        .from('counties')
+        .select('*')
+        .order('name', { ascending: true });
+      setCounties(countiesData || []);
     } catch (err) {
       console.error('Error fetching admin data:', err);
     } finally {
@@ -163,6 +172,13 @@ const AdminDashboard = () => {
               onClick={() => setActiveTab('users')} 
               icon={Users} 
               label="User Directory" 
+            />
+            <TabButton 
+              active={activeTab === 'counties'} 
+              onClick={() => setActiveTab('counties')} 
+              icon={Globe} 
+              label="County Manager" 
+              count={counties.filter(c => c.status === 'Waitlist').length}
             />
             <TabButton 
               active={activeTab === 'logs'} 
@@ -310,6 +326,48 @@ const AdminDashboard = () => {
                       ))}
                     </tbody>
                   </table>
+                ) : activeTab === 'counties' ? (
+                  <div className="p-6 space-y-6">
+                    <div className="flex items-center justify-between">
+                      <h4 className="text-sm font-black uppercase tracking-widest text-text-muted">Expansion Roadmap</h4>
+                      <button className="px-4 py-2 bg-brand-primary text-white rounded-xl text-[10px] font-black uppercase tracking-widest shadow-lg shadow-brand-primary/20">
+                        Add New Region
+                      </button>
+                    </div>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      {counties.map(county => (
+                        <div key={county.id} className="glass p-6 rounded-3xl border border-white/5 flex items-center justify-between group hover:border-brand-primary/20 transition-all">
+                          <div className="flex items-center gap-4">
+                            <div className={`p-3 rounded-2xl ${county.status === 'Active' ? 'bg-emerald-500/10 text-emerald-500' : 'bg-white/5 text-text-muted'}`}>
+                              <Globe className="w-5 h-5" />
+                            </div>
+                            <div>
+                              <h5 className="font-bold text-text-primary">{county.name}</h5>
+                              <p className="text-[10px] text-text-muted font-black uppercase tracking-tighter">
+                                {county.waitlist_count} VOTES • {county.status}
+                              </p>
+                            </div>
+                          </div>
+                          {county.status !== 'Active' && (
+                            <button 
+                              onClick={async () => {
+                                if (window.confirm(`Activate ${county.name} County?`)) {
+                                  const { error } = await supabase.from('counties').update({ status: 'Active' }).eq('id', county.id);
+                                  if (!error) {
+                                    await logAction('County Activation', county.id, { county: county.name });
+                                    fetchData();
+                                  }
+                                }
+                              }}
+                              className="px-4 py-2 bg-brand-primary/10 text-brand-primary border border-brand-primary/20 rounded-xl text-[9px] font-black uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity hover:bg-brand-primary hover:text-white transition-all"
+                            >
+                              Activate
+                            </button>
+                          )}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
                 ) : activeTab === 'logs' ? (
                   <div className="p-2 space-y-1">
                     {logs.map((log) => (

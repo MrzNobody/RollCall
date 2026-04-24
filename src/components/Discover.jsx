@@ -6,7 +6,7 @@ import 'leaflet/dist/leaflet.css';
 import { supabase } from '../lib/supabase';
 import { mockGroups } from '../data/mockGroups';
 import WaitlistModal from './WaitlistModal';
-import { Rocket } from 'lucide-react';
+import { Rocket, Globe } from 'lucide-react';
 
 const DefaultIcon = L.icon({
     iconUrl: 'https://unpkg.com/leaflet@1.7.1/dist/images/marker-icon.png',
@@ -76,6 +76,8 @@ const Discover = ({ onSelectGroup }) => {
   const [activeCategory, setActiveCategory] = useState('All');
   const [showWaitlist, setShowWaitlist] = useState(false);
   const [isLive, setIsLive] = useState(false);
+  const [counties, setCounties] = useState([]);
+  const [selectedCounty, setSelectedCounty] = useState(null);
 
   useEffect(() => {
     let isMounted = true;
@@ -101,6 +103,16 @@ const Discover = ({ onSelectGroup }) => {
       }
     }
     loadData();
+    
+    const fetchCounties = async () => {
+      const { data } = await supabase.from('counties').select('*').eq('status', 'Active');
+      if (data && data.length > 0) {
+        setCounties(data);
+        setSelectedCounty(data[0]);
+      }
+    };
+    fetchCounties();
+
     return () => { isMounted = false; };
   }, []);
 
@@ -119,15 +131,26 @@ const Discover = ({ onSelectGroup }) => {
       <div className="sticky top-16 z-40 bg-surface-950/80 backdrop-blur-xl border-b border-white/5 px-4 md:px-12 pt-4 md:pt-6">
         <div className="max-w-7xl mx-auto space-y-4 md:space-y-6 pb-4">
           <div className="flex flex-col md:flex-row gap-3 md:gap-4 items-center justify-between">
-            <div className="relative w-full md:w-96">
-              <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 md:w-5 md:h-5 text-text-muted" />
-              <input 
-                type="text" 
-                placeholder="Search PBC groups..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full bg-white/5 border border-white/10 rounded-2xl py-3 md:py-4 pl-10 md:pl-12 pr-6 focus:outline-none focus:border-brand-primary/50 transition-all text-xs md:text-sm text-text-primary placeholder:text-text-muted"
-              />
+            <div className="relative w-full md:w-96 flex gap-2">
+              <div className="relative flex-1">
+                <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 md:w-5 md:h-5 text-text-muted" />
+                <input 
+                  type="text" 
+                  placeholder="Search groups..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="w-full bg-white/5 border border-white/10 rounded-2xl py-3 md:py-4 pl-10 md:pl-12 pr-6 focus:outline-none focus:border-brand-primary/50 transition-all text-xs md:text-sm text-text-primary placeholder:text-text-muted"
+                />
+              </div>
+              <select 
+                value={selectedCounty?.id}
+                onChange={(e) => setSelectedCounty(counties.find(c => c.id === e.target.value))}
+                className="bg-white/5 border border-white/10 rounded-2xl px-4 py-3 md:py-4 text-[10px] md:text-xs font-black uppercase tracking-widest text-text-primary focus:outline-none focus:border-brand-primary/50 transition-all cursor-pointer"
+              >
+                {counties.map(c => (
+                  <option key={c.id} value={c.id}>{c.name}</option>
+                ))}
+              </select>
             </div>
 
             <div className="flex items-center gap-3 w-full md:w-auto">

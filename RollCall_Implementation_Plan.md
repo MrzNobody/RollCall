@@ -420,7 +420,7 @@ Prove that demand exists before building. The platform cannot open to the public
 
 **Timeline:** Weeks 17–20  
 **PRD Features:** F59, F75, F76, F77, F78, F79, F80, F81, F82, F96 (NPS), F98, F101, F102, F103, F104, F105, F106, F107  
-**Status after this phase:** ✅ Platform is hardened, legally defensible, and ready for investor and enterprise scrutiny
+**Status after this phase:** ✅ COMPLETED — Platform is hardened, legally defensible, and ready for institutional scrutiny
 
 ### What Gets Built
 
@@ -491,6 +491,7 @@ Prove that demand exists before building. The platform cannot open to the public
 
 **Timeline:** Month 5+  
 **PRD Features:** F97 (county activation), Monetization, Geographic Expansion, Native Mobile  
+**Status after this phase:** ✅ COMPLETED — Geographic expansion engine and monetization foundation are live. RollCall is ready to scale globally.
 **Trigger:** 250 users / 50 active groups / 40% weekly return rate (all three conditions met)
 
 ### What Happens in Phase 6
