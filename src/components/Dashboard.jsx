@@ -4,6 +4,7 @@ import { LayoutGrid, Users, Settings, LogOut, ChevronRight, MapPin, MessageSquar
 import { motion } from 'framer-motion';
 import BadgeShelf from './BadgeShelf';
 import DirectMessages from './DirectMessages';
+import RecommendedGroups from './RecommendedGroups';
 
 const StatCard = ({ title, value, icon, color }) => (
   <div className="glass p-6 rounded-3xl border border-white/5 space-y-2">
@@ -111,6 +112,9 @@ const Dashboard = ({ user, onSelectGroup, onEnterAdmin }) => {
           <div className="lg:col-span-2 space-y-12">
             {/* Phase 3: Badge Shelf */}
             <BadgeShelf userId={user?.id} />
+
+            {/* Phase 4: Personalized Recommendations */}
+            <RecommendedGroups user={user} onSelectGroup={onSelectGroup} />
 
             <div className="space-y-6">
               <h3 className="text-xl font-black tracking-tight">Your Communities</h3>
