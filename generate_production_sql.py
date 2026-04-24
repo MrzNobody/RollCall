@@ -78,6 +78,9 @@ with open(output_sql, 'w') as f:
     f.write("TRUNCATE public.groups CASCADE;\n")
     f.write("TRUNCATE public.memberships CASCADE;\n\n")
 
+    f.write("-- CLEANUP OLD FUNCTIONS\n")
+    f.write("DROP FUNCTION IF EXISTS create_rollcall_prod_user(text, text, text, text, int, text, text, text, text, text, decimal, int, jsonb, boolean);\n\n")
+
     f.write("""
 CREATE OR REPLACE FUNCTION create_rollcall_prod_user(
     u_email text, u_password text, u_handle text, u_name text, 
