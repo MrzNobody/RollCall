@@ -57,3 +57,35 @@ body {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
+
+/* Leaflet Popup Overrides */
+.leaflet-popup-content-wrapper {
+  background: var(--color-glass-bg) !important;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: 1.5rem !important;
+  padding: 0 !important;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04) !important;
+}
+
+.leaflet-popup-content {
+  margin: 0 !important;
+  width: auto !important;
+}
+
+.leaflet-popup-tip {
+  background: var(--color-glass-bg) !important;
+}
+
+.leaflet-container {
+  font-family: inherit !important;
+}
+
+.custom-popup .text-text-primary {
+  color: var(--color-text-primary) !important;
+}
+
+.custom-popup .text-text-secondary {
+  color: var(--color-text-secondary) !important;
+}

@@ -172,7 +172,14 @@ const Discover = ({ onSelectGroup }) => {
               zoomControl={false}
             >
               <LayersControl position="topright">
-                <LayersControl.BaseLayer name="Street Map" checked={document.documentElement.classList.contains('theme-light')}>
+                <LayersControl.BaseLayer name="Clean Light" checked={document.documentElement.classList.contains('theme-light')}>
+                  <TileLayer
+                    url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
+                    attribution='&copy; CARTO'
+                  />
+                </LayersControl.BaseLayer>
+
+                <LayersControl.BaseLayer name="Detailed Streets (Names)" checked={false}>
                   <TileLayer
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                     attribution='&copy; OpenStreetMap'
@@ -199,26 +206,31 @@ const Discover = ({ onSelectGroup }) => {
                   key={group.id} 
                   position={group.coords} 
                   icon={DefaultIcon}
-                  eventHandlers={{ click: () => onSelectGroup(group) }}
                 >
                   <Popup className="custom-popup">
-                    <div className="p-2 min-w-[150px]">
-                      <h4 className="font-bold text-slate-900 text-xs mb-1">{group.name}</h4>
-                      <p className="text-[9px] text-slate-500 mb-2 uppercase font-black tracking-tighter">{group.city} • {group.category}</p>
+                    <div className="p-3 min-w-[180px]">
+                      <h4 className="font-bold text-text-primary text-sm mb-1">{group.name}</h4>
+                      <p className="text-[10px] text-text-secondary mb-3 uppercase font-black tracking-widest">{group.city} • {group.category}</p>
                       <div className="flex gap-2">
                         <button 
                           onClick={() => onSelectGroup(group)}
-                          className="flex-1 py-2 bg-slate-100 text-slate-900 rounded-lg text-[9px] font-black uppercase tracking-widest hover:bg-slate-200 transition-all"
+                          className="flex-1 py-2 bg-surface-900 text-text-primary border border-white/10 rounded-lg text-[9px] font-black uppercase tracking-widest hover:bg-surface-800 transition-all"
                         >
                           Details
                         </button>
                         <button 
                           onClick={() => {
+                            const dest = `${group.coords[0]},${group.coords[1]}`;
                             if (navigator.geolocation) {
                               navigator.geolocation.getCurrentPosition((position) => {
                                 const { latitude, longitude } = position.coords;
-                                window.open(`https://www.google.com/maps/dir/?api=1&origin=${latitude},${longitude}&destination=${group.coords[0]},${group.coords[1]}`, '_blank');
+                                window.open(`https://www.google.com/maps/dir/?api=1&origin=${latitude},${longitude}&destination=${dest}`, '_blank');
+                              }, (err) => {
+                                console.warn("Geolocation error:", err);
+                                window.open(`https://www.google.com/maps/dir/?api=1&destination=${dest}`, '_blank');
                               });
+                            } else {
+                              window.open(`https://www.google.com/maps/dir/?api=1&destination=${dest}`, '_blank');
                             }
                           }}
                           className="px-3 py-2 bg-brand-primary text-white rounded-lg text-[9px] font-black uppercase tracking-widest shadow-md active:scale-95 transition-transform"
