@@ -453,7 +453,13 @@ function App() {
             <Logo size="sm" />
             <span className="text-sm font-black tracking-tighter uppercase">RollCall PBC</span>
           </div>
-          <div className="flex items-center gap-8">
+          <div className="flex flex-col md:flex-row items-center gap-8">
+            <div className="flex flex-col md:items-end gap-1">
+              <a href="tel:754-757-8952" className="text-[10px] font-black uppercase tracking-widest text-text-primary hover:text-brand-primary transition-all">754-757-8952</a>
+              <button onClick={() => { setStep('dashboard'); setTimeout(() => setShowSupport(true), 100); }} className="text-[10px] font-black uppercase tracking-[0.2em] text-brand-secondary hover:text-brand-secondary/80 transition-all flex items-center gap-2">
+                <LifeBuoy className="w-3 h-3" /> Contact Support
+              </button>
+            </div>
             <button onClick={() => setStep('status')} className="flex items-center gap-2 group">
               <div className="w-2 h-2 rounded-full bg-emerald-500 shadow-[0_0_10px_rgba(16,185,129,0.5)]" />
               <span className="text-[10px] font-black uppercase tracking-widest text-text-muted group-hover:text-text-primary transition-all">Systems Operational</span>
