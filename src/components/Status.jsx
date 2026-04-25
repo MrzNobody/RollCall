@@ -114,6 +114,54 @@ const Status = ({ onBack }) => {
           </div>
         </div>
 
+        {/* Sentinel Agent Monitoring */}
+        <div className="space-y-6">
+          <h3 className="text-sm font-black uppercase tracking-[0.3em] text-text-muted flex items-center gap-3">
+            <ShieldAlert className="w-4 h-4 text-brand-primary" /> Sentinel Agent Fleet
+          </h3>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="glass p-5 rounded-[2rem] border border-white/5 space-y-3">
+              <div className="flex items-center justify-between">
+                <div className="p-2 bg-brand-primary/10 rounded-xl text-brand-primary">
+                  <Zap className="w-4 h-4" />
+                </div>
+                <div className="flex items-center gap-1.5">
+                  <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.5)]" />
+                  <span className="text-[8px] font-black uppercase tracking-widest text-emerald-500">Active</span>
+                </div>
+              </div>
+              <h4 className="text-xs font-bold text-text-primary">Sync Agent</h4>
+              <p className="text-[9px] text-text-muted leading-tight">Monitoring real-time database synchronization and resident population health.</p>
+            </div>
+            <div className="glass p-5 rounded-[2rem] border border-white/5 space-y-3">
+              <div className="flex items-center justify-between">
+                <div className="p-2 bg-brand-secondary/10 rounded-xl text-brand-secondary">
+                  <Shield className="w-4 h-4" />
+                </div>
+                <div className="flex items-center gap-1.5">
+                  <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.5)]" />
+                  <span className="text-[8px] font-black uppercase tracking-widest text-emerald-500">Active</span>
+                </div>
+              </div>
+              <h4 className="text-xs font-bold text-text-primary">Security Agent</h4>
+              <p className="text-[9px] text-text-muted leading-tight">Verifying RLS policies and protecting community data from unauthorized access.</p>
+            </div>
+            <div className="glass p-5 rounded-[2rem] border border-white/5 space-y-3">
+              <div className="flex items-center justify-between">
+                <div className="p-2 bg-sky-500/10 rounded-xl text-sky-500">
+                  <Globe className="w-4 h-4" />
+                </div>
+                <div className="flex items-center gap-1.5">
+                  <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.5)]" />
+                  <span className="text-[8px] font-black uppercase tracking-widest text-emerald-500">Active</span>
+                </div>
+              </div>
+              <h4 className="text-xs font-bold text-text-primary">Verify Agent</h4>
+              <p className="text-[9px] text-text-muted leading-tight">Performing automated smoke tests and navigation integrity checks across the Hub.</p>
+            </div>
+          </div>
+        </div>
+
         {/* Uptime History */}
         <div className="space-y-6">
           <h3 className="text-sm font-black uppercase tracking-[0.3em] text-text-muted flex items-center gap-3">
@@ -122,15 +170,15 @@ const Status = ({ onBack }) => {
           <div className="space-y-3">
             <div className="p-4 bg-white/5 border border-white/5 rounded-2xl flex items-center justify-between">
               <div className="flex flex-col">
-                <span className="text-xs font-bold text-text-primary">Phase 5 Hardening Update</span>
-                <span className="text-[9px] text-text-muted font-medium">April 24, 2026</span>
+                <span className="text-xs font-bold text-text-primary">System Restoration: Carlo Admin Authority</span>
+                <span className="text-[9px] text-text-muted font-medium">April 25, 2026</span>
               </div>
               <span className="text-[9px] font-black uppercase tracking-widest text-emerald-500">Completed</span>
             </div>
-            <div className="p-4 bg-white/5 border border-white/5 rounded-2xl flex items-center justify-between opacity-50">
+            <div className="p-4 bg-white/5 border border-white/5 rounded-2xl flex items-center justify-between">
               <div className="flex flex-col">
-                <span className="text-xs font-bold text-text-primary">Database Index Optimization</span>
-                <span className="text-[9px] text-text-muted font-medium">April 22, 2026</span>
+                <span className="text-xs font-bold text-text-primary">Phase 5 Hardening Update</span>
+                <span className="text-[9px] text-text-muted font-medium">April 24, 2026</span>
               </div>
               <span className="text-[9px] font-black uppercase tracking-widest text-emerald-500">Completed</span>
             </div>
