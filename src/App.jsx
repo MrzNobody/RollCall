@@ -356,7 +356,7 @@ function App() {
     <div data-testid="main-app" className="min-h-screen bg-surface-950 text-text-primary selection:bg-brand-secondary/30 flex flex-col font-sans transition-all duration-500">
       <nav className="fixed top-0 w-full z-50 glass border-b border-white/5 py-4 px-6 md:px-12 flex justify-between items-center">
         <div className="flex items-center gap-4 cursor-pointer" onClick={() => {
-          setStep(user ? 'dashboard' : 'hero');
+          setStep('hero');
           setSelectedGroup(null);
           setSelectedCategory(null);
           setActiveCategoryFilter('All');
