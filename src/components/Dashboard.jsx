@@ -193,7 +193,6 @@ const Dashboard = ({ user, onSelectGroup, onEnterAdmin, onEnterDiscover }) => {
       {showSupport && (
         <SupportCenter user={user} onClose={() => setShowSupport(false)} />
       )}
-      </div>
     </div>
   );
 };
