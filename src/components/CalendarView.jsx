@@ -163,7 +163,7 @@ const CalendarView = ({ groupId, user }) => {
     try {
       const { data, error } = await supabase
         .from('events')
-        .select('*')
+        .select('id, title, description, event_date, location_name, max_attendees')
         .eq('group_id', groupId)
         .gte('event_date', new Date().toISOString())
         .order('event_date', { ascending: true });

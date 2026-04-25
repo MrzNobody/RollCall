@@ -32,15 +32,15 @@ const AdminDashboard = () => {
       // Fetch Reports
       const { data: reportsData } = await supabase
         .from('reports')
-        .select('*')
+        .select('id, reporter_id, target_id, target_type, reason, description, status, action_taken, created_at, resolved_at')
         .order('created_at', { ascending: false });
       
       setReports(reportsData || []);
 
       // Fetch Stats
-      const { count: userCount } = await supabase.from('profiles').select('*', { count: 'exact', head: true });
-      const { count: flaggedCount } = await supabase.from('profiles').select('*', { count: 'exact', head: true }).eq('is_flagged', true);
-      const { count: pendingReports } = await supabase.from('reports').select('*', { count: 'exact', head: true }).eq('status', 'pending');
+      const { count: userCount } = await supabase.from('profiles').select('id', { count: 'exact', head: true });
+      const { count: flaggedCount } = await supabase.from('profiles').select('id', { count: 'exact', head: true }).eq('is_flagged', true);
+      const { count: pendingReports } = await supabase.from('reports').select('id', { count: 'exact', head: true }).eq('status', 'pending');
 
       setStats({
         totalUsers: userCount || 0,
@@ -52,14 +52,14 @@ const AdminDashboard = () => {
       // Fetch Support Tickets
       const { data: ticketsData } = await supabase
         .from('support_tickets')
-        .select('*')
+        .select('id, user_id, category, subject, description, status, priority, created_at')
         .order('created_at', { ascending: false });
       setTickets(ticketsData || []);
 
       // Fetch Audit Logs
       const { data: logsData } = await supabase
         .from('admin_audit_log')
-        .select('*')
+        .select('id, admin_id, action, target_id, details, created_at')
         .order('created_at', { ascending: false })
         .limit(50);
       setLogs(logsData || []);
@@ -67,7 +67,7 @@ const AdminDashboard = () => {
       // Fetch Counties
       const { data: countiesData } = await supabase
         .from('counties')
-        .select('*')
+        .select('id, name, status, waitlist_count, created_at')
         .order('name', { ascending: true });
       setCounties(countiesData || []);
     } catch (err) {

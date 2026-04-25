@@ -32,7 +32,7 @@ const SupportCenter = ({ user, onClose }) => {
   const fetchTickets = async () => {
     const { data } = await supabase
       .from('support_tickets')
-      .select('*')
+      .select('id, category, subject, description, status, created_at')
       .eq('user_id', user.id)
       .order('created_at', { ascending: false });
     

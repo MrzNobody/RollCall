@@ -1,0 +1,26 @@
+# RollCall — Global Agent Directive
+
+You are an AI assistant working on **RollCall**, a high-fidelity platform for hobby communities.
+Every action you take must comply with the single source of truth: **RollCall_Antigravity_Setup/AGENTS.md**.
+
+## Critical Directives
+- **The PRD is Law:** Implement features exactly as specified in `docs/RollCall_PRD.md`.
+- **Phased Rollout:** Only build features for the current phase (Phase 6: Scaling & Expansion).
+- **Safety First:** Minimum age is 13. Never add 18+ gates.
+- **Data Privacy:** Never expose email addresses in member-facing APIs.
+- **Tech Stack:** Stick to the non-negotiable stack in `AGENTS.md`.
+
+## Agent Persona Activation
+For specific tasks, refer to the specialized skills in:
+- `RollCall_Antigravity_Setup/.agents/skills/prd-guardian.md`
+- `RollCall_Antigravity_Setup/.agents/skills/code-reviewer.md`
+- `RollCall_Antigravity_Setup/.agents/skills/ui-ux-designer.md`
+- `RollCall_Antigravity_Setup/.agents/skills/moderation-enforcer.md`
+
+## Formatting & Design
+- Use **Vibrant Aesthetics**: sleek dark modes, HSL tailored colors, and glassmorphism.
+- Use **Micro-animations**: smooth Framer Motion transitions on all interactive elements.
+- No placeholders. Generate images via tools if needed.
+
+---
+*Refer to `AGENTS.md` for the "Master Admin" safety protocols before any destructive operation.*

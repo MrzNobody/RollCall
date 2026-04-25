@@ -52,7 +52,7 @@ const DirectMessages = ({ user, onClose }) => {
       // For this demo, we'll fetch unique users the current user has messaged
       const { data, error } = await supabase
         .from('profiles')
-        .select('*')
+        .select('id, full_name')
         .neq('id', user.id)
         .limit(5); // Show some sample neighbors to start a chat with
       
@@ -68,7 +68,7 @@ const DirectMessages = ({ user, onClose }) => {
   const fetchMessages = async (targetId) => {
     const { data } = await supabase
       .from('direct_messages')
-      .select('*')
+      .select('id, sender_id, receiver_id, content, created_at')
       .or(`and(sender_id.eq.${user.id},receiver_id.eq.${targetId}),and(sender_id.eq.${targetId},receiver_id.eq.${user.id})`)
       .order('created_at', { ascending: true });
     

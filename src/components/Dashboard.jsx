@@ -33,7 +33,18 @@ const JoinedGroupCard = ({ group, onClick }) => (
         <span className="flex items-center gap-1"><Users className="w-3 h-3" /> {group.members} Members</span>
       </div>
     </div>
-    <ChevronRight className="w-5 h-5 text-text-muted group-hover:text-brand-primary group-hover:translate-x-1 transition-all" />
+    <div className="flex flex-col items-end gap-2">
+      <div className="flex items-center gap-2">
+        <button 
+          onClick={(e) => { e.stopPropagation(); onClick(); }} // In this context, just go to the group
+          className="p-2 rounded-xl bg-white/5 border border-white/10 text-text-muted hover:text-brand-primary transition-all"
+          title="Community Forum"
+        >
+          <MessageSquare className="w-4 h-4" />
+        </button>
+        <ChevronRight className="w-5 h-5 text-text-muted group-hover:text-brand-primary group-hover:translate-x-1 transition-all" />
+      </div>
+    </div>
   </div>
 );
 
@@ -60,7 +71,7 @@ const Dashboard = ({ user, onSelectGroup, onEnterAdmin, onEnterDiscover }) => {
           const groupIds = memberships.map(m => m.group_id);
           const { data: groups, error: gError } = await supabase
             .from('groups')
-            .select('*')
+            .select('id, name, image, city, members')
             .in('id', groupIds);
           
           if (gError) throw gError;
@@ -155,7 +166,7 @@ const Dashboard = ({ user, onSelectGroup, onEnterAdmin, onEnterDiscover }) => {
             {/* Phase 4: Viral Growth */}
             <ReferralBanner userId={user?.id} />
 
-            <div className="space-y-6">
+            <div id="communities-section" className="space-y-6">
               <h3 className="text-xl font-black tracking-tight">Your Communities</h3>
             {loading ? (
               <div className="flex items-center justify-center py-20">

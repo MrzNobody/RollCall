@@ -89,7 +89,7 @@ const Discover = ({ onSelectGroup, initialCategory = 'All' }) => {
     let isMounted = true;
     async function loadData() {
       try {
-        const { data, error } = await supabase.from('groups').select('*');
+        const { data, error } = await supabase.from('groups').select('id, name, image, category, skill, city, members, capacity, coords, description');
         if (isMounted) {
           if (data && data.length > 0) {
             const normalized = data.map(g => ({
@@ -111,7 +111,7 @@ const Discover = ({ onSelectGroup, initialCategory = 'All' }) => {
     loadData();
     
     const fetchCounties = async () => {
-      const { data } = await supabase.from('counties').select('*').eq('status', 'Active');
+      const { data } = await supabase.from('counties').select('id, name, status').eq('status', 'Active');
       if (data && data.length > 0) {
         setCounties(data);
         setSelectedCounty(data[0]);

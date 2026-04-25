@@ -41,7 +41,7 @@ const GroupDetail = ({ group, onBack, user }) => {
     const checkMembership = async () => {
       const { data } = await supabase
         .from('memberships')
-        .select('*')
+        .select('id, user_id, role')
         .eq('user_id', user.id)
         .eq('group_id', group.id)
         .single();
@@ -55,7 +55,7 @@ const GroupDetail = ({ group, onBack, user }) => {
     const fetchMessages = async () => {
       const { data } = await supabase
         .from('messages')
-        .select('*')
+        .select('id, user, text, created_at')
         .eq('group_id', group.id)
         .order('created_at', { ascending: true });
       
@@ -180,7 +180,7 @@ const GroupDetail = ({ group, onBack, user }) => {
       {/* Navigation Tabs */}
       <div className="border-b border-white/5 bg-surface-950/80 backdrop-blur-xl sticky top-16 z-30 px-6 md:px-12">
         <div className="max-w-7xl mx-auto flex gap-10">
-          {['Chat', 'Forum', 'Session Info', 'Members'].map(tab => (
+          {['Chat', 'Forum', 'Schedule', 'Rules & FAQ'].map(tab => (
             <button 
               key={tab}
               onClick={() => setActiveTab(tab.toLowerCase())}
@@ -246,8 +246,55 @@ const GroupDetail = ({ group, onBack, user }) => {
             <Forum groupId={group.id} user={user} />
           )}
 
-          {activeTab === 'session info' && (
+          {activeTab === 'schedule' && (
             <CalendarView groupId={group.id} user={user} />
+          )}
+
+          {activeTab === 'rules & faq' && (
+            <div className="space-y-8 animate-fade-in">
+              <div className="glass p-10 rounded-[3rem] border border-white/5 space-y-10">
+                <section className="space-y-6">
+                  <h3 className="text-xl font-black tracking-tight flex items-center gap-3">
+                    <ShieldCheck className="w-6 h-6 text-brand-primary" />
+                    Community Standards
+                  </h3>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    {[
+                      { title: 'Be Respectful', desc: 'Treat all neighbors with kindness. No harassment or hate speech.' },
+                      { title: 'Local First', desc: 'This is a PBC specific group. Keep discussions relevant to our area.' },
+                      { title: 'Safety First', desc: 'Always meet in public PBC spaces for first-time sessions.' },
+                      { title: 'No Spam', desc: 'Keep the chat and forum free of unsolicited ads or self-promotion.' }
+                    ].map(rule => (
+                      <div key={rule.title} className="p-4 rounded-2xl bg-white/5 border border-white/5">
+                        <h4 className="text-[10px] font-black uppercase tracking-widest text-brand-secondary mb-2">{rule.title}</h4>
+                        <p className="text-sm text-text-secondary leading-relaxed">{rule.desc}</p>
+                      </div>
+                    ))}
+                  </div>
+                </section>
+
+                <div className="h-px bg-white/5" />
+
+                <section className="space-y-6">
+                  <h3 className="text-xl font-black tracking-tight flex items-center gap-3">
+                    <MessageSquare className="w-6 h-6 text-brand-secondary" />
+                    Frequently Asked Questions
+                  </h3>
+                  <div className="space-y-4">
+                    {[
+                      { q: 'How do I join a session?', a: 'Navigate to the "Schedule" tab and click "Going" on any upcoming event.' },
+                      { q: 'Can I invite friends?', a: 'Yes! As long as they are PBC residents and the group has capacity.' },
+                      { q: 'Who runs this group?', a: 'This is a community-led group. You can see the creator in the header.' }
+                    ].map(item => (
+                      <div key={item.q} className="p-6 rounded-2xl bg-white/5 border border-white/5">
+                        <h4 className="text-sm font-bold text-text-primary mb-2">{item.q}</h4>
+                        <p className="text-sm text-text-secondary">{item.a}</p>
+                      </div>
+                    ))}
+                  </div>
+                </section>
+              </div>
+            </div>
           )}
         </div>
 

@@ -29,7 +29,7 @@ const ReferralBanner = ({ userId }) => {
     // 2. Get recruitment stats
     const { count } = await supabase
       .from('referrals')
-      .select('*', { count: 'exact', head: true })
+      .select('id', { count: 'exact', head: true })
       .eq('referrer_id', userId);
     
     setStats(count || 0);
