@@ -8,6 +8,7 @@ import Dashboard from './components/Dashboard';
 import Auth from './components/Auth';
 import AdminDashboard from './components/AdminDashboard';
 import Status from './components/Status';
+import FAQ from './components/FAQ';
 import { supabase } from './lib/supabase';
 
 // High-Fidelity PRD Logo: 6-Node Hexagonal Network with Center Hub
@@ -271,6 +272,7 @@ function App() {
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [categoryCounts, setCategoryCounts] = useState({});
   const [isInitializing, setIsInitializing] = useState(true);
+  const [isAdmin, setIsAdmin] = useState(false);
 
   useEffect(() => {
     const fetchCounts = async () => {
@@ -319,13 +321,18 @@ function App() {
     }
     init();
 
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(async (_event, session) => {
       setUser(session?.user ?? null);
       if (session?.user) {
         setShowAuth(false);
+        // Check for admin status via email or profile flag
+        if (session.user.email === 'craineri76@gmail.com') {
+          setIsAdmin(true);
+        }
         if (step === 'hero') setStep('dashboard');
       } else {
         setStep('hero');
+        setIsAdmin(false);
       }
     });
 
@@ -377,16 +384,12 @@ function App() {
                 <button onClick={() => setStep('dashboard')} className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-white/5 transition-all text-xs font-bold text-text-primary"><LayoutDashboard className="w-4 h-4" /> My Hub</button>
                 <button onClick={() => setStep('discover')} className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-white/5 transition-all text-xs font-bold text-text-primary"><MapPin className="w-4 h-4" /> Discover Map</button>
                 <button onClick={() => { setStep('dashboard'); setTimeout(() => { const el = document.getElementById('communities-section'); el?.scrollIntoView({ behavior: 'smooth' }); }, 100); }} className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-white/5 transition-all text-xs font-bold text-text-primary"><MessageSquare className="w-4 h-4" /> Community Forums</button>
-                <button onClick={() => setStep('status')} className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-white/5 transition-all text-xs font-bold text-text-primary"><Activity className="w-4 h-4" /> System Status</button>
+                {isAdmin && <button onClick={() => setStep('status')} className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-white/5 transition-all text-xs font-bold text-text-primary"><Activity className="w-4 h-4 text-emerald-500" /> System Status</button>}
                 <button onClick={handleLogout} className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-rose-500/10 text-rose-400 font-bold mt-1"><LogOut className="w-4 h-4" /> Sign Out</button>
               </div>
             </div>
           ) : (
             <div className="flex items-center gap-4">
-              <button onClick={() => setStep('status')} className="hidden sm:flex items-center gap-2 px-4 py-2 text-[9px] font-black uppercase tracking-widest text-text-muted hover:text-text-primary transition-all">
-                <Activity className="w-4 h-4 text-emerald-500" />
-                Status
-              </button>
               <button onClick={() => setShowAuth(true)} className="bg-brand-primary text-white px-8 py-2.5 rounded-full text-[10px] font-black uppercase tracking-widest hover:bg-brand-primary/80 shadow-xl shadow-brand-primary/20">Sign In</button>
             </div>
           )}
@@ -433,17 +436,18 @@ function App() {
 
             <div className="flex flex-col md:flex-row gap-4 mt-20">
               <button onClick={() => user ? setStep('dashboard') : setShowAuth(true)} className="bg-text-primary text-surface-950 px-12 py-5 rounded-3xl font-black text-sm flex items-center justify-center gap-2 hover:scale-105 transition-all shadow-2xl">Start Discovering <ChevronRight className="w-5 h-5 flex-shrink-0" /></button>
-              <button onClick={() => setStep('discover')} className="glass px-12 py-5 rounded-3xl font-black text-sm hover:bg-white/10 transition-all text-text-primary">View Local Map</button>
+              <button onClick={() => user ? setStep('discover') : setShowAuth(true)} className="glass px-12 py-5 rounded-3xl font-black text-sm hover:bg-white/10 transition-all text-text-primary">View Local Map</button>
             </div>
           </div>
         )}
 
         {step === 'dashboard' && <Dashboard user={user} onSelectGroup={(g) => { setSelectedGroup(g); setStep('group-detail'); }} onCreateGroup={() => setStep('create-group')} onEnterDiscover={(cat) => { setActiveCategoryFilter(cat || 'All'); setStep('discover'); }} onEnterAdmin={() => setStep('admin')} />}
-        {step === 'discover' && <Discover initialCategory={activeCategoryFilter} onSelectGroup={(g) => { setSelectedGroup(g); setStep('group-detail'); }} />}
+        {step === 'discover' && (user ? <Discover initialCategory={activeCategoryFilter} onSelectGroup={(g) => { setSelectedGroup(g); setStep('group-detail'); }} /> : <div className="flex-1 flex items-center justify-center"><button onClick={() => setShowAuth(true)} className="bg-brand-primary px-12 py-5 rounded-3xl font-black uppercase tracking-widest shadow-2xl">Sign In to View Map</button></div>)}
         {step === 'create-group' && <CreateGroup onCreated={() => setStep('dashboard')} onCancel={() => setStep('dashboard')} />}
         {step === 'group-detail' && <GroupDetail group={selectedGroup} onBack={() => setStep('dashboard')} />}
         {step === 'admin' && <AdminDashboard onBack={() => setStep('dashboard')} />}
-        {step === 'status' && <Status onBack={() => setStep(user ? 'dashboard' : 'hero')} />}
+        {step === 'status' && (isAdmin ? <Status onBack={() => setStep(user ? 'dashboard' : 'hero')} /> : <div className="flex-1 flex items-center justify-center"><p className="text-rose-500 font-black uppercase tracking-widest">Unauthorized Access</p></div>)}
+        {step === 'faq' && <FAQ onBack={() => setStep('hero')} />}
       </main>
 
       {/* Global Footer */}
@@ -453,17 +457,21 @@ function App() {
             <Logo size="sm" />
             <span className="text-sm font-black tracking-tighter uppercase">RollCall PBC</span>
           </div>
-          <div className="flex flex-col md:flex-row items-center gap-8">
+          <div className="flex flex-col md:flex-row items-center gap-12">
             <div className="flex flex-col md:items-end gap-1">
-              <a href="tel:754-757-8952" className="text-[10px] font-black uppercase tracking-widest text-text-primary hover:text-brand-primary transition-all">754-757-8952</a>
-              <button onClick={() => { setStep('dashboard'); setTimeout(() => setShowSupport(true), 100); }} className="text-[10px] font-black uppercase tracking-[0.2em] text-brand-secondary hover:text-brand-secondary/80 transition-all flex items-center gap-2">
-                <LifeBuoy className="w-3 h-3" /> Contact Support
-              </button>
+              <span className="text-[8px] font-black uppercase tracking-widest text-text-muted mb-1">Service Support</span>
+              <a href="tel:754-757-8952" className="text-lg font-black tracking-tight text-text-primary hover:text-brand-primary transition-all">754-757-8952</a>
+              <div className="flex gap-4 mt-2">
+                <button onClick={() => setStep('faq')} className="text-[10px] font-black uppercase tracking-widest text-text-muted hover:text-brand-primary transition-all">Platform FAQs</button>
+                <button onClick={() => { setStep('dashboard'); setTimeout(() => setShowSupport(true), 100); }} className="text-[10px] font-black uppercase tracking-widest text-brand-secondary hover:text-brand-secondary/80 transition-all">Contact Support</button>
+              </div>
             </div>
-            <button onClick={() => setStep('status')} className="flex items-center gap-2 group">
-              <div className="w-2 h-2 rounded-full bg-emerald-500 shadow-[0_0_10px_rgba(16,185,129,0.5)]" />
-              <span className="text-[10px] font-black uppercase tracking-widest text-text-muted group-hover:text-text-primary transition-all">Systems Operational</span>
-            </button>
+            {isAdmin && (
+              <button onClick={() => setStep('status')} className="flex items-center gap-2 group">
+                <div className="w-2 h-2 rounded-full bg-emerald-500 shadow-[0_0_10px_rgba(16,185,129,0.5)]" />
+                <span className="text-[10px] font-black uppercase tracking-widest text-text-muted group-hover:text-text-primary transition-all">Systems Operational</span>
+              </button>
+            )}
             <span className="text-[10px] font-black uppercase tracking-widest text-text-muted">© 2026 ROLLCALL PBC PILOT</span>
           </div>
         </div>
