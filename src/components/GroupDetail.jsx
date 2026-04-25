@@ -258,39 +258,74 @@ const GroupDetail = ({ group, onBack, user }) => {
                     <ShieldCheck className="w-6 h-6 text-brand-primary" />
                     Community Standards
                   </h3>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    {[
-                      { title: 'Be Respectful', desc: 'Treat all neighbors with kindness. No harassment or hate speech.' },
-                      { title: 'Local First', desc: 'This is a PBC specific group. Keep discussions relevant to our area.' },
-                      { title: 'Safety First', desc: 'Always meet in public PBC spaces for first-time sessions.' },
-                      { title: 'No Spam', desc: 'Keep the chat and forum free of unsolicited ads or self-promotion.' }
-                    ].map(rule => (
-                      <div key={rule.title} className="p-4 rounded-2xl bg-white/5 border border-white/5">
-                        <h4 className="text-[10px] font-black uppercase tracking-widest text-brand-secondary mb-2">{rule.title}</h4>
-                        <p className="text-sm text-text-secondary leading-relaxed">{rule.desc}</p>
-                      </div>
-                    ))}
+                  <div className="p-8 bg-brand-primary/5 border border-brand-primary/10 rounded-[2rem] space-y-4">
+                    <p className="text-sm text-text-primary leading-relaxed font-medium italic">
+                      "To ensure a safe and competitive environment for all Palm Beach County residents, members of {group.name} agree to the following standards:"
+                    </p>
+                    <div className="space-y-3">
+                      {group.rules ? (
+                        group.rules.split('.').filter(r => r.trim()).map((rule, i) => (
+                          <div key={i} className="flex gap-4 items-start">
+                            <div className="w-6 h-6 bg-brand-primary/20 rounded-lg flex items-center justify-center shrink-0 mt-0.5">
+                              <span className="text-[10px] font-black text-brand-primary">{i + 1}</span>
+                            </div>
+                            <p className="text-xs text-text-muted font-medium leading-relaxed">{rule.trim()}.</p>
+                          </div>
+                        ))
+                      ) : (
+                        <>
+                          <div className="flex gap-4 items-start">
+                            <div className="w-6 h-6 bg-brand-primary/20 rounded-lg flex items-center justify-center shrink-0 mt-0.5">
+                              <span className="text-[10px] font-black text-brand-primary">1</span>
+                            </div>
+                            <p className="text-xs text-text-muted font-medium leading-relaxed">Residents first. This group is for the Palm Beach community. Keep interactions local and relevant.</p>
+                          </div>
+                          <div className="flex gap-4 items-start">
+                            <div className="w-6 h-6 bg-brand-primary/20 rounded-lg flex items-center justify-center shrink-0 mt-0.5">
+                              <span className="text-[10px] font-black text-brand-primary">2</span>
+                            </div>
+                            <p className="text-xs text-text-muted font-medium leading-relaxed">Intergenerational Respect. We have members of all ages. Maintain a professional and helpful tone at all times.</p>
+                          </div>
+                        </>
+                      )}
+                    </div>
                   </div>
                 </section>
 
-                <div className="h-px bg-white/5" />
-
                 <section className="space-y-6">
                   <h3 className="text-xl font-black tracking-tight flex items-center gap-3">
-                    <MessageSquare className="w-6 h-6 text-brand-secondary" />
+                    <HelpCircle className="w-6 h-6 text-brand-primary" />
                     Frequently Asked Questions
                   </h3>
-                  <div className="space-y-4">
-                    {[
-                      { q: 'How do I join a session?', a: 'Navigate to the "Schedule" tab and click "Going" on any upcoming event.' },
-                      { q: 'Can I invite friends?', a: 'Yes! As long as they are PBC residents and the group has capacity.' },
-                      { q: 'Who runs this group?', a: 'This is a community-led group. You can see the creator in the header.' }
-                    ].map(item => (
-                      <div key={item.q} className="p-6 rounded-2xl bg-white/5 border border-white/5">
-                        <h4 className="text-sm font-bold text-text-primary mb-2">{item.q}</h4>
-                        <p className="text-sm text-text-secondary">{item.a}</p>
-                      </div>
-                    ))}
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    {group.faq && group.faq.length > 0 ? (
+                      group.faq.map((item, i) => (
+                        <div key={i} className="p-6 bg-white/5 border border-white/10 rounded-2xl space-y-2">
+                          <h4 className="font-bold text-text-primary text-sm flex items-center gap-2">
+                            <HelpCircle className="w-4 h-4 text-brand-primary" />
+                            {item.q}
+                          </h4>
+                          <p className="text-xs text-text-muted leading-relaxed font-medium">{item.a}</p>
+                        </div>
+                      ))
+                    ) : (
+                      <>
+                        <div className="p-6 bg-white/5 border border-white/10 rounded-2xl space-y-2">
+                          <h4 className="font-bold text-text-primary text-sm flex items-center gap-2">
+                            <HelpCircle className="w-4 h-4 text-brand-primary" />
+                            How do I join this group?
+                          </h4>
+                          <p className="text-xs text-text-muted leading-relaxed font-medium">Simply click the 'Join Community' button. Most groups are open to all residents immediately.</p>
+                        </div>
+                        <div className="p-6 bg-white/5 border border-white/10 rounded-2xl space-y-2">
+                          <h4 className="font-bold text-text-primary text-sm flex items-center gap-2">
+                            <HelpCircle className="w-4 h-4 text-brand-primary" />
+                            Are sessions free?
+                          </h4>
+                          <p className="text-xs text-text-muted leading-relaxed font-medium">Standard community sessions are free. Hosted tournaments may have a small prize pool fee.</p>
+                        </div>
+                      </>
+                    )}
                   </div>
                 </section>
               </div>
