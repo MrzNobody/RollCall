@@ -269,6 +269,10 @@ const SupportCenter = ({ user, onClose }) => {
                     answer="RollCall has a zero-tolerance policy. Use the 'Report' button on any post or profile to flag it for our Admin Command Center. High-severity reports are actioned in under 4 hours."
                   />
                   <FAQItem 
+                    question="How old do I need to be to join?"
+                    answer="RollCall is open to all Palm Beach County residents aged 13 and above. We are dedicated to building a safe, intergenerational community for local gamers and residents."
+                  />
+                  <FAQItem 
                     question="How do I earn badges?"
                     answer="Badges are awarded automatically for participation (milestones), being helpful in forums (merits), and helping the platform grow (recruitment)."
                   />
