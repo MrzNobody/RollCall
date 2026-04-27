@@ -186,6 +186,7 @@ const Dashboard = ({ user, onSelectGroup, onEnterAdmin, onEnterDiscover }) => {
                 <p className="text-text-secondary text-sm max-w-xs mx-auto">You haven't joined any groups yet. Start exploring the map!</p>
               </div>
             )}
+            </div>
           </div>
         </div>
       </div>
