@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { ChevronLeft, ChevronRight, MapPin, Users, Rocket, Loader2, Wifi, Building2, Zap } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { supabase } from '../lib/supabase';
+import { getGroupImage } from '../lib/groupImage';
 import { MapContainer, TileLayer, Marker, useMapEvents } from 'react-leaflet';
 
 const ONLINE_CATEGORIES = new Set([
@@ -100,7 +101,7 @@ const CreateGroup = ({ onCancel, onCreated, user }) => {
         skill: formData.skill,
         created_by: user?.id,
         members: 1,
-        image: 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&q=80&w=800',
+        image: getGroupImage(formData.name, formData.category),
       };
 
       if (isOnline) {
