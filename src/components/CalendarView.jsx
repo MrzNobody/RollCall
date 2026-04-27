@@ -52,7 +52,7 @@ const EventCard = ({ event, user, onRsvp }) => {
     }
   };
 
-  const date = new Date(event.event_date);
+  const date = new Date(event.starts_at);
 
   return (
     <motion.div 
@@ -86,7 +86,7 @@ const EventCard = ({ event, user, onRsvp }) => {
             </div>
             <div className="flex items-center gap-2">
               <MapPin className="w-4 h-4 text-brand-secondary" />
-              {event.location_name}
+              {event.location}
             </div>
           </div>
 
@@ -120,8 +120,8 @@ const EventCard = ({ event, user, onRsvp }) => {
             color="orange" 
           />
           <RsvpButton 
-            active={myRsvp === 'declined'} 
-            onClick={() => handleRsvpAction('declined')} 
+            active={myRsvp === 'not_going'}
+            onClick={() => handleRsvpAction('not_going')}
             icon={XCircle} 
             label="Pass" 
             color="rose" 
@@ -163,10 +163,10 @@ const CalendarView = ({ groupId, user }) => {
     try {
       const { data, error } = await supabase
         .from('events')
-        .select('id, title, description, event_date, location_name, max_attendees')
+        .select('id, title, description, starts_at, location, max_attendees')
         .eq('group_id', groupId)
-        .gte('event_date', new Date().toISOString())
-        .order('event_date', { ascending: true });
+        .gte('starts_at', new Date().toISOString())
+        .order('starts_at', { ascending: true });
       
       if (error) throw error;
       setEvents(data || []);

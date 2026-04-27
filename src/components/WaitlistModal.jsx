@@ -12,17 +12,23 @@ const WaitlistModal = ({ isOpen, onClose, initialCity }) => {
   const [city, setCity] = useState(initialCity || '');
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [voteCount] = useState(() => Math.floor(Math.random() * 50) + 10);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    
-    // In a real app, we'd save this to a waitlist table
-    // For now, we'll simulate a successful capture
-    await new Promise(r => setTimeout(r, 1500));
-    
-    setSubmitted(true);
-    setLoading(false);
+    try {
+      const { error } = await supabase
+        .from('geo_waitlist')
+        .insert({ email: email.trim().toLowerCase(), city: city.trim() });
+      // Ignore unique-violation (already on waitlist) — still show success
+      if (error && error.code !== '23505') throw error;
+      setSubmitted(true);
+    } catch (err) {
+      console.error('Waitlist insert failed:', err);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -92,7 +98,7 @@ const WaitlistModal = ({ isOpen, onClose, initialCity }) => {
                   </form>
 
                   <p className="text-center text-[10px] text-text-muted font-bold uppercase tracking-[0.2em]">
-                    Already have {Math.floor(Math.random() * 50) + 10} votes in your area!
+                    Already have {voteCount} votes in your area!
                   </p>
                 </>
               ) : (

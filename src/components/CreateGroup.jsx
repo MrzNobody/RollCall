@@ -13,7 +13,7 @@ const LocationPicker = ({ coords, setCoords }) => {
   return coords ? <Marker position={coords} /> : null;
 };
 
-const CreateGroup = ({ onBack, onSuccess, userId }) => {
+const CreateGroup = ({ onCancel, onCreated, user }) => {
   const [step, setStep] = useState(1);
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
@@ -33,13 +33,20 @@ const CreateGroup = ({ onBack, onSuccess, userId }) => {
         .from('groups')
         .insert([{
           ...formData,
+          created_by: user?.id,
           members: 1, // The creator is the first member
           image: `https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&q=80&w=800` // Default placeholder
         }])
         .select();
 
       if (error) throw error;
-      onSuccess(data[0]);
+
+      // Auto-join creator as a member
+      if (user?.id && data[0]?.id) {
+        await supabase.from('memberships').insert({ user_id: user.id, group_id: data[0].id });
+      }
+
+      onCreated(data[0]);
     } catch (err) {
       console.error('Error creating group:', err);
     } finally {
@@ -59,7 +66,7 @@ const CreateGroup = ({ onBack, onSuccess, userId }) => {
           />
         </div>
 
-        <button onClick={onBack} className="flex items-center gap-2 text-text-secondary hover:text-text-primary mb-8 transition-colors text-xs font-bold uppercase tracking-widest">
+        <button onClick={onCancel} className="flex items-center gap-2 text-text-secondary hover:text-text-primary mb-8 transition-colors text-xs font-bold uppercase tracking-widest">
           <ChevronLeft className="w-4 h-4" />
           Cancel
         </button>

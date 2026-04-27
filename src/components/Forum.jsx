@@ -76,10 +76,20 @@ const Forum = ({ groupId, user }) => {
   const [newPost, setNewPost] = useState({ title: '', content: '', category: 'discussion' });
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState('');
+  const [submittingComment, setSubmittingComment] = useState(false);
 
   useEffect(() => {
     fetchPosts();
   }, [groupId]);
+
+  const fetchComments = async (postId) => {
+    const { data, error } = await supabase
+      .from('forum_comments')
+      .select('id, content, author_id, created_at')
+      .eq('post_id', postId)
+      .order('created_at', { ascending: true });
+    if (!error) setComments(data || []);
+  };
 
   const fetchPosts = async () => {
     setLoading(true);
@@ -128,9 +138,35 @@ const Forum = ({ groupId, user }) => {
   };
 
   const handleVote = async (postId, type) => {
-    // In a real app, we would update the DB and check for duplicate votes
-    // For this prototype, we'll just update the local state to show the UI feedback
-    setPosts(prev => prev.map(p => p.id === postId ? { ...p, upvotes: p.upvotes + type } : p));
+    if (!user) return;
+    try {
+      // Upsert vote — if they already voted, update direction; otherwise insert
+      const { error } = await supabase
+        .from('post_votes')
+        .upsert({ post_id: postId, user_id: user.id, vote_type: type }, { onConflict: 'post_id,user_id' });
+      if (error) throw error;
+      // Update local state optimistically
+      setPosts(prev => prev.map(p => p.id === postId ? { ...p, upvotes: p.upvotes + type } : p));
+    } catch (err) {
+      console.error('Vote failed:', err);
+    }
+  };
+
+  const handleSubmitComment = async () => {
+    if (!newComment.trim() || !user || !selectedPost) return;
+    setSubmittingComment(true);
+    try {
+      const { error } = await supabase
+        .from('forum_comments')
+        .insert({ post_id: selectedPost.id, author_id: user.id, content: newComment.trim() });
+      if (error) throw error;
+      setNewComment('');
+      await fetchComments(selectedPost.id);
+    } catch (err) {
+      console.error('Comment failed:', err);
+    } finally {
+      setSubmittingComment(false);
+    }
   };
 
   if (selectedPost) {
@@ -157,28 +193,49 @@ const Forum = ({ groupId, user }) => {
         </div>
 
         <div className="space-y-6">
-          <h4 className="text-sm font-black uppercase tracking-[0.3em] text-text-muted">Discussion</h4>
-          <div className="glass p-6 rounded-[2rem] border border-white/5 space-y-4">
-             <div className="flex items-start gap-4">
-               <div className="w-10 h-10 rounded-2xl bg-brand-primary/20 flex items-center justify-center text-brand-primary font-bold">JD</div>
-               <div className="flex-1">
-                 <div className="flex items-center gap-2 mb-1">
-                   <span className="text-xs font-bold text-text-primary">Jane Doe</span>
-                   <span className="text-[10px] text-text-muted">2h ago</span>
-                 </div>
-                 <p className="text-sm text-text-secondary">This is a great point! I think we should definitely coordinate this for next weekend's session.</p>
-               </div>
-             </div>
-          </div>
+          <h4 className="text-sm font-black uppercase tracking-[0.3em] text-text-muted">Discussion ({comments.length})</h4>
+
+          {comments.length > 0 ? (
+            <div className="space-y-4">
+              {comments.map(c => (
+                <div key={c.id} className="glass p-6 rounded-[2rem] border border-white/5 flex items-start gap-4">
+                  <div className="w-10 h-10 rounded-2xl bg-brand-primary/20 flex items-center justify-center text-brand-primary font-bold text-xs shrink-0">
+                    {c.author_id?.slice(0, 2).toUpperCase()}
+                  </div>
+                  <div className="flex-1">
+                    <div className="flex items-center gap-2 mb-1">
+                      <span className="text-xs font-bold text-text-primary">Resident {c.author_id?.slice(0, 4)}</span>
+                      <span className="text-[10px] text-text-muted">{new Date(c.created_at).toLocaleDateString()}</span>
+                    </div>
+                    <p className="text-sm text-text-secondary">{c.content}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div className="glass p-8 rounded-[2rem] border border-dashed border-white/10 text-center text-sm text-text-muted">
+              No replies yet. Be the first to respond!
+            </div>
+          )}
 
           {user && (
             <div className="glass p-6 rounded-[2.5rem] border border-white/10 flex gap-4">
-              <input 
+              <input
+                value={newComment}
+                onChange={e => setNewComment(e.target.value)}
+                onKeyDown={e => e.key === 'Enter' && !e.shiftKey && handleSubmitComment()}
                 placeholder="Write a reply..."
                 className="flex-1 bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-sm focus:outline-none focus:border-brand-primary transition-all"
               />
-              <button className="bg-brand-primary p-4 rounded-2xl hover:bg-brand-primary/80 transition-all shadow-lg shadow-brand-primary/20">
-                <Send className="w-5 h-5 text-white" />
+              <button
+                onClick={handleSubmitComment}
+                disabled={submittingComment || !newComment.trim()}
+                className="bg-brand-primary p-4 rounded-2xl hover:bg-brand-primary/80 transition-all shadow-lg shadow-brand-primary/20 disabled:opacity-50"
+              >
+                {submittingComment
+                  ? <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                  : <Send className="w-5 h-5 text-white" />
+                }
               </button>
             </div>
           )}
@@ -257,7 +314,7 @@ const Forum = ({ groupId, user }) => {
           </div>
         ) : posts.length > 0 ? (
           posts.map(post => (
-            <ForumPost key={post.id} post={post} onSelect={setSelectedPost} onVote={handleVote} />
+            <ForumPost key={post.id} post={post} onSelect={(p) => { setSelectedPost(p); fetchComments(p.id); }} onVote={handleVote} />
           ))
         ) : (
           <div className="glass p-20 rounded-[3rem] border border-dashed border-white/10 text-center space-y-6">
