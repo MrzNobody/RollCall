@@ -1,14 +1,22 @@
 import React, { useState } from 'react';
 import { supabase } from '../lib/supabase';
-import { Mail, Lock, Loader2, ChevronRight, X } from 'lucide-react';
+import { Mail, Lock, Loader2, ChevronRight, X, Users, ChevronDown } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+
+const DEMO_ACCOUNTS = [
+  { label: 'Ethan Baker',    email: 'ethan.baker229@yahoo.com',     password: 'PeakEB21*',  tag: 'Gamer' },
+  { label: 'Kylie Nelson',   email: 'kylie.nelson829@gmail.com',    password: 'WildKN53#',  tag: 'Sports' },
+  { label: 'Leo Miller',     email: 'leo.miller253@hotmail.com',    password: 'ChillLM82*', tag: 'Tabletop' },
+];
 
 const Auth = ({ onClose, onSuccess }) => {
   const [loading, setLoading] = useState(false);
+  const [demoLoading, setDemoLoading] = useState(null);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isSignUp, setIsSignUp] = useState(false);
   const [message, setMessage] = useState({ type: '', content: '' });
+  const [showDemo, setShowDemo] = useState(false);
 
   const handleAuth = async (e) => {
     e.preventDefault();
@@ -19,9 +27,8 @@ const Auth = ({ onClose, onSuccess }) => {
       if (isSignUp) {
         const { error } = await supabase.auth.signUp({ email, password });
         if (error) throw error;
-        setMessage({ type: 'success', content: 'Account created! Check your email.' });
+        setMessage({ type: 'success', content: 'Account created! Check your email to confirm.' });
       } else {
-        // PRODUCTION AUTH ONLY
         const { error } = await supabase.auth.signInWithPassword({ email, password });
         if (error) throw error;
         onSuccess();
@@ -30,6 +37,23 @@ const Auth = ({ onClose, onSuccess }) => {
       setMessage({ type: 'error', content: error.message });
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleDemoLogin = async (account) => {
+    setDemoLoading(account.email);
+    setMessage({ type: '', content: '' });
+    try {
+      const { error } = await supabase.auth.signInWithPassword({
+        email: account.email,
+        password: account.password,
+      });
+      if (error) throw error;
+      onSuccess();
+    } catch (err) {
+      setMessage({ type: 'error', content: `Demo login failed: ${err.message}` });
+    } finally {
+      setDemoLoading(null);
     }
   };
 
@@ -96,13 +120,59 @@ const Auth = ({ onClose, onSuccess }) => {
 
         <p className="mt-8 text-center text-sm text-text-secondary">
           {isSignUp ? 'Already have an account?' : "Don't have an account?"}
-          <button 
+          <button
             onClick={() => setIsSignUp(!isSignUp)}
             className="ml-2 text-brand-primary font-bold hover:underline"
           >
             {isSignUp ? 'Sign In' : 'Sign Up'}
           </button>
         </p>
+
+        {/* Demo Accounts */}
+        <div className="mt-6 border-t border-white/10 pt-6">
+          <button
+            onClick={() => setShowDemo(d => !d)}
+            className="w-full flex items-center justify-between text-xs font-black text-text-muted uppercase tracking-[0.15em] hover:text-text-secondary transition-colors"
+          >
+            <span className="flex items-center gap-2">
+              <Users className="w-4 h-4" />
+              Try a Demo Account
+            </span>
+            <ChevronDown className={`w-4 h-4 transition-transform duration-300 ${showDemo ? 'rotate-180' : ''}`} />
+          </button>
+
+          <AnimatePresence>
+            {showDemo && (
+              <motion.div
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: 'auto' }}
+                exit={{ opacity: 0, height: 0 }}
+                className="overflow-hidden"
+              >
+                <div className="mt-4 space-y-2">
+                  {DEMO_ACCOUNTS.map(account => (
+                    <button
+                      key={account.email}
+                      onClick={() => handleDemoLogin(account)}
+                      disabled={demoLoading !== null}
+                      className="w-full flex items-center justify-between px-5 py-3 rounded-2xl bg-white/5 border border-white/10 hover:border-brand-primary/40 hover:bg-brand-primary/5 transition-all disabled:opacity-50 group"
+                    >
+                      <div className="text-left">
+                        <div className="text-sm font-bold text-text-primary group-hover:text-brand-primary transition-colors">{account.label}</div>
+                        <div className="text-[10px] font-medium text-text-muted uppercase tracking-wider mt-0.5">{account.tag}</div>
+                      </div>
+                      {demoLoading === account.email ? (
+                        <Loader2 className="w-4 h-4 animate-spin text-brand-primary" />
+                      ) : (
+                        <ChevronRight className="w-4 h-4 text-text-muted group-hover:text-brand-primary transition-colors" />
+                      )}
+                    </button>
+                  ))}
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
       </motion.div>
     </motion.div>
   );
