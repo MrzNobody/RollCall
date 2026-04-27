@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { ChevronLeft, ChevronRight, Calendar, MessageSquare, MapPin, Users, ShieldCheck, Gamepad2, ScrollText, Send, User, CheckCircle2, Flag, HelpCircle } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Calendar, MessageSquare, MapPin, Users, ShieldCheck, ScrollText, Send, User, CheckCircle2, Flag, HelpCircle } from 'lucide-react';
 import ReportModal from './ReportModal';
 import Forum from './Forum';
 import CalendarView from './CalendarView';
@@ -10,6 +10,61 @@ import { supabase } from '../lib/supabase';
 function cn(...inputs) {
   return twMerge(clsx(inputs));
 }
+
+const ONLINE_CATEGORIES = new Set([
+  'FPS Gaming', 'Battle Royale', 'MOBA', 'MMO / RPG', 'Card Games',
+  'Strategy Games', 'Fighting Games', 'Indie Games', 'Simulation',
+]);
+
+const OUTDOOR_CATEGORIES = new Set([
+  'Soccer', 'Pickleball', 'Hiking', 'Basketball', 'Tennis', 'Volleyball',
+  'Running', 'Cycling', 'Flag Football', 'Ultimate Frisbee', 'Softball',
+]);
+
+const TABLETOP_CATEGORIES = new Set([
+  'Dungeons & Dragons', 'Board Games', 'Tabletop RPG', 'Card Games (Tabletop)',
+  'Wargaming', 'Chess',
+]);
+
+const getGroupGuidelines = (group) => {
+  const cat = group?.category || '';
+  const isOnline = group?.city === 'Online' || ONLINE_CATEGORIES.has(cat);
+  const isOutdoor = OUTDOOR_CATEGORIES.has(cat);
+  const isTabletop = TABLETOP_CATEGORIES.has(cat);
+  const skill = group?.skill;
+
+  if (isOnline) {
+    return [
+      skill && skill !== 'Casual' ? `${skill} skill level` : 'All skill levels welcome',
+      'Mic required',
+      'Non-toxic environment',
+      'Discord server joined',
+    ].filter(Boolean);
+  }
+  if (isOutdoor) {
+    return [
+      'RSVP before showing up',
+      'Arrive on time',
+      'Bring your own gear',
+      'Non-toxic — good vibes only',
+    ];
+  }
+  if (isTabletop) {
+    return [
+      'Know the basic rules',
+      'RSVP so we have enough seats',
+      'Arrive ready to play',
+      'Non-toxic — respectful play',
+    ];
+  }
+  // Default / Other
+  return [
+    'RSVP before joining',
+    'Respectful to all members',
+    'Non-toxic environment',
+    skill && skill !== 'Casual' ? `${skill} skill level` : null,
+  ].filter(Boolean);
+};
 
 const ChatMessage = ({ user_id, content, created_at, self }) => (
   <div className={cn("flex flex-col mb-4 animate-fade-in", self ? "items-end" : "items-start")}>
@@ -338,13 +393,13 @@ const GroupDetail = ({ group, onBack, user }) => {
         <div className="space-y-6">
           <div className="glass p-8 rounded-[2rem] border border-brand-primary/20 bg-brand-primary/5">
             <h3 className="font-black text-xs uppercase tracking-[0.2em] mb-6 flex items-center gap-2">
-              <Gamepad2 className="w-5 h-5 text-brand-primary" />
+              <ShieldCheck className="w-5 h-5 text-brand-primary" />
               Guidelines
             </h3>
             <ul className="space-y-4">
-              {['Level 20+', 'Mic Required', 'Non-toxic', 'Discord Joined'].map(req => (
+              {getGroupGuidelines(group).map(req => (
                 <li key={req} className="flex items-center gap-3 text-xs font-medium text-text-secondary">
-                  <div className="h-1 w-1 rounded-full bg-brand-primary" />
+                  <div className="h-1 w-1 rounded-full bg-brand-primary shrink-0" />
                   {req}
                 </li>
               ))}
