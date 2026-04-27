@@ -3,11 +3,59 @@ import { supabase } from '../lib/supabase';
 import { Mail, Lock, Loader2, ChevronRight, X, Users, ChevronDown } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
-const DEMO_ACCOUNTS = [
-  { label: 'Ethan Baker',    email: 'ethan.baker229@yahoo.com',     password: 'PeakEB21*',  tag: 'Gamer' },
-  { label: 'Kylie Nelson',   email: 'kylie.nelson829@gmail.com',    password: 'WildKN53#',  tag: 'Sports' },
-  { label: 'Leo Miller',     email: 'leo.miller253@hotmail.com',    password: 'ChillLM82*', tag: 'Tabletop' },
+const DEMO_ORGANIZERS = [
+  { label: 'Marcus Webb',      email: 'marcus.webb@gmail.com',      password: 'OrgMW47!', tag: 'Gaming' },
+  { label: 'Sofia Delgado',    email: 'sofia.delgado@yahoo.com',    password: 'OrgSD29#', tag: 'Sports' },
+  { label: 'Priya Sharma',     email: 'priya.sharma@gmail.com',     password: 'OrgPS63*', tag: 'Tabletop' },
+  { label: 'Jake Thornton',    email: 'jake.thornton@hotmail.com',  password: 'OrgJT85@', tag: 'Hiking' },
+  { label: 'Camille Fontaine', email: 'camille.fontaine@gmail.com', password: 'OrgCF52!', tag: 'Arts' },
 ];
+
+const DEMO_PARTICIPANTS = [
+  { label: 'Ethan Baker',    email: 'ethan.baker229@yahoo.com',   password: 'PeakEB21*',  tag: 'Gaming' },
+  { label: 'Kylie Nelson',   email: 'kylie.nelson829@gmail.com',  password: 'WildKN53#',  tag: 'Sports' },
+  { label: 'Leo Miller',     email: 'leo.miller253@hotmail.com',  password: 'ChillLM82*', tag: 'Tabletop' },
+  { label: 'Tyler Brooks',   email: 'tyler.brooks@gmail.com',     password: 'TylB33*',    tag: 'Gaming' },
+  { label: 'Aisha Johnson',  email: 'aisha.johnson@yahoo.com',    password: 'AisJ71#',    tag: 'Sports' },
+  { label: 'Daniel Park',    email: 'daniel.park@gmail.com',      password: 'DanP44!',    tag: 'Tabletop' },
+  { label: 'Emma Rodriguez', email: 'emma.rodriguez@gmail.com',   password: 'EmmR58*',    tag: 'Running' },
+  { label: 'Chris Martinez', email: 'chris.martinez@gmail.com',   password: 'ChrM26#',    tag: 'Gaming' },
+  { label: 'Nadia Hassan',   email: 'nadia.hassan@yahoo.com',     password: 'NadH89!',    tag: 'Sports' },
+  { label: "Ryan O'Brien",   email: 'ryan.obrien@hotmail.com',    password: 'RyaO15*',    tag: 'Tabletop' },
+];
+
+const DemoButton = ({ account, isOrganizer = false, onLogin, loading }) => (
+  <button
+    onClick={() => onLogin(account)}
+    disabled={loading !== null}
+    className={`w-full flex items-center justify-between px-4 py-2.5 rounded-2xl border transition-all disabled:opacity-50 group ${
+      isOrganizer
+        ? 'bg-brand-primary/5 border-brand-primary/20 hover:border-brand-primary/50 hover:bg-brand-primary/10'
+        : 'bg-white/5 border-white/10 hover:border-white/20 hover:bg-white/8'
+    }`}
+  >
+    <div className="flex items-center gap-3">
+      <div className={`w-7 h-7 rounded-full flex items-center justify-center text-[9px] font-black shrink-0 ${
+        isOrganizer ? 'bg-brand-primary/20 text-brand-primary' : 'bg-white/10 text-text-muted'
+      }`}>
+        {account.label.split(' ').map(w => w[0]).join('').slice(0,2)}
+      </div>
+      <div className="text-left">
+        <div className={`text-sm font-bold transition-colors ${isOrganizer ? 'text-text-primary group-hover:text-brand-primary' : 'text-text-secondary group-hover:text-text-primary'}`}>
+          {account.label}
+        </div>
+        <div className="flex items-center gap-1.5 mt-0.5">
+          {isOrganizer && <span className="text-[8px] font-black uppercase tracking-wider text-brand-primary bg-brand-primary/10 px-1.5 py-0.5 rounded-md">Organizer</span>}
+          <span className="text-[9px] text-text-muted uppercase tracking-wider">{account.tag}</span>
+        </div>
+      </div>
+    </div>
+    {loading === account.email
+      ? <Loader2 className="w-4 h-4 animate-spin text-brand-primary shrink-0" />
+      : <ChevronRight className={`w-4 h-4 shrink-0 transition-colors ${isOrganizer ? 'text-brand-primary/50 group-hover:text-brand-primary' : 'text-text-muted group-hover:text-text-secondary'}`} />
+    }
+  </button>
+);
 
 const Auth = ({ onClose, onSuccess }) => {
   const [loading, setLoading] = useState(false);
@@ -149,25 +197,34 @@ const Auth = ({ onClose, onSuccess }) => {
                 exit={{ opacity: 0, height: 0 }}
                 className="overflow-hidden"
               >
-                <div className="mt-4 space-y-2">
-                  {DEMO_ACCOUNTS.map(account => (
-                    <button
-                      key={account.email}
-                      onClick={() => handleDemoLogin(account)}
-                      disabled={demoLoading !== null}
-                      className="w-full flex items-center justify-between px-5 py-3 rounded-2xl bg-white/5 border border-white/10 hover:border-brand-primary/40 hover:bg-brand-primary/5 transition-all disabled:opacity-50 group"
-                    >
-                      <div className="text-left">
-                        <div className="text-sm font-bold text-text-primary group-hover:text-brand-primary transition-colors">{account.label}</div>
-                        <div className="text-[10px] font-medium text-text-muted uppercase tracking-wider mt-0.5">{account.tag}</div>
-                      </div>
-                      {demoLoading === account.email ? (
-                        <Loader2 className="w-4 h-4 animate-spin text-brand-primary" />
-                      ) : (
-                        <ChevronRight className="w-4 h-4 text-text-muted group-hover:text-brand-primary transition-colors" />
-                      )}
-                    </button>
-                  ))}
+                <div className="mt-4 space-y-5">
+                  {/* Organizers */}
+                  <div>
+                    <div className="flex items-center gap-2 mb-2">
+                      <div className="h-px flex-1 bg-white/10" />
+                      <span className="text-[9px] font-black uppercase tracking-[0.2em] text-brand-primary px-2">Organizers</span>
+                      <div className="h-px flex-1 bg-white/10" />
+                    </div>
+                    <div className="space-y-1.5">
+                      {DEMO_ORGANIZERS.map(account => (
+                        <DemoButton key={account.email} account={account} isOrganizer onLogin={handleDemoLogin} loading={demoLoading} />
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Participants */}
+                  <div>
+                    <div className="flex items-center gap-2 mb-2">
+                      <div className="h-px flex-1 bg-white/10" />
+                      <span className="text-[9px] font-black uppercase tracking-[0.2em] text-text-muted px-2">Participants</span>
+                      <div className="h-px flex-1 bg-white/10" />
+                    </div>
+                    <div className="space-y-1.5">
+                      {DEMO_PARTICIPANTS.map(account => (
+                        <DemoButton key={account.email} account={account} onLogin={handleDemoLogin} loading={demoLoading} />
+                      ))}
+                    </div>
+                  </div>
                 </div>
               </motion.div>
             )}
