@@ -22,7 +22,7 @@ const ReferralBanner = ({ userId }) => {
       .from('referral_codes')
       .select('code')
       .eq('user_id', userId)
-      .single();
+      .maybeSingle();
     
     if (codeData) setReferralCode(codeData.code);
 

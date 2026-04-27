@@ -58,7 +58,7 @@ const RecommendedGroups = ({ user, onSelectGroup }) => {
         .from('profiles')
         .select('primary_interest, city')
         .eq('id', user.id)
-        .single();
+        .maybeSingle();
 
       // Get IDs of groups the user has already joined
       const { data: memberships } = await supabase

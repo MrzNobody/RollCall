@@ -1,4 +1,5 @@
-import { ChevronLeft, Calendar, MessageSquare, MapPin, Users, ShieldCheck, Gamepad2, ScrollText, Send, User, CheckCircle2, Flag } from 'lucide-react';
+import React, { useState, useEffect, useRef } from 'react';
+import { ChevronLeft, ChevronRight, Calendar, MessageSquare, MapPin, Users, ShieldCheck, Gamepad2, ScrollText, Send, User, CheckCircle2, Flag, HelpCircle } from 'lucide-react';
 import ReportModal from './ReportModal';
 import Forum from './Forum';
 import CalendarView from './CalendarView';
@@ -10,18 +11,18 @@ function cn(...inputs) {
   return twMerge(clsx(inputs));
 }
 
-const ChatMessage = ({ user, text, created_at, self }) => (
+const ChatMessage = ({ user_id, content, created_at, self }) => (
   <div className={cn("flex flex-col mb-4 animate-fade-in", self ? "items-end" : "items-start")}>
     <div className="flex items-center gap-2 mb-1">
       {!self && <div className="w-6 h-6 rounded-full bg-brand-primary/20 flex items-center justify-center text-[10px] font-bold"><User className="w-3 h-3 text-brand-primary" /></div>}
-      <span className="text-[10px] font-bold text-text-secondary uppercase tracking-wider">{user}</span>
+      <span className="text-[10px] font-bold text-text-secondary uppercase tracking-wider">{user_id?.slice(0, 8)}</span>
       <span className="text-[10px] text-text-muted">{new Date(created_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
     </div>
     <div className={cn(
       "px-4 py-2 rounded-2xl text-sm max-w-[80%] shadow-sm",
       self ? "bg-brand-primary text-white rounded-tr-none" : "bg-white/5 border border-white/10 rounded-tl-none"
     )}>
-      {text}
+      {content}
     </div>
   </div>
 );
@@ -44,8 +45,8 @@ const GroupDetail = ({ group, onBack, user }) => {
         .select('id, user_id, role')
         .eq('user_id', user.id)
         .eq('group_id', group.id)
-        .single();
-      
+        .maybeSingle();
+
       if (data) setIsJoined(true);
     };
 
@@ -55,7 +56,7 @@ const GroupDetail = ({ group, onBack, user }) => {
     const fetchMessages = async () => {
       const { data } = await supabase
         .from('messages')
-        .select('id, user, text, created_at')
+        .select('id, user_id, content, created_at')
         .eq('group_id', group.id)
         .order('created_at', { ascending: true });
       
@@ -109,8 +110,8 @@ const GroupDetail = ({ group, onBack, user }) => {
       .from('messages')
       .insert([{
         group_id: group.id,
-        user: user.email.split('@')[0], // Use email prefix as temp username
-        text: newMessage,
+        user_id: user.id,
+        content: newMessage,
       }]);
 
     if (!error) setNewMessage('');
@@ -216,10 +217,10 @@ const GroupDetail = ({ group, onBack, user }) => {
                   </div>
                 )}
                 {messages.map((msg) => (
-                  <ChatMessage 
-                    key={msg.id} 
-                    {...msg} 
-                    self={user && msg.user === user.email.split('@')[0]} 
+                  <ChatMessage
+                    key={msg.id}
+                    {...msg}
+                    self={user && msg.user_id === user.id}
                   />
                 ))}
                 <div ref={chatEndRef} />
