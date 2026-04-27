@@ -173,11 +173,105 @@ const ProposeModal = ({ groupId, user, onClose, onCreated }) => {
   );
 };
 
+// ─── Attendees Pane ──────────────────────────────────────────────────────────
+
+const AttendeeAvatar = ({ profile, status }) => {
+  const initials = (profile.username || profile.full_name || '?')
+    .split(/[\s_]/).map(w => w[0]).join('').slice(0, 2).toUpperCase();
+  const colors = ['bg-purple-500', 'bg-blue-500', 'bg-emerald-500', 'bg-orange-500', 'bg-rose-500', 'bg-cyan-500'];
+  const color = colors[(profile.username || '').charCodeAt(0) % colors.length] || 'bg-brand-primary';
+  return (
+    <div className="flex items-center gap-3 py-2">
+      <div className={`w-8 h-8 rounded-full ${color} flex items-center justify-center text-[10px] font-black text-white shrink-0`}>
+        {initials}
+      </div>
+      <div className="min-w-0">
+        <div className="text-sm font-bold text-text-primary truncate">{profile.full_name || profile.username}</div>
+        {profile.username && profile.full_name && (
+          <div className="text-[10px] text-text-muted">@{profile.username}</div>
+        )}
+      </div>
+      <span className={`ml-auto text-[9px] font-black uppercase tracking-widest px-2 py-0.5 rounded-md shrink-0 ${
+        status === 'going' ? 'bg-emerald-500/10 text-emerald-400' : 'bg-orange-500/10 text-orange-400'
+      }`}>
+        {status === 'going' ? 'Going' : 'Maybe'}
+      </span>
+    </div>
+  );
+};
+
+const AttendeesPane = ({ eventId }) => {
+  const [attendees, setAttendees] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchAttendees = async () => {
+      setLoading(true);
+      const { data } = await supabase
+        .from('rsvps')
+        .select('status, user_id, profiles:user_id(id, username, full_name, avatar_url)')
+        .eq('event_id', eventId)
+        .in('status', ['going', 'maybe'])
+        .order('status', { ascending: true }); // going before maybe
+      setAttendees(data || []);
+      setLoading(false);
+    };
+    fetchAttendees();
+  }, [eventId]);
+
+  const going = attendees.filter(a => a.status === 'going');
+  const maybe = attendees.filter(a => a.status === 'maybe');
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, height: 0 }}
+      animate={{ opacity: 1, height: 'auto' }}
+      exit={{ opacity: 0, height: 0 }}
+      className="overflow-hidden"
+    >
+      <div className="border-t border-white/5 mt-6 pt-6">
+        {loading ? (
+          <div className="flex items-center gap-3 py-4 text-text-muted">
+            <Loader2 className="w-4 h-4 animate-spin" />
+            <span className="text-xs font-bold">Loading attendees…</span>
+          </div>
+        ) : attendees.length === 0 ? (
+          <p className="text-xs text-text-muted font-bold py-2">No one has signed up yet — be the first!</p>
+        ) : (
+          <div className="grid md:grid-cols-2 gap-x-12">
+            {going.length > 0 && (
+              <div>
+                <div className="text-[9px] font-black uppercase tracking-[0.2em] text-emerald-400 mb-2">
+                  Going · {going.length}
+                </div>
+                <div className="divide-y divide-white/5">
+                  {going.map(a => <AttendeeAvatar key={a.user_id} profile={a.profiles} status="going" />)}
+                </div>
+              </div>
+            )}
+            {maybe.length > 0 && (
+              <div className={going.length > 0 ? 'mt-4 md:mt-0' : ''}>
+                <div className="text-[9px] font-black uppercase tracking-[0.2em] text-orange-400 mb-2">
+                  Maybe · {maybe.length}
+                </div>
+                <div className="divide-y divide-white/5">
+                  {maybe.map(a => <AttendeeAvatar key={a.user_id} profile={a.profiles} status="maybe" />)}
+                </div>
+              </div>
+            )}
+          </div>
+        )}
+      </div>
+    </motion.div>
+  );
+};
+
 // ─── Event Card ──────────────────────────────────────────────────────────────
 
 const EventCard = ({ event, user }) => {
   const [myRsvp, setMyRsvp] = useState(null);
   const [stats, setStats] = useState({ going: 0, maybe: 0 });
+  const [showAttendees, setShowAttendees] = useState(false);
 
   useEffect(() => {
     fetchRsvpData();
@@ -216,6 +310,7 @@ const EventCard = ({ event, user }) => {
   };
 
   const date = new Date(event.starts_at);
+  const totalSignups = stats.going + stats.maybe;
 
   return (
     <motion.div
@@ -273,20 +368,37 @@ const EventCard = ({ event, user }) => {
             <p className="text-sm text-text-secondary line-clamp-2 leading-relaxed">{event.description}</p>
           )}
 
-          <div className="flex items-center gap-4">
+          {/* Attendee summary + toggle */}
+          <button
+            onClick={() => setShowAttendees(s => !s)}
+            className="flex items-center gap-3 hover:opacity-80 transition-opacity group/att"
+          >
             <div className="flex -space-x-2">
-              {[1, 2, 3].map(i => (
-                <div key={i} className="w-6 h-6 rounded-full border-2 border-surface-950 bg-brand-primary/20 flex items-center justify-center text-[8px] font-bold">R{i}</div>
-              ))}
-              {stats.going > 3 && (
-                <div className="w-6 h-6 rounded-full border-2 border-surface-950 bg-white/5 flex items-center justify-center text-[8px] font-bold">+{stats.going - 3}</div>
+              {stats.going === 0 && stats.maybe === 0 ? (
+                <div className="w-6 h-6 rounded-full border-2 border-dashed border-white/20 flex items-center justify-center">
+                  <Users className="w-3 h-3 text-text-muted" />
+                </div>
+              ) : (
+                <>
+                  {Array.from({ length: Math.min(3, totalSignups) }).map((_, i) => (
+                    <div key={i} className="w-6 h-6 rounded-full border-2 border-surface-950 bg-brand-primary/30 flex items-center justify-center text-[7px] font-black text-brand-primary">
+                      {String.fromCharCode(65 + i)}
+                    </div>
+                  ))}
+                  {totalSignups > 3 && (
+                    <div className="w-6 h-6 rounded-full border-2 border-surface-950 bg-white/5 flex items-center justify-center text-[8px] font-bold text-text-muted">
+                      +{totalSignups - 3}
+                    </div>
+                  )}
+                </>
               )}
             </div>
-            <span className="text-[10px] font-black uppercase tracking-widest text-text-muted">
-              {stats.going} {stats.going === 1 ? 'resident' : 'residents'} confirmed
-              {stats.maybe > 0 && ` · ${stats.maybe} maybe`}
+            <span className="text-[10px] font-black uppercase tracking-widest text-text-muted group-hover/att:text-text-secondary transition-colors">
+              {stats.going > 0 || stats.maybe > 0
+                ? `${stats.going} going${stats.maybe > 0 ? ` · ${stats.maybe} maybe` : ''} · ${showAttendees ? 'Hide' : 'View'} list`
+                : 'No signups yet · Be first!'}
             </span>
-          </div>
+          </button>
         </div>
 
         {/* RSVP Actions */}
@@ -296,6 +408,11 @@ const EventCard = ({ event, user }) => {
           <RsvpButton active={myRsvp === 'not_going'} onClick={() => handleRsvpAction('not_going')} icon={XCircle}      label="Pass"   color="rose" />
         </div>
       </div>
+
+      {/* Attendees expandable pane */}
+      <AnimatePresence>
+        {showAttendees && <AttendeesPane eventId={event.id} />}
+      </AnimatePresence>
     </motion.div>
   );
 };
