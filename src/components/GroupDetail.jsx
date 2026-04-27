@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { ChevronLeft, ChevronRight, Calendar, MessageSquare, MapPin, Users, ShieldCheck, ScrollText, Send, User, CheckCircle2, Flag, HelpCircle } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Calendar, MessageSquare, MapPin, Users, ShieldCheck, ScrollText, Send, User, CheckCircle2, Flag, HelpCircle, Camera, X, Loader2, Link } from 'lucide-react';
 import ReportModal from './ReportModal';
 import Forum from './Forum';
 import CalendarView from './CalendarView';
@@ -66,6 +66,99 @@ const getGroupGuidelines = (group) => {
   ].filter(Boolean);
 };
 
+// ─── Image Edit Modal ────────────────────────────────────────────────────────
+
+const ImageEditModal = ({ groupId, currentImage, onClose, onSaved }) => {
+  const [url, setUrl] = useState(currentImage || '');
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+  const [preview, setPreview] = useState(currentImage || '');
+
+  const handleSave = async () => {
+    if (!url.trim()) { setError('Please enter an image URL.'); return; }
+    setLoading(true);
+    setError('');
+    try {
+      const { error: err } = await supabase
+        .from('groups')
+        .update({ image: url.trim() })
+        .eq('id', groupId);
+      if (err) throw err;
+      onSaved(url.trim());
+      onClose();
+    } catch (e) {
+      setError('Failed to save. Check the URL and try again.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <div className="fixed inset-0 z-[300] flex items-center justify-center p-6 bg-black/70 backdrop-blur-md">
+      <div className="w-full max-w-lg glass border border-white/10 rounded-[2.5rem] overflow-hidden shadow-2xl">
+        <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-brand-primary via-brand-secondary to-brand-primary" />
+        <div className="p-8 space-y-6">
+          <div className="flex items-center justify-between">
+            <h2 className="text-xl font-black text-text-primary flex items-center gap-3">
+              <Camera className="w-5 h-5 text-brand-primary" />
+              Update Group Image
+            </h2>
+            <button onClick={onClose} className="p-2 text-text-muted hover:text-text-primary transition-colors">
+              <X className="w-5 h-5" />
+            </button>
+          </div>
+
+          {/* Live preview */}
+          {preview && (
+            <div className="relative h-40 rounded-2xl overflow-hidden border border-white/10">
+              <img
+                src={preview}
+                alt="Preview"
+                className="w-full h-full object-cover"
+                onError={() => setPreview('')}
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
+              <span className="absolute bottom-2 left-3 text-[9px] font-black uppercase tracking-widest text-white/70">Preview</span>
+            </div>
+          )}
+
+          {/* URL input */}
+          <div className="space-y-2">
+            <label className="text-[10px] font-black uppercase tracking-widest text-text-muted flex items-center gap-2">
+              <Link className="w-3 h-3" /> Image URL
+            </label>
+            <input
+              value={url}
+              onChange={e => { setUrl(e.target.value); setPreview(e.target.value); }}
+              placeholder="https://images.unsplash.com/photo-..."
+              className="w-full bg-white/5 border border-white/10 rounded-2xl px-5 py-4 text-sm text-text-primary focus:outline-none focus:border-brand-primary transition-all placeholder:text-text-muted"
+            />
+            <p className="text-[10px] text-text-muted">
+              Paste any image URL — Unsplash, Pexels, or direct link. Recommended: 1600×900 landscape.
+            </p>
+          </div>
+
+          {error && <p className="text-xs text-rose-500 font-bold">{error}</p>}
+
+          <div className="flex justify-end gap-3 pt-2">
+            <button onClick={onClose} className="px-6 py-3 text-xs font-black uppercase tracking-widest text-text-muted hover:text-text-primary transition-colors">
+              Cancel
+            </button>
+            <button
+              onClick={handleSave}
+              disabled={loading}
+              className="px-8 py-3 bg-brand-primary text-white rounded-2xl text-xs font-black uppercase tracking-widest hover:bg-brand-primary/80 transition-all shadow-lg shadow-brand-primary/20 disabled:opacity-50 flex items-center gap-2"
+            >
+              {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Camera className="w-4 h-4" />}
+              {loading ? 'Saving…' : 'Save Image'}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 const ChatMessage = ({ user_id, content, created_at, self }) => (
   <div className={cn("flex flex-col mb-4 animate-fade-in", self ? "items-end" : "items-start")}>
     <div className="flex items-center gap-2 mb-1">
@@ -82,12 +175,14 @@ const ChatMessage = ({ user_id, content, created_at, self }) => (
   </div>
 );
 
-const GroupDetail = ({ group, onBack, user }) => {
+const GroupDetail = ({ group, onBack, user, isAdmin = false }) => {
   const [activeTab, setActiveTab] = useState('chat');
   const [isJoined, setIsJoined] = useState(false);
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState('');
   const [showReport, setShowReport] = useState(false);
+  const [showImageEdit, setShowImageEdit] = useState(false);
+  const [groupImage, setGroupImage] = useState(group.image);
   const chatEndRef = useRef(null);
 
   useEffect(() => {
@@ -176,8 +271,17 @@ const GroupDetail = ({ group, onBack, user }) => {
     <div className="pt-20 min-h-screen flex flex-col bg-surface-950">
       {/* Header */}
       <div className="relative h-[350px] overflow-hidden">
-        <img src={group.image} alt={group.name} className="w-full h-full object-cover" />
+        <img src={groupImage} alt={group.name} className="w-full h-full object-cover" />
         <div className="absolute inset-0 bg-gradient-to-t from-surface-950 via-surface-950/20 to-transparent" />
+        {isAdmin && (
+          <button
+            onClick={() => setShowImageEdit(true)}
+            className="absolute top-4 right-4 flex items-center gap-2 px-4 py-2.5 bg-black/60 backdrop-blur-md border border-white/20 rounded-2xl text-[10px] font-black uppercase tracking-widest text-white hover:bg-brand-primary/80 hover:border-brand-primary transition-all shadow-lg"
+          >
+            <Camera className="w-4 h-4" />
+            Edit Photo
+          </button>
+        )}
         
         <div className="absolute bottom-0 w-full px-6 md:px-12 pb-12">
           <div className="max-w-7xl mx-auto">
@@ -425,13 +529,22 @@ const GroupDetail = ({ group, onBack, user }) => {
         </div>
       </div>
 
-      <ReportModal 
+      <ReportModal
         isOpen={showReport}
         onClose={() => setShowReport(false)}
         targetId={group.id}
         targetType="group"
         targetName={group.name}
       />
+
+      {showImageEdit && (
+        <ImageEditModal
+          groupId={group.id}
+          currentImage={groupImage}
+          onClose={() => setShowImageEdit(false)}
+          onSaved={(newUrl) => setGroupImage(newUrl)}
+        />
+      )}
     </div>
   );
 };
