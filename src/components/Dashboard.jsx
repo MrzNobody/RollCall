@@ -48,7 +48,7 @@ const JoinedGroupCard = ({ group, onClick }) => (
   </div>
 );
 
-const Dashboard = ({ user, onSelectGroup, onEnterAdmin, onEnterDiscover }) => {
+const Dashboard = ({ user, onSelectGroup, onEnterAdmin, onEnterDiscover, isAdmin = false }) => {
   const [joinedGroups, setJoinedGroups] = useState([]);
   const [loading, setLoading] = useState(true);
   const [showMessages, setShowMessages] = useState(false);
@@ -111,13 +111,15 @@ const Dashboard = ({ user, onSelectGroup, onEnterAdmin, onEnterDiscover }) => {
             >
               <LifeBuoy className="w-5 h-5" />
             </button>
-            <button 
-              onClick={onEnterAdmin}
-              className="glass px-6 py-3 rounded-2xl border border-brand-primary/30 text-brand-primary font-black text-xs uppercase tracking-widest flex items-center gap-2 hover:bg-brand-primary/10 transition-all"
-            >
-              <Shield className="w-4 h-4" />
-              Admin Command
-            </button>
+            {isAdmin && (
+              <button
+                onClick={onEnterAdmin}
+                className="glass px-6 py-3 rounded-2xl border border-brand-primary/30 text-brand-primary font-black text-xs uppercase tracking-widest flex items-center gap-2 hover:bg-brand-primary/10 transition-all"
+              >
+                <Shield className="w-4 h-4" />
+                Admin Command
+              </button>
+            )}
           </div>
         </div>
 
