@@ -6,6 +6,7 @@ import CalendarView from './CalendarView';
 import { clsx } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 import { supabase } from '../lib/supabase';
+import { getGroupImage } from '../lib/groupImage';
 
 function cn(...inputs) {
   return twMerge(clsx(inputs));
@@ -290,7 +291,9 @@ const GroupDetail = ({ group, onBack, user, isAdmin = false }) => {
   const [newMessage, setNewMessage] = useState('');
   const [showReport, setShowReport] = useState(false);
   const [showImageEdit, setShowImageEdit] = useState(false);
-  const [groupImage, setGroupImage] = useState(group.image);
+  const [groupImage, setGroupImage] = useState(group.image || getGroupImage(group.name, group.category));
+
+  const isOrganizer = isAdmin || (user?.id && group?.owner_id && user.id === group.owner_id);
   const chatEndRef = useRef(null);
 
   useEffect(() => {
@@ -379,9 +382,14 @@ const GroupDetail = ({ group, onBack, user, isAdmin = false }) => {
     <div className="pt-20 min-h-screen flex flex-col bg-surface-950">
       {/* Header */}
       <div className="relative h-[350px] overflow-hidden">
-        <img src={groupImage} alt={group.name} className="w-full h-full object-cover" />
+        <img
+          src={groupImage}
+          alt={group.name}
+          className="w-full h-full object-cover"
+          onError={() => setGroupImage(getGroupImage(group.name, group.category))}
+        />
         <div className="absolute inset-0 bg-gradient-to-t from-surface-950 via-surface-950/20 to-transparent" />
-        {isAdmin && (
+        {isOrganizer && (
           <button
             onClick={() => setShowImageEdit(true)}
             className="absolute top-4 right-4 flex items-center gap-2 px-4 py-2.5 bg-black/60 backdrop-blur-md border border-white/20 rounded-2xl text-[10px] font-black uppercase tracking-widest text-white hover:bg-brand-primary/80 hover:border-brand-primary transition-all shadow-lg"
@@ -515,7 +523,7 @@ const GroupDetail = ({ group, onBack, user, isAdmin = false }) => {
           )}
 
           {activeTab === 'schedule' && (
-            <CalendarView groupId={group.id} user={user} />
+            <CalendarView groupId={group.id} user={user} isOrganizer={isOrganizer} />
           )}
 
           {activeTab === 'rules & faq' && (

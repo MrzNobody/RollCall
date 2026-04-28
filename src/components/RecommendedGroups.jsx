@@ -72,7 +72,7 @@ const RecommendedGroups = ({ user, onSelectGroup }) => {
       // Logic: Match interest OR Match city, and NOT already joined
       let query = supabase
         .from('groups')
-        .select('id, name, image, category, city, members')
+        .select('id, name, image, category, city, members, owner_id')
         .not('id', 'in', `(${joinedIds.length > 0 ? joinedIds.join(',') : '00000000-0000-0000-0000-000000000000'})`);
 
       // Attempt to match interest first

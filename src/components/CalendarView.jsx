@@ -71,7 +71,7 @@ const ProposeModal = ({ groupId, user, onClose, onCreated }) => {
 
         <div className="p-10 space-y-6">
           <div className="flex items-center justify-between">
-            <h2 className="text-2xl font-black tracking-tight text-text-primary">Propose a Session</h2>
+            <h2 className="text-2xl font-black tracking-tight text-text-primary">Schedule a Session</h2>
             <button onClick={onClose} className="p-2 text-text-muted hover:text-text-primary transition-colors">
               <X className="w-5 h-5" />
             </button>
@@ -436,7 +436,7 @@ const RsvpButton = ({ active, onClick, icon: Icon, label, color }) => {
 
 // ─── Calendar View ───────────────────────────────────────────────────────────
 
-const CalendarView = ({ groupId, user }) => {
+const CalendarView = ({ groupId, user, isOrganizer = false }) => {
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(true);
   const [showPropose, setShowPropose] = useState(false);
@@ -468,12 +468,14 @@ const CalendarView = ({ groupId, user }) => {
     <div className="space-y-8 animate-fade-in">
       <div className="flex items-center justify-between">
         <h3 className="text-sm font-black uppercase tracking-[0.3em] text-text-muted">Upcoming Sessions</h3>
-        <button
-          onClick={() => setShowPropose(true)}
-          className="flex items-center gap-2 px-6 py-3 bg-brand-primary text-white rounded-2xl text-xs font-black uppercase tracking-widest hover:scale-105 transition-all shadow-xl shadow-brand-primary/20"
-        >
-          <Plus className="w-4 h-4" /> Propose Session
-        </button>
+        {isOrganizer && (
+          <button
+            onClick={() => setShowPropose(true)}
+            className="flex items-center gap-2 px-6 py-3 bg-brand-primary text-white rounded-2xl text-xs font-black uppercase tracking-widest hover:scale-105 transition-all shadow-xl shadow-brand-primary/20"
+          >
+            <Plus className="w-4 h-4" /> Schedule Session
+          </button>
+        )}
       </div>
 
       <div className="space-y-6">
@@ -493,14 +495,20 @@ const CalendarView = ({ groupId, user }) => {
             </div>
             <div>
               <h4 className="text-xl font-bold text-text-primary">Clear Calendar</h4>
-              <p className="text-sm text-text-muted max-w-xs mx-auto">No upcoming sessions yet. Be the first to propose one!</p>
+              <p className="text-sm text-text-muted max-w-xs mx-auto">
+                {isOrganizer
+                  ? 'No upcoming sessions yet. Schedule the first one!'
+                  : 'No upcoming sessions yet. The organizer will schedule one soon!'}
+              </p>
             </div>
-            <button
-              onClick={() => setShowPropose(true)}
-              className="inline-flex items-center gap-2 px-8 py-3 bg-brand-primary text-white rounded-2xl text-xs font-black uppercase tracking-widest hover:bg-brand-primary/80 transition-all shadow-lg shadow-brand-primary/20"
-            >
-              <Plus className="w-4 h-4" /> Propose First Session
-            </button>
+            {isOrganizer && (
+              <button
+                onClick={() => setShowPropose(true)}
+                className="inline-flex items-center gap-2 px-8 py-3 bg-brand-primary text-white rounded-2xl text-xs font-black uppercase tracking-widest hover:bg-brand-primary/80 transition-all shadow-lg shadow-brand-primary/20"
+              >
+                <Plus className="w-4 h-4" /> Schedule First Session
+              </button>
+            )}
           </div>
         )}
       </div>

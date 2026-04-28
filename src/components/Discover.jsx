@@ -89,7 +89,7 @@ const Discover = ({ onSelectGroup, initialCategory = 'All' }) => {
     let isMounted = true;
     async function loadData() {
       try {
-        const { data, error } = await supabase.from('groups').select('id, name, image, category, skill, city, members, capacity, coords, description');
+        const { data, error } = await supabase.from('groups').select('id, name, image, category, skill, city, members, capacity, coords, description, owner_id');
         if (isMounted) {
           if (data && data.length > 0) {
             const normalized = data.map(g => ({

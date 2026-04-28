@@ -86,7 +86,7 @@ const Dashboard = ({ user, onSelectGroup, onEnterAdmin, onEnterDiscover, isAdmin
           const groupIds = membershipRes.data.map(m => m.group_id);
           const { data: groups, error: gError } = await supabase
             .from('groups')
-            .select('id, name, image, city, members')
+            .select('id, name, image, city, members, owner_id')
             .in('id', groupIds);
 
           if (gError) throw gError;
