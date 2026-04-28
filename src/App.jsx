@@ -10,6 +10,7 @@ import AdminDashboard from './components/AdminDashboard';
 import Status from './components/Status';
 import FAQ from './components/FAQ';
 import PricingPage from './components/PricingPage';
+import UserProfile from './components/UserProfile';
 import { supabase } from './lib/supabase';
 
 // High-Fidelity PRD Logo: 6-Node Hexagonal Network with Center Hub
@@ -275,6 +276,12 @@ function App() {
   const [isInitializing, setIsInitializing] = useState(true);
   const [isAdmin, setIsAdmin] = useState(false);
   const [showSupport, setShowSupport] = useState(false);
+  const [viewProfileId, setViewProfileId] = useState(null);
+
+  const goToProfile = (profileId = null) => {
+    setViewProfileId(profileId);
+    setStep('profile');
+  };
 
   useEffect(() => {
     const fetchCounts = async () => {
@@ -384,6 +391,7 @@ function App() {
               <div className="absolute top-12 right-0 w-60 glass p-3 rounded-2xl border border-white/10 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all shadow-2xl z-[100]">
                 <p className="text-[10px] text-text-secondary uppercase font-black tracking-widest mb-3 px-2 border-b border-white/5 pb-2 truncate">{user.email}</p>
                 <button onClick={() => setStep('dashboard')} className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-white/5 transition-all text-xs font-bold text-text-primary"><LayoutDashboard className="w-4 h-4" /> My Hub</button>
+                <button onClick={() => goToProfile()} className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-white/5 transition-all text-xs font-bold text-text-primary"><UserIcon className="w-4 h-4" /> My Profile</button>
                 <button onClick={() => setStep('discover')} className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-white/5 transition-all text-xs font-bold text-text-primary"><MapPin className="w-4 h-4" /> Discover Map</button>
                 <button onClick={() => { setStep('dashboard'); setTimeout(() => { const el = document.getElementById('communities-section'); el?.scrollIntoView({ behavior: 'smooth' }); }, 100); }} className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-white/5 transition-all text-xs font-bold text-text-primary"><MessageSquare className="w-4 h-4" /> Community Forums</button>
                 {isAdmin && <button onClick={() => setStep('status')} className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-white/5 transition-all text-xs font-bold text-text-primary"><Activity className="w-4 h-4 text-emerald-500" /> System Status</button>}
@@ -452,6 +460,14 @@ function App() {
         {step === 'status' && (isAdmin ? <Status onBack={() => setStep(user ? 'dashboard' : 'hero')} /> : <div className="flex-1 flex items-center justify-center"><p className="text-rose-500 font-black uppercase tracking-widest">Unauthorized Access</p></div>)}
         {step === 'faq' && <FAQ onBack={() => setStep('hero')} />}
         {step === 'pricing' && <PricingPage onBack={() => setStep('hero')} onSignIn={() => { setStep('hero'); setShowAuth(true); }} />}
+        {step === 'profile' && (
+          <UserProfile
+            user={user}
+            profileId={viewProfileId}
+            onBack={() => setStep(user ? 'dashboard' : 'hero')}
+            onSelectGroup={(g) => { setSelectedGroup(g); setStep('group-detail'); }}
+          />
+        )}
       </main>
 
       {/* Global Footer */}
