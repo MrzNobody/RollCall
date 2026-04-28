@@ -9,6 +9,7 @@ import Auth from './components/Auth';
 import AdminDashboard from './components/AdminDashboard';
 import Status from './components/Status';
 import FAQ from './components/FAQ';
+import PricingPage from './components/PricingPage';
 import { supabase } from './lib/supabase';
 
 // High-Fidelity PRD Logo: 6-Node Hexagonal Network with Center Hub
@@ -396,7 +397,7 @@ function App() {
           )}
         </div>
       </nav>
-      <AnimatePresence>{showAuth && <Auth onClose={() => setShowAuth(false)} onSuccess={() => setShowAuth(false)} />}</AnimatePresence>
+      <AnimatePresence>{showAuth && <Auth onClose={() => setShowAuth(false)} onSuccess={() => setShowAuth(false)} onViewPricing={() => { setShowAuth(false); setStep('pricing'); }} />}</AnimatePresence>
       <AnimatePresence>{selectedCategory && <CategoryModal category={selectedCategory} onClose={() => setSelectedCategory(null)} onNavigate={(target, cat) => { setActiveCategoryFilter(cat); setStep(target); }} />}</AnimatePresence>
       {/* Main Content Router */}
       <main className="flex-1 flex flex-col relative overflow-hidden">
@@ -438,6 +439,7 @@ function App() {
             <div className="flex flex-col md:flex-row gap-4 mt-20">
               <button onClick={() => user ? setStep('dashboard') : setShowAuth(true)} className="bg-text-primary text-surface-950 px-12 py-5 rounded-3xl font-black text-sm flex items-center justify-center gap-2 hover:scale-105 transition-all shadow-2xl">Start Discovering <ChevronRight className="w-5 h-5 flex-shrink-0" /></button>
               <button onClick={() => user ? setStep('discover') : setShowAuth(true)} className="glass px-12 py-5 rounded-3xl font-black text-sm hover:bg-white/10 transition-all text-text-primary">View Local Map</button>
+              <button onClick={() => setStep('pricing')} className="glass px-12 py-5 rounded-3xl font-black text-sm hover:bg-white/10 transition-all text-brand-primary border border-brand-primary/30">View Plans</button>
             </div>
           </div>
         )}
@@ -449,6 +451,7 @@ function App() {
         {step === 'admin' && <AdminDashboard onBack={() => setStep('dashboard')} />}
         {step === 'status' && (isAdmin ? <Status onBack={() => setStep(user ? 'dashboard' : 'hero')} /> : <div className="flex-1 flex items-center justify-center"><p className="text-rose-500 font-black uppercase tracking-widest">Unauthorized Access</p></div>)}
         {step === 'faq' && <FAQ onBack={() => setStep('hero')} />}
+        {step === 'pricing' && <PricingPage onBack={() => setStep('hero')} onSignIn={() => { setStep('hero'); setShowAuth(true); }} />}
       </main>
 
       {/* Global Footer */}
@@ -464,6 +467,7 @@ function App() {
               <a href="tel:754-757-8952" className="text-lg font-black tracking-tight text-text-primary hover:text-brand-primary transition-all">754-757-8952</a>
               <div className="flex gap-4 mt-2">
                 <button onClick={() => setStep('faq')} className="text-[10px] font-black uppercase tracking-widest text-text-muted hover:text-brand-primary transition-all">Platform FAQs</button>
+                <button onClick={() => setStep('pricing')} className="text-[10px] font-black uppercase tracking-widest text-brand-primary hover:text-brand-primary/80 transition-all">Pricing Plans</button>
                 <button onClick={() => { setStep('dashboard'); setTimeout(() => setShowSupport(true), 100); }} className="text-[10px] font-black uppercase tracking-widest text-brand-secondary hover:text-brand-secondary/80 transition-all">Contact Support</button>
               </div>
             </div>

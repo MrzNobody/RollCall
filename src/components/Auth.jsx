@@ -57,7 +57,7 @@ const DemoButton = ({ account, isOrganizer = false, onLogin, loading }) => (
   </button>
 );
 
-const Auth = ({ onClose, onSuccess }) => {
+const Auth = ({ onClose, onSuccess, onViewPricing }) => {
   const [loading, setLoading] = useState(false);
   const [demoLoading, setDemoLoading] = useState(null);
   const [email, setEmail] = useState('');
@@ -124,6 +124,15 @@ const Auth = ({ onClose, onSuccess }) => {
         <div className="text-center mb-8">
           <h2 className="text-3xl font-black mb-2 text-text-primary">{isSignUp ? 'Create Account' : 'Sign In'}</h2>
           <p className="text-text-secondary text-sm">Join the Palm Beach gaming community.</p>
+          {onViewPricing && (
+            <button
+              type="button"
+              onClick={onViewPricing}
+              className="mt-3 inline-flex items-center gap-1.5 text-[10px] font-black uppercase tracking-widest text-brand-primary hover:text-brand-primary/80 transition-all"
+            >
+              <span className="text-emerald-400">↓</span> Plans from $10/mo · View Pricing
+            </button>
+          )}
         </div>
 
         {message.content && (

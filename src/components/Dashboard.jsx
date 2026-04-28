@@ -48,32 +48,47 @@ const JoinedGroupCard = ({ group, onClick }) => (
   </div>
 );
 
+const RANK_TIERS = [
+  { min: 0, max: 0, label: 'Newcomer',    color: 'bg-slate-500/20 text-slate-400' },
+  { min: 1, max: 1, label: 'Regular',     color: 'bg-teal-500/20 text-teal-400' },
+  { min: 2, max: 2, label: 'Rising Star', color: 'bg-sky-500/20 text-sky-400' },
+  { min: 3, max: 3, label: 'Veteran',     color: 'bg-violet-500/20 text-violet-400' },
+  { min: 4, max: 5, label: 'Elite',       color: 'bg-emerald-500/20 text-emerald-400' },
+  { min: 6, max: 99, label: 'Legend',     color: 'bg-amber-500/20 text-amber-400' },
+];
+
+const getRank = (badgeCount) =>
+  RANK_TIERS.find(t => badgeCount >= t.min && badgeCount <= t.max) || RANK_TIERS[0];
+
 const Dashboard = ({ user, onSelectGroup, onEnterAdmin, onEnterDiscover, isAdmin = false }) => {
   const [joinedGroups, setJoinedGroups] = useState([]);
+  const [badgeCount, setBadgeCount] = useState(0);
   const [loading, setLoading] = useState(true);
   const [showMessages, setShowMessages] = useState(false);
   const [showSupport, setShowSupport] = useState(false);
 
   useEffect(() => {
-    const fetchJoinedGroups = async () => {
+    const fetchData = async () => {
       if (!user) return;
-      
+
       try {
-        // PRODUCTION SYNC: Using a simpler query to prevent schema join errors
-        const { data: memberships, error: mError } = await supabase
-          .from('memberships')
-          .select('group_id')
-          .eq('user_id', user.id);
+        // Fetch groups and badge count in parallel
+        const [membershipRes, badgeRes] = await Promise.all([
+          supabase.from('memberships').select('group_id').eq('user_id', user.id),
+          supabase.from('user_badges').select('id').eq('user_id', user.id),
+        ]);
 
-        if (mError) throw mError;
+        if (membershipRes.error) throw membershipRes.error;
 
-        if (memberships && memberships.length > 0) {
-          const groupIds = memberships.map(m => m.group_id);
+        setBadgeCount(badgeRes.data?.length ?? 0);
+
+        if (membershipRes.data && membershipRes.data.length > 0) {
+          const groupIds = membershipRes.data.map(m => m.group_id);
           const { data: groups, error: gError } = await supabase
             .from('groups')
             .select('id, name, image, city, members')
             .in('id', groupIds);
-          
+
           if (gError) throw gError;
           setJoinedGroups(groups || []);
         }
@@ -84,7 +99,7 @@ const Dashboard = ({ user, onSelectGroup, onEnterAdmin, onEnterDiscover, isAdmin
       }
     };
 
-    fetchJoinedGroups();
+    fetchData();
   }, [user]);
 
   return (
@@ -153,8 +168,8 @@ const Dashboard = ({ user, onSelectGroup, onEnterAdmin, onEnterDiscover, isAdmin
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           <StatCard title="Total Groups" value={joinedGroups.length} icon={<LayoutGrid className="w-5 h-5" />} color="bg-brand-primary/20 text-brand-primary" />
           <StatCard title="Upcoming Events" value="3" icon={<Zap className="w-5 h-5" />} color="bg-brand-secondary/20 text-brand-secondary" />
-          <StatCard title="Community Rank" value="Elite" icon={<Users className="w-5 h-5" />} color="bg-emerald-500/20 text-emerald-400" />
-          <StatCard title="Member Since" value="Apr 2026" icon={<MessageSquare className="w-5 h-5" />} color="bg-sky-500/20 text-sky-400" />
+          <StatCard title="Community Rank" value={getRank(badgeCount).label} icon={<Users className="w-5 h-5" />} color={getRank(badgeCount).color} />
+          <StatCard title="Member Since" value={user?.created_at ? new Date(user.created_at).toLocaleDateString('en-US', { month: 'short', year: 'numeric' }) : '—'} icon={<MessageSquare className="w-5 h-5" />} color="bg-sky-500/20 text-sky-400" />
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
