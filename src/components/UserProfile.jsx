@@ -589,7 +589,7 @@ const UserProfile = ({ user, profileId, onBack, onSelectGroup }) => {
                       <Shield className="w-3 h-3" /> Organizer
                     </span>
                   )}
-                  {profile.subscription_tier && (
+                  {profile.subscription_tier && !['free', 'Free', 'FREE'].includes(profile.subscription_tier) && (
                     <span className="flex items-center gap-1 px-2 py-0.5 bg-amber-500/10 border border-amber-500/30 rounded-lg text-[9px] font-black uppercase tracking-widest text-amber-400">
                       <Star className="w-3 h-3" /> {profile.subscription_tier}
                     </span>
