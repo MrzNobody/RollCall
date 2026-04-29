@@ -364,10 +364,18 @@ function App() {
     });
 
     // Then get the current session (also handles any code/token in the URL for PKCE)
+    // We race against a 6-second timeout so a hanging getSession() never
+    // leaves users stuck on the loading screen forever.
     async function init() {
+      const timeout = new Promise(resolve => setTimeout(() => resolve({ data: { session: null }, _timedOut: true }), 6000));
       try {
-        const { data: { session } } = await supabase.auth.getSession();
-        if (!session) setUser(null);
+        const result = await Promise.race([supabase.auth.getSession(), timeout]);
+        if (result._timedOut) {
+          console.warn('RollCall: getSession() timed out — proceeding without session.');
+        } else {
+          const { data: { session } } = result;
+          if (!session) setUser(null);
+        }
       } catch (err) {
         console.error('Initialization error:', err);
       } finally {
