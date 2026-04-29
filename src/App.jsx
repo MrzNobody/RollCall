@@ -11,6 +11,7 @@ import Status from './components/Status';
 import FAQ from './components/FAQ';
 import PricingPage from './components/PricingPage';
 import UserProfile from './components/UserProfile';
+import OnboardingSurvey from './components/OnboardingSurvey';
 import { supabase } from './lib/supabase';
 
 // High-Fidelity PRD Logo: 6-Node Hexagonal Network with Center Hub
@@ -278,6 +279,7 @@ function App() {
   const [showSupport, setShowSupport] = useState(false);
   const [viewProfileId, setViewProfileId] = useState(null);
   const [initialGroupTab, setInitialGroupTab] = useState('chat');
+  const [showOnboarding, setShowOnboarding] = useState(false);
 
   const goToProfile = (profileId = null) => {
     setViewProfileId(profileId);
@@ -331,17 +333,31 @@ function App() {
   useEffect(() => {
     // Register the auth state listener FIRST so we never miss a SIGNED_IN event
     // that fires when Supabase detects session tokens in the URL (e.g. email confirmation links).
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(async (_event, session) => {
       setUser(session?.user ?? null);
       if (session?.user) {
         setShowAuth(false);
         if (session.user.email === 'craineri76@gmail.com') {
           setIsAdmin(true);
         }
+        // Check if user has completed onboarding
+        try {
+          const { data: profile } = await supabase
+            .from('profiles')
+            .select('onboarding_completed')
+            .eq('id', session.user.id)
+            .maybeSingle();
+          if (!profile?.onboarding_completed) {
+            setShowOnboarding(true);
+          }
+        } catch (err) {
+          console.error('Error checking onboarding status:', err);
+        }
         // If we're on the landing page, move to the dashboard
         setStep(prev => (prev === 'hero' ? 'dashboard' : prev));
       } else {
         setIsAdmin(false);
+        setShowOnboarding(false);
         // Only redirect to hero on explicit sign-out, not on initial load
         if (_event === 'SIGNED_OUT') setStep('hero');
       }
@@ -422,6 +438,7 @@ function App() {
       </nav>
       <AnimatePresence>{showAuth && <Auth onClose={() => setShowAuth(false)} onSuccess={() => setShowAuth(false)} onViewPricing={() => { setShowAuth(false); setStep('pricing'); }} />}</AnimatePresence>
       <AnimatePresence>{selectedCategory && <CategoryModal category={selectedCategory} onClose={() => setSelectedCategory(null)} onNavigate={(target, cat) => { setActiveCategoryFilter(cat); setStep(target); }} />}</AnimatePresence>
+      <AnimatePresence>{showOnboarding && user && <OnboardingSurvey user={user} onComplete={() => setShowOnboarding(false)} />}</AnimatePresence>
       {/* Main Content Router */}
       <main className="flex-1 flex flex-col relative overflow-hidden">
         {step === 'hero' && (
