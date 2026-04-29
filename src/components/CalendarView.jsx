@@ -36,6 +36,8 @@ const ProposeModal = ({ groupId, user, onClose, onCreated }) => {
       setError('Title, date, and time are required.');
       return;
     }
+    // Extra safety guard: should never reach here for non-organizers
+    if (!user) { setError('You must be signed in as an organizer to schedule events.'); return; }
     setLoading(true);
     setError('');
     try {
@@ -477,8 +479,15 @@ const CalendarView = ({ groupId, user, isOrganizer = false }) => {
 
   return (
     <div className="space-y-8 animate-fade-in">
-      <div className="flex items-center justify-between">
-        <h3 className="text-sm font-black uppercase tracking-[0.3em] text-text-muted">Upcoming Sessions</h3>
+      <div className="flex items-center justify-between flex-wrap gap-4">
+        <div>
+          <h3 className="text-sm font-black uppercase tracking-[0.3em] text-text-muted">Upcoming Sessions</h3>
+          {isOrganizer ? (
+            <p className="text-[10px] text-brand-primary font-bold mt-1 uppercase tracking-widest">Organizer · You can schedule sessions</p>
+          ) : (
+            <p className="text-[10px] text-text-muted font-bold mt-1 uppercase tracking-widest">Participant · RSVP to sessions below</p>
+          )}
+        </div>
         {isOrganizer && (
           <button
             onClick={() => setShowPropose(true)}
@@ -488,6 +497,16 @@ const CalendarView = ({ groupId, user, isOrganizer = false }) => {
           </button>
         )}
       </div>
+
+      {/* Participant-only RSVP callout */}
+      {!isOrganizer && (
+        <div className="flex items-start gap-4 px-6 py-4 bg-brand-secondary/5 border border-brand-secondary/15 rounded-2xl">
+          <ShieldCheck className="w-5 h-5 text-brand-secondary shrink-0 mt-0.5" />
+          <p className="text-xs text-text-secondary leading-relaxed">
+            Sessions are scheduled by the group organizer. Use <span className="font-black text-emerald-400">Going</span>, <span className="font-black text-orange-400">Maybe</span>, or <span className="font-black text-rose-400">Pass</span> to RSVP to any upcoming session.
+          </p>
+        </div>
+      )}
 
       <div className="space-y-6">
         {loading ? (

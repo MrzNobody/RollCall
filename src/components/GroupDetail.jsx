@@ -87,6 +87,7 @@ const ChatMessage = ({ user_id, content, created_at, self }) => (
 const GroupDetail = ({ group, onBack, user, isAdmin = false, initialTab = 'chat' }) => {
   const [activeTab, setActiveTab] = useState(initialTab);
   const [isJoined, setIsJoined] = useState(false);
+  const [joinRequested, setJoinRequested] = useState(false);
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState('');
   const [showReport, setShowReport] = useState(false);
@@ -98,16 +99,22 @@ const GroupDetail = ({ group, onBack, user, isAdmin = false, initialTab = 'chat'
   useEffect(() => {
     if (!user) return;
 
-    // 1. Check if user is already a member
+    // 1. Check if user is already a member or has a pending request
     const checkMembership = async () => {
       const { data } = await supabase
         .from('memberships')
-        .select('id, user_id, role')
+        .select('id, user_id, role, status')
         .eq('user_id', user.id)
         .eq('group_id', group.id)
         .maybeSingle();
 
-      if (data) setIsJoined(true);
+      if (data) {
+        if (data.status === 'pending') {
+          setJoinRequested(true);
+        } else {
+          setIsJoined(true);
+        }
+      }
     };
 
     checkMembership();
@@ -148,18 +155,23 @@ const GroupDetail = ({ group, onBack, user, isAdmin = false, initialTab = 'chat'
   }, [messages]);
 
   const handleJoin = async () => {
-    if (!user) return; // Should be handled by UI showing Login
+    if (!user) return;
+    if (isJoined || joinRequested) return;
 
-    if (isJoined) {
-      // Logic for leaving group could go here
-      return;
-    }
+    // Organizers are auto-approved; regular participants send a request
+    const status = isOrganizer ? 'active' : 'pending';
 
     const { error } = await supabase
       .from('memberships')
-      .insert([{ user_id: user.id, group_id: group.id }]);
+      .insert([{ user_id: user.id, group_id: group.id, status }]);
 
-    if (!error) setIsJoined(true);
+    if (!error) {
+      if (isOrganizer) {
+        setIsJoined(true);
+      } else {
+        setJoinRequested(true);
+      }
+    }
   };
 
   const handleSendMessage = async (e) => {
@@ -216,11 +228,16 @@ const GroupDetail = ({ group, onBack, user, isAdmin = false, initialTab = 'chat'
                 </div>
               </div>
               
-              <button 
+              <button
                 onClick={handleJoin}
+                disabled={isJoined || joinRequested}
                 className={cn(
-                  "px-10 py-5 rounded-2xl font-black text-sm transition-all shadow-2xl active:scale-95 group relative overflow-hidden",
-                  isJoined ? "bg-emerald-500 text-white" : "bg-white text-black hover:bg-white/90"
+                  "px-10 py-5 rounded-2xl font-black text-sm transition-all shadow-2xl active:scale-95 group relative overflow-hidden disabled:cursor-default",
+                  isJoined
+                    ? "bg-emerald-500 text-white"
+                    : joinRequested
+                      ? "bg-orange-500/20 text-orange-400 border border-orange-500/30"
+                      : "bg-white text-black hover:bg-white/90"
                 )}
               >
                 <div className="flex items-center gap-3 relative z-10">
@@ -229,9 +246,14 @@ const GroupDetail = ({ group, onBack, user, isAdmin = false, initialTab = 'chat'
                       <CheckCircle2 className="w-5 h-5" />
                       MEMBERSHIP ACTIVE
                     </>
+                  ) : joinRequested ? (
+                    <>
+                      <HelpCircle className="w-5 h-5" />
+                      REQUEST SENT · PENDING
+                    </>
                   ) : (
                     <>
-                      JOIN COMMUNITY
+                      REQUEST TO JOIN
                       <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                     </>
                   )}

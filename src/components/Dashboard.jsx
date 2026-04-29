@@ -74,7 +74,7 @@ const Dashboard = ({ user, onSelectGroup, onEnterAdmin, onEnterDiscover, isAdmin
       try {
         // Fetch groups and badge count in parallel
         const [membershipRes, badgeRes] = await Promise.all([
-          supabase.from('memberships').select('group_id').eq('user_id', user.id),
+          supabase.from('memberships').select('group_id').eq('user_id', user.id).eq('status', 'active'),
           supabase.from('user_badges').select('id').eq('user_id', user.id),
         ]);
 
