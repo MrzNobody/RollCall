@@ -25,6 +25,7 @@ const MeetingTypePicker = ({ value, onChange }) => {
         <button
           key={opt.id}
           type="button"
+          title={`Choose ${opt.label} meeting type`}
           onClick={() => onChange(opt.id)}
           className={`flex flex-col items-start gap-2 p-5 rounded-2xl border-2 transition-all text-left ${
             value === opt.id
@@ -145,6 +146,7 @@ const CreateGroup = ({ onCancel, onCreated, user }) => {
         </div>
 
         <button
+          title="Cancel creating a group"
           onClick={onCancel}
           className="flex items-center gap-2 text-text-secondary hover:text-text-primary mb-8 transition-colors text-xs font-bold uppercase tracking-widest"
         >
@@ -292,6 +294,7 @@ const CreateGroup = ({ onCancel, onCreated, user }) => {
         <div className="mt-12 flex justify-between items-center">
           {step > 1 ? (
             <button
+              title="Go to previous step"
               onClick={prevStep}
               className="px-6 py-4 rounded-2xl font-bold text-text-secondary hover:text-text-primary transition-all flex items-center gap-2"
             >
@@ -301,6 +304,7 @@ const CreateGroup = ({ onCancel, onCreated, user }) => {
           ) : <div />}
 
           <button
+            title={isLastStep ? "Create and launch this group" : "Continue to next step"}
             onClick={isLastStep ? handleSubmit : nextStep}
             disabled={loading}
             className="bg-brand-primary px-8 py-4 rounded-2xl font-bold flex items-center justify-center gap-2 hover:bg-brand-primary/80 transition-all shadow-xl shadow-brand-primary/20 disabled:opacity-50 min-w-[160px]"

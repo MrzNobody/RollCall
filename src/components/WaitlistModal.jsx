@@ -84,9 +84,10 @@ const WaitlistModal = ({ isOpen, onClose, initialCity }) => {
                       </div>
                     </div>
 
-                    <button 
+                    <button
+                      title="Join the geographic expansion waitlist"
                       disabled={loading}
-                      type="submit" 
+                      type="submit"
                       className="w-full bg-brand-primary py-4 rounded-2xl font-black text-xs uppercase tracking-widest text-white flex items-center justify-center gap-3 hover:bg-brand-primary/80 transition-all shadow-lg shadow-brand-primary/20 disabled:opacity-50"
                     >
                       {loading ? (
@@ -112,7 +113,8 @@ const WaitlistModal = ({ isOpen, onClose, initialCity }) => {
                       We've registered your interest for <span className="text-brand-primary font-bold">{city}</span>. We'll notify you as soon as the RollCall pilot expands to your region.
                     </p>
                   </div>
-                  <button 
+                  <button
+                    title="Close waitlist dialog"
                     onClick={onClose}
                     className="px-8 py-4 bg-white/5 border border-white/10 rounded-2xl text-xs font-black uppercase tracking-widest text-text-primary hover:bg-white/10 transition-all"
                   >

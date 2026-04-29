@@ -100,7 +100,7 @@ const RecommendedGroups = ({ user, onSelectGroup }) => {
           <Sparkles className="w-4 h-4 text-brand-secondary" />
           Recommended For You
         </h3>
-        <button className="text-[10px] font-black uppercase tracking-widest text-brand-primary hover:underline flex items-center gap-1">
+        <button title="See all recommended groups" className="text-[10px] font-black uppercase tracking-widest text-brand-primary hover:underline flex items-center gap-1">
           Explore All <ChevronRight className="w-3 h-3" />
         </button>
       </div>

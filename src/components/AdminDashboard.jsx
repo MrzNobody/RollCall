@@ -230,7 +230,7 @@ const AdminDashboard = () => {
                     className="w-full bg-white/5 border border-white/10 rounded-xl py-3 pl-10 pr-4 text-sm text-text-primary focus:outline-none focus:border-brand-primary/50 transition-all"
                   />
                 </div>
-                <button className="p-3 bg-white/5 rounded-xl border border-white/10 text-text-muted hover:text-text-primary transition-all">
+                <button title="Open advanced filters" className="p-3 bg-white/5 rounded-xl border border-white/10 text-text-muted hover:text-text-primary transition-all">
                   <Filter className="w-4 h-4" />
                 </button>
               </div>
@@ -287,10 +287,10 @@ const AdminDashboard = () => {
                             </td>
                             <td className="px-6 py-5 text-right">
                               <div className="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                                <button onClick={() => handleAction(report.id, 'dismiss')} className="p-2 bg-white/5 rounded-lg border border-white/10 text-text-muted hover:text-text-primary hover:bg-white/10 transition-all">
+                                <button title="Dismiss this report" onClick={() => handleAction(report.id, 'dismiss')} className="p-2 bg-white/5 rounded-lg border border-white/10 text-text-muted hover:text-text-primary hover:bg-white/10 transition-all">
                                   <XCircle className="w-4 h-4" />
                                 </button>
-                                <button onClick={() => handleAction(report.id, 'resolve')} className="p-2 bg-emerald-500/10 rounded-lg border border-emerald-500/20 text-emerald-500 hover:bg-emerald-500 hover:text-white transition-all">
+                                <button title="Resolve this report" onClick={() => handleAction(report.id, 'resolve')} className="p-2 bg-emerald-500/10 rounded-lg border border-emerald-500/20 text-emerald-500 hover:bg-emerald-500 hover:text-white transition-all">
                                   <CheckCircle className="w-4 h-4" />
                                 </button>
                               </div>
@@ -369,9 +369,9 @@ const AdminDashboard = () => {
                               {/* Action Buttons */}
                               <div className="flex items-center gap-2 shrink-0 opacity-60 group-hover:opacity-100 transition-opacity">
                                 <button
+                                  title="Issue a warning to this account"
                                   onClick={() => handleBadActorAction(actor.id, 'warn')}
                                   disabled={actionLoading === `${actor.id}-warn`}
-                                  title="Issue Warning"
                                   className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-orange-500/10 border border-orange-500/30 text-orange-500 hover:bg-orange-500 hover:text-white text-[9px] font-black uppercase tracking-widest transition-all disabled:opacity-40"
                                 >
                                   {actionLoading === `${actor.id}-warn` ? (
@@ -380,9 +380,9 @@ const AdminDashboard = () => {
                                   Warn
                                 </button>
                                 <button
+                                  title="Suspend this account"
                                   onClick={() => handleBadActorAction(actor.id, 'suspend')}
                                   disabled={actionLoading === `${actor.id}-suspend`}
-                                  title="Suspend Account"
                                   className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-500 hover:bg-rose-500 hover:text-white text-[9px] font-black uppercase tracking-widest transition-all disabled:opacity-40"
                                 >
                                   {actionLoading === `${actor.id}-suspend` ? (
@@ -391,9 +391,9 @@ const AdminDashboard = () => {
                                   Suspend
                                 </button>
                                 <button
+                                  title="Clear the flag on this account"
                                   onClick={() => handleBadActorAction(actor.id, 'clear')}
                                   disabled={actionLoading === `${actor.id}-clear`}
-                                  title="Clear Flag"
                                   className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-500 hover:bg-emerald-500 hover:text-white text-[9px] font-black uppercase tracking-widest transition-all disabled:opacity-40"
                                 >
                                   {actionLoading === `${actor.id}-clear` ? (
@@ -465,6 +465,7 @@ const AdminDashboard = () => {
                               <td className="px-6 py-5 text-right" onClick={e => e.stopPropagation()}>
                                 {ticket.status === 'Open' && (
                                   <button
+                                    title="Mark this ticket as resolved"
                                     onClick={() => handleTicketAction(ticket.id, 'Resolved')}
                                     className="px-3 py-1.5 bg-brand-primary text-white rounded-lg text-[9px] font-black uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity"
                                   >
@@ -544,7 +545,7 @@ const AdminDashboard = () => {
                   <div className="p-6 space-y-6">
                     <div className="flex items-center justify-between">
                       <h4 className="text-sm font-black uppercase tracking-widest text-text-muted">Expansion Roadmap</h4>
-                      <button className="px-4 py-2 bg-brand-primary text-white rounded-xl text-[10px] font-black uppercase tracking-widest shadow-lg shadow-brand-primary/20">Add New Region</button>
+                      <button title="Add a new geographic region to expansion roadmap" className="px-4 py-2 bg-brand-primary text-white rounded-xl text-[10px] font-black uppercase tracking-widest shadow-lg shadow-brand-primary/20">Add New Region</button>
                     </div>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       {counties.map(county => (
@@ -560,6 +561,7 @@ const AdminDashboard = () => {
                           </div>
                           {county.status !== 'Active' && (
                             <button
+                              title={`Activate ${county.name} County`}
                               onClick={async () => {
                                 if (window.confirm(`Activate ${county.name} County?`)) {
                                   const { error } = await supabase.from('counties').update({ status: 'Active' }).eq('id', county.id);
@@ -640,6 +642,7 @@ const AdminDashboard = () => {
                   </div>
                 </div>
                 <button
+                  title="Close ticket details"
                   onClick={() => setSelectedTicket(null)}
                   className="p-2 rounded-xl hover:bg-white/10 transition-all text-text-muted hover:text-text-primary"
                 >
@@ -678,6 +681,7 @@ const AdminDashboard = () => {
               {/* Footer */}
               <div className="px-8 py-5 border-t border-white/5 flex items-center justify-end gap-3">
                 <button
+                  title="Close ticket details"
                   onClick={() => setSelectedTicket(null)}
                   className="px-5 py-2.5 rounded-xl bg-white/5 border border-white/10 text-xs font-black uppercase tracking-widest text-text-muted hover:text-text-primary transition-all"
                 >
@@ -685,6 +689,7 @@ const AdminDashboard = () => {
                 </button>
                 {selectedTicket.status === 'Open' && (
                   <button
+                    title="Mark this support ticket as resolved"
                     onClick={() => {
                       handleTicketAction(selectedTicket.id, 'Resolved');
                       setSelectedTicket(null);
@@ -715,6 +720,7 @@ const StatCard = ({ icon: Icon, label, value, color }) => (
 
 const TabButton = ({ active, onClick, icon: Icon, label, count, danger }) => (
   <button
+    title={`View ${label.toLowerCase()}`}
     onClick={onClick}
     className={`w-full flex items-center justify-between p-4 rounded-2xl border transition-all ${
       active

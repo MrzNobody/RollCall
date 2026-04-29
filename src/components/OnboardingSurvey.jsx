@@ -102,6 +102,7 @@ const StepInterests = ({ selected, onToggle }) => (
         return (
           <button
             key={key}
+            title={`Select interest: ${label}`}
             onClick={() => onToggle(key)}
             className={`relative p-5 rounded-2xl border-2 text-left transition-all ${
               active ? c.active : `${c.bg} ${c.border} hover:opacity-80`
@@ -133,6 +134,7 @@ const StepLocation = ({ city, onCityChange }) => (
       {PBC_CITIES.map(c => (
         <button
           key={c}
+          title={`Select city: ${c}`}
           onClick={() => onCityChange(c)}
           className={`py-3 px-4 rounded-xl border text-sm font-bold transition-all text-left ${
             city === c
@@ -158,6 +160,7 @@ const StepPlayStyle = ({ selected, onSelect }) => (
       {PLAY_STYLES.map(({ key, label, icon: Icon, desc }) => (
         <button
           key={key}
+          title={`Select play style: ${label}`}
           onClick={() => onSelect(key)}
           className={`w-full p-5 rounded-2xl border-2 flex items-center gap-4 text-left transition-all ${
             selected === key
@@ -184,6 +187,7 @@ const StepPlayStyle = ({ selected, onSelect }) => (
         {GROUP_SIZES.map(({ key, label, desc }) => (
           <button
             key={key}
+            title={`Select group size: ${label}`}
             onClick={() => {}} // handled by parent via groupSize state
             data-size={key}
             className="p-3 rounded-xl border border-white/10 bg-white/5 text-left hover:border-brand-primary/30 transition-all"
@@ -226,6 +230,7 @@ const StepAvailability = ({ availability, onToggle }) => (
                 return (
                   <td key={day} className="text-center">
                     <button
+                      title={`Toggle availability for ${day} ${slot.label}`}
                       onClick={() => onToggle(day, slot.key)}
                       className={`w-full h-9 rounded-xl border transition-all ${
                         active
@@ -287,6 +292,7 @@ const StepMatches = ({ matches, joined, onToggleJoin, loading }) => (
                 </div>
               </div>
               <button
+                title={isJoined ? `Leave ${group.name}` : `Join ${group.name}`}
                 onClick={() => onToggleJoin(group)}
                 className={`shrink-0 px-4 py-2 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all ${
                   isJoined
@@ -482,6 +488,7 @@ const OnboardingSurvey = ({ user, onComplete }) => {
                     {PLAY_STYLES.map(({ key, label, icon: Icon, desc }) => (
                       <button
                         key={key}
+                        title={`Select play style: ${label}`}
                         onClick={() => setPlayStyle(key)}
                         className={`w-full p-5 rounded-2xl border-2 flex items-center gap-4 text-left transition-all ${
                           playStyle === key
@@ -509,6 +516,7 @@ const OnboardingSurvey = ({ user, onComplete }) => {
                       {GROUP_SIZES.map(({ key, label, desc }) => (
                         <button
                           key={key}
+                          title={`Select group size: ${label}`}
                           onClick={() => setGroupSize(key)}
                           className={`p-3 rounded-xl border text-left transition-all ${
                             groupSize === key
@@ -541,6 +549,7 @@ const OnboardingSurvey = ({ user, onComplete }) => {
         <div className="px-8 pb-8 pt-4 border-t border-white/5 flex items-center justify-between shrink-0">
           {step > 1 ? (
             <button
+              title="Go to previous step"
               onClick={goPrev}
               className="flex items-center gap-2 text-text-muted hover:text-text-primary transition-colors text-sm font-bold"
             >
@@ -554,6 +563,7 @@ const OnboardingSurvey = ({ user, onComplete }) => {
             <div className="flex items-center gap-3">
               {step >= 5 && (
                 <button
+                  title="Skip to the next step"
                   onClick={goNext}
                   className="text-text-muted hover:text-text-primary transition-colors text-sm font-bold"
                 >
@@ -561,6 +571,7 @@ const OnboardingSurvey = ({ user, onComplete }) => {
                 </button>
               )}
               <button
+                title="Continue to next step"
                 onClick={goNext}
                 disabled={!canProceed() || saving}
                 className="flex items-center gap-2 px-8 py-3 bg-brand-primary text-white rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-brand-primary/80 transition-all shadow-xl shadow-brand-primary/20 disabled:opacity-40"
@@ -570,6 +581,7 @@ const OnboardingSurvey = ({ user, onComplete }) => {
             </div>
           ) : (
             <button
+              title="Complete onboarding and enter RollCall"
               onClick={handleFinish}
               disabled={saving}
               className="flex items-center gap-2 px-8 py-3 bg-emerald-500 text-white rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-emerald-500/80 transition-all shadow-xl shadow-emerald-500/20 disabled:opacity-40"

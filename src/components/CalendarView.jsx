@@ -75,7 +75,7 @@ const ProposeModal = ({ groupId, user, onClose, onCreated }) => {
         <div className="p-10 space-y-6">
           <div className="flex items-center justify-between">
             <h2 className="text-2xl font-black tracking-tight text-text-primary">Schedule a Session</h2>
-            <button onClick={onClose} className="p-2 text-text-muted hover:text-text-primary transition-colors">
+            <button title="Close session scheduler" onClick={onClose} className="p-2 text-text-muted hover:text-text-primary transition-colors">
               <X className="w-5 h-5" />
             </button>
           </div>
@@ -157,10 +157,11 @@ const ProposeModal = ({ groupId, user, onClose, onCreated }) => {
             {error && <p className="text-xs text-rose-500 font-bold">{error}</p>}
 
             <div className="flex justify-end gap-3 pt-2">
-              <button type="button" onClick={onClose} className="px-6 py-3 text-xs font-black uppercase tracking-widest text-text-muted hover:text-text-primary transition-colors">
+              <button title="Cancel and close without saving" type="button" onClick={onClose} className="px-6 py-3 text-xs font-black uppercase tracking-widest text-text-muted hover:text-text-primary transition-colors">
                 Cancel
               </button>
               <button
+                title="Save and publish this session"
                 type="submit"
                 disabled={loading}
                 className="px-8 py-3 bg-brand-primary text-white rounded-2xl text-xs font-black uppercase tracking-widest hover:bg-brand-primary/80 transition-all shadow-lg shadow-brand-primary/20 disabled:opacity-50 flex items-center gap-2"
@@ -382,6 +383,7 @@ const EventCard = ({ event, user }) => {
 
           {/* Attendee summary + toggle */}
           <button
+            title="Toggle attendee list"
             onClick={() => setShowAttendees(s => !s)}
             className="flex items-center gap-3 hover:opacity-80 transition-opacity group/att"
           >
@@ -438,6 +440,7 @@ const RsvpButton = ({ active, onClick, icon: Icon, label, color }) => {
   };
   return (
     <button
+      title={`Mark yourself as ${label} for this session`}
       onClick={onClick}
       className={`px-4 py-2.5 rounded-xl border text-[10px] font-black uppercase tracking-widest transition-all flex items-center justify-center gap-2 ${colors[color]}`}
     >
@@ -490,6 +493,7 @@ const CalendarView = ({ groupId, user, isOrganizer = false }) => {
         </div>
         {isOrganizer && (
           <button
+            title="Schedule a new session for this group"
             onClick={() => setShowPropose(true)}
             className="flex items-center gap-2 px-6 py-3 bg-brand-primary text-white rounded-2xl text-xs font-black uppercase tracking-widest hover:scale-105 transition-all shadow-xl shadow-brand-primary/20"
           >
@@ -533,6 +537,7 @@ const CalendarView = ({ groupId, user, isOrganizer = false }) => {
             </div>
             {isOrganizer && (
               <button
+                title="Schedule the first session for this group"
                 onClick={() => setShowPropose(true)}
                 className="inline-flex items-center gap-2 px-8 py-3 bg-brand-primary text-white rounded-2xl text-xs font-black uppercase tracking-widest hover:bg-brand-primary/80 transition-all shadow-lg shadow-brand-primary/20"
               >

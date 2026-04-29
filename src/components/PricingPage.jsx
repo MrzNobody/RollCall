@@ -152,6 +152,7 @@ const PlanCard = ({ plan, annual, onGetStarted }) => {
 
       {/* CTA */}
       <button
+        title={`Choose the ${plan.label} plan`}
         onClick={onGetStarted}
         className={`w-full py-4 rounded-2xl font-black text-xs uppercase tracking-widest text-white bg-gradient-to-r ${plan.color} hover:opacity-90 transition-all shadow-xl`}
       >
@@ -197,7 +198,7 @@ const PricingPage = ({ onBack, onSignIn }) => {
       <div className="max-w-5xl mx-auto">
 
         {/* Back */}
-        <button onClick={onBack} className="flex items-center gap-2 text-text-secondary hover:text-text-primary mb-10 transition-colors text-xs font-bold uppercase tracking-widest">
+        <button title="Go back to Dashboard" onClick={onBack} className="flex items-center gap-2 text-text-secondary hover:text-text-primary mb-10 transition-colors text-xs font-bold uppercase tracking-widest">
           <ChevronLeft className="w-4 h-4" /> Back
         </button>
 
@@ -213,6 +214,7 @@ const PricingPage = ({ onBack, onSignIn }) => {
           <div className="flex items-center justify-center gap-4 mt-8">
             <span className={`text-sm font-black uppercase tracking-widest transition-colors ${!annual ? 'text-text-primary' : 'text-text-muted'}`}>Monthly</span>
             <button
+              title={annual ? "Switch to monthly billing" : "Switch to annual billing"}
               onClick={() => setAnnual(a => !a)}
               className={`relative w-14 h-7 rounded-full transition-all duration-300 ${annual ? 'bg-brand-primary' : 'bg-white/10'}`}
             >
@@ -335,6 +337,7 @@ const PricingPage = ({ onBack, onSignIn }) => {
           {/* CTA */}
           <div className="text-center pt-4 pb-8">
             <button
+              title="Begin your free trial"
               onClick={onSignIn}
               className="bg-brand-primary text-white px-16 py-5 rounded-3xl font-black text-sm uppercase tracking-widest hover:bg-brand-primary/80 shadow-2xl shadow-brand-primary/20 transition-all"
             >

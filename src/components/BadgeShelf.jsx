@@ -117,7 +117,7 @@ const BadgeShelf = ({ userId }) => {
             <h4 className="text-lg font-bold text-text-primary">Your shelf is empty</h4>
             <p className="text-xs text-text-muted max-w-xs mx-auto">Attend sessions, post in the forum, and help others to start earning your PBC badges!</p>
           </div>
-          <button className="text-[10px] font-black uppercase tracking-widest text-brand-primary hover:underline">View Achievement Guide</button>
+          <button title="Learn how to earn badges" className="text-[10px] font-black uppercase tracking-widest text-brand-primary hover:underline">View Achievement Guide</button>
         </div>
       )}
     </div>

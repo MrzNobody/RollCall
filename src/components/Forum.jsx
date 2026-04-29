@@ -17,7 +17,8 @@ const ForumPost = ({ post, onSelect, onVote }) => (
     <div className="flex gap-6">
       {/* Vote Side */}
       <div className="flex flex-col items-center gap-1 mt-1">
-        <button 
+        <button
+          title="Upvote this post"
           onClick={(e) => { e.stopPropagation(); onVote(post.id, 1); }}
           className="p-2 hover:bg-brand-primary/10 rounded-xl text-text-muted hover:text-brand-primary transition-all"
         >
@@ -172,7 +173,8 @@ const Forum = ({ groupId, user }) => {
   if (selectedPost) {
     return (
       <div className="space-y-8 animate-fade-in">
-        <button 
+        <button
+          title="Go back to forum threads list"
           onClick={() => setSelectedPost(null)}
           className="flex items-center gap-2 text-text-muted hover:text-text-primary transition-colors text-[10px] font-black uppercase tracking-widest"
         >
@@ -228,6 +230,7 @@ const Forum = ({ groupId, user }) => {
                 className="flex-1 bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-sm focus:outline-none focus:border-brand-primary transition-all"
               />
               <button
+                title="Submit your reply to this thread"
                 onClick={handleSubmitComment}
                 disabled={submittingComment || !newComment.trim()}
                 className="bg-brand-primary p-4 rounded-2xl hover:bg-brand-primary/80 transition-all shadow-lg shadow-brand-primary/20 disabled:opacity-50"
@@ -248,7 +251,8 @@ const Forum = ({ groupId, user }) => {
     <div className="space-y-8 animate-fade-in">
       <div className="flex items-center justify-between">
         <h3 className="text-sm font-black uppercase tracking-[0.3em] text-text-muted">Community Threads</h3>
-        <button 
+        <button
+          title="Create a new forum thread"
           onClick={() => setShowCreate(true)}
           className="flex items-center gap-2 px-6 py-3 bg-brand-primary text-white rounded-2xl text-xs font-black uppercase tracking-widest hover:scale-105 transition-all shadow-xl shadow-brand-primary/20"
         >
@@ -298,8 +302,8 @@ const Forum = ({ groupId, user }) => {
                 />
               </div>
               <div className="flex justify-end gap-4">
-                <button type="button" onClick={() => setShowCreate(false)} className="px-6 py-3 text-xs font-black uppercase tracking-widest text-text-muted hover:text-text-primary">Cancel</button>
-                <button className="px-10 py-3 bg-brand-primary text-white rounded-xl text-xs font-black uppercase tracking-widest hover:bg-brand-primary/80 transition-all shadow-lg shadow-brand-primary/20">Post Thread</button>
+                <button type="button" title="Cancel and close" onClick={() => setShowCreate(false)} className="px-6 py-3 text-xs font-black uppercase tracking-widest text-text-muted hover:text-text-primary">Cancel</button>
+                <button title="Post this thread to the forum" className="px-10 py-3 bg-brand-primary text-white rounded-xl text-xs font-black uppercase tracking-widest hover:bg-brand-primary/80 transition-all shadow-lg shadow-brand-primary/20">Post Thread</button>
               </div>
             </form>
           </motion.div>

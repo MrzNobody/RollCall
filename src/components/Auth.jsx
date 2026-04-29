@@ -21,6 +21,7 @@ const DEMO_PARTICIPANTS = [
 
 const DemoButton = ({ account, isOrganizer = false, onLogin, loading }) => (
   <button
+    title={`Sign in as ${account.label}`}
     onClick={() => onLogin(account)}
     disabled={loading !== null}
     className={`w-full flex items-center justify-between px-4 py-2.5 rounded-2xl border transition-all disabled:opacity-50 group ${
@@ -137,7 +138,7 @@ const Auth = ({ onClose, onSuccess, onViewPricing }) => {
         animate={{ scale: 1, y: 0 }}
         className="glass w-full max-w-md p-8 rounded-[2.5rem] border border-white/10 relative"
       >
-        <button onClick={onClose} className="absolute top-6 right-6 text-text-muted hover:text-text-primary transition-colors">
+        <button title="Close Sign In" onClick={onClose} className="absolute top-6 right-6 text-text-muted hover:text-text-primary transition-colors">
           <X className="w-6 h-6" />
         </button>
 
@@ -147,6 +148,7 @@ const Auth = ({ onClose, onSuccess, onViewPricing }) => {
           {onViewPricing && (
             <button
               type="button"
+              title="View pricing plans"
               onClick={onViewPricing}
               className="mt-3 inline-flex items-center gap-1.5 text-[10px] font-black uppercase tracking-widest text-brand-primary hover:text-brand-primary/80 transition-all"
             >
@@ -185,8 +187,9 @@ const Auth = ({ onClose, onSuccess, onViewPricing }) => {
             />
           </div>
 
-          <button 
-            type="submit" 
+          <button
+            type="submit"
+            title={isSignUp ? "Create your account" : "Sign in to your account"}
             disabled={loading}
             className="w-full bg-brand-primary py-4 rounded-2xl font-bold flex items-center justify-center gap-2 hover:bg-brand-primary/80 transition-all shadow-xl shadow-brand-primary/20 disabled:opacity-50 text-white"
           >
@@ -198,6 +201,7 @@ const Auth = ({ onClose, onSuccess, onViewPricing }) => {
         <p className="mt-8 text-center text-sm text-text-secondary">
           {isSignUp ? 'Already have an account?' : "Don't have an account?"}
           <button
+            title={isSignUp ? "Go to sign in" : "Go to sign up"}
             onClick={() => setIsSignUp(!isSignUp)}
             className="ml-2 text-brand-primary font-bold hover:underline"
           >
@@ -208,6 +212,7 @@ const Auth = ({ onClose, onSuccess, onViewPricing }) => {
         {/* Demo Accounts */}
         <div className="mt-6 border-t border-white/10 pt-6">
           <button
+            title={showDemo ? "Hide demo accounts" : "Show demo accounts"}
             onClick={() => setShowDemo(d => !d)}
             className="w-full flex items-center justify-between text-xs font-black text-text-muted uppercase tracking-[0.15em] hover:text-text-secondary transition-colors"
           >

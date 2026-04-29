@@ -86,7 +86,7 @@ const SupportCenter = ({ user, onClose }) => {
               <p className="text-[10px] text-text-muted font-black uppercase tracking-widest">RollCall Concierge Desk</p>
             </div>
           </div>
-          <button onClick={onClose} className="p-3 hover:bg-white/5 rounded-full transition-all">
+          <button title="Close Support Center" onClick={onClose} className="p-3 hover:bg-white/5 rounded-full transition-all">
             <Shield className="w-6 h-6 text-text-muted" />
           </button>
         </div>
@@ -101,6 +101,7 @@ const SupportCenter = ({ user, onClose }) => {
             ].map(tab => (
               <button
                 key={tab.id}
+                title={`View ${tab.label}`}
                 onClick={() => setActiveTab(tab.id)}
                 className={`w-full p-4 rounded-2xl flex items-center gap-3 transition-all font-bold text-sm ${
                   activeTab === tab.id ? 'bg-brand-primary text-white shadow-lg shadow-brand-primary/20' : 'text-text-muted hover:bg-white/5 hover:text-text-primary'
@@ -155,8 +156,9 @@ const SupportCenter = ({ user, onClose }) => {
                         className="w-full bg-white/5 border border-white/10 rounded-2xl px-4 py-4 text-sm focus:border-brand-primary transition-all text-text-primary resize-none"
                       />
                     </div>
-                    <button 
+                    <button
                       type="submit"
+                      title="Submit your support request"
                       disabled={loading || submitted}
                       className={`w-full py-4 rounded-2xl font-black text-xs uppercase tracking-widest flex items-center justify-center gap-3 transition-all ${
                         submitted ? 'bg-emerald-500 text-white' : 'bg-brand-primary text-white hover:bg-brand-primary/80 shadow-lg shadow-brand-primary/20'
@@ -212,7 +214,8 @@ const SupportCenter = ({ user, onClose }) => {
                       <h4 className="font-bold text-text-primary">Export My Data</h4>
                       <p className="text-[10px] text-text-muted leading-relaxed">Download a full archive of your profile, posts, messages, and activity. (Processed in 24-48h)</p>
                     </div>
-                    <button 
+                    <button
+                      title="Request your data as a downloadable archive"
                       onClick={() => handleDataRequest('Data Export')}
                       className="w-full py-3 bg-white/5 hover:bg-white/10 border border-white/10 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all"
                     >
@@ -228,7 +231,8 @@ const SupportCenter = ({ user, onClose }) => {
                       <h4 className="font-bold text-text-primary text-rose-500">Delete My Account</h4>
                       <p className="text-[10px] text-text-muted leading-relaxed">Permanently erase your identity from RollCall. This action is irreversible. (Processed in 30 days)</p>
                     </div>
-                    <button 
+                    <button
+                      title="Request permanent deletion of your account and all data"
                       onClick={() => handleDataRequest('Account Deletion')}
                       className="w-full py-3 bg-rose-500/10 hover:bg-rose-500/20 border border-rose-500/20 rounded-xl text-[10px] font-black uppercase tracking-widest text-rose-500 transition-all"
                     >

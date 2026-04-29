@@ -101,10 +101,11 @@ const AvatarModal = ({ currentUrl, profileId, onClose, onSaved }) => {
         <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-brand-primary via-brand-secondary to-brand-primary rounded-t-[2.5rem]" />
         <div className="flex justify-between items-center">
           <h3 className="text-xl font-black text-text-primary">Update Avatar</h3>
-          <button onClick={onClose} className="text-text-muted hover:text-text-primary transition-colors"><X className="w-5 h-5" /></button>
+          <button title="Close avatar editor" onClick={onClose} className="text-text-muted hover:text-text-primary transition-colors"><X className="w-5 h-5" /></button>
         </div>
 
         <div
+          title="Click to upload avatar image"
           className="w-32 h-32 rounded-full mx-auto bg-white/5 border-2 border-dashed border-white/20 flex items-center justify-center overflow-hidden cursor-pointer hover:border-brand-primary/50 transition-all group"
           onClick={() => fileRef.current?.click()}
         >
@@ -128,8 +129,8 @@ const AvatarModal = ({ currentUrl, profileId, onClose, onSaved }) => {
         {error && <p className="text-xs text-rose-400 font-bold">{error}</p>}
 
         <div className="flex gap-3 justify-end pt-2">
-          <button onClick={onClose} className="px-6 py-3 text-xs font-black uppercase tracking-widest text-text-muted hover:text-text-primary transition-colors">Cancel</button>
-          <button onClick={handleSave} disabled={loading || (!preview && !urlInput)}
+          <button title="Close without saving" onClick={onClose} className="px-6 py-3 text-xs font-black uppercase tracking-widest text-text-muted hover:text-text-primary transition-colors">Cancel</button>
+          <button title="Save your new avatar" onClick={handleSave} disabled={loading || (!preview && !urlInput)}
             className="px-8 py-3 bg-brand-primary text-white rounded-2xl text-xs font-black uppercase tracking-widest hover:bg-brand-primary/80 disabled:opacity-50 flex items-center gap-2 shadow-lg shadow-brand-primary/20">
             {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Check className="w-4 h-4" />}
             {loading ? 'Saving…' : 'Save Avatar'}
@@ -221,7 +222,7 @@ const CommentCard = ({ comment, currentUserId, onDelete }) => {
               {new Date(comment.created_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
             </span>
             {isOwn && (
-              <button onClick={() => onDelete(comment.id)}
+              <button title="Delete this comment" onClick={() => onDelete(comment.id)}
                 className="opacity-0 group-hover:opacity-100 text-text-muted hover:text-rose-400 transition-all">
                 <Trash2 className="w-3.5 h-3.5" />
               </button>
@@ -523,7 +524,7 @@ const UserProfile = ({ user, profileId, onBack, onSelectGroup }) => {
         <div className="text-center space-y-4">
           <User className="w-12 h-12 text-text-muted mx-auto" />
           <p className="text-text-secondary font-bold">Profile not found.</p>
-          <button onClick={onBack} className="text-brand-primary font-black text-sm hover:underline">Go Back</button>
+          <button title="Go back to the previous page" onClick={onBack} className="text-brand-primary font-black text-sm hover:underline">Go Back</button>
         </div>
       </div>
     );
@@ -545,7 +546,7 @@ const UserProfile = ({ user, profileId, onBack, onSelectGroup }) => {
       <div className="max-w-5xl mx-auto space-y-10">
 
         {/* ── Back Button ──────────────────────────────────────────────────── */}
-        <button onClick={onBack} className="flex items-center gap-2 text-text-muted hover:text-text-primary transition-colors text-sm font-bold group">
+        <button title="Go back to Dashboard" onClick={onBack} className="flex items-center gap-2 text-text-muted hover:text-text-primary transition-colors text-sm font-bold group">
           <ChevronLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
           Back
         </button>
@@ -572,6 +573,7 @@ const UserProfile = ({ user, profileId, onBack, onSelectGroup }) => {
                 </div>
                 {isOwnProfile && (
                   <button
+                    title="Change profile picture"
                     onClick={() => setShowAvatarEdit(true)}
                     className="absolute -bottom-2 -right-2 w-8 h-8 bg-brand-primary rounded-xl flex items-center justify-center shadow-lg hover:bg-brand-primary/80 transition-all opacity-0 group-hover:opacity-100"
                   >
@@ -621,6 +623,7 @@ const UserProfile = ({ user, profileId, onBack, onSelectGroup }) => {
               <div className="flex gap-2 shrink-0">
                 {isOwnProfile ? (
                   <button
+                    title={editing ? "Save profile changes" : "Edit your profile"}
                     onClick={() => editing ? handleSaveProfile() : setEditing(true)}
                     disabled={saveLoading}
                     className={`flex items-center gap-2 px-5 py-2.5 rounded-2xl text-xs font-black uppercase tracking-widest transition-all ${
@@ -634,6 +637,7 @@ const UserProfile = ({ user, profileId, onBack, onSelectGroup }) => {
                   </button>
                 ) : user && (
                   <button
+                    title="Send a message to this user"
                     onClick={() => {}}
                     className="flex items-center gap-2 px-5 py-2.5 glass border border-white/10 rounded-2xl text-xs font-black uppercase tracking-widest text-text-primary hover:border-brand-primary/30 transition-all"
                   >
@@ -641,7 +645,7 @@ const UserProfile = ({ user, profileId, onBack, onSelectGroup }) => {
                   </button>
                 )}
                 {editing && (
-                  <button onClick={() => { setEditing(false); setSaveMsg(''); }}
+                  <button title="Cancel editing" onClick={() => { setEditing(false); setSaveMsg(''); }}
                     className="px-4 py-2.5 glass border border-white/10 rounded-2xl text-xs font-black uppercase tracking-widest text-text-muted hover:text-text-primary transition-all">
                     <X className="w-4 h-4" />
                   </button>
@@ -736,7 +740,7 @@ const UserProfile = ({ user, profileId, onBack, onSelectGroup }) => {
                               className="flex-1 bg-transparent text-sm text-text-primary focus:outline-none placeholder:text-text-muted"
                             />
                             {editHandles[key] && (
-                              <button onClick={() => setEditHandles(h => { const n = { ...h }; delete n[key]; return n; })}
+                              <button title="Remove this platform handle" onClick={() => setEditHandles(h => { const n = { ...h }; delete n[key]; return n; })}
                                 className="text-text-muted hover:text-rose-400 transition-colors shrink-0">
                                 <X className="w-3.5 h-3.5" />
                               </button>
@@ -749,7 +753,7 @@ const UserProfile = ({ user, profileId, onBack, onSelectGroup }) => {
                 </div>
 
                 <div className="flex justify-end">
-                  <button onClick={handleSaveProfile} disabled={saveLoading}
+                  <button title="Save your profile changes" onClick={handleSaveProfile} disabled={saveLoading}
                     className="px-10 py-3.5 bg-brand-primary text-white rounded-2xl text-xs font-black uppercase tracking-widest hover:bg-brand-primary/80 transition-all shadow-xl shadow-brand-primary/20 disabled:opacity-50 flex items-center gap-2">
                     {saveLoading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Check className="w-4 h-4" />}
                     {saveLoading ? 'Saving…' : 'Save Changes'}
@@ -763,7 +767,7 @@ const UserProfile = ({ user, profileId, onBack, onSelectGroup }) => {
         {/* ── Tabs ─────────────────────────────────────────────────────────── */}
         <div className="flex items-center gap-1 border-b border-white/5 overflow-x-auto">
           {TABS.map(tab => (
-            <button key={tab.key} onClick={() => setActiveTab(tab.key)}
+            <button key={tab.key} title={`View ${tab.label}`} onClick={() => setActiveTab(tab.key)}
               className={`px-6 py-3 text-[10px] font-black uppercase tracking-widest whitespace-nowrap transition-all border-b-2 -mb-px ${
                 activeTab === tab.key
                   ? 'border-brand-primary text-brand-primary'
@@ -800,7 +804,7 @@ const UserProfile = ({ user, profileId, onBack, onSelectGroup }) => {
                   })}
                 </div>
                 {isOwnProfile && activeHandles.length === 0 && (
-                  <button onClick={() => setEditing(true)}
+                  <button title="Add gaming platform usernames" onClick={() => setEditing(true)}
                     className="text-[10px] font-black uppercase tracking-widest text-text-muted hover:text-brand-primary transition-colors flex items-center gap-1">
                     <Plus className="w-3 h-3" /> Add your gamer handles
                   </button>
@@ -820,7 +824,7 @@ const UserProfile = ({ user, profileId, onBack, onSelectGroup }) => {
                     {isOwnProfile && (
                       <>
                         {/* Show to others toggle */}
-                        <button onClick={handleToggleShowAvail}
+                        <button title={showAvail ? "Hide availability from others" : "Show availability to others"} onClick={handleToggleShowAvail}
                           className="flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-text-muted hover:text-text-secondary transition-colors">
                           {showAvail
                             ? <ToggleRight className="w-5 h-5 text-brand-primary" />
@@ -829,13 +833,13 @@ const UserProfile = ({ user, profileId, onBack, onSelectGroup }) => {
                         </button>
                         {/* Edit toggle */}
                         {editingAvail ? (
-                          <button onClick={handleSaveAvailability} disabled={availSaving}
+                          <button title="Save availability changes" onClick={handleSaveAvailability} disabled={availSaving}
                             className="px-4 py-2 bg-emerald-500 text-white rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-emerald-500/80 flex items-center gap-1.5 disabled:opacity-50">
                             {availSaving ? <Loader2 className="w-3 h-3 animate-spin" /> : <Check className="w-3 h-3" />}
                             {availSaving ? 'Saving…' : 'Done'}
                           </button>
                         ) : (
-                          <button onClick={() => setEditingAvail(true)}
+                          <button title="Edit your availability schedule" onClick={() => setEditingAvail(true)}
                             className="px-4 py-2 glass border border-white/10 rounded-xl text-[10px] font-black uppercase tracking-widest text-text-muted hover:text-text-primary transition-all flex items-center gap-1.5">
                             <Edit3 className="w-3 h-3" /> Edit
                           </button>
@@ -866,6 +870,7 @@ const UserProfile = ({ user, profileId, onBack, onSelectGroup }) => {
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   {joinedGroups.map(group => (
                     <button key={group.id}
+                      title={`Go to ${group.name}`}
                       onClick={() => onSelectGroup && onSelectGroup(group)}
                       className="glass border border-white/5 hover:border-brand-primary/20 rounded-[1.5rem] p-4 flex items-center gap-4 transition-all group text-left w-full">
                       <div className="w-12 h-12 rounded-xl overflow-hidden shrink-0">
@@ -961,7 +966,7 @@ const UserProfile = ({ user, profileId, onBack, onSelectGroup }) => {
                     />
                     <div className="flex justify-between items-center">
                       <span className="text-[9px] text-text-muted">{newComment.length} / 500</span>
-                      <button type="submit" disabled={!newComment.trim() || commentLoading}
+                      <button type="submit" title="Post your comment" disabled={!newComment.trim() || commentLoading}
                         className="px-5 py-2 bg-brand-primary text-white rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-brand-primary/80 disabled:opacity-50 flex items-center gap-1.5 transition-all shadow-lg shadow-brand-primary/20">
                         {commentLoading ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : <Send className="w-3.5 h-3.5" />}
                         Post

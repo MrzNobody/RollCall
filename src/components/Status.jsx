@@ -185,7 +185,8 @@ const Status = ({ onBack }) => {
           </div>
         </div>
 
-        <button 
+        <button
+          title="Return to the main platform"
           onClick={onBack}
           className="w-full py-4 bg-white/5 border border-white/10 rounded-2xl font-black text-xs uppercase tracking-widest text-text-primary hover:bg-white/10 transition-all"
         >

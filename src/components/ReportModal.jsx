@@ -93,7 +93,7 @@ const ReportModal = ({ isOpen, onClose, targetId, targetType, targetName }) => {
                     <p className="text-[10px] text-text-muted font-bold truncate max-w-[200px]">{targetName}</p>
                   </div>
                 </div>
-                <button type="button" onClick={onClose} className="p-2 hover:bg-white/5 rounded-full transition-colors">
+                <button type="button" title="Close report dialog" onClick={onClose} className="p-2 hover:bg-white/5 rounded-full transition-colors">
                   <X className="w-5 h-5 text-text-muted" />
                 </button>
               </div>
@@ -106,10 +106,11 @@ const ReportModal = ({ isOpen, onClose, targetId, targetType, targetName }) => {
                       <button
                         key={r}
                         type="button"
+                        title={`Report for: ${r}`}
                         onClick={() => setReason(r)}
                         className={`text-left px-4 py-3 rounded-xl border text-xs font-bold transition-all ${
-                          reason === r 
-                            ? 'bg-brand-primary/10 border-brand-primary text-brand-primary' 
+                          reason === r
+                            ? 'bg-brand-primary/10 border-brand-primary text-brand-primary'
                             : 'bg-white/5 border-white/10 text-text-muted hover:border-white/20'
                         }`}
                       >
@@ -138,7 +139,8 @@ const ReportModal = ({ isOpen, onClose, targetId, targetType, targetName }) => {
               </div>
 
               <div className="p-8 bg-white/5">
-                <button 
+                <button
+                  title="Submit your report"
                   disabled={!reason || loading}
                   className="w-full bg-rose-500 text-white py-4 rounded-2xl font-black text-sm uppercase tracking-widest hover:bg-rose-600 disabled:opacity-50 disabled:cursor-not-allowed transition-all shadow-xl shadow-rose-500/20 flex items-center justify-center gap-2"
                 >

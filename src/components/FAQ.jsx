@@ -66,7 +66,7 @@ const FAQ = ({ onBack }) => {
           <h2 className="text-4xl font-black tracking-tighter text-text-primary mb-2">Platform FAQs</h2>
           <p className="text-[10px] font-black uppercase tracking-[0.3em] text-text-muted">Resident Support Center</p>
         </div>
-        <button onClick={onBack} className="flex items-center gap-2 px-4 py-2 rounded-xl bg-white/5 hover:bg-white/10 transition-all text-[10px] font-black uppercase tracking-widest text-text-muted">
+        <button title="Go back to Help Center" onClick={onBack} className="flex items-center gap-2 px-4 py-2 rounded-xl bg-white/5 hover:bg-white/10 transition-all text-[10px] font-black uppercase tracking-widest text-text-muted">
           <ArrowLeft className="w-4 h-4" /> Back to Hub
         </button>
       </div>
@@ -94,7 +94,8 @@ const FAQ = ({ onBack }) => {
                 const isExpanded = expanded === id;
                 return (
                   <div key={id} className="glass rounded-3xl border border-white/5 overflow-hidden transition-all hover:border-white/10">
-                    <button 
+                    <button
+                      title={isExpanded ? "Hide answer" : "Show answer"}
                       onClick={() => setExpanded(isExpanded ? null : id)}
                       className="w-full flex items-center justify-between p-6 text-left"
                     >

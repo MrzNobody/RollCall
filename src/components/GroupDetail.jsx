@@ -217,7 +217,7 @@ const GroupDetail = ({ group, onBack, user, isAdmin = false, initialTab = 'chat'
         
         <div className="absolute bottom-0 w-full px-6 md:px-12 pb-12">
           <div className="max-w-7xl mx-auto">
-            <button onClick={onBack} className="flex items-center gap-2 text-text-secondary hover:text-text-primary mb-8 transition-colors text-[10px] font-black uppercase tracking-[0.2em]">
+            <button title="Go back to Discover page" onClick={onBack} className="flex items-center gap-2 text-text-secondary hover:text-text-primary mb-8 transition-colors text-[10px] font-black uppercase tracking-[0.2em]">
               <ChevronLeft className="w-4 h-4" />
               Back to PBC Discover
             </button>
@@ -244,6 +244,7 @@ const GroupDetail = ({ group, onBack, user, isAdmin = false, initialTab = 'chat'
               </div>
               
               <button
+                title={isJoined ? "You are a member of this group" : joinRequested ? "Your request is pending approval" : "Request to join this group"}
                 onClick={handleJoin}
                 disabled={isJoined || joinRequested}
                 className={cn(
@@ -296,6 +297,7 @@ const GroupDetail = ({ group, onBack, user, isAdmin = false, initialTab = 'chat'
             {['Chat', 'Forum', 'Schedule', 'Rules & FAQ'].map(tab => (
               <button
                 key={tab}
+                title={`View ${tab}`}
                 onClick={() => setActiveTab(tab.toLowerCase())}
                 className={cn(
                   "py-6 text-[10px] font-black uppercase tracking-[0.2em] border-b-2 transition-all whitespace-nowrap shrink-0",
@@ -358,6 +360,7 @@ const GroupDetail = ({ group, onBack, user, isAdmin = false, initialTab = 'chat'
                     />
                     <button
                       type="submit"
+                      title="Send your message"
                       disabled={!newMessage.trim()}
                       className="bg-brand-primary p-3.5 rounded-2xl hover:bg-brand-primary/80 transition-all shadow-lg shadow-brand-primary/20 active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed"
                     >
@@ -500,7 +503,8 @@ const GroupDetail = ({ group, onBack, user, isAdmin = false, initialTab = 'chat'
             </p>
           </div>
 
-          <button 
+          <button
+            title="Report this community for violations"
             onClick={() => setShowReport(true)}
             className="w-full py-4 rounded-[2rem] bg-rose-500/5 border border-rose-500/20 text-rose-500 text-[10px] font-black uppercase tracking-widest flex items-center justify-center gap-2 hover:bg-rose-500/10 transition-all"
           >

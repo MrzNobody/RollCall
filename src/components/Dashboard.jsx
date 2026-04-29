@@ -130,6 +130,7 @@ const Dashboard = ({ user, onSelectGroup, onEnterAdmin, onEnterDiscover, isAdmin
             </button>
             {isAdmin && (
               <button
+                title="Open Admin Command Center"
                 onClick={onEnterAdmin}
                 className="glass px-6 py-3 rounded-2xl border border-brand-primary/30 text-brand-primary font-black text-xs uppercase tracking-widest flex items-center gap-2 hover:bg-brand-primary/10 transition-all"
               >
@@ -155,6 +156,7 @@ const Dashboard = ({ user, onSelectGroup, onEnterAdmin, onEnterDiscover, isAdmin
             ].map(cat => (
               <motion.button
                 key={cat.label}
+                title={`Explore ${cat.label} groups`}
                 whileHover={{ y: -5, scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
                 onClick={() => onEnterDiscover(cat.label)}

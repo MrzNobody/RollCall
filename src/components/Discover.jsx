@@ -53,10 +53,11 @@ const GroupCard = ({ group, onClick }) => {
           </div>
         </div>
         <div className="flex gap-2 mt-auto">
-          <button className="flex-1 py-2.5 bg-white/5 border border-white/10 rounded-xl font-bold text-[10px] hover:bg-brand-primary group-hover:border-brand-primary transition-all flex items-center justify-center gap-2 text-text-primary">
+          <button title="View details about this group" className="flex-1 py-2.5 bg-white/5 border border-white/10 rounded-xl font-bold text-[10px] hover:bg-brand-primary group-hover:border-brand-primary transition-all flex items-center justify-center gap-2 text-text-primary">
             Details
           </button>
-          <button 
+          <button
+            title="Get directions to this group's location"
             onClick={handleGetDirections}
             className="px-4 py-2.5 bg-brand-secondary/20 border border-brand-secondary/30 rounded-xl font-bold text-[10px] hover:bg-brand-secondary text-brand-secondary hover:text-white transition-all flex items-center justify-center gap-2"
           >
@@ -161,14 +162,16 @@ const Discover = ({ onSelectGroup, initialCategory = 'All' }) => {
 
             <div className="flex items-center gap-3 w-full md:w-auto">
               <div className="flex bg-white/5 rounded-2xl p-1 border border-white/10 flex-1 md:flex-none">
-                <button 
+                <button
+                  title="View groups as a list"
                   onClick={() => setView('list')}
                   className={`flex-1 md:flex-none flex items-center justify-center gap-2 px-4 py-2 rounded-xl text-[10px] md:text-sm font-black uppercase tracking-widest transition-all ${view === 'list' ? 'bg-brand-primary text-white shadow-lg shadow-brand-primary/20' : 'text-text-secondary hover:text-text-primary'}`}
                 >
                   <LayoutGrid className="w-4 h-4" />
                   <span className="hidden sm:inline">List</span>
                 </button>
-                <button 
+                <button
+                  title="View groups on a map"
                   onClick={() => setView('map')}
                   className={`flex-1 md:flex-none flex items-center justify-center gap-2 px-4 py-2 rounded-xl text-[10px] md:text-sm font-black uppercase tracking-widest transition-all ${view === 'map' ? 'bg-brand-primary text-white shadow-lg shadow-brand-primary/20' : 'text-text-secondary hover:text-text-primary'}`}
                 >
@@ -190,10 +193,11 @@ const Discover = ({ onSelectGroup, initialCategory = 'All' }) => {
             {['All', 'Gaming', 'Tabletop', 'Sports', 'Other'].map(cat => (
               <button
                 key={cat}
+                title={`Filter groups by ${cat} category`}
                 onClick={() => setActiveCategory(cat)}
                 className={`whitespace-nowrap px-4 py-2 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all border ${
-                  activeCategory === cat 
-                    ? 'bg-brand-primary/10 border-brand-primary text-brand-primary' 
+                  activeCategory === cat
+                    ? 'bg-brand-primary/10 border-brand-primary text-brand-primary'
                     : 'bg-white/5 border-white/10 text-text-muted hover:text-text-primary hover:border-white/20'
                 }`}
               >
@@ -226,7 +230,8 @@ const Discover = ({ onSelectGroup, initialCategory = 'All' }) => {
                   <p className="text-sm text-text-muted max-w-xs mx-auto font-medium">
                     We're currently focusing our pilot on <span className="text-brand-primary font-bold">Palm Beach County</span>. Want us to expand to your neighborhood next?
                   </p>
-                  <button 
+                  <button
+                    title="Join the waitlist for community expansion"
                     onClick={() => setShowWaitlist(true)}
                     className="bg-brand-primary px-8 py-4 rounded-2xl font-black text-xs uppercase tracking-widest text-white hover:bg-brand-primary/80 transition-all shadow-lg shadow-brand-primary/20"
                   >
@@ -286,13 +291,15 @@ const Discover = ({ onSelectGroup, initialCategory = 'All' }) => {
                       <h4 className="font-bold text-text-primary text-sm mb-1">{group.name}</h4>
                       <p className="text-[10px] text-text-secondary mb-3 uppercase font-black tracking-widest">{group.city} • {group.category}</p>
                       <div className="flex gap-2">
-                        <button 
+                        <button
+                          title="View details about this group"
                           onClick={() => onSelectGroup(group)}
                           className="flex-1 py-2 bg-surface-900 text-text-primary border border-white/10 rounded-lg text-[9px] font-black uppercase tracking-widest hover:bg-surface-800 transition-all"
                         >
                           Details
                         </button>
-                        <button 
+                        <button
+                          title="Get directions to this group's location"
                           onClick={() => {
                             const dest = `${group.coords[0]},${group.coords[1]}`;
                             if (navigator.geolocation) {

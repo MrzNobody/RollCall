@@ -20,7 +20,7 @@ const QRModal = ({ url, onClose }) => (
       className="glass border border-white/10 rounded-[2.5rem] p-10 space-y-6 text-center max-w-xs w-full"
       onClick={e => e.stopPropagation()}
     >
-      <button onClick={onClose} className="absolute top-5 right-5 text-text-muted hover:text-text-primary transition-colors">
+      <button title="Close QR code" onClick={onClose} className="absolute top-5 right-5 text-text-muted hover:text-text-primary transition-colors">
         <X className="w-5 h-5" />
       </button>
       <div>

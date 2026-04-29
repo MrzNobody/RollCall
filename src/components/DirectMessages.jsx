@@ -125,7 +125,7 @@ const DirectMessages = ({ user, onClose }) => {
           <div className="p-8 border-b border-white/5 space-y-6">
             <div className="flex items-center justify-between">
               <h2 className="text-xl font-black tracking-tight text-text-primary">Inbox</h2>
-              <button onClick={onClose} className="p-2 hover:bg-white/5 rounded-full transition-all">
+              <button title="Close Direct Messages" onClick={onClose} className="p-2 hover:bg-white/5 rounded-full transition-all">
                 <ChevronLeft className="w-5 h-5 text-text-muted" />
               </button>
             </div>
@@ -144,8 +144,9 @@ const DirectMessages = ({ user, onClose }) => {
                 <div className="w-6 h-6 border-2 border-brand-primary border-t-transparent rounded-full animate-spin" />
               </div>
             ) : conversations.map(neighbor => (
-              <button 
+              <button
                 key={neighbor.id}
+                title={`Chat with ${neighbor.full_name}`}
                 onClick={() => setActiveChat(neighbor)}
                 className={`w-full p-4 rounded-[1.5rem] flex items-center gap-4 transition-all ${
                   activeChat?.id === neighbor.id ? 'bg-brand-primary/10 border border-brand-primary/20' : 'hover:bg-white/5 border border-transparent'
@@ -173,7 +174,7 @@ const DirectMessages = ({ user, onClose }) => {
               {/* Header */}
               <div className="p-6 border-b border-white/5 flex items-center justify-between bg-surface-950/30 backdrop-blur-md">
                 <div className="flex items-center gap-4">
-                  <button onClick={() => setActiveChat(null)} className="lg:hidden p-2">
+                  <button title="Go back to conversations" onClick={() => setActiveChat(null)} className="lg:hidden p-2">
                     <ChevronLeft className="w-5 h-5" />
                   </button>
                   <div className="w-10 h-10 rounded-xl bg-brand-primary/20 flex items-center justify-center text-brand-primary font-bold">
@@ -191,7 +192,7 @@ const DirectMessages = ({ user, onClose }) => {
                   <div className="flex items-center gap-1.5 px-3 py-1 bg-white/5 border border-white/10 rounded-full text-[9px] font-black text-text-muted uppercase tracking-widest">
                     <Lock className="w-3 h-3" /> Encrypted
                   </div>
-                  <button className="p-2 hover:bg-white/5 rounded-full"><MoreVertical className="w-5 h-5 text-text-muted" /></button>
+                  <button title="Conversation options" className="p-2 hover:bg-white/5 rounded-full"><MoreVertical className="w-5 h-5 text-text-muted" /></button>
                 </div>
               </div>
 
@@ -220,7 +221,7 @@ const DirectMessages = ({ user, onClose }) => {
                       className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-sm focus:outline-none focus:border-brand-primary transition-all text-text-primary"
                     />
                   </div>
-                  <button type="submit" className="bg-brand-primary p-4 rounded-2xl hover:bg-brand-primary/80 transition-all shadow-lg shadow-brand-primary/20 active:scale-95">
+                  <button title="Send your message" type="submit" className="bg-brand-primary p-4 rounded-2xl hover:bg-brand-primary/80 transition-all shadow-lg shadow-brand-primary/20 active:scale-95">
                     <Send className="w-5 h-5 text-white" />
                   </button>
                 </form>
