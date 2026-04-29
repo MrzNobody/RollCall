@@ -284,8 +284,8 @@ const ChatMessage = ({ user_id, content, created_at, self }) => (
   </div>
 );
 
-const GroupDetail = ({ group, onBack, user, isAdmin = false }) => {
-  const [activeTab, setActiveTab] = useState('chat');
+const GroupDetail = ({ group, onBack, user, isAdmin = false, initialTab = 'chat' }) => {
+  const [activeTab, setActiveTab] = useState(initialTab);
   const [isJoined, setIsJoined] = useState(false);
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState('');

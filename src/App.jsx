@@ -277,6 +277,7 @@ function App() {
   const [isAdmin, setIsAdmin] = useState(false);
   const [showSupport, setShowSupport] = useState(false);
   const [viewProfileId, setViewProfileId] = useState(null);
+  const [initialGroupTab, setInitialGroupTab] = useState('chat');
 
   const goToProfile = (profileId = null) => {
     setViewProfileId(profileId);
@@ -455,10 +456,10 @@ function App() {
           </div>
         )}
 
-        {step === 'dashboard' && <Dashboard user={user} isAdmin={isAdmin} onSelectGroup={(g) => { setSelectedGroup(g); setStep('group-detail'); }} onCreateGroup={() => setStep('create-group')} onEnterDiscover={(cat) => { setActiveCategoryFilter(cat || 'All'); setStep('discover'); }} onEnterAdmin={() => setStep('admin')} />}
-        {step === 'discover' && (user ? <Discover initialCategory={activeCategoryFilter} onSelectGroup={(g) => { setSelectedGroup(g); setStep('group-detail'); }} /> : <div className="flex-1 flex items-center justify-center"><button onClick={() => setShowAuth(true)} className="bg-brand-primary px-12 py-5 rounded-3xl font-black uppercase tracking-widest shadow-2xl">Sign In to View Map</button></div>)}
+        {step === 'dashboard' && <Dashboard user={user} isAdmin={isAdmin} onSelectGroup={(g, tab = 'chat') => { setSelectedGroup(g); setInitialGroupTab(tab); setStep('group-detail'); }} onCreateGroup={() => setStep('create-group')} onEnterDiscover={(cat) => { setActiveCategoryFilter(cat || 'All'); setStep('discover'); }} onEnterAdmin={() => setStep('admin')} />}
+        {step === 'discover' && (user ? <Discover initialCategory={activeCategoryFilter} onSelectGroup={(g) => { setSelectedGroup(g); setInitialGroupTab('chat'); setStep('group-detail'); }} /> : <div className="flex-1 flex items-center justify-center"><button onClick={() => setShowAuth(true)} className="bg-brand-primary px-12 py-5 rounded-3xl font-black uppercase tracking-widest shadow-2xl">Sign In to View Map</button></div>)}
         {step === 'create-group' && <CreateGroup onCreated={() => setStep('dashboard')} onCancel={() => setStep('dashboard')} />}
-        {step === 'group-detail' && <GroupDetail group={selectedGroup} onBack={() => setStep('dashboard')} user={user} isAdmin={isAdmin} />}
+        {step === 'group-detail' && <GroupDetail group={selectedGroup} onBack={() => setStep('dashboard')} user={user} isAdmin={isAdmin} initialTab={initialGroupTab} />}
         {step === 'admin' && <AdminDashboard onBack={() => setStep('dashboard')} />}
         {step === 'status' && (isAdmin ? <Status onBack={() => setStep(user ? 'dashboard' : 'hero')} /> : <div className="flex-1 flex items-center justify-center"><p className="text-rose-500 font-black uppercase tracking-widest">Unauthorized Access</p></div>)}
         {step === 'faq' && <FAQ onBack={() => setStep('hero')} />}

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { supabase } from '../lib/supabase';
-import { LayoutGrid, Users, Settings, LogOut, ChevronRight, MapPin, MessageSquare, Zap, Shield, Award, LifeBuoy } from 'lucide-react';
+import { LayoutGrid, Users, Settings, LogOut, ChevronRight, MapPin, MessageSquare, Zap, Shield, Award, LifeBuoy, CalendarPlus, Calendar } from 'lucide-react';
 import { motion } from 'framer-motion';
 import BadgeShelf from './BadgeShelf';
 import DirectMessages from './DirectMessages';
@@ -166,6 +166,44 @@ const Dashboard = ({ user, onSelectGroup, onEnterAdmin, onEnterDiscover, isAdmin
             ))}
           </div>
         </div>
+
+        {/* Organizer Hub — only shown to users who own at least one group */}
+        {(() => {
+          const ownedGroups = joinedGroups.filter(g => g.owner_id === user?.id);
+          if (ownedGroups.length === 0) return null;
+          return (
+            <div className="space-y-5">
+              <div className="flex items-center gap-3">
+                <div className="p-2 bg-brand-primary/10 rounded-xl">
+                  <CalendarPlus className="w-4 h-4 text-brand-primary" />
+                </div>
+                <h3 className="text-sm font-black uppercase tracking-[0.2em] text-brand-primary">Organizer Hub</h3>
+                <div className="h-px flex-1 bg-brand-primary/10" />
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {ownedGroups.map(group => (
+                  <div key={group.id} className="glass p-5 rounded-3xl border border-brand-primary/20 bg-brand-primary/5 flex items-center gap-5">
+                    <div className="h-14 w-14 rounded-2xl overflow-hidden shrink-0">
+                      <img src={group.image} className="h-full w-full object-cover" />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <h4 className="font-bold text-text-primary truncate">{group.name}</h4>
+                      <p className="text-[10px] text-text-muted uppercase tracking-wider font-bold">{group.city} · {group.members} members</p>
+                    </div>
+                    <button
+                      title="Schedule a new session for this group"
+                      onClick={() => onSelectGroup(group, 'schedule')}
+                      className="flex items-center gap-2 px-4 py-2.5 bg-brand-primary text-white rounded-2xl text-[10px] font-black uppercase tracking-widest hover:bg-brand-primary/80 transition-all shadow-lg shadow-brand-primary/20 shrink-0"
+                    >
+                      <Calendar className="w-3.5 h-3.5" />
+                      Schedule
+                    </button>
+                  </div>
+                ))}
+              </div>
+            </div>
+          );
+        })()}
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           <StatCard title="Total Groups" value={joinedGroups.length} icon={<LayoutGrid className="w-5 h-5" />} color="bg-brand-primary/20 text-brand-primary" />
