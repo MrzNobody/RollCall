@@ -3,7 +3,7 @@ import {
   Shield, Users, AlertTriangle, CheckCircle, XCircle,
   Search, Filter, ChevronRight, MessageSquare, Flag,
   ArrowUpRight, ArrowDownRight, Clock, ShieldAlert, LifeBuoy, Globe,
-  AlertOctagon, Ban, ShieldOff, TriangleAlert
+  AlertOctagon, Ban, ShieldOff, TriangleAlert, X, FileText
 } from 'lucide-react';
 import { supabase } from '../lib/supabase';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -25,6 +25,7 @@ const AdminDashboard = () => {
   const [activeTab, setActiveTab] = useState('reports');
   const [searchQuery, setSearchQuery] = useState('');
   const [actionLoading, setActionLoading] = useState(null);
+  const [selectedTicket, setSelectedTicket] = useState(null);
 
   useEffect(() => {
     fetchData();
@@ -82,7 +83,7 @@ const AdminDashboard = () => {
 
       const { data: ticketsData } = await supabase
         .from('support_tickets')
-        .select('id, user_id, category, subject, description, status, priority, created_at')
+        .select('id, user_id, category, subject, description, status, priority, created_at, profiles(username, full_name)')
         .order('created_at', { ascending: false });
       setTickets(ticketsData || []);
 
@@ -418,40 +419,64 @@ const AdminDashboard = () => {
 
                 ) : activeTab === 'tickets' ? (
                   <table className="w-full text-left">
-                    <thead className="bg-white/5 text-[10px] font-black uppercase tracking-widest text-text-muted border-b border-white/10">
-                      <tr>
-                        <th className="px-6 py-4">Resident</th>
-                        <th className="px-6 py-4">Subject</th>
-                        <th className="px-6 py-4">Category</th>
-                        <th className="px-6 py-4">Status</th>
-                        <th className="px-6 py-4 text-right">Actions</th>
-                      </tr>
-                    </thead>
-                    <tbody className="divide-y divide-white/5">
-                      {tickets.map((ticket) => (
-                        <tr key={ticket.id} className="hover:bg-white/5 transition-colors group">
-                          <td className="px-6 py-5 text-xs font-bold text-text-primary">Resident {ticket.user_id?.slice(0, 6)}</td>
-                          <td className="px-6 py-5 text-xs font-medium text-text-secondary">{ticket.subject}</td>
-                          <td className="px-6 py-5">
-                            <span className="px-2 py-1 rounded-md bg-white/5 text-[8px] font-black uppercase tracking-widest text-text-muted border border-white/10">{ticket.category}</span>
-                          </td>
-                          <td className="px-6 py-5">
-                            <span className={`px-2 py-1 rounded-md text-[8px] font-black uppercase tracking-widest ${
-                              ticket.status === 'Open' ? 'bg-brand-primary/10 text-brand-primary border border-brand-primary/20' :
-                              'bg-emerald-500/10 text-emerald-500 border border-emerald-500/20'
-                            }`}>{ticket.status}</span>
-                          </td>
-                          <td className="px-6 py-5 text-right">
-                            {ticket.status === 'Open' && (
-                              <button onClick={() => handleTicketAction(ticket.id, 'Resolved')} className="px-3 py-1.5 bg-brand-primary text-white rounded-lg text-[9px] font-black uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity">
-                                Resolve
-                              </button>
-                            )}
-                          </td>
+                      <thead className="bg-white/5 text-[10px] font-black uppercase tracking-widest text-text-muted border-b border-white/10">
+                        <tr>
+                          <th className="px-6 py-4">From</th>
+                          <th className="px-6 py-4">Subject</th>
+                          <th className="px-6 py-4">Category</th>
+                          <th className="px-6 py-4">Date</th>
+                          <th className="px-6 py-4">Status</th>
+                          <th className="px-6 py-4 text-right">Actions</th>
                         </tr>
-                      ))}
-                    </tbody>
-                  </table>
+                      </thead>
+                      <tbody className="divide-y divide-white/5">
+                        {tickets.map((ticket) => {
+                          const displayName = ticket.profiles?.username
+                            ? `@${ticket.profiles.username}`
+                            : ticket.profiles?.full_name || `User ${ticket.user_id?.slice(0, 6)}`;
+                          return (
+                            <tr
+                              key={ticket.id}
+                              onClick={() => setSelectedTicket(ticket)}
+                              className="hover:bg-white/5 transition-colors group cursor-pointer"
+                            >
+                              <td className="px-6 py-5">
+                                <div className="flex items-center gap-2">
+                                  <div className="w-7 h-7 rounded-full bg-brand-primary/20 flex items-center justify-center text-[9px] font-black text-brand-primary shrink-0">
+                                    {(ticket.profiles?.username || ticket.profiles?.full_name || '?')[0].toUpperCase()}
+                                  </div>
+                                  <span className="text-xs font-bold text-text-primary">{displayName}</span>
+                                </div>
+                              </td>
+                              <td className="px-6 py-5 text-xs font-medium text-text-secondary max-w-[200px] truncate">{ticket.subject}</td>
+                              <td className="px-6 py-5">
+                                <span className="px-2 py-1 rounded-md bg-white/5 text-[8px] font-black uppercase tracking-widest text-text-muted border border-white/10">{ticket.category}</span>
+                              </td>
+                              <td className="px-6 py-5 text-[10px] text-text-muted font-medium">
+                                {new Date(ticket.created_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+                              </td>
+                              <td className="px-6 py-5">
+                                <span className={`px-2 py-1 rounded-md text-[8px] font-black uppercase tracking-widest ${
+                                  ticket.status === 'Open'
+                                    ? 'bg-brand-primary/10 text-brand-primary border border-brand-primary/20'
+                                    : 'bg-emerald-500/10 text-emerald-500 border border-emerald-500/20'
+                                }`}>{ticket.status}</span>
+                              </td>
+                              <td className="px-6 py-5 text-right" onClick={e => e.stopPropagation()}>
+                                {ticket.status === 'Open' && (
+                                  <button
+                                    onClick={() => handleTicketAction(ticket.id, 'Resolved')}
+                                    className="px-3 py-1.5 bg-brand-primary text-white rounded-lg text-[9px] font-black uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity"
+                                  >
+                                    Resolve
+                                  </button>
+                                )}
+                              </td>
+                            </tr>
+                          );
+                        })}
+                      </tbody>
+                    </table>
 
                 ) : activeTab === 'users' ? (
                   <div>
@@ -579,6 +604,101 @@ const AdminDashboard = () => {
           </div>
         </div>
       </div>
+
+      {/* Ticket Detail Modal — rendered at root level to escape overflow-hidden containers */}
+      <AnimatePresence>
+        {selectedTicket && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[200] flex items-center justify-center p-6 bg-black/70 backdrop-blur-md"
+            onClick={() => setSelectedTicket(null)}
+          >
+            <motion.div
+              initial={{ scale: 0.95, y: 16 }}
+              animate={{ scale: 1, y: 0 }}
+              exit={{ scale: 0.95, y: 16 }}
+              onClick={e => e.stopPropagation()}
+              className="w-full max-w-xl bg-surface-950 border border-white/10 rounded-[2rem] overflow-hidden shadow-2xl"
+            >
+              {/* Header */}
+              <div className="flex items-center justify-between px-8 py-6 border-b border-white/5">
+                <div className="flex items-center gap-3">
+                  <div className="w-9 h-9 rounded-full bg-brand-primary/20 flex items-center justify-center text-xs font-black text-brand-primary">
+                    {(selectedTicket.profiles?.username || selectedTicket.profiles?.full_name || '?')[0].toUpperCase()}
+                  </div>
+                  <div>
+                    <p className="text-sm font-black text-text-primary">
+                      {selectedTicket.profiles?.username
+                        ? `@${selectedTicket.profiles.username}`
+                        : selectedTicket.profiles?.full_name || `User ${selectedTicket.user_id?.slice(0, 8)}`}
+                    </p>
+                    <p className="text-[10px] text-text-muted font-medium">
+                      {new Date(selectedTicket.created_at).toLocaleString('en-US', { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric', hour: '2-digit', minute: '2-digit' })}
+                    </p>
+                  </div>
+                </div>
+                <button
+                  onClick={() => setSelectedTicket(null)}
+                  className="p-2 rounded-xl hover:bg-white/10 transition-all text-text-muted hover:text-text-primary"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
+
+              {/* Body */}
+              <div className="px-8 py-6 space-y-6">
+                <div className="flex items-center gap-3 flex-wrap">
+                  <span className="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-[9px] font-black uppercase tracking-widest text-text-muted">
+                    {selectedTicket.category}
+                  </span>
+                  <span className={`px-3 py-1 rounded-full text-[9px] font-black uppercase tracking-widest ${
+                    selectedTicket.status === 'Open'
+                      ? 'bg-brand-primary/10 text-brand-primary border border-brand-primary/20'
+                      : 'bg-emerald-500/10 text-emerald-500 border border-emerald-500/20'
+                  }`}>{selectedTicket.status}</span>
+                </div>
+
+                <div>
+                  <p className="text-[10px] font-black uppercase tracking-widest text-text-muted mb-1">Subject</p>
+                  <h3 className="text-lg font-black text-text-primary">{selectedTicket.subject}</h3>
+                </div>
+
+                <div>
+                  <p className="text-[10px] font-black uppercase tracking-widest text-text-muted mb-2 flex items-center gap-2">
+                    <FileText className="w-3 h-3" /> Request Details
+                  </p>
+                  <div className="bg-white/5 border border-white/10 rounded-2xl p-5 text-sm text-text-secondary leading-relaxed font-medium whitespace-pre-wrap min-h-[80px]">
+                    {selectedTicket.description || <span className="italic text-text-muted">No description provided.</span>}
+                  </div>
+                </div>
+              </div>
+
+              {/* Footer */}
+              <div className="px-8 py-5 border-t border-white/5 flex items-center justify-end gap-3">
+                <button
+                  onClick={() => setSelectedTicket(null)}
+                  className="px-5 py-2.5 rounded-xl bg-white/5 border border-white/10 text-xs font-black uppercase tracking-widest text-text-muted hover:text-text-primary transition-all"
+                >
+                  Close
+                </button>
+                {selectedTicket.status === 'Open' && (
+                  <button
+                    onClick={() => {
+                      handleTicketAction(selectedTicket.id, 'Resolved');
+                      setSelectedTicket(null);
+                    }}
+                    className="px-5 py-2.5 rounded-xl bg-brand-primary text-white text-xs font-black uppercase tracking-widest hover:bg-brand-primary/80 shadow-lg shadow-brand-primary/20 transition-all"
+                  >
+                    Mark Resolved
+                  </button>
+                )}
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };
