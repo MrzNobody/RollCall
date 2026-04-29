@@ -89,6 +89,7 @@ const GroupDetail = ({ group, onBack, user, isAdmin = false, initialTab = 'chat'
   const [isJoined, setIsJoined] = useState(false);
   const [joinRequested, setJoinRequested] = useState(false);
   const [messages, setMessages] = useState([]);
+  const [chatError, setChatError] = useState('');
   const [newMessage, setNewMessage] = useState('');
   const [showReport, setShowReport] = useState(false);
   const groupImage = group.image || getGroupImage(group.name, group.category);
@@ -175,18 +176,32 @@ const GroupDetail = ({ group, onBack, user, isAdmin = false, initialTab = 'chat'
   };
 
   const handleSendMessage = async (e) => {
-    e.preventDefault();
-    if (!newMessage.trim() || !user) return;
+    e?.preventDefault();
+    const text = newMessage.trim();
+    if (!text || !user) return;
+    setChatError('');
 
     const { error } = await supabase
       .from('messages')
       .insert([{
         group_id: group.id,
         user_id: user.id,
-        content: newMessage,
+        content: text,
       }]);
 
-    if (!error) setNewMessage('');
+    if (error) {
+      console.error('Chat send error:', error);
+      setChatError('Message failed to send. Please try again.');
+    } else {
+      setNewMessage('');
+    }
+  };
+
+  const handleChatKeyDown = (e) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      handleSendMessage();
+    }
   };
 
   return (
@@ -264,21 +279,33 @@ const GroupDetail = ({ group, onBack, user, isAdmin = false, initialTab = 'chat'
         </div>
       </div>
 
-      {/* Navigation Tabs */}
+      {/* Navigation Tabs — sticky, always visible */}
       <div className="border-b border-white/5 bg-surface-950/80 backdrop-blur-xl sticky top-16 z-30 px-6 md:px-12">
-        <div className="max-w-7xl mx-auto flex gap-10">
-          {['Chat', 'Forum', 'Schedule', 'Rules & FAQ'].map(tab => (
-            <button 
-              key={tab}
-              onClick={() => setActiveTab(tab.toLowerCase())}
-              className={cn(
-                "py-6 text-[10px] font-black uppercase tracking-[0.2em] border-b-2 transition-all",
-                activeTab === tab.toLowerCase() ? "border-brand-primary text-text-primary" : "border-transparent text-text-muted hover:text-text-primary"
-              )}
-            >
-              {tab}
-            </button>
-          ))}
+        <div className="max-w-7xl mx-auto flex items-center gap-6">
+          {/* Always-visible back button */}
+          <button
+            onClick={onBack}
+            title="Back to Dashboard"
+            className="flex items-center gap-1.5 text-[10px] font-black uppercase tracking-[0.15em] text-text-muted hover:text-brand-primary transition-colors py-6 shrink-0 border-b-2 border-transparent"
+          >
+            <ChevronLeft className="w-4 h-4" />
+            <span className="hidden sm:inline">Dashboard</span>
+          </button>
+          <div className="w-px h-5 bg-white/10 shrink-0" />
+          <div className="flex gap-6 md:gap-10 overflow-x-auto no-scrollbar">
+            {['Chat', 'Forum', 'Schedule', 'Rules & FAQ'].map(tab => (
+              <button
+                key={tab}
+                onClick={() => setActiveTab(tab.toLowerCase())}
+                className={cn(
+                  "py-6 text-[10px] font-black uppercase tracking-[0.2em] border-b-2 transition-all whitespace-nowrap shrink-0",
+                  activeTab === tab.toLowerCase() ? "border-brand-primary text-text-primary" : "border-transparent text-text-muted hover:text-text-primary"
+                )}
+              >
+                {tab}
+              </button>
+            ))}
+          </div>
         </div>
       </div>
 
@@ -287,12 +314,14 @@ const GroupDetail = ({ group, onBack, user, isAdmin = false, initialTab = 'chat'
         <div className="lg:col-span-2">
           {activeTab === 'chat' && (
             <div className="glass rounded-[2.5rem] flex flex-col h-[650px] overflow-hidden border border-white/5 shadow-2xl">
-              <div className="p-8 border-b border-white/5 flex items-center justify-between">
+              <div className="p-6 border-b border-white/5 flex items-center justify-between">
                 <div className="flex items-center gap-3">
-                  <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                  <div className={`w-2 h-2 rounded-full animate-pulse ${isJoined ? 'bg-emerald-500' : 'bg-white/20'}`} />
                   <span className="font-bold tracking-tight">Community Social Hub</span>
                 </div>
-                {!user && <span className="text-[10px] font-black text-brand-primary uppercase tracking-widest">Login to participate</span>}
+                {isJoined && (
+                  <span className="text-[9px] font-black uppercase tracking-widest text-emerald-400">Member · Live Chat</span>
+                )}
               </div>
               
               <div className="flex-1 overflow-y-auto p-8 scrollbar-hide space-y-4">
@@ -312,19 +341,44 @@ const GroupDetail = ({ group, onBack, user, isAdmin = false, initialTab = 'chat'
                 <div ref={chatEndRef} />
               </div>
 
-              {user && (
-                <form onSubmit={handleSendMessage} className="p-6 bg-white/5 border-t border-white/5 flex gap-4">
-                  <input 
-                    type="text" 
-                    value={newMessage}
-                    onChange={(e) => setNewMessage(e.target.value)}
-                    placeholder="Message the community..."
-                    className="flex-1 bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-sm focus:outline-none focus:border-brand-primary transition-all text-text-primary placeholder:text-text-muted"
-                  />
-                  <button type="submit" className="bg-brand-primary p-4 rounded-2xl hover:bg-brand-primary/80 transition-all shadow-lg shadow-brand-primary/20 active:scale-95">
-                    <Send className="w-5 h-5 text-white" />
-                  </button>
-                </form>
+              {/* Chat input — shown only to active members */}
+              {isJoined ? (
+                <div className="border-t border-white/5">
+                  {chatError && (
+                    <p className="px-6 pt-3 text-[10px] font-bold text-rose-400">{chatError}</p>
+                  )}
+                  <form onSubmit={handleSendMessage} className="p-4 bg-white/5 flex gap-3">
+                    <input
+                      type="text"
+                      value={newMessage}
+                      onChange={(e) => { setNewMessage(e.target.value); setChatError(''); }}
+                      onKeyDown={handleChatKeyDown}
+                      placeholder="Say hi to the community… press Enter to send"
+                      className="flex-1 bg-white/5 border border-white/10 rounded-2xl px-5 py-3.5 text-sm focus:outline-none focus:border-brand-primary transition-all text-text-primary placeholder:text-text-muted"
+                    />
+                    <button
+                      type="submit"
+                      disabled={!newMessage.trim()}
+                      className="bg-brand-primary p-3.5 rounded-2xl hover:bg-brand-primary/80 transition-all shadow-lg shadow-brand-primary/20 active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed"
+                    >
+                      <Send className="w-5 h-5 text-white" />
+                    </button>
+                  </form>
+                </div>
+              ) : joinRequested ? (
+                <div className="border-t border-white/5 p-4 flex items-center justify-center gap-3 text-[10px] font-black uppercase tracking-widest text-orange-400">
+                  <HelpCircle className="w-4 h-4 shrink-0" />
+                  Your join request is pending organizer approval
+                </div>
+              ) : user ? (
+                <div className="border-t border-white/5 p-4 flex items-center justify-center gap-3 text-[10px] font-black uppercase tracking-widest text-text-muted">
+                  <CheckCircle2 className="w-4 h-4 shrink-0 text-brand-primary" />
+                  Request to join above to participate in chat
+                </div>
+              ) : (
+                <div className="border-t border-white/5 p-4 text-center text-[10px] font-black uppercase tracking-widest text-brand-primary">
+                  Sign in to participate
+                </div>
               )}
             </div>
           )}

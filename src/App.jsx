@@ -402,8 +402,8 @@ function App() {
   return (
     <div data-testid="main-app" className="min-h-screen bg-surface-950 text-text-primary selection:bg-brand-secondary/30 flex flex-col font-sans transition-all duration-500">
       <nav className="fixed top-0 w-full z-50 glass border-b border-white/5 py-4 px-6 md:px-12 flex justify-between items-center">
-        <div className="flex items-center gap-4 cursor-pointer" title="Go to RollCall Home" onClick={() => {
-          setStep('hero');
+        <div className="flex items-center gap-4 cursor-pointer" title={user ? "Go to My Dashboard" : "Go to RollCall Home"} onClick={() => {
+          setStep(user ? 'dashboard' : 'hero');
           setSelectedGroup(null);
           setSelectedCategory(null);
           setActiveCategoryFilter('All');
