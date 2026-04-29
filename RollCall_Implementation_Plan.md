@@ -511,11 +511,12 @@ This phase is **trigger-gated** — it does not begin on a calendar date. It beg
 - One config change in `approved_regions` table activates a new county — no code deploy required
 - All waitlisted users in activated county receive an invitation email automatically
 
-#### Monetization Activation
-- **Premium Organizer Tier**: enhanced group tools (custom domain, priority support, advanced analytics, promoted placement)
-- **Promoted Group Placement**: paid discovery slot for group owners wanting faster growth
-- Both features built in Phase 4 infrastructure — activation requires product and pricing decisions, not new code
-- Affiliate commissions (F100) already generating passive revenue from Phase 4
+#### Monetization (Live from Launch)
+- **Subscription billing is active from Day 1** — Participant plan ($10/mo) and Organizer plan ($15/mo) with 15% annual discount and a 30-day free trial for all new accounts
+- **No credit card required at trial start** — account prompts for plan selection at day 30
+- **Affiliate commissions (F100)** generating passive revenue from Phase 4 onward
+- **Phase 6 monetization focus:** Promoted Group Placement — paid discovery slot for group owners wanting faster growth; builds on subscription infrastructure already live
+- **Future enhancement:** custom domain, priority support queue, and advanced analytics add-ons for high-volume Organizer accounts (evaluated after 1,000 active subscribers)
 
 #### Native Mobile Apps
 - React Native (shared codebase with web React)
@@ -532,12 +533,12 @@ This phase is **trigger-gated** — it does not begin on a calendar date. It beg
 
 ### Business Value
 
-> **Phase 6 is where the business model is proven.** Everything before this was building a product and proving it works with real users. Phase 6 takes a product that 250+ people already use and love, opens it to new markets, and begins generating sustainable recurring revenue. Geographic expansion is low-cost because the platform is already built — it's literally a one-row database change per county.
+> **Phase 6 is where growth compounds.** The business model was proven from launch — subscription billing is live and generating recurring revenue from Day 1 of the pilot. Phase 6 takes a product that 250+ people already pay for and love, opens it to new markets, and accelerates revenue through geographic expansion and promoted placement. Expansion is low-cost because the platform is already built — it's literally a one-row database change per county.
 
 **Phase 6 success metrics:**
 - Month 6: Active in 2 South Florida counties
-- Month 9: 1,000+ registered users across all active counties
-- Month 12: First paid Premium Organizer subscribers
+- Month 9: 1,000+ registered users across all active counties with positive MRR
+- Month 12: Promoted Group Placement feature live; 10%+ of active Organizer accounts using it
 - Year 2: React Native apps live on both app stores
 
 ---

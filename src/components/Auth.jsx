@@ -12,16 +12,11 @@ const DEMO_ORGANIZERS = [
 ];
 
 const DEMO_PARTICIPANTS = [
-  { label: 'Ethan Baker',    email: 'ethan.baker229@yahoo.com',   password: 'PeakEB21*',  tag: 'Gaming' },
-  { label: 'Kylie Nelson',   email: 'kylie.nelson829@gmail.com',  password: 'WildKN53#',  tag: 'Sports' },
-  { label: 'Leo Miller',     email: 'leo.miller253@hotmail.com',  password: 'ChillLM82*', tag: 'Tabletop' },
-  { label: 'Tyler Brooks',   email: 'tyler.brooks@gmail.com',     password: 'TylB33*',    tag: 'Gaming' },
-  { label: 'Aisha Johnson',  email: 'aisha.johnson@yahoo.com',    password: 'AisJ71#',    tag: 'Sports' },
-  { label: 'Daniel Park',    email: 'daniel.park@gmail.com',      password: 'DanP44!',    tag: 'Tabletop' },
-  { label: 'Emma Rodriguez', email: 'emma.rodriguez@gmail.com',   password: 'EmmR58*',    tag: 'Running' },
-  { label: 'Chris Martinez', email: 'chris.martinez@gmail.com',   password: 'ChrM26#',    tag: 'Gaming' },
-  { label: 'Nadia Hassan',   email: 'nadia.hassan@yahoo.com',     password: 'NadH89!',    tag: 'Sports' },
-  { label: "Ryan O'Brien",   email: 'ryan.obrien@hotmail.com',    password: 'RyaO15*',    tag: 'Tabletop' },
+  { label: 'Ethan Baker',   email: 'ethan.baker229@yahoo.com',  password: 'PeakEB21*',  tag: 'Gaming' },
+  { label: 'Kylie Nelson',  email: 'kylie.nelson829@gmail.com', password: 'WildKN53#',  tag: 'Sports' },
+  { label: 'Leo Miller',    email: 'leo.miller253@hotmail.com', password: 'ChillLM82*', tag: 'Tabletop' },
+  { label: 'Tyler Brooks',  email: 'tyler.brooks@gmail.com',    password: 'TylB33*',    tag: 'Gaming' },
+  { label: 'Aisha Johnson', email: 'aisha.johnson@yahoo.com',   password: 'AisJ71#',    tag: 'Sports' },
 ];
 
 const DemoButton = ({ account, isOrganizer = false, onLogin, loading }) => (
@@ -73,7 +68,13 @@ const Auth = ({ onClose, onSuccess, onViewPricing }) => {
 
     try {
       if (isSignUp) {
-        const { error } = await supabase.auth.signUp({ email, password });
+        const { error } = await supabase.auth.signUp({
+          email,
+          password,
+          options: {
+            emailRedirectTo: window.location.origin,
+          },
+        });
         if (error) throw error;
         setMessage({ type: 'success', content: 'Account created! Check your email to confirm.' });
       } else {

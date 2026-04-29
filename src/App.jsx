@@ -316,12 +316,29 @@ function App() {
   }, [theme]);
 
   useEffect(() => {
+    // Register the auth state listener FIRST so we never miss a SIGNED_IN event
+    // that fires when Supabase detects session tokens in the URL (e.g. email confirmation links).
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+      setUser(session?.user ?? null);
+      if (session?.user) {
+        setShowAuth(false);
+        if (session.user.email === 'craineri76@gmail.com') {
+          setIsAdmin(true);
+        }
+        // If we're on the landing page, move to the dashboard
+        setStep(prev => (prev === 'hero' ? 'dashboard' : prev));
+      } else {
+        setIsAdmin(false);
+        // Only redirect to hero on explicit sign-out, not on initial load
+        if (_event === 'SIGNED_OUT') setStep('hero');
+      }
+    });
+
+    // Then get the current session (also handles any code/token in the URL for PKCE)
     async function init() {
       try {
-        const { data: { session }, error } = await supabase.auth.getSession();
-        if (error) throw error;
-        setUser(session?.user ?? null);
-        if (session?.user && (step === 'hero')) setStep('dashboard');
+        const { data: { session } } = await supabase.auth.getSession();
+        if (!session) setUser(null);
       } catch (err) {
         console.error('Initialization error:', err);
       } finally {
@@ -329,21 +346,6 @@ function App() {
       }
     }
     init();
-
-    const { data: { subscription } } = supabase.auth.onAuthStateChange(async (_event, session) => {
-      setUser(session?.user ?? null);
-      if (session?.user) {
-        setShowAuth(false);
-        // Check for admin status via email or profile flag
-        if (session.user.email === 'craineri76@gmail.com') {
-          setIsAdmin(true);
-        }
-        if (step === 'hero') setStep('dashboard');
-      } else {
-        setStep('hero');
-        setIsAdmin(false);
-      }
-    });
 
     return () => subscription.unsubscribe();
   }, []);

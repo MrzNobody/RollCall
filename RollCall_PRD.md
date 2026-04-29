@@ -1,14 +1,15 @@
 # RollCall — Product Requirements Document
 
-**Version:** 3.17  
-**Date:** April 21, 2026  
+**Version:** 3.18  
+**Date:** April 29, 2026  
 **Status:** Draft  
 **Author:** Carlo Raineri  
 **Changelog:**
+- v3.18 — **Subscription Billing Model Adopted**: RollCall is no longer free; all references to the platform being permanently free have been removed. Pricing: Participant plan $10/mo, Organizer plan $15/mo, 15% annual discount on both plans; all new accounts receive a 30-day free trial with no credit card required. Updated Launch Strategy Monetization subsection to reflect live subscription billing (replacing the deferred pilot-stage approach). Updated F108 Community Standards scam-prevention language to clarify that RollCall does not facilitate direct payments between users (removed prior "free platform" framing). Updated F70 Organizer Analytics availability from "at no cost" to "included in all Organizer plan subscriptions." Updated organizer recruiting pitch to "Your first 30 days are free." Updated Out of Scope section to remove "platform is fully free" framing. Companion document `RollCall_Pricing_Plans.md` created with full plan details, feature comparison, billing cycles, and competitive positioning.
 - v3.17 — **F111 — Personalized Home Dashboard**: every logged-in user lands on a unique dynamic `/home` page assembling five personalised sections — (1) My Week: 7-day calendar strip of all upcoming RSVPd/member sessions with group icon, RSVP status badge, and Roll20 badge; links to full `/calendar` page; (2) Recommended For You: 4–6 group cards scored by F60 match algorithm (min score 35) with "why it matched" chips and one-tap join; warm zero-match empty state if insufficient groups; (3) My Groups — Recent Activity: live feed of new forum posts, new members, polls, resources, announcements, and unRSVPd sessions across all joined groups since last visit; up to 15 items ordered by recency; read-state tracked via `home_feed_last_seen_at`; (4) My Forum Threads: threads the user has posted or reacted to with new unread replies since last visit; reply count badge and last-reply preview; (5) Trending in Your Interests: new groups in matching categories, high-demand activity gaps from F94 Part 5, and large upcoming events (≥10 RSVPs); suppressed for users with ≥10 groups; section customisation: users can collapse or hide optional sections (Recommended, Forum Threads, Trending) via ⚙️ Customise button; prefs stored in `home_dashboard_prefs` JSONB on users table; all five sections returned in single `GET /api/home/feed` response to avoid waterfall; per-section cache TTLs (1–30 min) with targeted invalidation; skeleton loaders (F90) per section; greeting rotates by time of day; personalisation draws on interests (F26), memberships, RSVP history, forum activity, F60 scoring, F107 analytics, F83 follow graph, and F94 gap votes; `home_feed_last_seen_at` and `home_dashboard_prefs` columns added to users table; 8 new API endpoints; 7 new user stories #340–#346
 - v3.16 — **F110 — Roll20 & Virtual Tabletop Integration**: online RPG groups can link their Roll20 campaign (or any VTT platform) once at the group level, with a per-session override for one-shots or side campaigns; Roll20 URL validated against `app.roll20.net` pattern at group creation/edit; campaign link visible to confirmed group members only — locked state shown to non-members; VTT panel rendered in group page right sidebar with Roll20 logo and "Open Roll20 Campaign" CTA; session reminders (24h + 2h) include "Join on Roll20" CTA in email and in-app notification; Discover filter panel extended with "Roll20 games only" and "Any VTT platform" toggles; Roll20 badge (🎲 SVG logo, 16×16) displayed on Discover group card, map pin popover, group header, and F26 onboarding match cards; all Roll20 links pass through F62 External Link Warning (one-time per domain, stored in `external_link_confirmations`); data model designed for VTT extensibility — Foundry VTT, Fantasy Grounds, Alchemy RPG can be added without schema changes; `vtt_platform` and `vtt_url` columns added to both `groups` and `events` tables; 4 new API endpoints; 6 new user stories #334–#339
 - v3.15 — **F109 — Group Activity Icons & Game Cover Art**: every group displays a visual identity icon on Discover cards, group header, calendar, map pins, and chat thread lists; four icon source tiers — (1) IGDB API for video game cover art (Arc Raiders, Valorant, Elden Ring, etc.) with server-side proxy using Twitch developer credentials; (2) BoardGameGeek XML API v2 for tabletop, board game, and RPG cover art (D&D, Pathfinder, Gloomhaven, Wingspan, etc.); (3) curated SVG icon library for sports and activities (basketball, soccer, yoga, book club, etc.) shown as a visual picker grid at group creation; (4) custom Cloudinary upload (1:1 crop enforced, 5 MB max, MIME validation) available as override for any group at any time; F2 group creation flow updated with Icon step after category selection; all external cover art fetched once and cached via Cloudinary CDN at each required render size; IGDB and BGG cover art bypasses moderation as trusted sources; custom uploads go through F42 AI moderation pipeline; admin can remove icons from F15 Tab 1; `icon_source`, `icon_url`, `icon_igdb_id`, `icon_bgg_id`, `icon_lib_key` columns added to groups table; 5 new API endpoints; 2 new environment variables (IGDB_CLIENT_ID, IGDB_CLIENT_SECRET); 5 new user stories #329–#333
-- v3.14 — Added **Pilot Stage Monetization** subsection to Launch Strategy: platform stays fully free through Phase 0–2; F100 affiliate commissions activated at launch as passive revenue requiring no additional features; all active monetization decisions (Premium Organizer tier, promoted group placement) deferred until Phase 3 expansion thresholds are met (250 users / 50 active groups / 40% weekly return rate)
+- v3.14 — Added **Pilot Stage Monetization** subsection to Launch Strategy: at the time of this version, the platform was planned to stay free through Phase 0–2, with active monetization deferred to Phase 3; this approach was superseded in v3.18 by the adoption of live subscription billing from launch (Participant $10/mo, Organizer $15/mo, 30-day free trial); F100 affiliate commissions activated at launch as passive revenue requiring no additional features
 - v3.13 — **F108 — Scam & Social Engineering Prevention**: seven-part spec targeting the primary attack surface (human organizer soliciting off-platform payments) and secondary vectors (impersonation, account takeover): (1) F14 Community Standards extended with standalone Financial Solicitation prohibition at zero-tolerance tier — immediate suspension on report receipt, permanent ban on first substantiated offence, routes to Tab 6 fast-track; (2) New account organizer cool-down — accounts under 7 days cannot create groups; accounts under 14 days cannot DM their own members — both enforced server-side with config constants; (3) Payment pattern message screening — parallel server-side pass on all outgoing messages (never blocks delivery) detecting payment app names, solicitation verbs, and combined payment-app + dollar-amount signals; flags to admin queue + +15 fraud score on sender; (4) Two new report categories — "Financial solicitation / scam" (fast-track suspension for group owner reports) and "Impersonation" (standard-priority); both added to `violation_type` ENUM; (5) Mandatory payment prohibition acknowledgment checkbox at group creation — logged server-side as `payment_prohibition_ack` + timestamp on groups table; (6) New-member safety notice when group owner account is under 30 days old — one-time dismissible banner with Report CTA; dismissed state tracked in `group_members.seen_new_owner_notice`; (7) Verified Organizer badge (✅) — manually admin-granted, distinct from Trust Score, appears on profile/group cards/member lists; Phase 0 seeded organizers receive it automatically; admin grant/revoke endpoints logged in F82 audit log; database changes: 2 columns on `groups`, 3 columns on `users`, 1 column on `group_members`, 2 ENUM values on `violation_type`; 3 new admin API endpoints; 4 server config constants; 9 new user stories #320–#328
 - v3.12 — **Converted Feature Backlog B1–B9 into full feature specifications F99–F107**: F99 Mental Health & Crisis Resource Hub (proactive `/support/mental-health` page with 988, Crisis Text Line, SAMHSA, NAMI, Trevor Project, IASP; persistent footer link; admin-editable via F39 Help Center editor); F100 Partner Discount Program (`/discounts` page with rotating monthly deal cards, promo code copy, 5 categories, `partner_deals` table, 5 API endpoints, admin management tab); F101 Browser Compatibility & Support Policy (evergreen Chrome/Firefox/Safari/Edge support, non-blocking unsupported browser banner with sessionStorage dismiss state, Playwright smoke-test matrix); F102 Fully Optional Notifications (policy enforcement pass — mandatory-only list is password reset, suspension, COPPA, guardian consent, data export; all others are opt-out; surfaced in F26 Step 4 onboarding); F103 Optional Display Phone & Email in Profile (`display_email` and `display_phone` columns on users table; visible to confirmed group members only; separate from account login email and 3FA number); F104 In-Editor Spell Check (`spellcheck="true"` on all textareas + Typo.js for rich-text editors; suggestions only, no autocorrect; language follows browser locale); F105 Forum Attachments Restricted to PDF Only (three enforcement layers: client `accept=".pdf"` attribute, server MIME validation, Cloudinary upload preset; download card with signed URL; no in-browser preview; 10 MB max, 3 attachments per post); F106 Last-Minute Cancellation Reputation Penalty (24-hour threshold; −8 trust score; −10 group health; `late_cancel_count_90d` counter; profile badge after 1st offence; ⚠️🕐 Reliability Warning badge after 3 in 90 days; emergency exception with admin review; `cancellation_events` table with generated `hours_before_session` column); F107 Unified Behavioural Analytics & Intelligent Tracking (extended PostHog event stream with 12 new event types; plain-language disclosure in ToS and first-login acceptance agreement; opt-out in Settings → Privacy; Feature Usage heatmap and Discovery Funnel in admin panel); Feature Backlog section header updated to reflect all items promoted; 22 new user stories #298–#319
 - v3.11 — Removed B3 (Live Video & Voice Session Rooms) and B11 (AI Community Monitor & Moderation Assistant) from Feature Backlog — both assessed as high complexity and deferred back to Future Roadmap consideration; remaining backlog renumbered B1–B9
@@ -3620,7 +3621,7 @@ Sequence stops as soon as the user joins a group. All emails include one-click u
 
 #### Win-Back Campaign (triggered after 60 days of inactivity)
 
-A single email highlighting what's new on the platform (new features, active groups in their area) with a "Come back for free" CTA. Sent once; no further automated emails after this point to avoid spam classification.
+A single email highlighting what's new on the platform (new features, active groups in their area) with a "Come back and see what's new" CTA. Sent once; no further automated emails after this point to avoid spam classification.
 
 ---
 
@@ -3672,7 +3673,7 @@ email_sends
 
 **Priority: Should Have**
 
-Group organizers need data to understand how their group is performing and to make informed decisions about their community. The dashboard is accessible at `/groups/:id/analytics` and is available to all group owners and co-moderators at no cost.
+Group organizers need data to understand how their group is performing and to make informed decisions about their community. The dashboard is accessible at `/groups/:id/analytics` and is included in all Organizer plan subscriptions.
 
 ---
 
@@ -7419,7 +7420,7 @@ The platform's trust model — joining groups run by strangers — creates a soc
 
 A new standalone **Financial Solicitation** section is added to the F14 Zero-Tolerance Community Policy, at the same enforcement tier as sexual harassment:
 
-> Soliciting money, payment-app transfers, or cryptocurrency from members or potential members — for any stated reason — is a zero-tolerance violation. This includes asking members to pay a group fee, entry fee, equipment deposit, event ticket, or any other charge. RollCall is a free platform and never facilitates payments between users. Any organizer requesting payment is acting outside the platform's intended scope and will be permanently banned.
+> Soliciting money, payment-app transfers, or cryptocurrency from members or potential members — for any stated reason — is a zero-tolerance violation. This includes asking members to pay a group fee, entry fee, equipment deposit, event ticket, or any other charge. RollCall never facilitates direct payments between users; subscription fees are paid to RollCall only. Any organizer requesting payment from members is acting outside the platform's intended scope and will be permanently banned.
 
 **Consequence:** Immediate account suspension on report receipt, reviewed by platform owner within 24 hours, permanent ban on first substantiated offence. Routes to the existing Tab 6 sensitive-report flow in F15.
 
@@ -7492,7 +7493,7 @@ The group creation flow (F2) gains a mandatory unchecked acknowledgment checkbox
 ```
 ☐  I understand that requesting money or payments from members —
    for any reason — is strictly prohibited and will result in a
-   permanent ban. RollCall is always free to use.
+   permanent ban. Members may never be charged directly by organizers.
 ```
 
 The checkbox cannot be pre-ticked. Submitting the form without checking it returns a validation error. The acknowledgment is logged server-side:
@@ -7514,7 +7515,8 @@ When a user visits a group for the first time and the group owner's account was 
 ```
 ⚠️  Heads up: This group was created by a new account.
     If anyone asks you to send money or pay a fee to participate,
-    please report it immediately — RollCall is always free.
+    please report it immediately — organizers are prohibited from
+    charging members on this platform.
     [Dismiss]  [Report this group]
 ```
 
@@ -9572,7 +9574,7 @@ The platform does not open public registration until **at least 20 real, active 
 
 **Seeding approach:**
 
-Identify and personally recruit 8–12 local organizers who already run hobby groups in the county — people managing board game nights, hiking meetups, cycling clubs, D&D campaigns, or gaming squads over WhatsApp, iMessage, or Facebook. The pitch is direct: "We'll move your group onto a tool built for exactly this. It's free, and your members won't have to download anything."
+Identify and personally recruit 8–12 local organizers who already run hobby groups in the county — people managing board game nights, hiking meetups, cycling clubs, D&D campaigns, or gaming squads over WhatsApp, iMessage, or Facebook. The pitch is direct: "We'll move your group onto a tool built for exactly this. Your first 30 days are free, and your members won't have to download anything."
 
 Target channels for finding these organizers: local Facebook Groups (Palm Beach Hikers, PBC Board Gamers, South Florida Cycling, etc.), r/WestPalmBeach and r/BocaRaton subreddits, and game stores (e.g. Dragon's Lair in WPB, Level Up Games in Lake Worth).
 
@@ -9646,15 +9648,26 @@ Likely next South Florida targets: Broward County (Fort Lauderdale), Miami-Dade.
 
 ---
 
-### Monetization — Pilot Stage Approach
+### Monetization — Subscription Model
 
-RollCall is free for all users throughout the pilot. No charges, no paywalls, no subscription prompts. The priority during Phase 0–2 is proving that the platform can reach and sustain critical density in Palm Beach County — monetization pressure before that point risks chilling organizer adoption.
+RollCall operates on a subscription billing model from launch. Every new account receives a **30-day free trial** with full platform access and no credit card required. After the trial, users continue on a paid plan.
 
-**The one revenue action taken at launch:** activate affiliate commissions on the F100 Partner Discount Program. Every deal link already goes to a partner; enabling commission tracking requires no user-facing change and no additional features. This is passive income from day one with zero friction to members or organizers.
+**Plans:**
 
-**The first active monetization decision** is revisited only after Phase 3 expansion signals are met — 250 registered users, 50 active groups, 40% weekly return rate. At that point, the platform has enough active organizers to evaluate a Premium Organizer tier and enough Discover depth to consider promoted group placement. Both are deferred until then.
+| Plan | Monthly | Annual (15% off) |
+|---|---|---|
+| Participant | $10/mo | $8.50/mo · billed $102/yr |
+| Organizer | $15/mo | $12.75/mo · billed $153/yr |
 
-Until Phase 3 is reached: keep the product free, keep the organizer experience frictionless, and let the community prove its value first.
+**Participant plan** includes: join unlimited groups, RSVP to events, group forum and chat, direct messages, badge and rank system, discover map, partner discounts, and personalized dashboard.
+
+**Organizer plan** adds: create and host unlimited groups, schedule sessions, organizer analytics dashboard, group image management, member join request management, waitlist management, co-moderator assignment, session templates, and Verified Organizer badge eligibility.
+
+**Additional passive revenue from launch:** F100 Partner Discount Program affiliate commissions — every deal link passes through a partner commission; no user-facing change required and zero friction to members or organizers.
+
+**Pricing philosophy:** RollCall is approximately 50% cheaper than Meetup ($29.99/mo), charges no per-event fees (unlike Eventbrite), and offers a purpose-built community platform for hobbyist groups — not a general-purpose social feed. The 30-day no-card trial removes friction for both organizer recruitment and member sign-up during the PBC pilot phase.
+
+For full plan details, feature comparison, billing cycle options, and competitive positioning, see `RollCall_Pricing_Plans.md`.
 
 ---
 
@@ -9849,7 +9862,7 @@ An **analytics opt-out** option is available in Settings → Privacy (already sp
 ## Out of Scope (v1.0)
 
 - Native mobile applications (web-first; PWA covers mobile baseline — see F35)
-- Payment processing or subscription tiers (platform is fully free)
+- In-app payment processing between users (organizers may not charge members directly; subscription billing is handled by RollCall's payment provider)
 - Video or voice calling (integrations with Discord handle this better)
 - Standalone content moderation AI platform or full automated text moderation (Cloudinary AI is used for image uploads only — F42; all text moderation uses the keyword filter F18 plus human review via F14, F15, F44)
 - Third-party gaming platform integrations (Steam inventory, Xbox achievements, PlayStation trophies)

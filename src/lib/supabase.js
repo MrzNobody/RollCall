@@ -6,8 +6,15 @@ const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY || '';
 
 // INDESTRUCTIBLE MODE: If keys are missing, we provide a "dummy" client 
 // so the app stays alive and can show a UI error instead of a black screen.
-export const supabase = (supabaseUrl && supabaseAnonKey) 
-  ? createClient(supabaseUrl, supabaseAnonKey)
+export const supabase = (supabaseUrl && supabaseAnonKey)
+  ? createClient(supabaseUrl, supabaseAnonKey, {
+      auth: {
+        detectSessionInUrl: true,
+        persistSession: true,
+        autoRefreshToken: true,
+        flowType: 'pkce',
+      }
+    })
   : {
       auth: {
         getSession: async () => ({ data: { session: null }, error: new Error('Missing API Keys') }),
