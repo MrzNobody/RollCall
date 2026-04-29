@@ -284,6 +284,18 @@ function App() {
     setStep('profile');
   };
 
+  // Capture referral code from URL and store in localStorage
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const ref = params.get('ref');
+    if (ref) {
+      localStorage.setItem('rollcall_ref', ref);
+      // Clean the URL without reloading
+      const clean = window.location.pathname;
+      window.history.replaceState({}, '', clean);
+    }
+  }, []);
+
   useEffect(() => {
     const fetchCounts = async () => {
       try {

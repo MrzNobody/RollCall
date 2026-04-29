@@ -68,7 +68,7 @@ const Auth = ({ onClose, onSuccess, onViewPricing }) => {
 
     try {
       if (isSignUp) {
-        const { error } = await supabase.auth.signUp({
+        const { data: signUpData, error } = await supabase.auth.signUp({
           email,
           password,
           options: {
@@ -76,6 +76,25 @@ const Auth = ({ onClose, onSuccess, onViewPricing }) => {
           },
         });
         if (error) throw error;
+
+        // If a referral code was stored, link this new user to the referrer
+        const refCode = localStorage.getItem('rollcall_ref');
+        if (refCode && signUpData?.user?.id) {
+          const { data: codeRow } = await supabase
+            .from('referral_codes')
+            .select('user_id')
+            .eq('code', refCode)
+            .maybeSingle();
+
+          if (codeRow && codeRow.user_id !== signUpData.user.id) {
+            await supabase.from('referrals').insert([{
+              referrer_id: codeRow.user_id,
+              referee_id: signUpData.user.id,
+            }]);
+          }
+          localStorage.removeItem('rollcall_ref');
+        }
+
         setMessage({ type: 'success', content: 'Account created! Check your email to confirm.' });
       } else {
         const { error } = await supabase.auth.signInWithPassword({ email, password });
