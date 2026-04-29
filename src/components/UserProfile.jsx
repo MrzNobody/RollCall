@@ -332,16 +332,27 @@ const UserProfile = ({ user, profileId, onBack, onSelectGroup }) => {
   // ── Fetch profile & ancillary data ──────────────────────────────────────────
 
   useEffect(() => {
-    if (!targetId) return;
+    if (!targetId) {
+      // No user / profile ID available — stop the spinner immediately
+      setLoading(false);
+      return;
+    }
     fetchAll();
   }, [targetId]);
 
   const fetchAll = async () => {
     setLoading(true);
     try {
-      const [profileRes, badgeRes] = await Promise.all([
-        supabase.from('profiles').select('*').eq('id', targetId).single(),
-        supabase.from('user_badges').select('id').eq('user_id', targetId),
+      const makeTimeout = (ms) => new Promise((_, reject) =>
+        setTimeout(() => reject(new Error('Profile fetch timed out')), ms)
+      );
+
+      const [profileRes, badgeRes] = await Promise.race([
+        Promise.all([
+          supabase.from('profiles').select('*').eq('id', targetId).single(),
+          supabase.from('user_badges').select('id').eq('user_id', targetId),
+        ]),
+        makeTimeout(8000).then(() => { throw new Error('Profile fetch timed out'); }),
       ]);
 
       if (profileRes.data) {
