@@ -113,14 +113,16 @@ const Dashboard = ({ user, onSelectGroup, onEnterAdmin, onEnterDiscover, isAdmin
             <h1 className="text-5xl font-black tracking-tighter">Welcome back, <span className="gradient-text">{user?.email.split('@')[0]}</span></h1>
           </div>
           <div className="flex items-center gap-4">
-            <button 
+            <button
+              title="Open Direct Messages"
               onClick={() => setShowMessages(true)}
               className="glass p-3 rounded-2xl border border-white/10 text-text-muted hover:text-brand-primary hover:border-brand-primary/30 transition-all relative"
             >
               <MessageSquare className="w-5 h-5" />
               <div className="absolute top-2 right-2 w-2 h-2 bg-brand-primary rounded-full animate-pulse" />
             </button>
-            <button 
+            <button
+              title="Open Support Center & Help"
               onClick={() => setShowSupport(true)}
               className="glass p-3 rounded-2xl border border-white/10 text-text-muted hover:text-brand-primary hover:border-brand-primary/30 transition-all"
             >
@@ -207,6 +209,10 @@ const Dashboard = ({ user, onSelectGroup, onEnterAdmin, onEnterDiscover, isAdmin
           </div>
         </div>
       </div>
+
+      {showMessages && (
+        <DirectMessages user={user} onClose={() => setShowMessages(false)} />
+      )}
 
       {showSupport && (
         <SupportCenter user={user} onClose={() => setShowSupport(false)} />
