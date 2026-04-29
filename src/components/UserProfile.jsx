@@ -143,27 +143,15 @@ const AvatarModal = ({ currentUrl, profileId, onClose, onSaved }) => {
 
 // ─── Availability Grid ────────────────────────────────────────────────────────
 
-// Normalizes both storage formats:
-//   Survey format:  { Mon: { morning: true, evening: false } }
-//   Profile format: { Mon: ['morning', 'evening'] }
-const normalizeSlots = (dayData) => {
-  if (!dayData) return [];
-  if (Array.isArray(dayData)) return dayData;
-  if (typeof dayData === 'object') {
-    return Object.entries(dayData).filter(([, v]) => Boolean(v)).map(([k]) => k);
-  }
-  return [];
-};
-
 const AvailabilityGrid = ({ availability, editable, onChange }) => {
   const toggle = (day, slot) => {
     if (!editable) return;
-    const cur = normalizeSlots(availability[day]);
+    const cur = availability[day] || [];
     const next = cur.includes(slot) ? cur.filter(s => s !== slot) : [...cur, slot];
     onChange({ ...availability, [day]: next });
   };
 
-  const hasAny = DAYS.some(d => normalizeSlots(availability[d]).length > 0);
+  const hasAny = DAYS.some(d => (availability[d] || []).length > 0);
 
   return (
     <div className="overflow-x-auto">
@@ -187,7 +175,7 @@ const AvailabilityGrid = ({ availability, editable, onChange }) => {
                 <p className="text-[8px] text-text-muted mt-0.5">{slot.sub}</p>
               </td>
               {DAYS.map(day => {
-                const active = normalizeSlots(availability[day]).includes(slot.key);
+                const active = (availability[day] || []).includes(slot.key);
                 return (
                   <td key={day} className="text-center py-1 px-0.5">
                     <button
@@ -332,27 +320,16 @@ const UserProfile = ({ user, profileId, onBack, onSelectGroup }) => {
   // ── Fetch profile & ancillary data ──────────────────────────────────────────
 
   useEffect(() => {
-    if (!targetId) {
-      // No user / profile ID available — stop the spinner immediately
-      setLoading(false);
-      return;
-    }
+    if (!targetId) return;
     fetchAll();
   }, [targetId]);
 
   const fetchAll = async () => {
     setLoading(true);
     try {
-      const makeTimeout = (ms) => new Promise((_, reject) =>
-        setTimeout(() => reject(new Error('Profile fetch timed out')), ms)
-      );
-
-      const [profileRes, badgeRes] = await Promise.race([
-        Promise.all([
-          supabase.from('profiles').select('*').eq('id', targetId).single(),
-          supabase.from('user_badges').select('id').eq('user_id', targetId),
-        ]),
-        makeTimeout(8000).then(() => { throw new Error('Profile fetch timed out'); }),
+      const [profileRes, badgeRes] = await Promise.all([
+        supabase.from('profiles').select('*').eq('id', targetId).single(),
+        supabase.from('user_badges').select('id').eq('user_id', targetId),
       ]);
 
       if (profileRes.data) {
