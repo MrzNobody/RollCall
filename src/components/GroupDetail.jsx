@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { ChevronLeft, ChevronRight, Calendar, MessageSquare, MapPin, Users, ShieldCheck, ScrollText, Send, User, CheckCircle2, Flag, HelpCircle, Camera, X, Loader2, Link } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Calendar, MessageSquare, MapPin, Users, ShieldCheck, ScrollText, Send, User, CheckCircle2, Flag, HelpCircle, X, Link } from 'lucide-react';
 import ReportModal from './ReportModal';
 import Forum from './Forum';
 import CalendarView from './CalendarView';
@@ -67,206 +67,6 @@ const getGroupGuidelines = (group) => {
   ].filter(Boolean);
 };
 
-// ─── Image Edit Modal ────────────────────────────────────────────────────────
-
-const ImageEditModal = ({ groupId, currentImage, onClose, onSaved }) => {
-  const [preview, setPreview] = useState(currentImage || '');
-  const [urlInput, setUrlInput] = useState('');
-  const [file, setFile] = useState(null);
-  const [isDragging, setIsDragging] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [progress, setProgress] = useState('');
-  const [error, setError] = useState('');
-  const fileInputRef = React.useRef(null);
-
-  const applyFile = (f) => {
-    if (!f) return;
-    if (!f.type.startsWith('image/')) { setError('Please select an image file (JPG, PNG, WebP, GIF).'); return; }
-    if (f.size > 5 * 1024 * 1024) { setError('File must be under 5 MB.'); return; }
-    setError('');
-    setFile(f);
-    setUrlInput('');
-    setPreview(URL.createObjectURL(f));
-  };
-
-  const onFileInput = (e) => applyFile(e.target.files?.[0]);
-
-  const onDrop = (e) => {
-    e.preventDefault();
-    setIsDragging(false);
-    applyFile(e.dataTransfer.files?.[0]);
-  };
-
-  const onUrlChange = (e) => {
-    const v = e.target.value;
-    setUrlInput(v);
-    setFile(null);
-    setPreview(v);
-    setError('');
-  };
-
-  const handleSave = async () => {
-    if (!file && !urlInput.trim()) { setError('Choose a file or paste a URL.'); return; }
-    setLoading(true);
-    setError('');
-    try {
-      let finalUrl = urlInput.trim();
-
-      if (file) {
-        setProgress('Uploading image…');
-        const ext = file.name.split('.').pop();
-        const path = `groups/${groupId}-${Date.now()}.${ext}`;
-        const { error: upErr } = await supabase.storage
-          .from('group-images')
-          .upload(path, file, { upsert: true, contentType: file.type });
-        if (upErr) throw upErr;
-
-        const { data: urlData } = supabase.storage.from('group-images').getPublicUrl(path);
-        finalUrl = urlData.publicUrl;
-      }
-
-      setProgress('Saving…');
-      const { error: dbErr } = await supabase
-        .from('groups')
-        .update({ image: finalUrl })
-        .eq('id', groupId);
-      if (dbErr) throw dbErr;
-
-      onSaved(finalUrl);
-      onClose();
-    } catch (e) {
-      console.error(e);
-      setError(e.message || 'Upload failed. Please try again.');
-    } finally {
-      setLoading(false);
-      setProgress('');
-    }
-  };
-
-  return (
-    <div className="fixed inset-0 z-[300] flex items-center justify-center p-6 bg-black/70 backdrop-blur-md">
-      <div className="relative w-full max-w-lg glass border border-white/10 rounded-[2.5rem] overflow-hidden shadow-2xl">
-        <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-brand-primary via-brand-secondary to-brand-primary" />
-
-        <div className="p-8 space-y-5">
-          {/* Header */}
-          <div className="flex items-center justify-between">
-            <h2 className="text-xl font-black text-text-primary flex items-center gap-3">
-              <Camera className="w-5 h-5 text-brand-primary" />
-              Update Group Photo
-            </h2>
-            <button onClick={onClose} className="p-2 text-text-muted hover:text-text-primary transition-colors">
-              <X className="w-5 h-5" />
-            </button>
-          </div>
-
-          {/* Drop zone */}
-          <div
-            onDragOver={(e) => { e.preventDefault(); setIsDragging(true); }}
-            onDragLeave={() => setIsDragging(false)}
-            onDrop={onDrop}
-            onClick={() => fileInputRef.current?.click()}
-            className={`relative cursor-pointer rounded-3xl border-2 border-dashed transition-all overflow-hidden ${
-              isDragging
-                ? 'border-brand-primary bg-brand-primary/10 scale-[1.01]'
-                : 'border-white/20 hover:border-brand-primary/50 hover:bg-white/5'
-            }`}
-            style={{ minHeight: preview ? 0 : '10rem' }}
-          >
-            {preview ? (
-              <div className="relative h-44">
-                <img
-                  src={preview}
-                  alt="Preview"
-                  className="w-full h-full object-cover"
-                  onError={() => { setPreview(''); setError('Could not load that URL — check the link.'); }}
-                />
-                <div className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity">
-                  <div className="flex flex-col items-center gap-2 text-white">
-                    <Camera className="w-8 h-8" />
-                    <span className="text-xs font-black uppercase tracking-widest">Change Photo</span>
-                  </div>
-                </div>
-                <div className="absolute bottom-0 left-0 right-0 h-12 bg-gradient-to-t from-black/60 to-transparent" />
-                {file && (
-                  <span className="absolute bottom-2 left-3 text-[9px] font-black uppercase tracking-widest text-white/80">
-                    {file.name} · {(file.size / 1024).toFixed(0)} KB
-                  </span>
-                )}
-              </div>
-            ) : (
-              <div className="flex flex-col items-center justify-center gap-3 py-10 px-6 text-center">
-                <div className="w-14 h-14 rounded-full bg-brand-primary/10 border border-brand-primary/20 flex items-center justify-center">
-                  <Camera className="w-6 h-6 text-brand-primary" />
-                </div>
-                <div>
-                  <p className="text-sm font-black text-text-primary">Drop an image here</p>
-                  <p className="text-xs text-text-muted mt-1">or click to browse your files</p>
-                </div>
-                <p className="text-[10px] text-text-muted">JPG, PNG, WebP, GIF · Max 5 MB</p>
-              </div>
-            )}
-          </div>
-
-          <input
-            ref={fileInputRef}
-            type="file"
-            accept="image/jpeg,image/png,image/webp,image/gif"
-            className="hidden"
-            onChange={onFileInput}
-          />
-
-          {/* Browse button */}
-          <button
-            type="button"
-            onClick={() => fileInputRef.current?.click()}
-            className="w-full py-3 rounded-2xl border border-white/10 bg-white/5 hover:bg-white/10 text-xs font-black uppercase tracking-widest text-text-secondary transition-all flex items-center justify-center gap-2"
-          >
-            <Camera className="w-4 h-4" />
-            Browse Files
-          </button>
-
-          {/* Divider */}
-          <div className="flex items-center gap-3">
-            <div className="flex-1 h-px bg-white/10" />
-            <span className="text-[10px] font-black uppercase tracking-widest text-text-muted">or paste a URL</span>
-            <div className="flex-1 h-px bg-white/10" />
-          </div>
-
-          {/* URL input */}
-          <input
-            value={urlInput}
-            onChange={onUrlChange}
-            placeholder="https://images.unsplash.com/photo-..."
-            className="w-full bg-white/5 border border-white/10 rounded-2xl px-5 py-3.5 text-sm text-text-primary focus:outline-none focus:border-brand-primary transition-all placeholder:text-text-muted"
-          />
-
-          {error && <p className="text-xs text-rose-400 font-bold">{error}</p>}
-
-          {/* Actions */}
-          <div className="flex justify-end gap-3 pt-1">
-            <button
-              type="button"
-              onClick={onClose}
-              className="px-6 py-3 text-xs font-black uppercase tracking-widest text-text-muted hover:text-text-primary transition-colors"
-            >
-              Cancel
-            </button>
-            <button
-              onClick={handleSave}
-              disabled={loading || (!file && !urlInput.trim())}
-              className="px-8 py-3 bg-brand-primary text-white rounded-2xl text-xs font-black uppercase tracking-widest hover:bg-brand-primary/80 transition-all shadow-lg shadow-brand-primary/20 disabled:opacity-40 flex items-center gap-2 min-w-[140px] justify-center"
-            >
-              {loading
-                ? <><Loader2 className="w-4 h-4 animate-spin" />{progress || 'Working…'}</>
-                : <><Camera className="w-4 h-4" />Save Photo</>}
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-};
 
 const ChatMessage = ({ user_id, content, created_at, self }) => (
   <div className={cn("flex flex-col mb-4 animate-fade-in", self ? "items-end" : "items-start")}>
@@ -290,8 +90,7 @@ const GroupDetail = ({ group, onBack, user, isAdmin = false, initialTab = 'chat'
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState('');
   const [showReport, setShowReport] = useState(false);
-  const [showImageEdit, setShowImageEdit] = useState(false);
-  const [groupImage, setGroupImage] = useState(group.image || getGroupImage(group.name, group.category));
+  const groupImage = group.image || getGroupImage(group.name, group.category);
 
   const isOrganizer = isAdmin || (user?.id && group?.owner_id && user.id === group.owner_id);
   const chatEndRef = useRef(null);
@@ -386,18 +185,8 @@ const GroupDetail = ({ group, onBack, user, isAdmin = false, initialTab = 'chat'
           src={groupImage}
           alt={group.name}
           className="w-full h-full object-cover"
-          onError={() => setGroupImage(getGroupImage(group.name, group.category))}
         />
         <div className="absolute inset-0 bg-gradient-to-t from-surface-950 via-surface-950/20 to-transparent" />
-        {isOrganizer && (
-          <button
-            onClick={() => setShowImageEdit(true)}
-            className="absolute top-4 right-4 flex items-center gap-2 px-4 py-2.5 bg-black/60 backdrop-blur-md border border-white/20 rounded-2xl text-[10px] font-black uppercase tracking-widest text-white hover:bg-brand-primary/80 hover:border-brand-primary transition-all shadow-lg"
-          >
-            <Camera className="w-4 h-4" />
-            Edit Photo
-          </button>
-        )}
         
         <div className="absolute bottom-0 w-full px-6 md:px-12 pb-12">
           <div className="max-w-7xl mx-auto">
@@ -653,14 +442,6 @@ const GroupDetail = ({ group, onBack, user, isAdmin = false, initialTab = 'chat'
         targetName={group.name}
       />
 
-      {showImageEdit && (
-        <ImageEditModal
-          groupId={group.id}
-          currentImage={groupImage}
-          onClose={() => setShowImageEdit(false)}
-          onSaved={(newUrl) => setGroupImage(newUrl)}
-        />
-      )}
     </div>
   );
 };

@@ -5,6 +5,7 @@ import {
   ChevronRight, ShieldCheck, X, Loader2
 } from 'lucide-react';
 import { supabase } from '../lib/supabase';
+import { getEventImage } from '../lib/groupImage';
 import { motion, AnimatePresence } from 'framer-motion';
 
 // ─── Helpers ────────────────────────────────────────────────────────────────
@@ -311,39 +312,48 @@ const EventCard = ({ event, user }) => {
 
   const date = new Date(event.starts_at);
   const totalSignups = stats.going + stats.maybe;
+  const eventImg = getEventImage(event.title);
 
   return (
     <motion.div
       initial={{ opacity: 0, x: 20 }}
       animate={{ opacity: 1, x: 0 }}
-      className="glass p-6 rounded-[2.5rem] border border-white/5 hover:border-brand-primary/20 transition-all group"
+      className="glass rounded-[2.5rem] border border-white/5 hover:border-brand-primary/20 transition-all group overflow-hidden"
     >
-      <div className="flex flex-col md:flex-row gap-8">
-        {/* Date Badge */}
-        <div className="flex flex-col items-center justify-center bg-white/5 rounded-3xl p-4 min-w-[100px] border border-white/5 group-hover:border-brand-primary/20 transition-all shrink-0">
-          <span className="text-[10px] font-black uppercase tracking-[0.2em] text-brand-primary">
-            {date.toLocaleDateString('en-US', { month: 'short' })}
-          </span>
-          <span className="text-4xl font-black text-text-primary tracking-tighter">{date.getDate()}</span>
-          <span className="text-[10px] font-black uppercase tracking-widest text-text-muted mt-1">
-            {date.toLocaleDateString('en-US', { weekday: 'short' })}
-          </span>
-          <span className="text-[9px] font-black text-text-muted mt-1 opacity-60">
-            {date.getFullYear()}
-          </span>
-        </div>
-
-        {/* Info */}
-        <div className="flex-1 space-y-4 min-w-0">
-          <div className="flex items-center gap-3 flex-wrap">
-            <h3 className="text-xl font-black text-text-primary tracking-tight">{event.title}</h3>
+      {/* Activity image banner */}
+      <div className="relative h-36 overflow-hidden">
+        <img
+          src={eventImg}
+          alt={event.title}
+          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-surface-950/90 via-surface-950/30 to-transparent" />
+        {/* Date badge overlaid on image */}
+        <div className="absolute bottom-3 left-4 flex items-center gap-3">
+          <div className="flex flex-col items-center bg-surface-950/80 backdrop-blur-md rounded-2xl px-4 py-2 border border-white/10 min-w-[60px]">
+            <span className="text-[9px] font-black uppercase tracking-[0.2em] text-brand-primary">
+              {date.toLocaleDateString('en-US', { month: 'short' })}
+            </span>
+            <span className="text-2xl font-black text-text-primary leading-none">{date.getDate()}</span>
+            <span className="text-[9px] font-black uppercase tracking-widest text-text-muted">
+              {date.toLocaleDateString('en-US', { weekday: 'short' })}
+            </span>
+          </div>
+          <div>
+            <h3 className="text-lg font-black text-white tracking-tight drop-shadow-lg">{event.title}</h3>
             {event.max_attendees && (
-              <span className="px-2 py-0.5 bg-brand-primary/10 text-brand-primary rounded-md text-[8px] font-black uppercase tracking-widest">
-                {stats.going} / {event.max_attendees} Filled
+              <span className="px-2 py-0.5 bg-brand-primary/80 text-white rounded-md text-[8px] font-black uppercase tracking-widest">
+                {stats.going} / {event.max_attendees} Spots Filled
               </span>
             )}
           </div>
+        </div>
+      </div>
 
+      <div className="p-6">
+      <div className="flex flex-col md:flex-row gap-8">
+        {/* Info */}
+        <div className="flex-1 space-y-4 min-w-0">
           {/* Date + Time — full, always visible */}
           <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
             <div className="flex items-center gap-2 text-sm font-bold text-text-primary">
@@ -413,6 +423,7 @@ const EventCard = ({ event, user }) => {
       <AnimatePresence>
         {showAttendees && <AttendeesPane eventId={event.id} />}
       </AnimatePresence>
+      </div>{/* end p-6 */}
     </motion.div>
   );
 };
