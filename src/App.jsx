@@ -373,7 +373,7 @@ function App() {
   return (
     <div data-testid="main-app" className="min-h-screen bg-surface-950 text-text-primary selection:bg-brand-secondary/30 flex flex-col font-sans transition-all duration-500">
       <nav className="fixed top-0 w-full z-50 glass border-b border-white/5 py-4 px-6 md:px-12 flex justify-between items-center">
-        <div className="flex items-center gap-4 cursor-pointer" onClick={() => {
+        <div className="flex items-center gap-4 cursor-pointer" title="Go to RollCall Home" onClick={() => {
           setStep('hero');
           setSelectedGroup(null);
           setSelectedCategory(null);
@@ -383,26 +383,26 @@ function App() {
           <span className="text-2xl font-black tracking-tighter leading-none bg-gradient-to-r from-rose-500 to-blue-500 bg-clip-text text-transparent">RollCall</span>
         </div>
         <div className="flex items-center gap-4">
-          <button onClick={toggleTheme} className="flex items-center gap-2 px-3 py-2 rounded-xl bg-white/10 border border-white/10 hover:bg-white/20 transition-all group shadow-lg">
+          <button title={theme === 'dark' ? 'Switch to Light Mode' : 'Switch to Dark Mode'} onClick={toggleTheme} className="flex items-center gap-2 px-3 py-2 rounded-xl bg-white/10 border border-white/10 hover:bg-white/20 transition-all group shadow-lg">
             {theme === 'dark' ? <Sun className="w-5 h-5 text-amber-400" /> : <Moon className="w-5 h-5 text-indigo-400" />}
             <span className="hidden sm:inline text-[10px] font-black uppercase tracking-widest opacity-60 group-hover:opacity-100">{theme === 'dark' ? 'Light' : 'Dark'}</span>
           </button>
           {user ? (
-            <div className="h-10 w-10 rounded-full bg-brand-primary/20 flex items-center justify-center border border-brand-primary/30 group relative cursor-pointer">
+            <div title="Open Account Menu" className="h-10 w-10 rounded-full bg-brand-primary/20 flex items-center justify-center border border-brand-primary/30 group relative cursor-pointer">
               <UserIcon className="w-5 h-5 text-brand-primary" />
               <div className="absolute top-12 right-0 w-60 glass p-3 rounded-2xl border border-white/10 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all shadow-2xl z-[100]">
                 <p className="text-[10px] text-text-secondary uppercase font-black tracking-widest mb-3 px-2 border-b border-white/5 pb-2 truncate">{user.email}</p>
-                <button onClick={() => setStep('dashboard')} className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-white/5 transition-all text-xs font-bold text-text-primary"><LayoutDashboard className="w-4 h-4" /> My Hub</button>
-                <button onClick={() => goToProfile()} className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-white/5 transition-all text-xs font-bold text-text-primary"><UserIcon className="w-4 h-4" /> My Profile</button>
-                <button onClick={() => setStep('discover')} className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-white/5 transition-all text-xs font-bold text-text-primary"><MapPin className="w-4 h-4" /> Discover Map</button>
-                <button onClick={() => { setStep('dashboard'); setTimeout(() => { const el = document.getElementById('communities-section'); el?.scrollIntoView({ behavior: 'smooth' }); }, 100); }} className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-white/5 transition-all text-xs font-bold text-text-primary"><MessageSquare className="w-4 h-4" /> Community Forums</button>
-                {isAdmin && <button onClick={() => setStep('status')} className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-white/5 transition-all text-xs font-bold text-text-primary"><Activity className="w-4 h-4 text-emerald-500" /> System Status</button>}
-                <button onClick={handleLogout} className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-rose-500/10 text-rose-400 font-bold mt-1"><LogOut className="w-4 h-4" /> Sign Out</button>
+                <button title="Go to My Dashboard" onClick={() => setStep('dashboard')} className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-white/5 transition-all text-xs font-bold text-text-primary"><LayoutDashboard className="w-4 h-4" /> My Hub</button>
+                <button title="View and Edit My Profile" onClick={() => goToProfile()} className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-white/5 transition-all text-xs font-bold text-text-primary"><UserIcon className="w-4 h-4" /> My Profile</button>
+                <button title="Browse Groups on the Discover Map" onClick={() => setStep('discover')} className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-white/5 transition-all text-xs font-bold text-text-primary"><MapPin className="w-4 h-4" /> Discover Map</button>
+                <button title="Browse Community Discussion Forums" onClick={() => { setStep('dashboard'); setTimeout(() => { const el = document.getElementById('communities-section'); el?.scrollIntoView({ behavior: 'smooth' }); }, 100); }} className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-white/5 transition-all text-xs font-bold text-text-primary"><MessageSquare className="w-4 h-4" /> Community Forums</button>
+                {isAdmin && <button title="View Platform System Status" onClick={() => setStep('status')} className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-white/5 transition-all text-xs font-bold text-text-primary"><Activity className="w-4 h-4 text-emerald-500" /> System Status</button>}
+                <button title="Sign Out of RollCall" onClick={handleLogout} className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-rose-500/10 text-rose-400 font-bold mt-1"><LogOut className="w-4 h-4" /> Sign Out</button>
               </div>
             </div>
           ) : (
             <div className="flex items-center gap-4">
-              <button onClick={() => setShowAuth(true)} className="bg-brand-primary text-white px-8 py-2.5 rounded-full text-[10px] font-black uppercase tracking-widest hover:bg-brand-primary/80 shadow-xl shadow-brand-primary/20">Sign In</button>
+              <button title="Sign in to your RollCall account" onClick={() => setShowAuth(true)} className="bg-brand-primary text-white px-8 py-2.5 rounded-full text-[10px] font-black uppercase tracking-widest hover:bg-brand-primary/80 shadow-xl shadow-brand-primary/20">Sign In</button>
             </div>
           )}
         </div>
@@ -425,13 +425,14 @@ function App() {
             {/* Category Discovery Grid */}
             <div className="flex flex-wrap justify-center gap-4 mb-20 px-6">
               {[
-                { label: 'Gaming', icon: Gamepad2, color: 'border-rose-500/30 text-rose-500' },
-                { label: 'Tabletop', icon: Dices, color: 'border-purple-500/30 text-purple-500' },
-                { label: 'Sports', icon: Trophy, color: 'border-blue-500/30 text-blue-500' },
-                { label: 'Other', icon: Sparkles, color: 'border-orange-500/30 text-orange-500' }
+                { label: 'Gaming', icon: Gamepad2, color: 'border-rose-500/30 text-rose-500', title: 'Browse Gaming groups in Palm Beach County' },
+                { label: 'Tabletop', icon: Dices, color: 'border-purple-500/30 text-purple-500', title: 'Browse Tabletop & RPG groups in Palm Beach County' },
+                { label: 'Sports', icon: Trophy, color: 'border-blue-500/30 text-blue-500', title: 'Browse Sports groups in Palm Beach County' },
+                { label: 'Other', icon: Sparkles, color: 'border-orange-500/30 text-orange-500', title: 'Browse other community groups in Palm Beach County' }
               ].map(cat => (
                 <button
                   key={cat.label}
+                  title={cat.title}
                   onClick={() => {
                     setActiveCategoryFilter(cat.label);
                     setStep('discover');
@@ -447,9 +448,9 @@ function App() {
             <LatestFeed user={user} onAuthRequired={() => setShowAuth(true)} />
 
             <div className="flex flex-col md:flex-row gap-4 mt-20">
-              <button onClick={() => user ? setStep('dashboard') : setShowAuth(true)} className="bg-text-primary text-surface-950 px-12 py-5 rounded-3xl font-black text-sm flex items-center justify-center gap-2 hover:scale-105 transition-all shadow-2xl">Start Discovering <ChevronRight className="w-5 h-5 flex-shrink-0" /></button>
-              <button onClick={() => user ? setStep('discover') : setShowAuth(true)} className="glass px-12 py-5 rounded-3xl font-black text-sm hover:bg-white/10 transition-all text-text-primary">View Local Map</button>
-              <button onClick={() => setStep('pricing')} className="glass px-12 py-5 rounded-3xl font-black text-sm hover:bg-white/10 transition-all text-brand-primary border border-brand-primary/30">View Plans</button>
+              <button title="Go to your RollCall dashboard" onClick={() => user ? setStep('dashboard') : setShowAuth(true)} className="bg-text-primary text-surface-950 px-12 py-5 rounded-3xl font-black text-sm flex items-center justify-center gap-2 hover:scale-105 transition-all shadow-2xl">Start Discovering <ChevronRight className="w-5 h-5 flex-shrink-0" /></button>
+              <button title="Browse local groups on the map" onClick={() => user ? setStep('discover') : setShowAuth(true)} className="glass px-12 py-5 rounded-3xl font-black text-sm hover:bg-white/10 transition-all text-text-primary">View Local Map</button>
+              <button title="View RollCall subscription plans and pricing" onClick={() => setStep('pricing')} className="glass px-12 py-5 rounded-3xl font-black text-sm hover:bg-white/10 transition-all text-brand-primary border border-brand-primary/30">View Plans</button>
             </div>
           </div>
         )}
@@ -482,15 +483,15 @@ function App() {
           <div className="flex flex-col md:flex-row items-center gap-12">
             <div className="flex flex-col md:items-end gap-1">
               <span className="text-[8px] font-black uppercase tracking-widest text-text-muted mb-1">Service Support</span>
-              <a href="tel:754-757-8952" className="text-lg font-black tracking-tight text-text-primary hover:text-brand-primary transition-all">754-757-8952</a>
+              <a href="tel:754-757-8952" title="Call RollCall Support at 754-757-8952" className="text-lg font-black tracking-tight text-text-primary hover:text-brand-primary transition-all">754-757-8952</a>
               <div className="flex gap-4 mt-2">
-                <button onClick={() => setStep('faq')} className="text-[10px] font-black uppercase tracking-widest text-text-muted hover:text-brand-primary transition-all">Platform FAQs</button>
-                <button onClick={() => setStep('pricing')} className="text-[10px] font-black uppercase tracking-widest text-brand-primary hover:text-brand-primary/80 transition-all">Pricing Plans</button>
-                <button onClick={() => { setStep('dashboard'); setTimeout(() => setShowSupport(true), 100); }} className="text-[10px] font-black uppercase tracking-widest text-brand-secondary hover:text-brand-secondary/80 transition-all">Contact Support</button>
+                <button title="View Frequently Asked Questions" onClick={() => setStep('faq')} className="text-[10px] font-black uppercase tracking-widest text-text-muted hover:text-brand-primary transition-all">Platform FAQs</button>
+                <button title="View RollCall subscription plans and pricing" onClick={() => setStep('pricing')} className="text-[10px] font-black uppercase tracking-widest text-brand-primary hover:text-brand-primary/80 transition-all">Pricing Plans</button>
+                <button title="Submit a support request or contact our team" onClick={() => { setStep('dashboard'); setTimeout(() => setShowSupport(true), 100); }} className="text-[10px] font-black uppercase tracking-widest text-brand-secondary hover:text-brand-secondary/80 transition-all">Contact Support</button>
               </div>
             </div>
             {isAdmin && (
-              <button onClick={() => setStep('status')} className="flex items-center gap-2 group">
+              <button title="View live platform system status and health metrics" onClick={() => setStep('status')} className="flex items-center gap-2 group">
                 <div className="w-2 h-2 rounded-full bg-emerald-500 shadow-[0_0_10px_rgba(16,185,129,0.5)]" />
                 <span className="text-[10px] font-black uppercase tracking-widest text-text-muted group-hover:text-text-primary transition-all">Systems Operational</span>
               </button>
@@ -501,9 +502,9 @@ function App() {
       </footer>
       {step !== 'hero' && (
         <nav className="fixed bottom-0 w-full z-50 md:hidden glass border-t border-white/10 px-6 py-4 pb-12 flex justify-around items-center">
-          <button onClick={() => setStep('discover')} className={`flex flex-col items-center gap-1 ${step === 'discover' ? 'text-brand-primary' : 'opacity-40 text-white'}`}><Search className="w-6 h-6" /><span className="text-[10px] font-black uppercase">Map</span></button>
-          <button onClick={() => user ? setStep('create-group') : setShowAuth(true)} className="relative -top-8 w-16 h-16 bg-brand-primary rounded-[2rem] flex items-center justify-center shadow-2xl border-8 border-surface-950"><Plus className="w-10 h-10 text-white" /></button>
-          <button onClick={() => user ? setStep('dashboard') : setShowAuth(true)} className={`flex flex-col items-center gap-1 ${step === 'dashboard' ? 'text-brand-primary' : 'opacity-40 text-white'}`}><LayoutDashboard className="w-6 h-6" /><span className="text-[10px] font-black uppercase">Hub</span></button>
+          <button title="Discover local groups on the map" onClick={() => setStep('discover')} className={`flex flex-col items-center gap-1 ${step === 'discover' ? 'text-brand-primary' : 'opacity-40 text-white'}`}><Search className="w-6 h-6" /><span className="text-[10px] font-black uppercase">Map</span></button>
+          <button title="Create a new group" onClick={() => user ? setStep('create-group') : setShowAuth(true)} className="relative -top-8 w-16 h-16 bg-brand-primary rounded-[2rem] flex items-center justify-center shadow-2xl border-8 border-surface-950"><Plus className="w-10 h-10 text-white" /></button>
+          <button title="Go to My Dashboard" onClick={() => user ? setStep('dashboard') : setShowAuth(true)} className={`flex flex-col items-center gap-1 ${step === 'dashboard' ? 'text-brand-primary' : 'opacity-40 text-white'}`}><LayoutDashboard className="w-6 h-6" /><span className="text-[10px] font-black uppercase">Hub</span></button>
         </nav>
       )}
     </div>
