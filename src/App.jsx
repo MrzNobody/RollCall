@@ -366,8 +366,14 @@ function App() {
     // Then get the current session (also handles any code/token in the URL for PKCE)
     async function init() {
       try {
-        const { data: { session } } = await supabase.auth.getSession();
-        if (!session) setUser(null);
+        const timeout = new Promise(resolve =>
+          setTimeout(() => resolve({ _timedOut: true }), 5000)
+        );
+        const result = await Promise.race([supabase.auth.getSession(), timeout]);
+        if (!result._timedOut) {
+          const { data: { session } } = result;
+          if (!session) setUser(null);
+        }
       } catch (err) {
         console.error('Initialization error:', err);
       } finally {
