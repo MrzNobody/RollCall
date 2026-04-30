@@ -365,16 +365,22 @@ const OnboardingSurvey = ({ user, onComplete }) => {
 
   const saveProfile = async () => {
     setSaving(true);
-    await supabase.from('profiles').update({
-      username: username.trim(),
-      city,
-      primary_interest: interests[0] || null,
-      interests,
-      play_style: playStyle,
-      group_size_pref: groupSize,
-      availability,
-    }).eq('id', user.id);
-    setSaving(false);
+    try {
+      const { error } = await supabase.from('profiles').update({
+        username: username.trim(),
+        city,
+        primary_interest: interests[0] || null,
+        interests,
+        play_style: playStyle,
+        group_size_pref: groupSize,
+        availability,
+      }).eq('id', user.id);
+      if (error) console.error('Profile save error:', error);
+    } catch (err) {
+      console.error('Profile save exception:', err);
+    } finally {
+      setSaving(false);
+    }
   };
 
   const fetchMatches = async () => {
@@ -416,20 +422,28 @@ const OnboardingSurvey = ({ user, onComplete }) => {
         .eq('user_id', user.id).eq('group_id', group.id);
       setJoined(prev => prev.filter(id => id !== group.id));
     } else {
-      // Join
-      await supabase.from('memberships').upsert({
+      // Join — include status so it satisfies any DB CHECK constraint
+      const { error } = await supabase.from('memberships').upsert({
         user_id: user.id,
         group_id: group.id,
+        status: 'active',
       }, { onConflict: 'user_id,group_id' });
-      setJoined(prev => [...prev, group.id]);
+      if (error) console.error('Membership upsert error:', error);
+      else setJoined(prev => [...prev, group.id]);
     }
   };
 
   const handleFinish = async () => {
     setSaving(true);
-    await supabase.from('profiles').update({ onboarding_completed: true }).eq('id', user.id);
-    setSaving(false);
-    onComplete();
+    try {
+      const { error } = await supabase.from('profiles').update({ onboarding_completed: true }).eq('id', user.id);
+      if (error) console.error('Onboarding completion error:', error);
+    } catch (err) {
+      console.error('Onboarding finish exception:', err);
+    } finally {
+      setSaving(false);
+      onComplete(); // always dismiss — even if the DB update failed
+    }
   };
 
   const variants = {

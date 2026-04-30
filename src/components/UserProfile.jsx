@@ -143,15 +143,27 @@ const AvatarModal = ({ currentUrl, profileId, onClose, onSaved }) => {
 
 // ─── Availability Grid ────────────────────────────────────────────────────────
 
+// Normalizes availability day data regardless of whether it came from the
+// onboarding survey (stored as { morning: true, evening: false }) or from
+// a profile that already uses arrays (['morning', 'evening']).
+const normalizeSlots = (dayData) => {
+  if (!dayData) return [];
+  if (Array.isArray(dayData)) return dayData;
+  if (typeof dayData === 'object') {
+    return Object.entries(dayData).filter(([, v]) => Boolean(v)).map(([k]) => k);
+  }
+  return [];
+};
+
 const AvailabilityGrid = ({ availability, editable, onChange }) => {
   const toggle = (day, slot) => {
     if (!editable) return;
-    const cur = availability[day] || [];
+    const cur = normalizeSlots(availability[day]);
     const next = cur.includes(slot) ? cur.filter(s => s !== slot) : [...cur, slot];
     onChange({ ...availability, [day]: next });
   };
 
-  const hasAny = DAYS.some(d => (availability[d] || []).length > 0);
+  const hasAny = DAYS.some(d => normalizeSlots(availability[d]).length > 0);
 
   return (
     <div className="overflow-x-auto">
@@ -175,7 +187,7 @@ const AvailabilityGrid = ({ availability, editable, onChange }) => {
                 <p className="text-[8px] text-text-muted mt-0.5">{slot.sub}</p>
               </td>
               {DAYS.map(day => {
-                const active = (availability[day] || []).includes(slot.key);
+                const active = normalizeSlots(availability[day]).includes(slot.key);
                 return (
                   <td key={day} className="text-center py-1 px-0.5">
                     <button

@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { 
-  Activity, Shield, Database, Globe, 
-  CheckCircle2, AlertCircle, Clock, 
-  Zap, Server, Lock
+import {
+  Activity, Shield, Database, Globe,
+  CheckCircle2, AlertCircle, Clock,
+  Zap, Server, Lock, ShieldAlert
 } from 'lucide-react';
 import { supabase } from '../lib/supabase';
 import { motion } from 'framer-motion';
